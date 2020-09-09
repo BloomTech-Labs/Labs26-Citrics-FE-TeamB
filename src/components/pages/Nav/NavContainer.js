@@ -1,17 +1,30 @@
+// React imports
 import React, { useState } from "react";
+// Styling
 import { Drawer, Button } from "antd";
+// Dummy city data
+import { cities } from "./cityList";
 
 export default function NavContainer(props) {
-  //import antdesign for drawer
-  //implement drawer for navbar feature
-  //create search bar form
+  //import antdesign for drawer✅
+  //implement drawer for navbar feature✅
+  //create dummy data to test✅
+  //create search bar form✅
+  //select cities
+  //create state so button changes from 'Search' to Compare' when more than one is selected
 
+  // ----- State -----
+  // Drawer visibility
   const [visible, setVisible] = useState(false);
+  // Selected cities
+  const [selectedCities, setSelectedCities] = useState([]);
 
+  // Opens drawer
   const showDrawer = () => {
     setVisible(true);
   };
 
+  // Closes drawer
   const onClose = () => {
     setVisible(false);
   };
@@ -22,15 +35,24 @@ export default function NavContainer(props) {
         Open
       </Button>
       <Drawer
-        title="Basic Drawer"
+        title="Basic Drawer" //rename!
         placement="left"
         closable={false}
         onClose={onClose}
         visible={visible}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <input type="text" placeholder="Enter City.."></input>
+        <button>Search</button>
+        <br />
+        <br />
+        <br />
+        <br />
+
+        {/* Later implement this to show up once a city is selected 
+          Create option to X out and unselect city*/}
+        <h4>Selected Cities</h4>
+        {!selectedCities && "Please select a city"}
+        {selectedCities && selectedCities.map(item => <p>{item}</p>)}
       </Drawer>
     </>
   );

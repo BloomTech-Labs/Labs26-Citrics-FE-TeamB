@@ -1,23 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 import {
   BrowserRouter as Router,
   Route,
   useHistory,
-  Switch,
-} from 'react-router-dom';
-import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
+  Switch
+} from "react-router-dom";
+// import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
 
-import 'antd/dist/antd.less';
+import "antd/dist/antd.less";
 
-import { NotFoundPage } from './components/pages/NotFound';
-import { ExampleListPage } from './components/pages/ExampleList';
-import { ProfileListPage } from './components/pages/ProfileList';
-import { LoginPage } from './components/pages/Login';
-import { HomePage } from './components/pages/Home';
-import { ExampleDataViz } from './components/pages/ExampleDataViz';
-import { config } from './utils/oktaConfig';
-import { LoadingComponent } from './components/common';
+import { NotFoundPage } from "./components/pages/NotFound";
+import { ExampleListPage } from "./components/pages/ExampleList";
+import { ProfileListPage } from "./components/pages/ProfileList";
+import { LoginPage } from "./components/pages/Login";
+import { NavPage } from "./components/pages/Nav";
+import { HomePage } from "./components/pages/Home";
+import { ExampleDataViz } from "./components/pages/ExampleDataViz";
+// import { config } from './utils/oktaConfig';
+import { LoadingComponent } from "./components/common";
+// import NavContainer from './components/pages/Nav/NavContainer';
 
 ReactDOM.render(
   <Router>
@@ -25,7 +27,7 @@ ReactDOM.render(
       <App />
     </React.StrictMode>
   </Router>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 function App() {
@@ -33,28 +35,31 @@ function App() {
   // React Router has a nifty useHistory hook we can use at this level to ensure we have security around our routes.
   const history = useHistory();
 
-  const authHandler = () => {
-    // We pass this to our <Security /> component that wraps our routes.
-    // It'll automatically check if userToken is available and push back to login if not :)
-    history.push('/login');
-  };
+  // const authHandler = () => {
+  //   // We pass this to our <Security /> component that wraps our routes.
+  //   // It'll automatically check if userToken is available and push back to login if not :)
+  //   history.push('/login');
+  // };
 
   return (
-    <Security {...config} onAuthRequired={authHandler}>
+    // <Security {...config} onAuthRequired={authHandler}>
+    <>
       <Switch>
         <Route path="/login" component={LoginPage} />
-        <Route path="/implicit/callback" component={LoginCallback} />
+        {/* <Route path="/implicit/callback" component={LoginCallback} /> */}
         {/* any of the routes you need secured should be registered as SecureRoutes */}
-        <SecureRoute
+        <Route
           path="/"
           exact
           component={() => <HomePage LoadingComponent={LoadingComponent} />}
         />
-        <SecureRoute path="/example-list" component={ExampleListPage} />
-        <SecureRoute path="/profile-list" component={ProfileListPage} />
-        <SecureRoute path="/datavis" component={ExampleDataViz} />
+        <Route path="/example-list" component={ExampleListPage} />
+        <Route path="/profile-list" component={ProfileListPage} />
+        <Route path="/datavis" component={ExampleDataViz} />
         <Route component={NotFoundPage} />
       </Switch>
-    </Security>
+      <NavPage />
+      {/* </Security> */}
+    </>
   );
 }

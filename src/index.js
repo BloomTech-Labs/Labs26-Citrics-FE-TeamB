@@ -6,7 +6,9 @@ import {
   useHistory,
   Switch
 } from "react-router-dom";
+
 // import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
+
 
 import "antd/dist/antd.less";
 
@@ -14,6 +16,7 @@ import { NotFoundPage } from "./components/pages/NotFound";
 import { ExampleListPage } from "./components/pages/ExampleList";
 import { ProfileListPage } from "./components/pages/ProfileList";
 import { LoginPage } from "./components/pages/Login";
+
 import { NavPage } from "./components/pages/Nav";
 import { HomePage } from "./components/pages/Home";
 import { ExampleDataViz } from "./components/pages/ExampleDataViz";
@@ -21,10 +24,16 @@ import { ExampleDataViz } from "./components/pages/ExampleDataViz";
 import { LoadingComponent } from "./components/common";
 // import NavContainer from './components/pages/Nav/NavContainer';
 
+import { Provider } from "react-redux";
+import { store } from "./state";
+
+
 ReactDOM.render(
   <Router>
     <React.StrictMode>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </React.StrictMode>
   </Router>,
   document.getElementById("root")
@@ -35,11 +44,13 @@ function App() {
   // React Router has a nifty useHistory hook we can use at this level to ensure we have security around our routes.
   const history = useHistory();
 
+
   // const authHandler = () => {
   //   // We pass this to our <Security /> component that wraps our routes.
   //   // It'll automatically check if userToken is available and push back to login if not :)
   //   history.push('/login');
   // };
+
 
   return (
     // <Security {...config} onAuthRequired={authHandler}>

@@ -51,8 +51,10 @@ export default function NavContainer(props) {
         {/* Later implement this to show up once a city is selected 
           Create option to X out and unselect city*/}
         <h4>Selected Cities</h4>
-        {!selectedCities && "Please select a city"}
-        {selectedCities && selectedCities.map(item => <p>{item}</p>)}
+        {/* If selectedCities is empty, display string. Else display state data */}
+        {selectedCities.length === 0
+          ? "Please select a city"
+          : selectedCities.map(item => <p>{item}</p>)}
       </Drawer>
     </>
   );

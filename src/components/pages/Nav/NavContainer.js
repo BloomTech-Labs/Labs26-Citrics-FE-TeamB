@@ -1,18 +1,11 @@
 // React imports
 import React, { useState, useEffect } from "react";
 // Styling
-import { Drawer, Button } from "antd";
+import { Drawer, Button, AutoComplete } from "antd";
 // Dummy city data
 import { cities } from "./cityList";
 
 export default function NavContainer(props) {
-  //import antdesign for drawer✅
-  //implement drawer for navbar feature✅
-  //create dummy data to test✅
-  //create search bar form✅
-  //select cities
-  //create state so button changes from 'Search' to Compare' when more than one is selected
-
   // ----- State -----
   // Drawer visibility
   const [visible, setVisible] = useState(false);
@@ -22,6 +15,8 @@ export default function NavContainer(props) {
   const [searchTerm, setSearchTerm] = useState("");
   // Store search results as list
   const [searchResults, setSearchResults] = useState([]);
+  //State for options for Autocomplete
+  const [options, setOptions] = useState([cities]);
 
   // Sets user input to searchTerm
   const handleChange = event => {
@@ -46,6 +41,25 @@ export default function NavContainer(props) {
     setVisible(false);
   };
 
+  // Functionality while searching--changing selectedCities
+  const onSearch = searchText => {
+    setOptions(
+      //fill in with functionality to return first three responses
+      !searchText ? [] : []
+    );
+  };
+
+  //onSelect to consloe log the data
+  const onSelect = data => {
+    console.log("onSelect", data);
+  };
+
+  // change handler for setting the search term
+  //CHANGE NAMING
+  const onChange = data => {
+    setSearchTerm(data);
+  };
+
   return (
     <>
       <Button type="primary" onClick={showDrawer}>
@@ -58,12 +72,21 @@ export default function NavContainer(props) {
         onClose={onClose}
         visible={visible}
       >
-        <input
+        <AutoComplete
+          value={searchTerm}
+          options={options}
+          style={{ width: 200 }}
+          onSelect={onSelect}
+          onSearch={onSearch}
+          onChange={onChange}
+          placeholder="testing Autocomplete.."
+        />
+        {/* <input
           type="text"
           placeholder="Enter City.."
           value={searchTerm}
           onChange={handleChange}
-        />
+        /> */}
         <button>Search</button>
         <ul>
           {searchResults.map(item => (
@@ -75,8 +98,6 @@ export default function NavContainer(props) {
         <br />
         <br />
 
-        {/* Later implement this to show up once a city is selected 
-          Create option to X out and unselect city*/}
         <h4>Selected Cities</h4>
         {/* If selectedCities is empty, display string. Else display state data */}
         {selectedCities.length === 0

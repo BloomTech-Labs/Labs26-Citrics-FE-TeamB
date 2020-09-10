@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Drawer, Button, AutoComplete } from "antd";
 // Dummy city data
 import { cities } from "./cityList";
+import "./styles.css";
 
 export default function NavContainer(props) {
   // ----- State -----
@@ -16,7 +17,7 @@ export default function NavContainer(props) {
   // Store search results as list
   const [searchResults, setSearchResults] = useState([]);
   //State for options for Autocomplete
-  const [options, setOptions] = useState([cities]);
+  const [options, setOptions] = useState(searchResults);
 
   // Sets user input to searchTerm
   const handleChange = event => {
@@ -26,7 +27,7 @@ export default function NavContainer(props) {
   // Search filter functionality
   useEffect(() => {
     const results = cities.filter(item =>
-      item.toLowerCase().includes(searchTerm)
+      item.value.toLowerCase().includes(searchTerm)
     );
     setSearchResults(results);
   }, [searchTerm]);
@@ -61,7 +62,7 @@ export default function NavContainer(props) {
   };
 
   return (
-    <>
+    <div className="navbar">
       <Button type="primary" onClick={showDrawer}>
         Open
       </Button>
@@ -90,7 +91,7 @@ export default function NavContainer(props) {
         <button>Search</button>
         <ul>
           {searchResults.map(item => (
-            <li>{item}</li>
+            <li>{item.value}</li>
           ))}
         </ul>
         <br />
@@ -104,6 +105,6 @@ export default function NavContainer(props) {
           ? "Please select a city"
           : selectedCities.map(item => <p>{item}</p>)}
       </Drawer>
-    </>
+    </div>
   );
 }

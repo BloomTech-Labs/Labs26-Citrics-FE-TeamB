@@ -45,7 +45,7 @@ export default function NavContainer(props) {
   const onSearch = searchText => {
     setOptions(
       //fill in with functionality to return first three responses
-      !searchText ? [] : []
+      !searchText ? [] : [searchResults[0], searchResults[1], searchResults[2]]
     );
   };
 
@@ -79,7 +79,7 @@ export default function NavContainer(props) {
           onSelect={onSelect}
           onSearch={onSearch}
           onChange={onChange}
-          placeholder="testing Autocomplete.."
+          placeholder="Enter City.."
         />
         {/* <input
           type="text"

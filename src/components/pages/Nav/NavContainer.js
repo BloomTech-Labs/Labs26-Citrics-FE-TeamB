@@ -20,15 +20,15 @@ export default function NavContainer(props) {
   const [options, setOptions] = useState(searchResults);
 
   // Sets user input to searchTerm
-  const handleChange = event => {
-    setSearchTerm(event.target.value);
+  const onChange = data => {
+    setSearchTerm(data);
   };
 
   // Search filter functionality
   useEffect(() => {
-    const results = cities.filter(item =>
-      item.value.toLowerCase().includes(searchTerm)
-    );
+    const results = cities
+      .map(item => ({ value: `${item.name} ${item.state}`, ...item }))
+      .filter(item => item.value.toLowerCase().includes(searchTerm));
     setSearchResults(results);
   }, [searchTerm]);
 
@@ -46,19 +46,17 @@ export default function NavContainer(props) {
   const onSearch = searchText => {
     setOptions(
       //fill in with functionality to return first three responses
-      !searchText ? [] : [searchResults[0], searchResults[1], searchResults[2]]
+      !searchText
+        ? []
+        : searchResults.length <= 3
+        ? searchResults
+        : searchResults.slice(0, 3)
     );
   };
 
   //onSelect to consloe log the data
   const onSelect = data => {
     console.log("onSelect", data);
-  };
-
-  // change handler for setting the search term
-  //CHANGE NAMING
-  const onChange = data => {
-    setSearchTerm(data);
   };
 
   return (
@@ -82,12 +80,6 @@ export default function NavContainer(props) {
           onChange={onChange}
           placeholder="Enter City.."
         />
-        {/* <input
-          type="text"
-          placeholder="Enter City.."
-          value={searchTerm}
-          onChange={handleChange}
-        /> */}
         <button>Search</button>
         <ul>
           {searchResults.map(item => (

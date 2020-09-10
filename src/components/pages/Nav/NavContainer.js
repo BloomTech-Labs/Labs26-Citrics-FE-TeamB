@@ -1,5 +1,5 @@
 // React imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // Styling
 import { Drawer, Button } from "antd";
 // Dummy city data
@@ -18,6 +18,23 @@ export default function NavContainer(props) {
   const [visible, setVisible] = useState(false);
   // Selected cities
   const [selectedCities, setSelectedCities] = useState([]);
+  // Store search input as string
+  const [searchTerm, setSearchTerm] = useState("");
+  // Store search results as list
+  const [searchResults, setSearchResults] = useState([]);
+
+  // Sets user input to searchTerm
+  const handleChange = event => {
+    setSearchTerm(event.target.value);
+  };
+
+  // Search filter functionality
+  useEffect(() => {
+    const results = cities.filter(item =>
+      item.toLowerCase().includes(searchTerm)
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
 
   // Opens drawer
   const showDrawer = () => {
@@ -41,8 +58,18 @@ export default function NavContainer(props) {
         onClose={onClose}
         visible={visible}
       >
-        <input type="text" placeholder="Enter City.."></input>
+        <input
+          type="text"
+          placeholder="Enter City.."
+          value={searchTerm}
+          onChange={handleChange}
+        />
         <button>Search</button>
+        <ul>
+          {searchResults.map(item => (
+            <li>{item}</li>
+          ))}
+        </ul>
         <br />
         <br />
         <br />

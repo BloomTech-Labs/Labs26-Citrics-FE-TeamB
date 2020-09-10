@@ -30,22 +30,24 @@ const RenderComparison = props => {
     const cities = [];
     for (const data in dummyData) {
       cities.push(
-        <Card style={{ width: 240 }} bodyStyle={{ padding: 0 }}>
-          <div className="custom-image">
-            <img
-              alt="example"
-              width="100%"
-              src="https://i.imgur.com/YXdssOR.jpeg"
-            />
-          </div>
-          <div className="custom-card">
-            <h3>city name: {dummyData[data].city}</h3>
-            <p>state: {dummyData[data].state}</p>
-            <p>population: {dummyData[data].pop}</p>
-            <p>rental: {dummyData[data].rental}</p>
-            <p>weather: {dummyData[data].weather}</p>
-          </div>
-        </Card>
+        <div className="card" key={data}>
+          <Card style={{ width: 240 }} bodyStyle={{ padding: 0 }}>
+            <div className="custom-image">
+              <img
+                alt="example"
+                width="100%"
+                src="https://i.imgur.com/YXdssOR.jpeg"
+              />
+            </div>
+            <div className="custom-card">
+              <h3>city name: {dummyData[data].city}</h3>
+              <p>state: {dummyData[data].state}</p>
+              <p>population: {dummyData[data].pop}</p>
+              <p>rental: {dummyData[data].rental}</p>
+              <p>weather: {dummyData[data].weather}</p>
+            </div>
+          </Card>
+        </div>
       );
     }
     return cities;

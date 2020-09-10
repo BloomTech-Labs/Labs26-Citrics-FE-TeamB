@@ -2,7 +2,7 @@
 // Data pulled from: https://simple.wikipedia.org/wiki/List_of_United_States_cities_by_population#Cities_that_used_to_have_100,000_people
 
 export const cities = [
-  { value: "Albany NY" },
+  { id: 1, name: "Albany", state: "NY" },
   { value: "Allegheny PA" },
   { value: "Brooklyn NY" },
   { value: "Camden NJ" },

@@ -1,5 +1,5 @@
 .background-image {
-  background-image: url("/splash_screen_full.jpg");
+  background: url("/splash_screen_full.jpg") center no-repeat;
   background-size: cover;
   position: relative;
   z-index: -1;

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { Drawer, Button } from "antd";
 // Dummy city data
 import { cities } from "./cityList";
+import "./styles.css";
 
 export default function NavContainer(props) {
   //import antdesign for drawer✅
@@ -47,7 +48,7 @@ export default function NavContainer(props) {
   };
 
   return (
-    <>
+    <div className="navbar">
       <Button type="primary" onClick={showDrawer}>
         Open
       </Button>
@@ -83,6 +84,6 @@ export default function NavContainer(props) {
           ? "Please select a city"
           : selectedCities.map(item => <p>{item}</p>)}
       </Drawer>
-    </>
+    </div>
   );
 }

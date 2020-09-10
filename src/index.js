@@ -9,7 +9,6 @@ import {
 
 // import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
 
-
 import "antd/dist/antd.less";
 
 import { NotFoundPage } from "./components/pages/NotFound";
@@ -23,10 +22,9 @@ import { ExampleDataViz } from "./components/pages/ExampleDataViz";
 // import { config } from './utils/oktaConfig';
 import { LoadingComponent } from "./components/common";
 // import NavContainer from './components/pages/Nav/NavContainer';
-
+import { ComparisonPage } from "./components/pages/Comparison";
 import { Provider } from "react-redux";
 import { store } from "./state";
-
 
 ReactDOM.render(
   <Router>
@@ -44,13 +42,11 @@ function App() {
   // React Router has a nifty useHistory hook we can use at this level to ensure we have security around our routes.
   const history = useHistory();
 
-
   // const authHandler = () => {
   //   // We pass this to our <Security /> component that wraps our routes.
   //   // It'll automatically check if userToken is available and push back to login if not :)
   //   history.push('/login');
   // };
-
 
   return (
     // <Security {...config} onAuthRequired={authHandler}>
@@ -67,6 +63,7 @@ function App() {
         <Route path="/example-list" component={ExampleListPage} />
         <Route path="/profile-list" component={ProfileListPage} />
         <Route path="/datavis" component={ExampleDataViz} />
+        <Route path="/comparison-page" component={ComparisonPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <NavPage />

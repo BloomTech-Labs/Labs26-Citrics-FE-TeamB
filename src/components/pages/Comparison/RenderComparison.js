@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import { Card, Button } from "antd";
 import { connect } from "react-redux";
 import ModalComponent from "../../common/Modal.js";
@@ -50,8 +51,15 @@ const RenderComparison = ({ singleCityDetail, citiesData }) => {
   };
   return (
     <>
-      <div className="card-container">{renderCard()}</div>
-      <ModalComponent visible={visible} setVisible={setVisible} />
+      {Object.keys(citiesData).length < 2 ? (
+        // Place holder redirect for now, should redirect to the single details page or something else later
+        <Redirect to="/" />
+      ) : (
+        <>
+          <div className="card-container">{renderCard()}</div>
+          <ModalComponent visible={visible} setVisible={setVisible} />
+        </>
+      )}
     </>
   );
 };

@@ -1,8 +1,14 @@
-import { ADD_CITY, REMOVE_CITY, ADD_CITY_DETAILS } from "../contexts";
+import {
+  ADD_CITY,
+  REMOVE_CITY,
+  ADD_CITY_DETAILS,
+  SINGLE_CITY_DETAILS
+} from "../contexts";
 
 const initialState = {
   selectedCities: [{ id: 100, name: "Los Angeles", state: "CA" }],
-  cityDetails: {}
+  cityDetails: {},
+  singleCityDetails: {}
 };
 export default function cityReducer(state = initialState, { type, payload }) {
   switch (type) {
@@ -41,6 +47,12 @@ export default function cityReducer(state = initialState, { type, payload }) {
           ...state.cityDetails,
           [payload.id]: payload.details
         }
+      };
+    case SINGLE_CITY_DETAILS:
+      return {
+        ...state,
+
+        singleCityDetails: payload
       };
     default:
       return state;

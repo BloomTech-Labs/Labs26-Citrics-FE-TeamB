@@ -78,5 +78,5 @@ const RenderComparison = props => {
     </>
   );
 };
-
-export default connect(null, null)(RenderComparison);
+const actions = {};
+export default connect(null, actions)(RenderComparison);

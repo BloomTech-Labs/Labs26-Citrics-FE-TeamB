@@ -25,6 +25,7 @@ import { LoadingComponent } from "./components/common";
 import { ComparisonPage } from "./components/pages/Comparison";
 import { Provider } from "react-redux";
 import { store } from "./state";
+import GraphContainer from "./components/common/GraphContainer";
 
 ReactDOM.render(
   <Router>
@@ -61,6 +62,7 @@ function App() {
         <Route path="/example-list" component={ExampleListPage} />
         <Route path="/profile-list" component={ProfileListPage} />
         <Route path="/datavis" component={ExampleDataViz} />
+        <Route path="/example-graph" component={GraphContainer} />
         <Route path="/comparison-page" component={ComparisonPage} />
         <Route component={NotFoundPage} />
       </Switch>

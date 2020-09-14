@@ -1,6 +1,8 @@
-.navbar {
+.floating-visibility-button {
   position: absolute;
-  top: 0px;
   left: 0px;
-  z-index: 1;
+  top: 0px;
 }
+/* .floating-visibility-button.open {
+  transform: translate(256px, 0px);
+} */

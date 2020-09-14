@@ -1,5 +1,5 @@
 import { ADD_CITY, REMOVE_CITY, ADD_CITY_DETAILS } from "../contexts";
-import axios from "axios";
+//import axios from "axios";
 
 export const addCity = city => dispatch => {
   dispatch({
@@ -14,6 +14,7 @@ export const removeCity = cityId => ({
 });
 
 export const getCityDetails = id => async dispatch => {
-  const details = { population: 100, weather: "perfect" }; //await axios.get("http://google.com");
+  // TODO: Add API call here to get detailed data
+  const details = { population: 100, weather: "perfect" };
   dispatch({ type: ADD_CITY_DETAILS, payload: { id, details } });
 };

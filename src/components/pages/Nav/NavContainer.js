@@ -45,7 +45,8 @@ function NavContainer({ toggleDrawer, isOpen }) {
     </div>
   );
 }
-export default connect(
-  ({ drawer: { isOpen } }, props) => ({ isOpen, ...props }),
-  { toggleDrawer }
-)(NavContainer);
+const mapPropsToState = ({ drawer: { isOpen } }, props) => ({
+  isOpen,
+  ...props
+});
+export default connect(mapPropsToState, { toggleDrawer })(NavContainer);

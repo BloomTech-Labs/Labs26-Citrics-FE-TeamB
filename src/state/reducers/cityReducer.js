@@ -7,7 +7,29 @@ import {
 
 const initialState = {
   selectedCities: [{ id: 100, name: "Los Angeles", state: "CA" }],
-  cityDetails: {},
+  cityDetails: {
+    100: {
+      name: "Los Angeles",
+      state: "CA",
+      pop: 4721923,
+      rental: 4851,
+      weather: 33
+    },
+    124: {
+      name: "Phoenix",
+      state: "Arizona",
+      pop: 5462312,
+      rental: 1203,
+      weather: 42
+    },
+    562: {
+      name: "Salt Lake City",
+      state: "Utah",
+      pop: 928481,
+      rental: 28123,
+      weather: 38
+    }
+  },
   singleCityDetails: {}
 };
 export default function cityReducer(state = initialState, { type, payload }) {

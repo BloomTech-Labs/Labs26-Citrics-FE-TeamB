@@ -13,8 +13,9 @@ import SelectedCities from "./SelectedCities";
 import "./styles.css";
 
 function NavContainer({ toggleDrawer, isOpen }) {
-  // Opens drawer
+  // This defines the width of the drawer *and* how far to translate the floating button
   const drawerWidth = 256;
+  // Opens drawer
   const showDrawer = () => {
     toggleDrawer();
   };
@@ -44,6 +45,7 @@ function NavContainer({ toggleDrawer, isOpen }) {
         width={drawerWidth}
       >
         <SearchBar />
+        {/* TODO: remove these and clean up formatting of this element */}
         <br />
         <br />
         <br />

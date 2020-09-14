@@ -1,17 +1,20 @@
+// Library imports
 import React, { useState, useEffect } from "react";
-
 import { AutoComplete } from "antd";
-// Dummy city data
+import { connect } from "react-redux";
+import { addCity } from "../../../state/actions";
+
+// Dummy data
 import { cities } from "./cityList";
 
-export default function SearchBar(props) {
+function SearchBar({ addCity }) {
   // List of all cities in database
   const [cityList, setCityList] = useState([]);
   // Search term as entered in box
   const [searchTerm, setSearchTerm] = useState("");
   // Store search results as list
   const [searchResults, setSearchResults] = useState([]);
-  //State for options for Autocomplete
+  //Options to show in the Autocomplete
   const [options, setOptions] = useState([]);
 
   // Sets user input to searchTerm
@@ -21,7 +24,7 @@ export default function SearchBar(props) {
 
   // Initial city list fetching (currently using dummy data)
   useEffect(() => {
-    //axios stuff goes here
+    //TODO: Add axios query here and remove dummy data up top
     const queryResult = cities;
     setCityList(
       queryResult.map(item => ({
@@ -30,7 +33,7 @@ export default function SearchBar(props) {
       }))
     );
   }, []);
-  // Search filter functionality
+  // Get search results by searching through cityList
   useEffect(() => {
     const results = cityList.filter(item =>
       item.value.toLowerCase().includes(searchTerm)
@@ -38,17 +41,16 @@ export default function SearchBar(props) {
     setSearchResults(results);
   }, [searchTerm, cityList]);
 
-  // Functionality while searching--changing selectedCities
+  // On each keystroke, update the list shown in Autocomplete
   const onSearch = searchText => {
-    setOptions(
-      //fill in with functionality to return first three responses
-      !searchText ? [] : searchResults.slice(0, 5)
-    );
+    setOptions(!searchText ? [] : searchResults.slice(0, 5));
   };
 
-  //onSelect to consloe log the data
+  //When clicking on a city, add it to the selected cities
   const onSelect = data => {
-    console.log("onSelect", data);
+    const entry = cityList.find(({ value }) => value === data);
+    // console.log("City to be added",entry);
+    addCity(entry);
   };
 
   return (
@@ -63,3 +65,5 @@ export default function SearchBar(props) {
     />
   );
 }
+const mapPropsToState = (reduxProps, props) => props;
+export default connect(mapPropsToState, { addCity })(SearchBar);

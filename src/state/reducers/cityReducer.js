@@ -8,20 +8,20 @@ export default function cityReducer(state = initialState, { type, payload }) {
   switch (type) {
     case ADD_CITY:
       // Limit to 3 cities
-      // console.log("adding city", payload.city);
       if (state.selectedCities.length > 2) return state;
       return {
         ...state,
         selectedCities: [...state.selectedCities, payload.city]
       };
     case REMOVE_CITY:
-      // console.log("Removing city number", payload.cityId);
       // To remove details, first copy the object, then remove the key
       let newDetails = { ...state.cityDetails };
       delete newDetails[payload.cityId];
       return {
         ...state,
         selectedCities: state.selectedCities.filter(
+          // Would use != instead here, but eslint doesn't allow it
+          // So must typecast both operands manually
           city => Number(city.id) !== Number(payload.cityId)
         ),
         cityDetails: newDetails

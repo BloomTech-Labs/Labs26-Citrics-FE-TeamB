@@ -4,21 +4,21 @@ import { connect } from "react-redux";
 import ModalComponent from "../../common/Modal.js";
 const dummyData = {
   123: {
-    city: "city1",
+    name: "city1",
     state: "state1",
     pop: 5462312,
     rental: 2131,
     weather: 32
   },
   133: {
-    city: "city2",
+    name: "city2",
     state: "state2",
     pop: 5462312,
     rental: 2131,
     weather: 32
   },
   124: {
-    city: "city3",
+    name: "city3",
     state: "state3",
     pop: 5462312,
     rental: 2131,

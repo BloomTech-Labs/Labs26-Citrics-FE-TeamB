@@ -3,11 +3,11 @@ import React from "react";
 export default function RenderCityDetail({ city }) {
   return (
     <div>
-      <p>{city.city}</p>
-      <p>{city.state}</p>
-      <p>{city.rental}</p>
-      <p>{city.pop}</p>
-      <p>{city.weather}</p>
+      <p>City: {city.name}</p>
+      <p> State: {city.state}</p>
+      <p>Rent: {city.rental}</p>
+      <p>Population: {city.pop}</p>
+      <p>Weather: {city.weather}</p>
     </div>
   );
 }

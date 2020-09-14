@@ -1,102 +1,63 @@
-// React imports
-import React, { useState, useEffect } from "react";
-// Styling
-import { Drawer, Button, AutoComplete } from "antd";
-// Dummy city data
-import { cities } from "./cityList";
+// Library imports
+import React from "react";
+import { connect } from "react-redux";
+import { toggleDrawer } from "../../../state/actions";
+import { Drawer, Button } from "antd";
+import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
+
+//Subcomponents
+import SearchBar from "./SearchBar";
+import SelectedCities from "./SelectedCities";
+
+//Styling
 import "./styles.css";
 
-export default function NavContainer(props) {
-  // ----- State -----
-  // Drawer visibility
-  const [visible, setVisible] = useState(false);
-  // Selected cities
-  const [selectedCities, setSelectedCities] = useState([]);
-  // Store search input as string
-  const [searchTerm, setSearchTerm] = useState("");
-  // Store search results as list
-  const [searchResults, setSearchResults] = useState([]);
-  //State for options for Autocomplete
-  const [options, setOptions] = useState(searchResults);
-
-  // Sets user input to searchTerm
-  const onChange = data => {
-    setSearchTerm(data);
-  };
-
-  // Search filter functionality
-  useEffect(() => {
-    const results = cities
-      .map(item => ({ value: `${item.name} ${item.state}`, ...item }))
-      .filter(item => item.value.toLowerCase().includes(searchTerm));
-    setSearchResults(results);
-  }, [searchTerm]);
-
+function NavContainer({ toggleDrawer, isOpen }) {
+  // This defines the width of the drawer *and* how far to translate the floating button
+  const drawerWidth = 256;
   // Opens drawer
   const showDrawer = () => {
-    setVisible(true);
+    toggleDrawer();
   };
 
   // Closes drawer
   const onClose = () => {
-    setVisible(false);
-  };
-
-  // Functionality while searching--changing selectedCities
-  const onSearch = searchText => {
-    setOptions(
-      //fill in with functionality to return first three responses
-      !searchText
-        ? []
-        : searchResults.length <= 3
-        ? searchResults
-        : searchResults.slice(0, 3)
-    );
-  };
-
-  //onSelect to consloe log the data
-  const onSelect = data => {
-    console.log("onSelect", data);
+    toggleDrawer();
   };
 
   return (
     <div className="navbar">
-      <Button type="primary" onClick={showDrawer}>
-        Open
+      <Button
+        className="floating-visibility-button"
+        type="secondary"
+        onClick={showDrawer}
+        style={{ transform: isOpen ? `translate(${drawerWidth}px,0px)` : "" }}
+      >
+        {isOpen ? <DoubleLeftOutlined /> : <DoubleRightOutlined />}
       </Button>
       <Drawer
-        title="Basic Drawer" //rename!
+        title="City Search"
         placement="left"
         closable={false}
         onClose={onClose}
-        visible={visible}
+        visible={isOpen}
+        mask={false}
+        width={drawerWidth}
       >
-        <AutoComplete
-          value={searchTerm}
-          options={options}
-          style={{ width: 200 }}
-          onSelect={onSelect}
-          onSearch={onSearch}
-          onChange={onChange}
-          placeholder="Enter City.."
-        />
-        <button>Search</button>
-        <ul>
-          {searchResults.map(item => (
-            <li>{item.value}</li>
-          ))}
-        </ul>
+        <SearchBar />
+        {/* TODO: remove these and clean up formatting of this element */}
         <br />
         <br />
         <br />
         <br />
 
-        <h4>Selected Cities</h4>
-        {/* If selectedCities is empty, display string. Else display state data */}
-        {selectedCities.length === 0
-          ? "Please select a city"
-          : selectedCities.map(item => <p>{item}</p>)}
+        <SelectedCities />
       </Drawer>
     </div>
   );
 }
+const mapPropsToState = ({ drawer: { isOpen } }, props) => ({
+  isOpen,
+  ...props
+});
+export default connect(mapPropsToState, { toggleDrawer })(NavContainer);

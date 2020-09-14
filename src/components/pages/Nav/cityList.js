@@ -30,5 +30,4 @@ export const cities = [
   { id: 26, name: "Utica", state: "NY" },
   { id: 27, name: "Wilmington", state: "DW" },
   { id: 28, name: "Youngstown", state: "OH" }
-
 ];

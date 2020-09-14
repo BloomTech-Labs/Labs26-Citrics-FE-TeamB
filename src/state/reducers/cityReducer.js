@@ -6,7 +6,11 @@ import {
 } from "../contexts";
 
 const initialState = {
-  selectedCities: [{ id: 100, name: "Los Angeles", state: "CA" }],
+  selectedCities: [
+    { id: 100, name: "Los Angeles", state: "CA" },
+    { id: 124, name: "Phoenix", state: "Arizona" },
+    { id: 562, name: "Salt Lake City", state: "Utah" }
+  ],
   cityDetails: {
     100: {
       name: "Los Angeles",

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { toggleDrawer } from "../../../state/actions";
 import { Drawer, Button } from "antd";
+import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
 
 //Subcomponents
 import SearchBar from "./SearchBar";
@@ -26,11 +27,12 @@ function NavContainer({ toggleDrawer, isOpen }) {
   return (
     <div className="navbar">
       <Button
-        className={`floating-visibility-button${isOpen ? " open" : ""}`}
-        type="ghost"
+        className="floating-visibility-button"
+        type="secondary"
         onClick={showDrawer}
+        style={{ transform: isOpen ? `translate(${drawerWidth}px,0px)` : "" }}
       >
-        {isOpen ? "<" : ">"}
+        {isOpen ? <DoubleLeftOutlined /> : <DoubleRightOutlined />}
       </Button>
       <Drawer
         title="City Search"

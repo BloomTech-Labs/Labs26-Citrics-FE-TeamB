@@ -3,9 +3,6 @@
   left: 0px;
   top: 0px;
 }
-.floating-visibility-button.open {
-  transform: translate(
-    256px,
-    0px
-  ); /*Hardcoded - this is the width of the drawer*/
-}
+/* .floating-visibility-button.open {
+  transform: translate(256px, 0px);
+} */

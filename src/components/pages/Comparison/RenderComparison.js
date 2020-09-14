@@ -1,7 +1,7 @@
-import React from "react";
-import { Card } from "antd";
+import React, { useState } from "react";
+import { Card, Button } from "antd";
 import { connect } from "react-redux";
-
+import ModalComponent from "../../common/Modal.js";
 const dummyData = {
   123: {
     city: "city1",
@@ -26,6 +26,9 @@ const dummyData = {
   }
 };
 const RenderComparison = props => {
+  const [visible, setVisible] = useState(false);
+
+  // Iterates through the cities state and renders the card per city
   const renderCard = () => {
     const cities = [];
     for (const data in dummyData) {
@@ -45,6 +48,9 @@ const RenderComparison = props => {
               <p>population: {dummyData[data].pop}</p>
               <p>rental: {dummyData[data].rental}</p>
               <p>weather: {dummyData[data].weather}</p>
+              <Button type="primary" onClick={() => setVisible(true)}>
+                More Info
+              </Button>
             </div>
           </Card>
         </div>
@@ -55,6 +61,7 @@ const RenderComparison = props => {
   return (
     <>
       <div className="card-container">{renderCard()}</div>
+      <ModalComponent visible={visible} setVisible={setVisible} />
     </>
   );
 };

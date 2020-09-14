@@ -15,7 +15,7 @@ function RenderHomePage({ toggleDrawer }) {
   };
   return (
     <>
-      <div className="background-image" />
+      <div className="background-image" role="img" />
       <Card className="title-card">
         <Title>Citrics</Title>
         <Text>Your one stop for city metrics!</Text>

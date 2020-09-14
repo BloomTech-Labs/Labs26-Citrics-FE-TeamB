@@ -1,9 +1,4 @@
-import {
-  ADD_CITY,
-  REMOVE_CITY,
-  ADD_CITY_DETAILS,
-  SINGLE_CITY_DETAILS
-} from "../contexts";
+import { ADD_CITY, REMOVE_CITY, ADD_CITY_DETAILS } from "../contexts";
 
 const initialState = {
   selectedCities: [
@@ -33,8 +28,7 @@ const initialState = {
       rental: 28123,
       weather: 38
     }
-  },
-  singleCityDetails: {}
+  }
 };
 export default function cityReducer(state = initialState, { type, payload }) {
   switch (type) {
@@ -73,12 +67,6 @@ export default function cityReducer(state = initialState, { type, payload }) {
           ...state.cityDetails,
           [payload.id]: payload.details
         }
-      };
-    case SINGLE_CITY_DETAILS:
-      return {
-        ...state,
-        // sets the single city details whenever a the single city action is fired
-        singleCityDetails: payload
       };
     default:
       return state;

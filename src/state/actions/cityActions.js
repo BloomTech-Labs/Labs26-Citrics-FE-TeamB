@@ -1,9 +1,4 @@
-import {
-  ADD_CITY,
-  REMOVE_CITY,
-  ADD_CITY_DETAILS,
-  SINGLE_CITY_DETAILS
-} from "../contexts";
+import { ADD_CITY, REMOVE_CITY, ADD_CITY_DETAILS } from "../contexts";
 //import axios from "axios";
 
 export const addCity = city => dispatch => {
@@ -22,8 +17,4 @@ export const getCityDetails = id => async dispatch => {
   // TODO: Add API call here to get detailed data
   const details = { population: 100, weather: "perfect" };
   dispatch({ type: ADD_CITY_DETAILS, payload: { id, details } });
-};
-
-export const singleCityDetail = city => dispatch => {
-  dispatch({ type: SINGLE_CITY_DETAILS, payload: city });
 };

@@ -4,14 +4,12 @@ import { Card, Button } from "antd";
 import { connect } from "react-redux";
 import ModalComponent from "../../common/Modal.js";
 
-import { singleCityDetail } from "../../../state/actions/cityActions";
-
-const RenderComparison = ({ singleCityDetail, citiesData }) => {
+const RenderComparison = ({ citiesData }) => {
   const [visible, setVisible] = useState(false);
+  const [city, setCity] = useState({});
 
   const toggleModal = cityData => {
-    // Sets the details to view for a single city
-    singleCityDetail(cityData);
+    setCity(cityData);
     // Toggles the modal to open
     setVisible(true);
   };
@@ -57,19 +55,19 @@ const RenderComparison = ({ singleCityDetail, citiesData }) => {
       ) : (
         <>
           <div className="card-container">{renderCard()}</div>
-          <ModalComponent visible={visible} setVisible={setVisible} />
+          <ModalComponent
+            visible={visible}
+            setVisible={setVisible}
+            city={city}
+          />
         </>
       )}
     </>
   );
 };
 
-// Redux actions
-const actions = {
-  singleCityDetail
-};
 // Map State to props
 const mapState = state => ({
   citiesData: state.cities.cityDetails
 });
-export default connect(mapState, actions)(RenderComparison);
+export default connect(mapState, null)(RenderComparison);

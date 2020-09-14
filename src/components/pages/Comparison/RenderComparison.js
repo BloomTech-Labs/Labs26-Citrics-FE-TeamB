@@ -29,10 +29,11 @@ const dummyData = {
 };
 const RenderComparison = ({ singleCityDetail }) => {
   const [visible, setVisible] = useState(false);
-  // const [citySelected, setCitySelected] = useState({});
 
   const toggleModal = cityData => {
+    // Sets the details to view for a single city
     singleCityDetail(cityData);
+    // Toggles the modal to open
     setVisible(true);
   };
 
@@ -76,7 +77,13 @@ const RenderComparison = ({ singleCityDetail }) => {
     </>
   );
 };
+
+// Redux actions
 const actions = {
   singleCityDetail
 };
-export default connect(null, actions)(RenderComparison);
+// Map State to props
+const mapState = state => ({
+  citiesData: state.cities.cityDetails
+});
+export default connect(mapState, actions)(RenderComparison);

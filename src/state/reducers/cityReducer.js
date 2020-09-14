@@ -51,6 +51,7 @@ export default function cityReducer(state = initialState, { type, payload }) {
     case SINGLE_CITY_DETAILS:
       return {
         ...state,
+        // sets the single city details whenever a the single city action is fired
         singleCityDetails: payload
       };
     default:

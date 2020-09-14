@@ -5,11 +5,14 @@ import { CityDetailPage } from "../pages/CityDetail";
 
 const ModalComponent = ({ visible, setVisible, singleCity }) => {
   const [city, setCity] = useState(singleCity);
+
+  // Everytime the singleCity state changes, updates the city to view
   useEffect(() => {
     setCity(singleCity);
   }, [singleCity]);
   return (
     <>
+      {/* Checks to see if theres something in city object */}
       {city ? (
         <Modal
           title={`Info for ${city.name}`}
@@ -22,11 +25,13 @@ const ModalComponent = ({ visible, setVisible, singleCity }) => {
         >
           <CityDetailPage city={city} />
         </Modal>
-      ) : null}
+      ) : // Returns null if nothing is in it
+      null}
     </>
   );
 };
 
+// Map State to props
 const mapState = state => ({
   singleCity: state.cities.singleCityDetails
 });

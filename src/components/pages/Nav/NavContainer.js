@@ -1,5 +1,5 @@
 // Library imports
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import { toggleDrawer } from "../../../state/actions";
 import { Drawer, Button } from "antd";

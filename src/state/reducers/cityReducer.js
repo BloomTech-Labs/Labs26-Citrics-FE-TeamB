@@ -9,6 +9,14 @@ export default function cityReducer(state = initialState, { type, payload }) {
     case ADD_CITY:
       // Limit to 3 cities
       if (state.selectedCities.length > 2) return state;
+      // Prevent adding duplicates
+      if (
+        state.selectedCities.find(
+          ({ id }) => Number(id) === Number(payload.city.id)
+        )
+      ) {
+        return state;
+      }
       return {
         ...state,
         selectedCities: [...state.selectedCities, payload.city]

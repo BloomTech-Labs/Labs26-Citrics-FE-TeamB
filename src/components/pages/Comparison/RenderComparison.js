@@ -1,43 +1,23 @@
 import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import { Card, Button } from "antd";
 import { connect } from "react-redux";
 import ModalComponent from "../../common/Modal.js";
-const dummyData = {
-  123: {
-    name: "city1",
-    state: "state1",
-    pop: 5462312,
-    rental: 2131,
-    weather: 32
-  },
-  133: {
-    name: "city2",
-    state: "state2",
-    pop: 5462312,
-    rental: 2131,
-    weather: 32
-  },
-  124: {
-    name: "city3",
-    state: "state3",
-    pop: 5462312,
-    rental: 2131,
-    weather: 32
-  }
-};
-const RenderComparison = props => {
+
+const RenderComparison = ({ citiesData }) => {
   const [visible, setVisible] = useState(false);
-  const [citySelected, setCitySelected] = useState({});
+  const [city, setCity] = useState({});
 
   const toggleModal = cityData => {
-    setCitySelected(cityData);
+    setCity(cityData);
+    // Toggles the modal to open
     setVisible(true);
   };
 
   // Iterates through the cities state and renders the card per city
   const renderCard = () => {
     const cities = [];
-    for (const data in dummyData) {
+    for (const data in citiesData) {
       cities.push(
         <div className="card" key={data}>
           <Card style={{ width: 240 }} bodyStyle={{ padding: 0 }}>
@@ -49,14 +29,14 @@ const RenderComparison = props => {
               />
             </div>
             <div className="custom-card">
-              <h3>city name: {dummyData[data].city}</h3>
-              <p>state: {dummyData[data].state}</p>
-              <p>population: {dummyData[data].pop}</p>
-              <p>rental: {dummyData[data].rental}</p>
-              <p>weather: {dummyData[data].weather}</p>
+              <h3>city name: {citiesData[data].name}</h3>
+              <p>state: {citiesData[data].state}</p>
+              <p>population: {citiesData[data].pop}</p>
+              <p>rental: {citiesData[data].rental}</p>
+              <p>weather: {citiesData[data].weather}</p>
               <Button
                 type="primary"
-                onClick={() => toggleModal(dummyData[data])}
+                onClick={() => toggleModal(citiesData[data])}
               >
                 More Info
               </Button>
@@ -69,14 +49,25 @@ const RenderComparison = props => {
   };
   return (
     <>
-      <div className="card-container">{renderCard()}</div>
-      <ModalComponent
-        visible={visible}
-        setVisible={setVisible}
-        city={citySelected}
-      />
+      {Object.keys(citiesData).length < 2 ? (
+        // Place holder redirect for now, should redirect to the single details page or something else later
+        <Redirect to="/" />
+      ) : (
+        <>
+          <div className="card-container">{renderCard()}</div>
+          <ModalComponent
+            visible={visible}
+            setVisible={setVisible}
+            city={city}
+          />
+        </>
+      )}
     </>
   );
 };
 
-export default connect(null, null)(RenderComparison);
+// Map State to props
+const mapState = state => ({
+  citiesData: state.cities.cityDetails
+});
+export default connect(mapState, null)(RenderComparison);

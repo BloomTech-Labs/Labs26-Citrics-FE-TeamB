@@ -51,7 +51,6 @@ export default function cityReducer(state = initialState, { type, payload }) {
     case SINGLE_CITY_DETAILS:
       return {
         ...state,
-
         singleCityDetails: payload
       };
     default:

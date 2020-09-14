@@ -8,8 +8,12 @@ export default function cityReducer(state = initialState, { type, payload }) {
   switch (type) {
     case ADD_CITY:
       // Limit to 3 cities
+      // console.log("adding city", payload.city);
       if (state.selectedCities.length > 2) return state;
-      return { ...state, cities: [...state.selectedCities, payload.city] };
+      return {
+        ...state,
+        selectedCities: [...state.selectedCities, payload.city]
+      };
     case REMOVE_CITY:
       // To remove details, first copy the object, then remove the key
       let newDetails = state.cityDetails;

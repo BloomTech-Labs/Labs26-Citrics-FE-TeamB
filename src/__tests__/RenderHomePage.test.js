@@ -2,7 +2,7 @@ import RenderHomePage from "../components/pages/Home/RenderHomePage";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import { render } from "@testing-library/react";
+import { getByText, render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 describe("<RenderHomePage /> test suite", () => {
@@ -24,9 +24,22 @@ describe("<RenderHomePage /> test suite", () => {
   //   );
   // });
 
-  test("Renders homepage without crashing", () => {
+  // Arrange - Act - Assert pattern
+  test("Renders homepage without errors", () => {
     const div = document.createElement("div");
     ReactDOM.render(<RenderHomePage />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
+
+  test('If header title "Citrics" is on the document', async () => {
+    const { findByText } = render(<RenderHomePage />);
+    const showHeader = await findByText(/Citrics/i);
+    expect(showHeader).toBeInTheDocument();
+  });
+
+  test("If landingpage has a background image", () => {});
+
+  test("If Get Started Button is clickable", () => {});
+
+  test("If clicking Get Started button opens the Nav Bar", () => {});
 });

@@ -4,30 +4,8 @@ import { connect } from "react-redux";
 import ModalComponent from "../../common/Modal.js";
 
 import { singleCityDetail } from "../../../state/actions/cityActions";
-const dummyData = {
-  123: {
-    name: "city1",
-    state: "state1",
-    pop: 5462312,
-    rental: 2131,
-    weather: 32
-  },
-  133: {
-    name: "city2",
-    state: "state2",
-    pop: 5462312,
-    rental: 2131,
-    weather: 32
-  },
-  124: {
-    name: "city3",
-    state: "state3",
-    pop: 5462312,
-    rental: 2131,
-    weather: 32
-  }
-};
-const RenderComparison = ({ singleCityDetail }) => {
+
+const RenderComparison = ({ singleCityDetail, citiesData }) => {
   const [visible, setVisible] = useState(false);
 
   const toggleModal = cityData => {
@@ -40,7 +18,7 @@ const RenderComparison = ({ singleCityDetail }) => {
   // Iterates through the cities state and renders the card per city
   const renderCard = () => {
     const cities = [];
-    for (const data in dummyData) {
+    for (const data in citiesData) {
       cities.push(
         <div className="card" key={data}>
           <Card style={{ width: 240 }} bodyStyle={{ padding: 0 }}>
@@ -52,14 +30,14 @@ const RenderComparison = ({ singleCityDetail }) => {
               />
             </div>
             <div className="custom-card">
-              <h3>city name: {dummyData[data].city}</h3>
-              <p>state: {dummyData[data].state}</p>
-              <p>population: {dummyData[data].pop}</p>
-              <p>rental: {dummyData[data].rental}</p>
-              <p>weather: {dummyData[data].weather}</p>
+              <h3>city name: {citiesData[data].name}</h3>
+              <p>state: {citiesData[data].state}</p>
+              <p>population: {citiesData[data].pop}</p>
+              <p>rental: {citiesData[data].rental}</p>
+              <p>weather: {citiesData[data].weather}</p>
               <Button
                 type="primary"
-                onClick={() => toggleModal(dummyData[data])}
+                onClick={() => toggleModal(citiesData[data])}
               >
                 More Info
               </Button>

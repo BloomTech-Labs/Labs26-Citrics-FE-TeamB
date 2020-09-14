@@ -1,29 +1,25 @@
-// React imports
+// Library imports
 import React, { useState } from "react";
-// Styling
+import { connect } from "react-redux";
+import { toggleDrawer } from "../../../state/actions";
 import { Drawer, Button } from "antd";
-// Dummy city data
+
+//Subcomponents
 import SearchBar from "./SearchBar";
 import SelectedCities from "./SelectedCities";
 
+//Styling
 import "./styles.css";
 
-export default function NavContainer(props) {
-  // ----- State -----
-  // Drawer visibility
-  const [visible, setVisible] = useState(false);
-  // Selected cities
-  const [selectedCities, setSelectedCities] = useState([]);
-  // Store search input as string
-
+function NavContainer({ toggleDrawer, isOpen }) {
   // Opens drawer
   const showDrawer = () => {
-    setVisible(true);
+    toggleDrawer();
   };
 
   // Closes drawer
   const onClose = () => {
-    setVisible(false);
+    toggleDrawer();
   };
 
   return (
@@ -36,7 +32,7 @@ export default function NavContainer(props) {
         placement="left"
         closable={false}
         onClose={onClose}
-        visible={visible}
+        visible={isOpen}
       >
         <SearchBar />
         <br />
@@ -49,3 +45,7 @@ export default function NavContainer(props) {
     </div>
   );
 }
+export default connect(
+  ({ drawer: { isOpen } }, props) => ({ isOpen, ...props }),
+  { toggleDrawer }
+)(NavContainer);

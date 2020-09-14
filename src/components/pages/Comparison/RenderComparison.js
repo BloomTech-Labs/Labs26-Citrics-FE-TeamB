@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Card, Button } from "antd";
 import { connect } from "react-redux";
 import ModalComponent from "../../common/Modal.js";
+
+import { singleCityDetail } from "../../../state/actions/cityActions";
 const dummyData = {
   123: {
     name: "city1",
@@ -25,12 +27,12 @@ const dummyData = {
     weather: 32
   }
 };
-const RenderComparison = props => {
+const RenderComparison = ({ singleCityDetail }) => {
   const [visible, setVisible] = useState(false);
-  const [citySelected, setCitySelected] = useState({});
+  // const [citySelected, setCitySelected] = useState({});
 
   const toggleModal = cityData => {
-    setCitySelected(cityData);
+    singleCityDetail(cityData);
     setVisible(true);
   };
 
@@ -70,13 +72,11 @@ const RenderComparison = props => {
   return (
     <>
       <div className="card-container">{renderCard()}</div>
-      <ModalComponent
-        visible={visible}
-        setVisible={setVisible}
-        city={citySelected}
-      />
+      <ModalComponent visible={visible} setVisible={setVisible} />
     </>
   );
 };
-const actions = {};
+const actions = {
+  singleCityDetail
+};
 export default connect(null, actions)(RenderComparison);

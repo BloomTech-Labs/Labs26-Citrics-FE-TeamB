@@ -1,15 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Modal } from "antd";
-import { connect } from "react-redux";
 import { CityDetailPage } from "../pages/CityDetail";
 
-const ModalComponent = ({ visible, setVisible, singleCity }) => {
-  const [city, setCity] = useState(singleCity);
-
-  // Everytime the singleCity state changes, updates the city to view
-  useEffect(() => {
-    setCity(singleCity);
-  }, [singleCity]);
+const ModalComponent = ({ visible, setVisible, city }) => {
   return (
     <>
       {/* Checks to see if theres something in city object */}
@@ -31,9 +24,4 @@ const ModalComponent = ({ visible, setVisible, singleCity }) => {
   );
 };
 
-// Map State to props
-const mapState = state => ({
-  singleCity: state.cities.singleCityDetails
-});
-
-export default connect(mapState, null)(ModalComponent);
+export default ModalComponent;

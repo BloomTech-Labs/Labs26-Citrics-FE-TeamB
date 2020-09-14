@@ -13,6 +13,7 @@ import "./styles.css";
 
 function NavContainer({ toggleDrawer, isOpen }) {
   // Opens drawer
+  const drawerWidth = 256;
   const showDrawer = () => {
     toggleDrawer();
   };
@@ -24,8 +25,12 @@ function NavContainer({ toggleDrawer, isOpen }) {
 
   return (
     <div className="navbar">
-      <Button type="primary" onClick={showDrawer}>
-        Open
+      <Button
+        className={`floating-visibility-button${isOpen ? " open" : ""}`}
+        type="ghost"
+        onClick={showDrawer}
+      >
+        {isOpen ? "<" : ">"}
       </Button>
       <Drawer
         title="City Search"
@@ -33,6 +38,8 @@ function NavContainer({ toggleDrawer, isOpen }) {
         closable={false}
         onClose={onClose}
         visible={isOpen}
+        mask={false}
+        width={drawerWidth}
       >
         <SearchBar />
         <br />

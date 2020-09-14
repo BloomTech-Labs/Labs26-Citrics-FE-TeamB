@@ -1,10 +1,12 @@
 import RenderHomePage from "../components/pages/Home/RenderHomePage";
 import React from "react";
+import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 describe("<RenderHomePage /> test suite", () => {
+  //COMMENTING OUT DUE TO NOT HAVING LOGIN/AUTHENTICATION IN RELEASE 1--KEEPING IF NEEDED IN RELEASE 2
   // test('it handles a loading state', () => {
   //   const authService = {
   //     logout: jest.fn(),
@@ -21,5 +23,10 @@ describe("<RenderHomePage /> test suite", () => {
   //     'Hi Sara Welcome to Labs Basic SPA'
   //   );
   // });
-  test("renders homepage (image, title and button)", () => {});
+
+  test("Renders homepage without crashing", () => {
+    const div = document.createElement("div");
+    ReactDOM.render(<RenderHomePage />, div);
+    ReactDOM.unmountComponentAtNode(div);
+  });
 });

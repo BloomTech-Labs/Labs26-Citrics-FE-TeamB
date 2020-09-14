@@ -27,6 +27,12 @@ const dummyData = {
 };
 const RenderComparison = props => {
   const [visible, setVisible] = useState(false);
+  const [citySelected, setCitySelected] = useState({});
+
+  const toggleModal = cityData => {
+    setCitySelected(cityData);
+    setVisible(true);
+  };
 
   // Iterates through the cities state and renders the card per city
   const renderCard = () => {
@@ -48,7 +54,10 @@ const RenderComparison = props => {
               <p>population: {dummyData[data].pop}</p>
               <p>rental: {dummyData[data].rental}</p>
               <p>weather: {dummyData[data].weather}</p>
-              <Button type="primary" onClick={() => setVisible(true)}>
+              <Button
+                type="primary"
+                onClick={() => toggleModal(dummyData[data])}
+              >
                 More Info
               </Button>
             </div>
@@ -61,7 +70,11 @@ const RenderComparison = props => {
   return (
     <>
       <div className="card-container">{renderCard()}</div>
-      <ModalComponent visible={visible} setVisible={setVisible} />
+      <ModalComponent
+        visible={visible}
+        setVisible={setVisible}
+        city={citySelected}
+      />
     </>
   );
 };

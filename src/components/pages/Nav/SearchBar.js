@@ -5,34 +5,44 @@ import { AutoComplete } from "antd";
 import { cities } from "./cityList";
 
 export default function SearchBar(props) {
+  // List of all cities in database
+  const [cityList, setCityList] = useState([]);
+  // Search term as entered in box
   const [searchTerm, setSearchTerm] = useState("");
   // Store search results as list
   const [searchResults, setSearchResults] = useState([]);
   //State for options for Autocomplete
-  const [options, setOptions] = useState(searchResults);
+  const [options, setOptions] = useState([]);
 
   // Sets user input to searchTerm
   const onChange = data => {
     setSearchTerm(data);
   };
 
+  // Initial city list fetching (currently using dummy data)
+  useEffect(() => {
+    //axios stuff goes here
+    const queryResult = cities;
+    setCityList(
+      queryResult.map(item => ({
+        value: `${item.name} ${item.state}`,
+        ...item
+      }))
+    );
+  }, []);
   // Search filter functionality
   useEffect(() => {
-    const results = cities
-      .map(item => ({ value: `${item.name} ${item.state}`, ...item }))
-      .filter(item => item.value.toLowerCase().includes(searchTerm));
+    const results = cityList.filter(item =>
+      item.value.toLowerCase().includes(searchTerm)
+    );
     setSearchResults(results);
-  }, [searchTerm]);
+  }, [searchTerm, cityList]);
 
   // Functionality while searching--changing selectedCities
   const onSearch = searchText => {
     setOptions(
       //fill in with functionality to return first three responses
-      !searchText
-        ? []
-        : searchResults.length <= 3
-        ? searchResults
-        : searchResults.slice(0, 3)
+      !searchText ? [] : searchResults.slice(0, 5)
     );
   };
 
@@ -42,17 +52,14 @@ export default function SearchBar(props) {
   };
 
   return (
-    <>
-      <AutoComplete
-        value={searchTerm}
-        options={options}
-        style={{ width: 200 }}
-        onSelect={onSelect}
-        onSearch={onSearch}
-        onChange={onChange}
-        placeholder="Enter City.."
-      />
-      <button>Search</button>
-    </>
+    <AutoComplete
+      value={searchTerm}
+      options={options}
+      style={{ width: 200 }}
+      onSelect={onSelect}
+      onSearch={onSearch}
+      onChange={onChange}
+      placeholder="Enter City.."
+    />
   );
 }

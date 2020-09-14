@@ -28,12 +28,17 @@ describe("<RenderHomePage /> test suite", () => {
   // });
 
   // Arrange - Act - Assert pattern
-  let store;
+  let store, component;
   beforeEach(() => {
     store = mockStore({
       drawer: { isOpen: false }
     });
     store.dispatch = jest.fn();
+    component = render(
+      <Provider store={store}>
+        <RenderHomePage />
+      </Provider>
+    );
   });
 
   test("Renders homepage without errors", () => {
@@ -48,41 +53,25 @@ describe("<RenderHomePage /> test suite", () => {
   });
 
   test('If header title "Citrics" is on the document', async () => {
-    const { findByText } = render(
-      <Provider store={store}>
-        <RenderHomePage />
-      </Provider>
-    );
+    const { findByText } = component;
     const showHeader = await findByText(/Citrics/i);
     expect(showHeader).toBeInTheDocument();
   });
 
   test("If landingpage has a background image", () => {
-    const { getByRole } = render(
-      <Provider store={store}>
-        <RenderHomePage />
-      </Provider>
-    );
+    const { getByRole } = component;
     const bgImage = getByRole("img");
     expect(bgImage).toBeInTheDocument();
   });
 
   test("If Get Started Button is clickable", () => {
-    const { getByText } = render(
-      <Provider store={store}>
-        <RenderHomePage />
-      </Provider>
-    );
+    const { getByText } = component;
     const getStartedBtn = getByText(/Get Started/i);
     expect(getStartedBtn).toBeInTheDocument();
   });
 
   test("If clicking Get Started button opens the Nav Bar", () => {
-    const { getByText } = render(
-      <Provider store={store}>
-        <RenderHomePage />
-      </Provider>
-    );
+    const { getByText } = component;
     const getStartedBtn = getByText(/Get Started/i);
     fireEvent.click(getStartedBtn);
     expect(store.dispatch).toHaveBeenCalledTimes(1);

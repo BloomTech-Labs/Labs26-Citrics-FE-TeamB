@@ -26,5 +26,4 @@ function RenderHomePage({ toggleDrawer }) {
     </>
   );
 }
-const mapPropsToState = (reduxProps, props) => props;
-export default connect(mapPropsToState, { toggleDrawer })(RenderHomePage);
+export default connect(null, { toggleDrawer })(RenderHomePage);

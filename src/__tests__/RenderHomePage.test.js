@@ -3,10 +3,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router } from "react-router-dom";
-import { getByText, render } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { store } from "../state";
+import { render, fireEvent } from "@testing-library/react";
+import configureStore from "redux-mock-store";
+import { toggleDrawer } from "../state/actions";
 
+const mockStore = configureStore([]);
 describe("<RenderHomePage /> test suite", () => {
   //COMMENTING OUT DUE TO NOT HAVING LOGIN/AUTHENTICATION IN RELEASE 1--KEEPING IF NEEDED IN RELEASE 2
   // test('it handles a loading state', () => {
@@ -27,6 +28,14 @@ describe("<RenderHomePage /> test suite", () => {
   // });
 
   // Arrange - Act - Assert pattern
+  let store;
+  beforeEach(() => {
+    store = mockStore({
+      drawer: { isOpen: false }
+    });
+    store.dispatch = jest.fn();
+  });
+
   test("Renders homepage without errors", () => {
     const div = document.createElement("div");
     ReactDOM.render(
@@ -68,5 +77,15 @@ describe("<RenderHomePage /> test suite", () => {
     expect(getStartedBtn).toBeInTheDocument();
   });
 
-  test("If clicking Get Started button opens the Nav Bar", () => {});
+  test("If clicking Get Started button opens the Nav Bar", () => {
+    const { getByText } = render(
+      <Provider store={store}>
+        <RenderHomePage />
+      </Provider>
+    );
+    const getStartedBtn = getByText(/Get Started/i);
+    fireEvent.click(getStartedBtn);
+    expect(store.dispatch).toHaveBeenCalledTimes(1);
+    expect(store.dispatch).toHaveBeenCalledWith(toggleDrawer());
+  });
 });

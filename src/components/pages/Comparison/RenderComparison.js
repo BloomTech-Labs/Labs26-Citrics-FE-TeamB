@@ -1,24 +1,24 @@
-import React from "react";
-import { Card } from "antd";
+import React, { useState } from "react";
+import { Card, Button } from "antd";
 import { connect } from "react-redux";
-
+import ModalComponent from "../../common/Modal.js";
 const dummyData = {
   123: {
-    city: "city1",
+    name: "city1",
     state: "state1",
     pop: 5462312,
     rental: 2131,
     weather: 32
   },
   133: {
-    city: "city2",
+    name: "city2",
     state: "state2",
     pop: 5462312,
     rental: 2131,
     weather: 32
   },
   124: {
-    city: "city3",
+    name: "city3",
     state: "state3",
     pop: 5462312,
     rental: 2131,
@@ -26,6 +26,15 @@ const dummyData = {
   }
 };
 const RenderComparison = props => {
+  const [visible, setVisible] = useState(false);
+  const [citySelected, setCitySelected] = useState({});
+
+  const toggleModal = cityData => {
+    setCitySelected(cityData);
+    setVisible(true);
+  };
+
+  // Iterates through the cities state and renders the card per city
   const renderCard = () => {
     const cities = [];
     for (const data in dummyData) {
@@ -45,6 +54,12 @@ const RenderComparison = props => {
               <p>population: {dummyData[data].pop}</p>
               <p>rental: {dummyData[data].rental}</p>
               <p>weather: {dummyData[data].weather}</p>
+              <Button
+                type="primary"
+                onClick={() => toggleModal(dummyData[data])}
+              >
+                More Info
+              </Button>
             </div>
           </Card>
         </div>
@@ -55,6 +70,11 @@ const RenderComparison = props => {
   return (
     <>
       <div className="card-container">{renderCard()}</div>
+      <ModalComponent
+        visible={visible}
+        setVisible={setVisible}
+        city={citySelected}
+      />
     </>
   );
 };

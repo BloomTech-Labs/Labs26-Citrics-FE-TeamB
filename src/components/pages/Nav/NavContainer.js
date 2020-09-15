@@ -5,12 +5,13 @@ import { toggleDrawer } from "../../../state/actions";
 import { Drawer, Button } from "antd";
 import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
+
 //Subcomponents
 import SearchBar from "./SearchBar";
 import SelectedCities from "./SelectedCities";
 
 //Styling
-import "./styles.css";
+import "../../../styles/LESS/nav-bar.less";
 
 function NavContainer({ toggleDrawer, isOpen }) {
   // This defines the width of the drawer *and* how far to translate the floating button

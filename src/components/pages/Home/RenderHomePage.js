@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { toggleDrawer } from "../../../state/actions";
 
 //Styling
-import "./styles.css";
+import "../../../styles/LESS/home-page.less";
 const { Title, Text } = Typography;
 
 function RenderHomePage({ toggleDrawer }) {

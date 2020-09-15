@@ -1,4 +1,5 @@
 import React from "react";
+import GraphContainer from "../../common/GraphContainer";
 
 export default function RenderCityDetail({ city }) {
   return (
@@ -8,6 +9,7 @@ export default function RenderCityDetail({ city }) {
       <p>Rent: {city.rental}</p>
       <p>Population: {city.pop}</p>
       <p>Weather: {city.weather}</p>
+      <GraphContainer state={city.state} />
     </div>
   );
 }

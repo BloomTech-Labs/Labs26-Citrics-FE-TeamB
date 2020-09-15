@@ -1,6 +1,9 @@
+//Library imports
 import React from "react";
 import RenderComparison from "./RenderComparison";
-import "./comparison-page.css";
+
+//Styling
+import "../../../styles/LESS/comparison-page.less";
 
 export default function ComparisonContainer(props) {
   return (

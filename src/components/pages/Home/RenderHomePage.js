@@ -19,6 +19,8 @@ function RenderHomePage({ toggleDrawer }) {
       <Card className="title-card">
         <Title>Citrics</Title>
         <Text>Your one stop for city metrics!</Text>
+        <br />
+        <br />
         <Button type="primary" onClick={openNav}>
           Get Started
         </Button>

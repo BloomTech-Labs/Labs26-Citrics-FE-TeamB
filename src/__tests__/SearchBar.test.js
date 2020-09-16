@@ -5,6 +5,9 @@ import { render, fireEvent } from "@testing-library/react";
 import configureStore from "redux-mock-store";
 import { addCity } from "../state/actions";
 import SearchBar from "../components/pages/Nav/SearchBar";
+// import axios from "axios";
+// jest.mock("axios");
+
 const mockStore = configureStore([]);
 // A list of dummy data to get the search form functional
 // Data pulled from: https://simple.wikipedia.org/wiki/List_of_United_States_cities_by_population#Cities_that_used_to_have_100,000_people
@@ -41,15 +44,7 @@ const cities = [
 describe("<SearchBar />", () => {
   let store, component;
   beforeEach(() => {
-    store = mockStore({
-      cities: {
-        selectedCities: [
-          { id: 1, name: "Albany", state: "NY" },
-          { id: 2, name: "Allegheny", state: "PA" },
-          { id: 3, name: "Brooklyn", state: "NY" }
-        ]
-      }
-    });
+    store = mockStore({});
     store.dispatch = jest.fn();
     component = render(
       <Provider store={store}>
@@ -59,6 +54,7 @@ describe("<SearchBar />", () => {
   });
   it("Renders navbar without errors", () => {
     const div = document.createElement("div");
+    // axios.get.mockResolvedValue({ data: { cities } });
     ReactDOM.render(
       <Provider store={store}>
         <SearchBar />
@@ -67,4 +63,6 @@ describe("<SearchBar />", () => {
     );
     ReactDOM.unmountComponentAtNode(div);
   });
+  it.todo("Shows a popup with results when typing");
+  it.todo("Adds a city to selectedCities when clicked on");
 });

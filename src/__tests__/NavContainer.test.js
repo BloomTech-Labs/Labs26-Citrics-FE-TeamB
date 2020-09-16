@@ -73,11 +73,5 @@ describe("<NavContainer />", () => {
       expect(header).toBeInTheDocument();
       done();
     });
-    it("Shows a button to show the results (single or comparison)", async done => {
-      const { findByTestId } = component;
-      const resultsButton = await findByTestId("results-page-button");
-      expect(resultsButton).toBeInTheDocument();
-      done();
-    });
   });
 });

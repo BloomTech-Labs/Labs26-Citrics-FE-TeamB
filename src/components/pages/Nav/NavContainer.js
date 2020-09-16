@@ -55,11 +55,7 @@ function NavContainer({ toggleDrawer, isOpen }) {
         <SelectedCities />
 
         {/* Place holder button - Only redirects to comparison for now */}
-        <Button
-          data-testid="results-page-button"
-          type="primary"
-          onClick={() => history.push("/comparison-page")}
-        >
+        <Button type="primary" onClick={() => history.push("/comparison-page")}>
           Compare
         </Button>
       </Drawer>

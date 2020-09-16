@@ -17,6 +17,7 @@ describe("<NavContainer />", () => {
         }
       });
     });
+
     it("Renders without errors", () => {
       const div = document.createElement("div");
       ReactDOM.render(
@@ -66,7 +67,13 @@ describe("<NavContainer />", () => {
       done();
     });
     // TODO: Add tests for the new button
-    it.todo("Shows the button to open single-city detail view");
+    it("Shows the button to open single-city detail view", async done => {
+      const { findByText } = component;
+      // findByText will throw an error if it fails
+      // so no need to test further
+      await findByText(/details/i);
+      done();
+    });
   });
   describe("Tests with multiple cities selected", () => {
     let store, component;
@@ -108,7 +115,12 @@ describe("<NavContainer />", () => {
       expect(store.dispatch).toHaveBeenCalledWith(removeCity("3"));
       done();
     });
-    // TODO: Add tests for the new button
-    it.todo("Shows the button to open comparison view");
+    it("Shows the button to open comparison view", async done => {
+      const { findByText } = component;
+      // findByText will throw an error if it fails
+      // so no need to test further
+      await findByText(/compare/i);
+      done();
+    });
   });
 });

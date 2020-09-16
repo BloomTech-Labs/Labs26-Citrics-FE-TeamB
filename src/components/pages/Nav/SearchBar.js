@@ -5,9 +5,6 @@ import { connect } from "react-redux";
 import { addCity } from "../../../state/actions";
 import axios from "axios";
 
-// Dummy data
-// import { cities } from "./cityList";
-
 function SearchBar({ addCity }) {
   // List of all cities in database
   const [cityList, setCityList] = useState([]);
@@ -25,7 +22,6 @@ function SearchBar({ addCity }) {
 
   // Initial city list fetching
   useEffect(() => {
-    //TODO: Add axios query here and remove dummy data up top
     axios
       .get("https://b-ds.citrics.dev/cities")
       .then(r => r.data.cities)

@@ -8,7 +8,6 @@ const { Title, Text } = Typography;
 
 function RenderHomePage({ toggleDrawer }) {
   const openNav = () => {
-    // console.log("Opening Nav");
     toggleDrawer();
   };
   return (

@@ -16,13 +16,13 @@ module.exports = {
 };
 
 //Color Scheme:
-//Bright Navy Blue: #057CD8
-//Bright Gold: #FFD700
-//Orange Soda: #E36242
-//Cinnabar Red: #EB4B3D
+//Blue: #057CD8
+//Gold: #FFD700
+//Orange: #E36242
+//Red: #EB4B3D
 //Light Yellow: #FEE885
-//Dark Gray: #777A66
-//Timberwolf Gray: #D2D4C9
+//Dark Grey: #777A66
+//Light Grey: #D2D4C9
 
 //Font Family: Josefin Sans
 //Light: Light 300

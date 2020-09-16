@@ -4,13 +4,11 @@ import { connect } from "react-redux";
 import { toggleDrawer } from "../../../state/actions";
 import { Drawer, Button } from "antd";
 import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
+import { useHistory } from "react-router-dom";
 
 //Subcomponents
 import SearchBar from "./SearchBar";
 import SelectedCities from "./SelectedCities";
-
-//Styling
-import "./styles.css";
 
 function NavContainer({ toggleDrawer, isOpen }) {
   // This defines the width of the drawer *and* how far to translate the floating button
@@ -25,6 +23,8 @@ function NavContainer({ toggleDrawer, isOpen }) {
     toggleDrawer();
   };
 
+  //History hook to push to comparison route
+  let history = useHistory();
   return (
     <div className="navbar">
       <Button
@@ -52,6 +52,11 @@ function NavContainer({ toggleDrawer, isOpen }) {
         <br />
 
         <SelectedCities />
+
+        {/* Place holder button - Only redirects to comparison for now */}
+        <Button type="primary" onClick={() => history.push("/comparison-page")}>
+          Compare
+        </Button>
       </Drawer>
     </div>
   );

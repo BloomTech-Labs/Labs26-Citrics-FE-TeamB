@@ -1,8 +1,34 @@
 import { ADD_CITY, REMOVE_CITY, ADD_CITY_DETAILS } from "../contexts";
 
 const initialState = {
-  selectedCities: [{ id: 100, name: "Los Angeles", state: "CA" }],
-  cityDetails: {}
+  selectedCities: [
+    { id: 100, name: "Los Angeles", state: "CA" },
+    { id: 124, name: "Phoenix", state: "AZ" },
+    { id: 562, name: "Salt Lake City", state: "UT" }
+  ],
+  cityDetails: {
+    100: {
+      name: "Los Angeles",
+      state: "CA",
+      pop: 4721923,
+      rental: 4851,
+      weather: 33
+    },
+    124: {
+      name: "Phoenix",
+      state: "AZ",
+      pop: 5462312,
+      rental: 1203,
+      weather: 42
+    },
+    562: {
+      name: "Salt Lake City",
+      state: "UT",
+      pop: 928481,
+      rental: 28123,
+      weather: 38
+    }
+  }
 };
 export default function cityReducer(state = initialState, { type, payload }) {
   switch (type) {

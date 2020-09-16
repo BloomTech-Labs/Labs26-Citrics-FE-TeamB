@@ -4,7 +4,7 @@ import RenderCityDetail from "./RenderCityDetail";
 
 export default function CityDetailContainer({ city }) {
   return (
-    <div>
+    <div data-testid="city-details">
       <RenderCityDetail city={city} />
     </div>
   );

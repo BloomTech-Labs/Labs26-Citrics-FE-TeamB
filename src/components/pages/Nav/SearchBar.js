@@ -3,9 +3,7 @@ import React, { useState, useEffect } from "react";
 import { AutoComplete } from "antd";
 import { connect } from "react-redux";
 import { addCity } from "../../../state/actions";
-
-// Dummy data
-import { cities } from "./cityList";
+import axios from "axios";
 
 function SearchBar({ addCity }) {
   // List of all cities in database
@@ -22,16 +20,19 @@ function SearchBar({ addCity }) {
     setSearchTerm(data);
   };
 
-  // Initial city list fetching (currently using dummy data)
+  // Initial city list fetching
   useEffect(() => {
-    //TODO: Add axios query here and remove dummy data up top
-    const queryResult = cities;
-    setCityList(
-      queryResult.map(item => ({
-        value: `${item.name} ${item.state}`,
-        ...item
-      }))
-    );
+    axios
+      .get("https://b-ds.citrics.dev/cities")
+      .then(r => r.data.cities)
+      .then(queryResult =>
+        setCityList(
+          queryResult.map(item => ({
+            value: `${item.name} ${item.state}`,
+            ...item
+          }))
+        )
+      );
   }, []);
   // Get search results by searching through cityList
   useEffect(() => {

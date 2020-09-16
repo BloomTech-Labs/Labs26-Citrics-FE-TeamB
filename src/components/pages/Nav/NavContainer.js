@@ -29,6 +29,7 @@ function NavContainer({ toggleDrawer, isOpen }) {
     <div className="navbar">
       <Button
         className="floating-visibility-button"
+        data-testid="floating-visibility-button"
         type="secondary"
         onClick={showDrawer}
         style={{ transform: isOpen ? `translate(${drawerWidth}px,0px)` : "" }}
@@ -54,7 +55,11 @@ function NavContainer({ toggleDrawer, isOpen }) {
         <SelectedCities />
 
         {/* Place holder button - Only redirects to comparison for now */}
-        <Button type="primary" onClick={() => history.push("/comparison-page")}>
+        <Button
+          data-testid="results-page-button"
+          type="primary"
+          onClick={() => history.push("/comparison-page")}
+        >
           Compare
         </Button>
       </Drawer>

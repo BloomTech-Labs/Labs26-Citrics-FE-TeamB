@@ -3,8 +3,12 @@ import React from "react";
 import { connect } from "react-redux";
 import { removeCity } from "../../../state/actions";
 import { CloseSquareFilled } from "@ant-design/icons";
+import { Button } from "antd";
+import { useHistory } from "react-router-dom";
 
 function SelectedCities({ selectedCities, removeCity }) {
+  // Router hook to push to different routes
+  let history = useHistory();
   // The action handler is attached to the parent div
   // which stores the id in a data- attribute
   const removeFromSelectedCities = ({ currentTarget: { attributes } }) => {
@@ -25,6 +29,30 @@ function SelectedCities({ selectedCities, removeCity }) {
           <CloseSquareFilled />
         </div>
       ))}
+
+      {/* Dynamic Button that responds to how many cities are selected */}
+      <div className="btn-container">
+        {selectedCities.length > 1 ? (
+          <Button
+            type="primary"
+            onClick={() => history.push("/comparison-page")}
+          >
+            Compare
+          </Button>
+        ) : (
+          <Button
+            type="primary"
+            onClick={() =>
+              history.push({
+                pathname: "/city-detail-page",
+                state: selectedCities[0]
+              })
+            }
+          >
+            Details
+          </Button>
+        )}
+      </div>
     </>
   );
 }

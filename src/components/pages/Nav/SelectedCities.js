@@ -2,7 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { removeCity } from "../../../state/actions";
-import { CloseSquareFilled } from "@ant-design/icons";
+import { CloseCircleFilled } from "@ant-design/icons";
 
 function SelectedCities({ selectedCities, removeCity }) {
   // The action handler is attached to the parent div
@@ -22,7 +22,7 @@ function SelectedCities({ selectedCities, removeCity }) {
       {selectedCities.map(({ name, state, id }) => (
         <div key={id} data-id={id} onClick={removeFromSelectedCities}>
           {`${name}, ${state} `}
-          <CloseSquareFilled />
+          &nbsp; <CloseCircleFilled className="remove-city" />
         </div>
       ))}
     </>

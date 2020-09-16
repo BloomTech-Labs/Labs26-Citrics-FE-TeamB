@@ -1,3 +1,5 @@
+// A list of dummy data to get the search form functional
+// Data pulled from: https://simple.wikipedia.org/wiki/List_of_United_States_cities_by_population#Cities_that_used_to_have_100,000_people
 const cities = [
   { id: 1, name: "Albany", state: "NY" },
   { id: 2, name: "Allegheny", state: "PA" },

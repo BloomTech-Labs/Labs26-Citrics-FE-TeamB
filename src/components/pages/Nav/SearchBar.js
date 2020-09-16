@@ -23,7 +23,8 @@ function SearchBar({ addCity }) {
   // Initial city list fetching
   useEffect(() => {
     axios
-      .get("https://b-ds.citrics.dev/cities")
+    // Trailing slash is needed as it's present in DS backend
+      .get("https://b-ds.citrics.dev/cities/")
       .then(r => r.data.cities)
       .then(queryResult =>
         setCityList(

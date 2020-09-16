@@ -24,6 +24,7 @@ import { ExampleDataViz } from "./components/pages/ExampleDataViz";
 import { LoadingComponent } from "./components/common";
 // import NavContainer from './components/pages/Nav/NavContainer';
 import { ComparisonPage } from "./components/pages/Comparison";
+import { CityDetailPage } from "./components/pages/CityDetail";
 import { Provider } from "react-redux";
 import { store } from "./state";
 
@@ -63,6 +64,7 @@ function App() {
         <Route path="/profile-list" component={ProfileListPage} />
         <Route path="/datavis" component={ExampleDataViz} />
         <Route path="/comparison-page" component={ComparisonPage} />
+        <Route path="/city-detail-page" component={CityDetailPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <NavPage />

@@ -35,8 +35,8 @@ const RenderComparison = ({ citiesData }) => {
             <div className="custom-card">
               <h3>city name: {citiesData[data].name}</h3>
               <p>state: {citiesData[data].state}</p>
-              <p>population: {citiesData[data].pop}</p>
-              <p>rental: {citiesData[data].rental}</p>
+              <p>population: {citiesData[data].population}</p>
+              <p>rental: {citiesData[data].rent}</p>
               <p>weather: {citiesData[data].weather}</p>
               <Button
                 data-testid="more-info-btn"

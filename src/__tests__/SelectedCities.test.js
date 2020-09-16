@@ -1,29 +1,72 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { render, fireEvent } from "@testing-library/react";
+import { render, fireEvent, findByTestId } from "@testing-library/react";
 import configureStore from "redux-mock-store";
 import { removeCity } from "../state/actions";
 import SelectedCities from "../components/pages/Nav/SelectedCities";
 const mockStore = configureStore([]);
 describe("<NavContainer />", () => {
-  it("Is hidden when no cities are selected", async done => {
-    let store = mockStore({
-      cities: {
-        selectedCities: []
-      }
+  describe("Tests with no cities selected", () => {
+    let store;
+    beforeAll(() => {
+      store = mockStore({
+        cities: {
+          selectedCities: []
+        }
+      });
     });
-    let component = render(
-      <Provider store={store}>
-        <SelectedCities />
-      </Provider>
-    );
-    const { queryByText } = component;
-    const header = queryByText(/selected cities/i);
-    expect(header).toBeNull();
-    done();
+    it("Renders without errors", () => {
+      const div = document.createElement("div");
+      ReactDOM.render(
+        <Provider store={store}>
+          <SelectedCities />
+        </Provider>,
+        div
+      );
+      ReactDOM.unmountComponentAtNode(div);
+    });
+    it("Is hidden when no cities are selected", () => {
+      const { queryByText } = render(
+        <Provider store={store}>
+          <SelectedCities />
+        </Provider>
+      );
+      const header = queryByText(/selected cities/i);
+      expect(header).toBeNull();
+    });
   });
-  describe("Tests with at least one city selected", () => {
+  describe("Tests with one city selected", () => {
+    let store, component;
+    beforeEach(() => {
+      store = mockStore({
+        cities: {
+          selectedCities: [{ id: 1, name: "Albany", state: "NY" }]
+        }
+      });
+      store.dispatch = jest.fn();
+      component = render(
+        <Provider store={store}>
+          <SelectedCities />
+        </Provider>
+      );
+    });
+    it("Displays the city from Redux", async done => {
+      const { findByText } = component;
+      await findByText(/albany/i);
+      done();
+    });
+    it("Allows the city to be removed", async done => {
+      const { findByText } = component;
+      let cityDiv = await findByText(/albany/i);
+      fireEvent.click(cityDiv);
+      expect(store.dispatch).toHaveBeenCalledTimes(1);
+      expect(store.dispatch).toHaveBeenCalledWith(removeCity("1"));
+      done();
+    });
+    it.todo("Shows the button to open single-city detail view");
+  });
+  describe("Tests with multiple cities selected", () => {
     let store, component;
     beforeEach(() => {
       store = mockStore({
@@ -42,28 +85,25 @@ describe("<NavContainer />", () => {
         </Provider>
       );
     });
-
-    it("Renders navbar without errors", () => {
-      const div = document.createElement("div");
-      ReactDOM.render(
-        <Provider store={store}>
-          <SelectedCities />
-        </Provider>,
-        div
-      );
-      ReactDOM.unmountComponentAtNode(div);
+    it("Displays the cities from Redux", async done => {
+      const { findByText } = component;
+      await findByText(/albany/i);
+      await findByText(/brooklyn/i);
+      await findByText(/allegheny/i);
+      done();
     });
-
-    // it("Opens and closes when the button is pressed", async done => {
-    //   const { findByTestId } = component;
-    //   const visibilityButton = await findByTestId("floating-visibility-button");
-    //   fireEvent.click(visibilityButton);
-    //   expect(store.dispatch).toHaveBeenCalledTimes(1);
-    //   expect(store.dispatch).toHaveBeenCalledWith(toggleDrawer());
-    //   fireEvent.click(visibilityButton);
-    //   expect(store.dispatch).toHaveBeenCalledTimes(2);
-    //   expect(store.dispatch).toHaveBeenCalledWith(toggleDrawer());
-    //   done();
-    // });
+    it("Allows cities to be removed", async done => {
+      const { findByText } = component;
+      let cityDiv = await findByText(/albany/i);
+      fireEvent.click(cityDiv);
+      expect(store.dispatch).toHaveBeenCalledTimes(1);
+      expect(store.dispatch).toHaveBeenCalledWith(removeCity("1"));
+      cityDiv = await findByText(/brooklyn/i);
+      fireEvent.click(cityDiv);
+      expect(store.dispatch).toHaveBeenCalledTimes(2);
+      expect(store.dispatch).toHaveBeenCalledWith(removeCity("3"));
+      done();
+    });
+    it.todo("Shows the button to open comparison view");
   });
 });

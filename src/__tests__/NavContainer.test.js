@@ -7,6 +7,7 @@ import configureStore from "redux-mock-store";
 import { toggleDrawer } from "../state/actions";
 const mockStore = configureStore([]);
 describe("<NavContainer />", () => {
+  // Tests are split into two sections since the mock Redux store is immutable
   describe("Closed Nav Tests", () => {
     let store, component;
     beforeEach(() => {

@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { render, fireEvent, findByTestId } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import configureStore from "redux-mock-store";
 import { removeCity } from "../state/actions";
 import SelectedCities from "../components/pages/Nav/SelectedCities";
 const mockStore = configureStore([]);
 describe("<NavContainer />", () => {
+  // Tests are split into two sections since the mock Redux store is immutable
   describe("Tests with no cities selected", () => {
     let store;
     beforeAll(() => {
@@ -64,6 +65,7 @@ describe("<NavContainer />", () => {
       expect(store.dispatch).toHaveBeenCalledWith(removeCity("1"));
       done();
     });
+    // TODO: Add tests for the new button
     it.todo("Shows the button to open single-city detail view");
   });
   describe("Tests with multiple cities selected", () => {
@@ -87,6 +89,8 @@ describe("<NavContainer />", () => {
     });
     it("Displays the cities from Redux", async done => {
       const { findByText } = component;
+      // findByText will throw an error if it finds nothing
+      // Simply calling it is a sufficient test
       await findByText(/albany/i);
       await findByText(/brooklyn/i);
       await findByText(/allegheny/i);
@@ -104,6 +108,7 @@ describe("<NavContainer />", () => {
       expect(store.dispatch).toHaveBeenCalledWith(removeCity("3"));
       done();
     });
+    // TODO: Add tests for the new button
     it.todo("Shows the button to open comparison view");
   });
 });

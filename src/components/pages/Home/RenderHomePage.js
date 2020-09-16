@@ -4,8 +4,6 @@ import { Typography, Card, Button } from "antd";
 import { connect } from "react-redux";
 import { toggleDrawer } from "../../../state/actions";
 
-//Styling
-import "../../../styles/LESS/home-page.less";
 const { Title, Text } = Typography;
 
 function RenderHomePage({ toggleDrawer }) {

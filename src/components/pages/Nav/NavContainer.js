@@ -10,9 +10,6 @@ import { useHistory } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import SelectedCities from "./SelectedCities";
 
-//Styling
-import "../../../styles/LESS/nav-bar.less";
-
 function NavContainer({ toggleDrawer, isOpen }) {
   // This defines the width of the drawer *and* how far to translate the floating button
   const drawerWidth = 256;

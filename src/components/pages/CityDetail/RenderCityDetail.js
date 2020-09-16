@@ -14,9 +14,9 @@ export default function RenderCityDetail({ city }) {
     <div>
       <p>City: {citySelect.name}</p>
       <p> State: {citySelect.state}</p>
-      {/* <p>Rent: {citySelect.rental}</p>
-      <p>Population: {citySelect.pop}</p>
-      <p>Weather: {citySelect.weather}</p> */}
+      <p>Rent: {citySelect.rent}</p>
+      <p>Population: {citySelect.population}</p>
+      <p>Weather: {citySelect.weather}</p>
       <GraphContainer state={citySelect.state} />
     </div>
   );

@@ -1,11 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import routeData from "react-router";
 import { render, fireEvent } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import RenderComparison from "../components/pages/Comparison/RenderComparison";
 
 const mockStore = configureStore([]);
+const mockLocation = {
+  pathname: "/welcome",
+  hash: "",
+  search: "",
+  state: ""
+};
+
 let store, component;
 beforeEach(() => {
   store = mockStore({
@@ -35,6 +43,7 @@ beforeEach(() => {
       }
     }
   });
+  jest.spyOn(routeData, "useLocation").mockReturnValue(mockLocation);
   component = render(
     <Provider store={store}>
       <RenderComparison citiesData={store.getState().cities.cityDetails} />

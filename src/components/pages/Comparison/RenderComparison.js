@@ -55,8 +55,13 @@ const RenderComparison = ({ selectedCities, cityDetails }) => {
   return (
     <>
       {selectedCities.length < 2 ? (
-        // Place holder redirect for now, should redirect to the single details page or something else later
-        <Redirect to={`/city-detail-page/${selectedCities[0].id}`} />
+        // Redirect to a detail page if there is one city selected
+        selectedCities.length === 1 ? (
+          <Redirect to={`/city-detail-page/${selectedCities[0].id}`} />
+        ) : (
+          // Redirect to home if no city is selected
+          <Redirect to="/" />
+        )
       ) : (
         <>
           <div className="card-container">{renderCard()}</div>

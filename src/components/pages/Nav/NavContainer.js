@@ -9,9 +9,11 @@ import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
 import SearchBar from "./SearchBar";
 import SelectedCities from "./SelectedCities";
 
+//Configuration
+import drawerWidth from "./drawerWidth";
+
 function NavContainer({ toggleDrawer, isOpen }) {
   // This defines the width of the drawer *and* how far to translate the floating button
-  const drawerWidth = 256;
   // Opens drawer
   const showDrawer = () => {
     toggleDrawer();

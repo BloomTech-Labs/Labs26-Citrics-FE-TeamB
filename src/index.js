@@ -13,15 +13,16 @@ import "antd/dist/antd.less";
 import "./styles/LESS/index.less";
 
 import { NotFoundPage } from "./components/pages/NotFound";
-import { ExampleListPage } from "./components/pages/ExampleList";
-import { ProfileListPage } from "./components/pages/ProfileList";
-import { LoginPage } from "./components/pages/Login";
+// import { ExampleListPage } from "./components/pages/ExampleList";
+// import { ProfileListPage } from "./components/pages/ProfileList";
+// import { LoginPage } from "./components/pages/Login";
 
 import { NavPage } from "./components/pages/Nav";
 import { HomePage } from "./components/pages/Home";
-import { ExampleDataViz } from "./components/pages/ExampleDataViz";
+import { MainPageContainer } from "./components/pages/MainPageContainer";
+// import { ExampleDataViz } from "./components/pages/ExampleDataViz";
 // import { config } from './utils/oktaConfig';
-import { LoadingComponent } from "./components/common";
+// import { LoadingComponent } from "./components/common";
 // import NavContainer from './components/pages/Nav/NavContainer';
 import { ComparisonPage } from "./components/pages/Comparison";
 import { CityDetailPage } from "./components/pages/CityDetail";
@@ -52,19 +53,35 @@ function App() {
     // <Security {...config} onAuthRequired={authHandler}>
     <>
       <Switch>
-        <Route path="/login" component={LoginPage} />
+        {/* <Route path="/login" component={LoginPage} /> */}
         {/* <Route path="/implicit/callback" component={LoginCallback} /> */}
         {/* any of the routes you need secured should be registered as SecureRoutes */}
         <Route
           path="/"
           exact
-          component={() => <HomePage LoadingComponent={LoadingComponent} />}
+          render={params => (
+            <HomePage {...params} /*LoadingComponent={LoadingComponent}*/ />
+          )}
         />
-        <Route path="/example-list" component={ExampleListPage} />
-        <Route path="/profile-list" component={ProfileListPage} />
-        <Route path="/datavis" component={ExampleDataViz} />
-        <Route path="/comparison-page" component={ComparisonPage} />
-        <Route path="/city-detail-page" component={CityDetailPage} />
+        {/* <Route path="/example-list" component={ExampleListPage} /> */}
+        {/* <Route path="/profile-list" component={ProfileListPage} /> */}
+        {/* <Route path="/datavis" component={ExampleDataViz} /> */}
+        <Route
+          path="/comparison-page"
+          render={p => (
+            <MainPageContainer>
+              <ComparisonPage {...p} />
+            </MainPageContainer>
+          )}
+        />
+        <Route
+          path="/city-detail-page"
+          render={p => (
+            <MainPageContainer>
+              <CityDetailPage {...p} />
+            </MainPageContainer>
+          )}
+        />
         <Route component={NotFoundPage} />
       </Switch>
       <NavPage />

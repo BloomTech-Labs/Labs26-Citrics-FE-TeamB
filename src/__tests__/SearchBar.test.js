@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { render, fireEvent, act, waitFor } from "@testing-library/react";
 import configureStore from "redux-mock-store";
@@ -19,16 +18,7 @@ describe("<SearchBar />", () => {
       );
     });
   });
-  it("Renders navbar without errors", () => {
-    const div = document.createElement("div");
-    ReactDOM.render(
-      <Provider store={store}>
-        <SearchBar />
-      </Provider>,
-      div
-    );
-    ReactDOM.unmountComponentAtNode(div);
-  });
+  // TODO: Write these tests
   it.todo("Shows a popup with results when typing");
   it.todo("Adds a city to selectedCities when clicked on");
 });

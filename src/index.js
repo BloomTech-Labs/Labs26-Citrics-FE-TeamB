@@ -59,14 +59,16 @@ function App() {
         <Route
           path="/"
           exact
-          component={() => <HomePage /*LoadingComponent={LoadingComponent}*/ />}
+          render={params => (
+            <HomePage {...params} /*LoadingComponent={LoadingComponent}*/ />
+          )}
         />
         {/* <Route path="/example-list" component={ExampleListPage} /> */}
         {/* <Route path="/profile-list" component={ProfileListPage} /> */}
         {/* <Route path="/datavis" component={ExampleDataViz} /> */}
         <Route
           path="/comparison-page"
-          component={p => (
+          render={p => (
             <MainPageContainer>
               <ComparisonPage {...p} />
             </MainPageContainer>
@@ -74,7 +76,7 @@ function App() {
         />
         <Route
           path="/city-detail-page"
-          component={p => (
+          render={p => (
             <MainPageContainer>
               <CityDetailPage {...p} />
             </MainPageContainer>

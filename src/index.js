@@ -25,7 +25,7 @@ import { MainPageContainer } from "./components/pages/MainPageContainer";
 // import { LoadingComponent } from "./components/common";
 // import NavContainer from './components/pages/Nav/NavContainer';
 import { ComparisonPage } from "./components/pages/Comparison";
-import { CityDetailPage } from "./components/pages/CityDetail";
+import { CityPage } from "./components/pages/CityPage";
 import { Provider } from "react-redux";
 import { store } from "./state";
 
@@ -78,7 +78,7 @@ function App() {
           path="/city-detail-page"
           render={p => (
             <MainPageContainer>
-              <CityDetailPage {...p} />
+              <CityPage {...p} />
             </MainPageContainer>
           )}
         />

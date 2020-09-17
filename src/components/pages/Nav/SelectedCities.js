@@ -2,9 +2,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { removeCity } from "../../../state/actions";
-import { CloseSquareFilled } from "@ant-design/icons";
+import { CloseCircleFilled } from "@ant-design/icons";
 import { Button } from "antd";
 import { useHistory } from "react-router-dom";
+
 
 function SelectedCities({ selectedCities, removeCity, cityDetails }) {
   // Router hook to push to different routes
@@ -26,7 +27,7 @@ function SelectedCities({ selectedCities, removeCity, cityDetails }) {
       {selectedCities.map(({ name, state, id }) => (
         <div key={id} data-id={id} onClick={removeFromSelectedCities}>
           {`${name}, ${state} `}
-          <CloseSquareFilled />
+          &nbsp; <CloseCircleFilled className="remove-city" />
         </div>
       ))}
 

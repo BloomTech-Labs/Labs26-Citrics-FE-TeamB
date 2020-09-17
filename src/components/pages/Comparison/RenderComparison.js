@@ -20,7 +20,11 @@ const RenderComparison = ({ citiesData }) => {
     for (const data in citiesData) {
       cities.push(
         <div className="card" key={data}>
-          <Card style={{ width: 240 }} bodyStyle={{ padding: 0 }}>
+          <Card
+            style={{ width: 240 }}
+            bodyStyle={{ padding: 0 }}
+            data-testid="city-cards"
+          >
             <div className="custom-image">
               <img
                 alt="example"
@@ -31,10 +35,11 @@ const RenderComparison = ({ citiesData }) => {
             <div className="custom-card">
               <h3>city name: {citiesData[data].name}</h3>
               <p>state: {citiesData[data].state}</p>
-              <p>population: {citiesData[data].pop}</p>
-              <p>rental: {citiesData[data].rental}</p>
+              <p>population: {citiesData[data].population}</p>
+              <p>rental: {citiesData[data].rent}</p>
               <p>weather: {citiesData[data].weather}</p>
               <Button
+                data-testid="more-info-btn"
                 type="primary"
                 onClick={() => toggleModal(citiesData[data])}
               >

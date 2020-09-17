@@ -56,6 +56,8 @@ describe("<MainPageContainer />", () => {
       </Provider>
     );
     const testDiv = (await findByTestId("main-page-container")).children[0];
+    // This nonsense is what was necessary to confirm
+    // both divs have the same attributes
     expect(Object.keys(testDivRaw.props)[0]).toEqual(
       testDiv.attributes[0].name
     );

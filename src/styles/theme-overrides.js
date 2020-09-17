@@ -1,5 +1,5 @@
 module.exports = {
-  "@primary-color": "#EB4B3D",
+  "@primary-color": "#DE2817",
   "@link-color": " #057CD8",
   "@success-color": "#057CD8",
   "@warning-color": "#FFD700",

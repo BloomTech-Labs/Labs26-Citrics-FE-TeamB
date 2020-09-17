@@ -14,7 +14,7 @@ class SearchBar extends React.Component {
       .then(queryResult =>
         this.setState({
           cityList: queryResult.map(item => ({
-            value: `${item.name} ${item.state}`,
+            value: `${item.name}, ${item.state}`,
             ...item
           }))
         })

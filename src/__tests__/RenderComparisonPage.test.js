@@ -18,6 +18,7 @@ let store, component;
 beforeEach(() => {
   store = mockStore({
     cities: {
+      selectedCities: [{ id: 100 }, { id: 124 }, { id: 562 }],
       cityDetails: {
         100: {
           name: "Los Angeles",

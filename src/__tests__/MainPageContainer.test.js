@@ -55,8 +55,7 @@ describe("<MainPageContainer />", () => {
         <MainPageContainer>{testDivRaw}</MainPageContainer>
       </Provider>
     );
-    const mainDiv = await findByTestId("main-page-container");
-    const testDiv = await findByTestId("test-div");
+    const testDiv = (await findByTestId("main-page-container")).children[0];
     expect(Object.keys(testDivRaw.props)[0]).toEqual(
       testDiv.attributes[0].name
     );

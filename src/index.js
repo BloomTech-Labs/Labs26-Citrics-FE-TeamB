@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
   // useHistory,
   Switch
@@ -74,8 +75,11 @@ function App() {
             </MainPageContainer>
           )}
         />
+        <Route exact path="/city-detail-page">
+          <Redirect to="/" />
+        </Route>
         <Route
-          path="/city-detail-page"
+          path="/city-detail-page/:id"
           render={p => (
             <MainPageContainer>
               <CityPage {...p} />

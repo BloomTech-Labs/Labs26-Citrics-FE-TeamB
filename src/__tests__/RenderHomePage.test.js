@@ -59,8 +59,8 @@ describe("<RenderHomePage /> test suite", () => {
   });
 
   test("If landingpage has a background image", () => {
-    const { getByRole } = component;
-    const bgImage = getByRole("img");
+    const { getAllByRole } = component;
+    const bgImage = getAllByRole("img")[0];
     expect(bgImage).toBeInTheDocument();
   });
 

@@ -4,10 +4,10 @@ import { Card, Button } from "antd";
 import { connect } from "react-redux";
 import ModalComponent from "../../common/Modal.js";
 
-const RenderComparison = ({ citiesData }) => {
+const RenderComparison = ({ selectedCities, cityDetails }) => {
   const [visible, setVisible] = useState(false);
   const [city, setCity] = useState({});
-
+  const citiesData = selectedCities.map(({ id }) => cityDetails[id]);
   const toggleModal = cityData => {
     setCity(cityData);
     // Toggles the modal to open
@@ -54,9 +54,14 @@ const RenderComparison = ({ citiesData }) => {
   };
   return (
     <>
-      {Object.keys(citiesData).length < 2 ? (
-        // Place holder redirect for now, should redirect to the single details page or something else later
-        <Redirect to="/" />
+      {selectedCities.length < 2 ? (
+        // Redirect to a detail page if there is one city selected
+        selectedCities.length === 1 ? (
+          <Redirect to={`/city-detail-page/${selectedCities[0].id}`} />
+        ) : (
+          // Redirect to home if no city is selected
+          <Redirect to="/" />
+        )
       ) : (
         <>
           <div className="card-container">{renderCard()}</div>
@@ -72,7 +77,9 @@ const RenderComparison = ({ citiesData }) => {
 };
 
 // Map State to props
-const mapState = state => ({
-  citiesData: state.cities.cityDetails
+const mapState = ({ cities: { selectedCities, cityDetails } }, props) => ({
+  ...props,
+  selectedCities,
+  cityDetails
 });
 export default connect(mapState, null)(RenderComparison);

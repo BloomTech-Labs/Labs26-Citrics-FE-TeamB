@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
   // useHistory,
   Switch
@@ -25,7 +26,7 @@ import { MainPageContainer } from "./components/pages/MainPageContainer";
 // import { LoadingComponent } from "./components/common";
 // import NavContainer from './components/pages/Nav/NavContainer';
 import { ComparisonPage } from "./components/pages/Comparison";
-import { CityDetailPage } from "./components/pages/CityDetail";
+import { CityPage } from "./components/pages/CityPage";
 import { Provider } from "react-redux";
 import { store } from "./state";
 
@@ -74,11 +75,14 @@ function App() {
             </MainPageContainer>
           )}
         />
+        <Route exact path="/city-detail-page">
+          <Redirect to="/" />
+        </Route>
         <Route
-          path="/city-detail-page"
+          path="/city-detail-page/:id"
           render={p => (
             <MainPageContainer>
-              <CityDetailPage {...p} />
+              <CityPage {...p} />
             </MainPageContainer>
           )}
         />

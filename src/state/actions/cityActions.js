@@ -22,7 +22,7 @@ export const getCityDetails = ({ id, name, state }) => {
     weather: "perfect",
     rent: 10000,
     name,
-    state
+    state: state ?? "CA"
   };
   return {
     type: ADD_CITY_DETAILS,

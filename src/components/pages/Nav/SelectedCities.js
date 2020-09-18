@@ -6,7 +6,6 @@ import { CloseCircleFilled } from "@ant-design/icons";
 import { Button } from "antd";
 import { useHistory } from "react-router-dom";
 
-
 function SelectedCities({ selectedCities, removeCity, cityDetails }) {
   // Router hook to push to different routes
   let history = useHistory();
@@ -45,8 +44,7 @@ function SelectedCities({ selectedCities, removeCity, cityDetails }) {
             type="primary"
             onClick={() =>
               history.push({
-                pathname: "/city-detail-page",
-                state: cityDetails[selectedCities[0].id]
+                pathname: `/city-detail-page/${selectedCities[0].id}`
               })
             }
           >

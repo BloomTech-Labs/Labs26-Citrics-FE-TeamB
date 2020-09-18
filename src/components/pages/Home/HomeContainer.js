@@ -3,7 +3,11 @@ import React from "react";
 import RenderHomePage from "./RenderHomePage";
 
 function HomeContainer({ LoadingComponent }) {
-  return <RenderHomePage />;
+  return (
+    <div className="home-container" role="img">
+      <RenderHomePage />
+    </div>
+  );
 }
 
 export default HomeContainer;

@@ -1,14 +1,24 @@
 .comparison-container {
+  .background-image("/compare_screen_full.jpg");
   display: flex;
-  
-  // margin-left: 15%;
-  margin-top: 5%;
+  justify-content: center;
 }
 
 .card-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  margin-top: 15%;
 }
 .card {
   margin: 0 5%;
+}
+
+.more-info-btn{
+  .button(95px, 32px, 1.4rem, @buttonBG-compare);
+  border: 1px solid @buttonBG-compare;
+
+  &:hover{
+    background-color: @buttonBG-compare-hover;
+    border: 1px solid @buttonBG-compare-hover;
+  }
 }

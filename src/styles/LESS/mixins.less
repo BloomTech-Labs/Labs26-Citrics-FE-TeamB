@@ -1,13 +1,18 @@
 //For all Mixins
+.background-image(@url){
+    background: url('@{url}') center no-repeat;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    height:100vh;
+  }
 
-.button(@width, @height, @text){
-    background-color: @button-bg;
+.button(@width, @height, @text, @button-color){
+    background-color: @button-color;
     color: @white;
     width: @width;
     height: @height;
     font-size: @text;
-    // border-radius: 10px;
     font-weight: bolder;
-    // margin: 2% 0 0;
     outline:none;
 }

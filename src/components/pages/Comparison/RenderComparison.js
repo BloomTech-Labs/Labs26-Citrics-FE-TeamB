@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 import { Card, Button } from "antd";
-import { connect } from "react-redux";
 import ModalComponent from "../../common/Modal.js";
+import LoadingComponent from "../../common/LoadingComponent.js";
 
-const RenderComparison = ({ selectedCities, cityDetails }) => {
+export default function RenderComparison({ citiesData }) {
   const [visible, setVisible] = useState(false);
   const [city, setCity] = useState({});
-  const citiesData = selectedCities.map(({ id }) => cityDetails[id]);
   const toggleModal = cityData => {
     setCity(cityData);
     // Toggles the modal to open
@@ -32,20 +30,24 @@ const RenderComparison = ({ selectedCities, cityDetails }) => {
                 src="https://i.imgur.com/YXdssOR.jpeg"
               />
             </div>
-            <div className="custom-card">
-              <h3>city name: {citiesData[data].name}</h3>
-              <p>state: {citiesData[data].state}</p>
-              <p>population: {citiesData[data].population}</p>
-              <p>rental: {citiesData[data].rent}</p>
-              <p>weather: {citiesData[data].weather}</p>
-              <Button
-                data-testid="more-info-btn"
-                type="primary"
-                onClick={() => toggleModal(citiesData[data])}
-              >
-                More Info
-              </Button>
-            </div>
+            {!citiesData[data] ? (
+              <LoadingComponent message="Loading city data..." />
+            ) : (
+              <div className="custom-card">
+                <h3>city name: {citiesData[data].name}</h3>
+                <p>state: {citiesData[data].state}</p>
+                <p>population: {citiesData[data].population}</p>
+                <p>rental: {citiesData[data].rent}</p>
+                <p>weather: {citiesData[data].weather}</p>
+                <Button
+                  data-testid="more-info-btn"
+                  type="primary"
+                  onClick={() => toggleModal(citiesData[data])}
+                >
+                  More Info
+                </Button>
+              </div>
+            )}
           </Card>
         </div>
       );
@@ -54,32 +56,8 @@ const RenderComparison = ({ selectedCities, cityDetails }) => {
   };
   return (
     <>
-      {selectedCities.length < 2 ? (
-        // Redirect to a detail page if there is one city selected
-        selectedCities.length === 1 ? (
-          <Redirect to={`/city-detail-page/${selectedCities[0].id}`} />
-        ) : (
-          // Redirect to home if no city is selected
-          <Redirect to="/" />
-        )
-      ) : (
-        <>
-          <div className="card-container">{renderCard()}</div>
-          <ModalComponent
-            visible={visible}
-            setVisible={setVisible}
-            city={city}
-          />
-        </>
-      )}
+      <div className="card-container">{renderCard()}</div>
+      <ModalComponent visible={visible} setVisible={setVisible} city={city} />
     </>
   );
-};
-
-// Map State to props
-const mapState = ({ cities: { selectedCities, cityDetails } }, props) => ({
-  ...props,
-  selectedCities,
-  cityDetails
-});
-export default connect(mapState, null)(RenderComparison);
+}

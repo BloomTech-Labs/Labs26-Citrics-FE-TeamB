@@ -28,12 +28,17 @@ class ComparisonContainer extends React.Component {
     const selectedCities = Array.from(queryParams.values()).map(id =>
       Number(id)
     );
-    console.log("selectedCities", selectedCities);
+    // console.log("selectedCities", selectedCities);
     return selectedCities;
   };
-  retrieveCityDataIfNeeded = selectedCities => {
-    const citiesData = selectedCities.map(id => this.props.cityDetails[id]);
-    console.log("citiesData", citiesData);
+  retrieveCityDataIfNeeded = async selectedCities => {
+    for (const id of selectedCities) {
+      if (!this.props.cityDetails[id]) {
+        await this.props.getCityDetails({ id, name: "Testing" });
+      }
+    }
+    let citiesData = selectedCities.map(id => this.props.cityDetails[id]);
+    // console.log("citiesData", citiesData);
     this.setState({ citiesData });
   };
   render() {

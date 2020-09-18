@@ -14,18 +14,3 @@ module.exports = {
   "@box-shadow-base":
     "0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05)"
 };
-
-//Color Scheme:
-//Blue: #057CD8
-//Gold: #FFD700
-//Orange: #E36242
-//Red: #EB4B3D
-//Light Yellow: #FEE885
-//Dark Grey: #777A66
-//Light Grey: #D2D4C9
-
-//Font Family: Josefin Sans
-//Light: Light 300
-//Regular: Regular 400
-//Bold: Bold 700
-//Italic: " " + Italic

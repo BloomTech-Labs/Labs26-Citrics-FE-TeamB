@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card, Button } from "antd";
 import ModalComponent from "../../common/Modal.js";
+import LoadingComponent from "../../common/LoadingComponent.js";
 
 export default function RenderComparison({ citiesData }) {
   const [visible, setVisible] = useState(false);
@@ -29,20 +30,24 @@ export default function RenderComparison({ citiesData }) {
                 src="https://i.imgur.com/YXdssOR.jpeg"
               />
             </div>
-            <div className="custom-card">
-              <h3>city name: {citiesData[data].name}</h3>
-              <p>state: {citiesData[data].state}</p>
-              <p>population: {citiesData[data].population}</p>
-              <p>rental: {citiesData[data].rent}</p>
-              <p>weather: {citiesData[data].weather}</p>
-              <Button
-                data-testid="more-info-btn"
-                type="primary"
-                onClick={() => toggleModal(citiesData[data])}
-              >
-                More Info
-              </Button>
-            </div>
+            {!citiesData[data] ? (
+              <LoadingComponent message="Loading city data..." />
+            ) : (
+              <div className="custom-card">
+                <h3>city name: {citiesData[data].name}</h3>
+                <p>state: {citiesData[data].state}</p>
+                <p>population: {citiesData[data].population}</p>
+                <p>rental: {citiesData[data].rent}</p>
+                <p>weather: {citiesData[data].weather}</p>
+                <Button
+                  data-testid="more-info-btn"
+                  type="primary"
+                  onClick={() => toggleModal(citiesData[data])}
+                >
+                  More Info
+                </Button>
+              </div>
+            )}
           </Card>
         </div>
       );

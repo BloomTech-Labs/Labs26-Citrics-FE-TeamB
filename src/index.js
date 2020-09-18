@@ -75,9 +75,11 @@ function App() {
             </MainPageContainer>
           )}
         />
-        <Route exact path="/city-detail-page">
-          <Redirect to="/" />
-        </Route>
+        <Route
+          exact
+          path="/city-detail-page"
+          render={() => <Redirect to="/" />}
+        />
         <Route
           path="/city-detail-page/:id"
           render={p => (

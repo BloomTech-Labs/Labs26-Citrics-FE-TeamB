@@ -40,6 +40,7 @@ const RenderComparison = ({ citiesData }) => {
               <p>Rental Prices: ${citiesData[data].rent}</p>
               <p>Weather: {citiesData[data].weather}</p>
               <Button
+                className="more-info-btn"
                 data-testid="more-info-btn"
                 type="primary"
                 onClick={() => toggleModal(citiesData[data])}

@@ -60,14 +60,14 @@ const RenderComparison = ({ citiesData }) => {
         // Place holder redirect for now, should redirect to the single details page or something else later
         <Redirect to="/" />
       ) : (
-        <>
+        <div className="comparison-container">
           <div className="card-container">{renderCard()}</div>
           <ModalComponent
             visible={visible}
             setVisible={setVisible}
             city={city}
           />
-        </>
+        </div>
       )}
     </>
   );

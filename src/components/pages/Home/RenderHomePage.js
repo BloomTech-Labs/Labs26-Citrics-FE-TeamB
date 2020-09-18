@@ -18,6 +18,7 @@ function RenderHomePage({ toggleDrawer }) {
   };
   return (
     <>
+      <div className="home-container" role="img" />
       <Card className="title-card">
         <h1>Citrics</h1>
         <h2>One-stop for City Metrics!</h2>

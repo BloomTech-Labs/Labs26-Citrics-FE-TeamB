@@ -28,6 +28,7 @@ function NavContainer({ toggleDrawer, isOpen }) {
     <div className="navbar">
       <Button
         className="floating-visibility-button"
+        data-testid="floating-visibility-button"
         type="secondary"
         onClick={showDrawer}
         style={{ transform: isOpen ? `translate(${drawerWidth}px,0px)` : "" }}

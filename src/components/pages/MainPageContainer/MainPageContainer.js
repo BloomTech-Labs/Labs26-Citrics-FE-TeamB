@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import drawerWidth from "../Nav/drawerWidth";
-export const baseMargin = 10;
+export const baseMargin = 0;
 function MainPageContainer({ children, isOpen }) {
   const marginLeft = isOpen
     ? `${drawerWidth + baseMargin}px`

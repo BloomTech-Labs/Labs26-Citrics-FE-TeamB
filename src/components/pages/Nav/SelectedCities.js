@@ -6,7 +6,6 @@ import { CloseCircleFilled } from "@ant-design/icons";
 import { Button } from "antd";
 import { useHistory } from "react-router-dom";
 
-
 function SelectedCities({ selectedCities, removeCity, cityDetails }) {
   // Router hook to push to different routes
   let history = useHistory();
@@ -16,6 +15,19 @@ function SelectedCities({ selectedCities, removeCity, cityDetails }) {
     // Optionals here ensure we fail gracefully if there is an issue
     const cityId = attributes?.["data-id"]?.nodeValue;
     cityId && removeCity(cityId);
+  };
+  // Creates a query string containing the IDs of selected cities
+  const queryString = cities => {
+    // Initialize the string
+    let str = "?";
+    let i;
+    // Add every city but the last one to the string followed by an '&'
+    for (i = 0; i < cities.length - 1; i++) {
+      str += `c${i}=${cities[i].id}&`;
+    }
+    // Add the last city to the string without the trailing '&'
+    str += `c${i}=${cities[i].id}`;
+    return str;
   };
   // Hide the component if there are no cities to show
   return selectedCities.length === 0 ? (
@@ -36,7 +48,9 @@ function SelectedCities({ selectedCities, removeCity, cityDetails }) {
         {selectedCities.length > 1 ? (
           <Button
             type="primary"
-            onClick={() => history.push("/comparison-page")}
+            onClick={() =>
+              history.push(`/comparison-page${queryString(selectedCities)}`)
+            }
           >
             Compare
           </Button>
@@ -44,10 +58,7 @@ function SelectedCities({ selectedCities, removeCity, cityDetails }) {
           <Button
             type="primary"
             onClick={() =>
-              history.push({
-                pathname: "/city-detail-page",
-                state: cityDetails[selectedCities[0].id]
-              })
+              history.push(`/city-detail-page/${selectedCities[0].id}`)
             }
           >
             Details

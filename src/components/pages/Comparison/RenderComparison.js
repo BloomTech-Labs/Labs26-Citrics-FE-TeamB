@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 import { Card, Button } from "antd";
-import { connect } from "react-redux";
 import ModalComponent from "../../common/Modal.js";
+import LoadingComponent from "../../common/LoadingComponent.js";
 
-const RenderComparison = ({ citiesData }) => {
+export default function RenderComparison({ citiesData }) {
   const [visible, setVisible] = useState(false);
   const [city, setCity] = useState({});
-
   const toggleModal = cityData => {
     setCity(cityData);
     // Toggles the modal to open
@@ -32,7 +30,10 @@ const RenderComparison = ({ citiesData }) => {
                 src="https://i.imgur.com/YXdssOR.jpeg"
               />
             </div>
-            <div className="custom-card">
+            {!citiesData[data] ? (
+              <LoadingComponent message="Loading city data..." />
+            ) : (
+               <div className="custom-card">
               <h3>
                 City Name: {citiesData[data].name}, {citiesData[data].state}
               </h3>
@@ -48,6 +49,7 @@ const RenderComparison = ({ citiesData }) => {
                 More Info
               </Button>
             </div>
+            )}
           </Card>
         </div>
       );
@@ -56,11 +58,6 @@ const RenderComparison = ({ citiesData }) => {
   };
 
   return (
-    <>
-      {Object.keys(citiesData).length < 2 ? (
-        // Place holder redirect for now, should redirect to the single details page or something else later
-        <Redirect to="/" />
-      ) : (
         <div className="comparison-container">
           <div className="card-container">{renderCard()}</div>
           <ModalComponent
@@ -68,14 +65,6 @@ const RenderComparison = ({ citiesData }) => {
             setVisible={setVisible}
             city={city}
           />
-        </div>
-      )}
-    </>
+        </div>  
   );
-};
-
-// Map State to props
-const mapState = state => ({
-  citiesData: state.cities.cityDetails
-});
-export default connect(mapState, null)(RenderComparison);
+}

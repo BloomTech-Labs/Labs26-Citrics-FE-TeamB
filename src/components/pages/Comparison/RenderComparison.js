@@ -33,11 +33,12 @@ const RenderComparison = ({ citiesData }) => {
               />
             </div>
             <div className="custom-card">
-              <h3>city name: {citiesData[data].name}</h3>
-              <p>state: {citiesData[data].state}</p>
-              <p>population: {citiesData[data].population}</p>
-              <p>rental: {citiesData[data].rent}</p>
-              <p>weather: {citiesData[data].weather}</p>
+              <h3>
+                City Name: {citiesData[data].name}, {citiesData[data].state}
+              </h3>
+              <p>Population: {citiesData[data].population}</p>
+              <p>Rental Prices: ${citiesData[data].rent}</p>
+              <p>Weather: {citiesData[data].weather}</p>
               <Button
                 data-testid="more-info-btn"
                 type="primary"
@@ -52,6 +53,7 @@ const RenderComparison = ({ citiesData }) => {
     }
     return cities;
   };
+
   return (
     <>
       {Object.keys(citiesData).length < 2 ? (

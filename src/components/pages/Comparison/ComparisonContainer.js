@@ -11,10 +11,11 @@ function ComparisonContainer({
   location: { search }
 }) {
   const queryParams = new URLSearchParams(search);
-  const selectedCities = Array.from(queryParams.values());
-  console.log(selectedCities);
-  const citiesData = selectedCities.map(({ id }) => cityDetails[Number(id)]);
-  console.log(citiesData);
+  const selectedCities = Array.from(queryParams.values()).map(id => Number(id));
+  console.log("selectedCities", selectedCities);
+  console.log("Details", cityDetails);
+  const citiesData = selectedCities.map(id => cityDetails[id]);
+  console.log("citiesData", citiesData);
   return citiesData.length < 2 ? (
     <Redirect to="/" />
   ) : (

@@ -27,10 +27,14 @@ class CityPage extends React.Component {
     }
   }
   render() {
-    return this.state.city?.name ? (
-      <CityDetailPage city={this.state.city} />
-    ) : (
-      <LoadingComponent message={"Retrieving City Data... "} />
+    return (
+      <div className="city-page">
+        {this.state.city?.name ? (
+          <CityDetailPage city={this.state.city} />
+        ) : (
+          <LoadingComponent message={"Retrieving City Data... "} />
+        )}
+      </div>
     );
   }
 }

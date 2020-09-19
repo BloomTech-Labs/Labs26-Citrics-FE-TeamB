@@ -21,7 +21,7 @@ export const getCityDetails = ({ id, name, state }) => {
     population: 100,
     weather: "perfect",
     rent: 10000,
-    name,
+    name: name ?? "Example City",
     state: state ?? "CA"
   };
   return {

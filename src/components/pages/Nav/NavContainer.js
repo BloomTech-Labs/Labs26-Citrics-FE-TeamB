@@ -10,19 +10,11 @@ import SearchBar from "./SearchBar";
 import SelectedCities from "./SelectedCities";
 
 //Configuration
+// This defines the width of the drawer *and* how far to translate the floating button
 import drawerWidth from "./drawerWidth";
 
 function NavContainer({ toggleDrawer, isOpen }) {
-  // This defines the width of the drawer *and* how far to translate the floating button
-  // Opens drawer
-  const showDrawer = () => {
-    toggleDrawer();
-  };
-
-  // Closes drawer
-  const onClose = () => {
-    toggleDrawer();
-  };
+  const buttonTransform = isOpen ? `translate(${drawerWidth}px,0px)` : "";
 
   return (
     <div className="navbar">
@@ -30,8 +22,8 @@ function NavContainer({ toggleDrawer, isOpen }) {
         className="floating-visibility-button"
         data-testid="floating-visibility-button"
         type="secondary"
-        onClick={showDrawer}
-        style={{ transform: isOpen ? `translate(${drawerWidth}px,0px)` : "" }}
+        onClick={toggleDrawer}
+        style={{ transform: buttonTransform }}
       >
         {isOpen ? <DoubleLeftOutlined /> : <DoubleRightOutlined />}
       </Button>
@@ -39,7 +31,7 @@ function NavContainer({ toggleDrawer, isOpen }) {
         title="City Search"
         placement="left"
         closable={false}
-        onClose={onClose}
+        onClose={toggleDrawer}
         visible={isOpen}
         mask={false}
         width={drawerWidth}

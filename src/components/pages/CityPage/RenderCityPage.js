@@ -5,10 +5,10 @@ import LoadingComponent from "../../common/LoadingComponent";
 export default function RenderCityPage({ city, isLoading }) {
   return (
     <div className="city-page">
-      {!isLoading ? (
-        <CityDetailPage city={city} />
-      ) : (
+      {isLoading ? (
         <LoadingComponent message={"Retrieving City Data... "} />
+      ) : (
+        <CityDetailPage city={city} />
       )}
     </div>
   );

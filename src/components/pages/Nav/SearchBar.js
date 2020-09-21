@@ -1,5 +1,6 @@
 // Library imports
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { AutoComplete } from "antd";
 import { connect } from "react-redux";
 import { addCity } from "../../../state/actions";
@@ -8,17 +9,39 @@ import axios from "axios";
 class SearchBar extends React.Component {
   state = { cityList: [], searchTerm: "", options: [] };
   componentDidMount() {
+    // Retrieve user's currently selected cities
+    // using either the query string on comparison page or id on city detail page
+    let selectedCities = [];
+    const { pathname, search } = this.props.location;
+    if (pathname.includes("comparison-page")) {
+      const queryParams = new URLSearchParams(search);
+      // IDs are stored in query string
+      selectedCities = Array.from(queryParams.values()).map(id => Number(id));
+    } else if (pathname.includes("city-detail-page")) {
+      // ID is stored as the last part of url path
+      selectedCities = [Number(pathname.split("/").pop())];
+    }
+    // console.log("selected cities", selectedCities);
+    // Retrieve city list from the backend
     axios
       .get("https://b-ds.citrics.dev/cities")
       .then(r => r.data.cities)
       .then(queryResult =>
-        this.setState({
-          cityList: queryResult.map(item => ({
-            value: `${item.name}, ${item.state}`,
-            ...item
-          }))
-        })
-      );
+        queryResult.map(item => ({
+          // need to add value to display in the Autocomplete
+          value: `${item.name}, ${item.state}`,
+          ...item
+        }))
+      )
+      .then(cityList => {
+        // store city list
+        this.setState({ cityList });
+        // add any already selected cities to the Redux store
+        selectedCities.forEach(cityId => {
+          const city = cityList.find(({ id }) => Number(id) === cityId);
+          this.props.addCity(city);
+        });
+      });
   }
 
   // Every keystroke, update what's shown in the box
@@ -54,4 +77,4 @@ class SearchBar extends React.Component {
   }
 }
 const mapPropsToState = (reduxProps, props) => props;
-export default connect(mapPropsToState, { addCity })(SearchBar);
+export default connect(mapPropsToState, { addCity })(withRouter(SearchBar));

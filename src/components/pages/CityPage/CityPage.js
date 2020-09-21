@@ -12,7 +12,7 @@ class CityPage extends React.Component {
     // If we don't have cached data on this city, retrieve it
     if (!this.props.cityDetails[id]) {
       // We need to wait for getCityDetails to finish before proceeding
-      await this.props.getCityDetails({ id, name: "Testing" });
+      await this.props.getCityDetails({ id });
     }
     this.setState({ city: this.props.cityDetails[id] });
   };

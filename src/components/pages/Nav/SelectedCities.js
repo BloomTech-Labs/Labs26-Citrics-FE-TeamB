@@ -30,18 +30,20 @@ function SelectedCities({ selectedCities, removeCity, cityDetails }) {
     return str;
   };
   // Hide the component if there are no cities to show
-  return selectedCities.length === 0 ? (
-    <div />
-  ) : (
+  return (
     <>
       {/* TODO: Replace this with Ant Design components */}
       <h4>Selected Cities</h4>
-      {selectedCities.map(({ name, state, id }) => (
-        <div key={id} data-id={id} onClick={removeFromSelectedCities}>
-          {`${name}, ${state} `}
-          &nbsp; <CloseCircleFilled className="remove-city" />
-        </div>
-      ))}
+      {selectedCities.length === 0 ? (
+        <div>No city selected</div>
+      ) : (
+        selectedCities.map(({ name, state, id }) => (
+          <div key={id} data-id={id} onClick={removeFromSelectedCities}>
+            {`${name}, ${state} `}
+            &nbsp; <CloseCircleFilled className="remove-city" />
+          </div>
+        ))
+      )}
 
       {/* Dynamic Button that responds to how many cities are selected */}
       <div className="btn-container">
@@ -57,6 +59,7 @@ function SelectedCities({ selectedCities, removeCity, cityDetails }) {
         ) : (
           <Button
             type="primary"
+            disabled={selectedCities.length === 0}
             onClick={() =>
               history.push(`/city-detail-page/${selectedCities[0].id}`)
             }

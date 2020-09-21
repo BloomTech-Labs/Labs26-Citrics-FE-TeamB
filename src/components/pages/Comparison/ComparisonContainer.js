@@ -46,7 +46,7 @@ class ComparisonContainer extends React.Component {
     for (const id of selectedCities) {
       if (!this.props.cityDetails[id]) {
         // Make sure each server request finished before proceeding
-        await this.props.getCityDetails({ id, name: "Testing" });
+        await this.props.getCityDetails({ id });
       }
     }
     // Get citiesData using the latest information from Redux passed thru props

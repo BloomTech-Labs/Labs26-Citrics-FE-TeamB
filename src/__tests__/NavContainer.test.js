@@ -1,6 +1,7 @@
 import Nav from "../components/pages/Nav/NavContainer";
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import { render, fireEvent } from "@testing-library/react";
 import configureStore from "redux-mock-store";
@@ -17,9 +18,11 @@ describe("<NavContainer />", () => {
       });
       store.dispatch = jest.fn();
       component = render(
-        <Provider store={store}>
-          <Nav />
-        </Provider>
+        <Router>
+          <Provider store={store}>
+            <Nav />
+          </Provider>
+        </Router>
       );
     });
 
@@ -62,9 +65,11 @@ describe("<NavContainer />", () => {
       });
       store.dispatch = jest.fn();
       component = render(
-        <Provider store={store}>
-          <Nav />
-        </Provider>
+        <Router>
+          <Provider store={store}>
+            <Nav />
+          </Provider>
+        </Router>
       );
     });
 

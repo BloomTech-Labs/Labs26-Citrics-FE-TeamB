@@ -28,14 +28,19 @@ describe("<NavContainer />", () => {
       );
       ReactDOM.unmountComponentAtNode(div);
     });
-    it("Is hidden when no cities are selected", () => {
-      const { queryByText } = render(
+    it("Displays a message and disabled button when no city is selected", async done => {
+      const { findByText } = render(
         <Provider store={store}>
           <SelectedCities />
         </Provider>
       );
-      const header = queryByText(/selected cities/i);
-      expect(header).toBeNull();
+      // The message should say "No city selected"
+      await findByText(/no city selected/i);
+      // The ant button is the parent element of the span with "Details" in it
+      // It should be disabled
+      const button = await findByText(/details/i);
+      expect(button.parentElement.getAttribute("disabled")).toEqual("");
+      done();
     });
   });
   describe("Tests with one city selected", () => {

@@ -1,5 +1,6 @@
 // A list of dummy data to get the search form functional
 // Data pulled from: https://simple.wikipedia.org/wiki/List_of_United_States_cities_by_population#Cities_that_used_to_have_100,000_people
+import axios from "axios";
 const cities = [
   { id: 1, name: "Albany", state: "NY" },
   { id: 2, name: "Allegheny", state: "PA" },
@@ -38,7 +39,8 @@ export default {
       case "https://b-ds.citrics.dev/cities":
         return Promise.resolve({ data: { cities } });
       default:
-        throw new Error(`UNMATCHED URL: ${url}`);
+        console.warn(`Warning: axios request was not mocked: ${url}`);
+        return axios.get(url);
     }
   })
 };

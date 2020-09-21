@@ -6,7 +6,7 @@ import { Drawer, Button } from "antd";
 import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
 
 //Subcomponents
-import SearchBar from "./SearchBar";
+import { SearchBar } from "../SearchBar";
 import SelectedCities from "./SelectedCities";
 
 //Configuration

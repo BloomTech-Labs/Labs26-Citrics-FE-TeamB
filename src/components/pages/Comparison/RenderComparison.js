@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { Card, Button, Tabs } from "antd";
 import ModalComponent from "../../common/Modal.js";
 import LoadingComponent from "../../common/LoadingComponent.js";
-import GraphContainer from "../../common/Graphs/GraphContainer";
+// Graphs
+import LineGraph from "../../common/Graphs/LineGraph";
+import BarGraph from "../../common/Graphs/BarGraph";
+import PieChart from "../../common/Graphs/PieChart";
 
 export default function RenderComparison({ citiesData }) {
   const [visible, setVisible] = useState(false);
@@ -81,17 +84,17 @@ export default function RenderComparison({ citiesData }) {
           style={{ width: "100%" }}
         >
           <TabPane tab="Unemployment Rate" key="1">
-            <GraphContainer
+            <LineGraph
               state={getStateName()[0]}
               state2={getStateName()[1]}
               state3={getStateName()[2]}
             />
           </TabPane>
-          <TabPane tab="Example 2" key="2">
-            <GraphContainer state="UT" />
+          <TabPane tab="Example Bar" key="2">
+            <BarGraph />
           </TabPane>
-          <TabPane tab="Example 3" key="3">
-            <GraphContainer state="NY" />
+          <TabPane tab="Example Pie" key="3">
+            <PieChart />
           </TabPane>
         </Tabs>
       ) : (

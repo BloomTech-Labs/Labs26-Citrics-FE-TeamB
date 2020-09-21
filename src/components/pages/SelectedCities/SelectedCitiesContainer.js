@@ -6,7 +6,7 @@ import { CloseCircleFilled } from "@ant-design/icons";
 import { Button } from "antd";
 import { useHistory } from "react-router-dom";
 
-function SelectedCities({ selectedCities, removeCity, cityDetails }) {
+function SelectedCitiesContainer({ selectedCities, removeCity, cityDetails }) {
   // Router hook to push to different routes
   let history = useHistory();
   // The action handler is attached to the parent div
@@ -79,4 +79,6 @@ const mapPropsToState = (
   selectedCities,
   cityDetails
 });
-export default connect(mapPropsToState, { removeCity })(SelectedCities);
+export default connect(mapPropsToState, { removeCity })(
+  SelectedCitiesContainer
+);

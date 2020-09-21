@@ -7,7 +7,7 @@ import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
 
 //Subcomponents
 import { SearchBar } from "../SearchBar";
-import SelectedCities from "./SelectedCities";
+import { SelectedCities } from "../SelectedCities/";
 
 //Configuration
 // This defines the width of the drawer *and* how far to translate the floating button

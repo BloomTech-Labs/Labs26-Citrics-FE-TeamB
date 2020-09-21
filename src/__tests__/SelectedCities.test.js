@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { render, fireEvent } from "@testing-library/react";
 import configureStore from "redux-mock-store";
 import { removeCity } from "../state/actions";
-import SelectedCities from "../components/pages/Nav/SelectedCities";
+import { SelectedCities } from "../components/pages/SelectedCities";
 const mockStore = configureStore([]);
 describe("<NavContainer />", () => {
   // Tests are split into two sections since the mock Redux store is immutable

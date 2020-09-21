@@ -18,3 +18,6 @@ yarn-debug.log*
 yarn-error.log*
 # vs code config
 .vscode
+
+#dotenv
+.env

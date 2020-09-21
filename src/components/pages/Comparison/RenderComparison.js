@@ -28,15 +28,17 @@ export default function RenderComparison({ citiesData }) {
       cities.push(
         <div className="card" key={data}>
           <Card
-            style={{ width: 240 }}
+            className="comparison-card"
             bodyStyle={{ padding: 0 }}
             data-testid="city-cards"
           >
-            <div className="custom-image">
+            <div
+              className="custom-image"
+              style={{ backgroundImage: `url(${citiesData[data].image})` }}
+            >
               <img
-                alt="example"
-                width="100%"
-                src="https://i.imgur.com/YXdssOR.jpeg"
+                alt={`Thumbnail for ${citiesData[data].name}, ${citiesData[data].state}`}
+                src={citiesData[data].image}
               />
             </div>
             {!citiesData[data] ? (
@@ -44,7 +46,7 @@ export default function RenderComparison({ citiesData }) {
             ) : (
               <div className="custom-card">
                 <h3>
-                  City Name: {citiesData[data].name}, {citiesData[data].state}
+                  {citiesData[data].name}, {citiesData[data].state}
                 </h3>
                 <p>Population: {citiesData[data].population}</p>
                 <p>Rental Prices: ${citiesData[data].rent}</p>

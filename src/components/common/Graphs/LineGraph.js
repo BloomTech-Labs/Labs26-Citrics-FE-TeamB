@@ -9,9 +9,11 @@ export default function LineGraph({ state, state2, state3 }) {
   const [data3, setData3] = React.useState(null);
 
   React.useEffect(() => {
-    axios
-      .get(`https://b-ds.citrics.dev/viz/${state}`)
-      .then(({ data }) => setData(JSON.parse(data).data));
+    if (state) {
+      axios
+        .get(`https://b-ds.citrics.dev/viz/${state}`)
+        .then(({ data }) => setData(JSON.parse(data).data));
+    }
     if (state2) {
       axios
         .get(`https://b-ds.citrics.dev/viz/${state2}`)

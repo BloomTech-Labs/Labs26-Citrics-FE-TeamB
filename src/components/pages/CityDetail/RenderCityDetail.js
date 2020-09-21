@@ -1,5 +1,5 @@
 import React from "react";
-import GraphContainer from "../../common/GraphContainer";
+import LineGraph from "../../common/Graphs/LineGraph";
 
 export default function RenderCityDetail({ city }) {
   return (
@@ -9,7 +9,7 @@ export default function RenderCityDetail({ city }) {
       <p>Rent: ${city.rent}</p>
       <p>Population: {city.population}</p>
       <p>Weather: {city.weather}</p>
-      <GraphContainer state={city.state} />
+      <LineGraph state={city.state} />
     </div>
   );
 }

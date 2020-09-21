@@ -4,10 +4,11 @@ import LineGraph from "../../common/Graphs/LineGraph";
 export default function RenderCityDetail({ city }) {
   return (
     <div>
-      <p>City: {city.name}</p>
-      <p>State: {city.state}</p>
-      <p>Rent: ${city.rent}</p>
+      <h3>
+        City: {city.name}, {city.state}
+      </h3>
       <p>Population: {city.population}</p>
+      <p>Rental Prices: ${city.rent}</p>
       <p>Weather: {city.weather}</p>
       <LineGraph state={city.state} />
     </div>

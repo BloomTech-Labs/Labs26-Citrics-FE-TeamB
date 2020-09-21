@@ -31,6 +31,14 @@ export const getCityDetails = ({ id, name, state }) => async dispatch => {
     name = city?.name;
     state = city?.state;
   }
+  const proxyURL = "https://cors-anywhere.herokuapp.com/";
+  const placesLookupURL = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${name} ${state}&key=${process.env.REACT_APP_PLACES_API_KEY}&inputtype=textquery&fields=name,photos`;
+  const initialImageQuery = await axios
+    .get(proxyURL + placesLookupURL)
+    .catch(console.error);
+  const photoRef =
+    initialImageQuery?.data?.candidates?.[0]?.photos?.[0]?.photo_reference;
+  console.log(photoRef);
 
   const image = null;
   const details = {

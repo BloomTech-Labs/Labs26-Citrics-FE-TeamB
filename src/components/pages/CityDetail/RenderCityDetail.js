@@ -4,10 +4,11 @@ import GraphContainer from "../../common/GraphContainer";
 export default function RenderCityDetail({ city }) {
   return (
     <div>
-      <p>City: {city.name}</p>
-      <p>State: {city.state}</p>
-      <p>Rent: ${city.rent}</p>
+      <h3>
+        City: {city.name}, {city.state}
+      </h3>
       <p>Population: {city.population}</p>
+      <p>Rental Prices: ${city.rent}</p>
       <p>Weather: {city.weather}</p>
       <GraphContainer state={city.state} />
     </div>

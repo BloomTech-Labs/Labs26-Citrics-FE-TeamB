@@ -1,10 +1,10 @@
 // Library imports
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { AutoComplete } from "antd";
 import { connect } from "react-redux";
 import { addCity } from "../../../state/actions";
 import axios from "axios";
+import RenderSearchBar from "./RenderSearchBar";
 
 class SearchBar extends React.Component {
   state = { cityList: [], searchTerm: "", options: [] };
@@ -65,13 +65,11 @@ class SearchBar extends React.Component {
   };
   render() {
     return (
-      <AutoComplete
-        value={this.state.searchTerm}
+      <RenderSearchBar
+        searchTerm={this.state.searchTerm}
         options={this.state.options}
-        style={{ width: 200 }}
-        onSelect={this.onSelect}
         onChange={this.onChange}
-        placeholder="Enter City.."
+        onSelect={this.onSelect}
       />
     );
   }

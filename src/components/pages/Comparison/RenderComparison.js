@@ -28,12 +28,18 @@ export default function RenderComparison({ citiesData }) {
       cities.push(
         <div className="card" key={data}>
           <Card
-            style={{ width: 240 }}
+            className="comparison-card"
             bodyStyle={{ padding: 0 }}
             data-testid="city-cards"
           >
-            <div className="custom-image">
-              <img alt="example" width="100%" src={citiesData[data].image} />
+            <div
+              className="custom-image"
+              style={{ backgroundImage: `url(${citiesData[data].image})` }}
+            >
+              <img
+                alt={`Thumbnail for ${citiesData[data].name}, ${citiesData[data].state}`}
+                src={citiesData[data].image}
+              />
             </div>
             {!citiesData[data] ? (
               <LoadingComponent message="Loading city data..." />

@@ -66,7 +66,7 @@ export default function RenderComparison({ citiesData }) {
     return cities;
   };
 
-  // get states
+  // funciton to put state names into an array for quick test
   const getStateName = () => {
     const stateName = [];
     for (let id in citiesData) {
@@ -77,6 +77,7 @@ export default function RenderComparison({ citiesData }) {
   return (
     <div className="comparison-container">
       <div className="card-container">{renderCard()}</div>
+      {/* Renders the tabs for the user to navigate for different visuals */}
       {citiesData ? (
         <Tabs
           defaultActiveKey="1"

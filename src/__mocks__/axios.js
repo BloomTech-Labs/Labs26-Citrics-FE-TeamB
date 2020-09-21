@@ -39,7 +39,9 @@ export default {
       case "https://b-ds.citrics.dev/cities":
         return Promise.resolve({ data: { cities } });
       default:
-        console.warn(`Warning: axios request was not mocked: ${url}`);
+        console.warn(
+          `Request not mocked: ${url}. Please update __mocks__/axios.js`
+        );
         return axios.get(url);
     }
   })

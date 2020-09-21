@@ -1,8 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getCityDetails } from "../../../state/actions";
-import { CityDetailPage } from "../CityDetail";
-import LoadingComponent from "../../common/LoadingComponent";
+
+import RenderCityPage from "./RenderCityPage";
 
 class CityPage extends React.Component {
   state = { city: {} };
@@ -28,13 +28,10 @@ class CityPage extends React.Component {
   }
   render() {
     return (
-      <div className="city-page">
-        {this.state.city?.name ? (
-          <CityDetailPage city={this.state.city} />
-        ) : (
-          <LoadingComponent message={"Retrieving City Data... "} />
-        )}
-      </div>
+      <RenderCityPage
+        city={this.state.city}
+        isLoading={!this.state.city?.name}
+      />
     );
   }
 }

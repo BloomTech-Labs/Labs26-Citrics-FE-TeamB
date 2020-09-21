@@ -38,9 +38,13 @@ export const getCityDetails = ({ id, name, state }) => async dispatch => {
     .catch(console.error);
   const photoRef =
     initialImageQuery?.data?.candidates?.[0]?.photos?.[0]?.photo_reference;
-  console.log(photoRef);
 
-  const image = null;
+  const imageLookupURL = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&key=${process.env.REACT_APP_PLACES_API_KEY}&maxwidth=400&maxheight=400`;
+  const imageURLQuery = await fetch(proxyURL + imageLookupURL)
+    .then(r => r.blob())
+    .catch(console.error);
+
+  const image = URL.createObjectURL(imageURLQuery);
   const details = {
     population: 100,
     weather: "perfect",

@@ -39,7 +39,7 @@ export const getCityDetails = ({ id, name, state }) => async dispatch => {
   const photoRef =
     initialImageQuery?.data?.candidates?.[0]?.photos?.[0]?.photo_reference;
 
-  const imageLookupURL = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&key=${process.env.REACT_APP_PLACES_API_KEY}&maxwidth=400&maxheight=400`;
+  const imageLookupURL = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&key=${process.env.REACT_APP_PLACES_API_KEY}&maxwidth=700&maxheight=700`;
   const imageURLQuery = await fetch(proxyURL + imageLookupURL)
     .then(r => r.blob())
     .catch(console.error);

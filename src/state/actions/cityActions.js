@@ -1,5 +1,5 @@
 import { ADD_CITY, REMOVE_CITY, ADD_CITY_DETAILS } from "../contexts";
-//import axios from "axios";
+import axios from "axios";
 
 export const addCity = city => async dispatch => {
   dispatch({
@@ -16,14 +16,28 @@ export const removeCity = cityId => ({
 });
 
 export const getCityDetails = ({ id, name, state }) => async dispatch => {
-  // TODO: Add API call here to get detailed data
+  //Placeholder image for cities with no Places API image result
   const fallbackImage = "https://i.imgur.com/YXdssOR.jpeg";
+
+  // If we aren't given name and state, look them up from the backend
+  if (!(name && state)) {
+    const cityList = await axios
+      .get("https://b-ds.citrics.dev/cities")
+      .then(r => r.data.cities);
+    const city = cityList.find(
+      ({ id: cityId }) => Number(cityId) === Number(id)
+    );
+    console.log(city);
+    name = city?.name;
+    state = city?.state;
+  }
+
   const image = null;
   const details = {
     population: 100,
     weather: "perfect",
     rent: 10000,
-    name: name ?? "Example City",
+    name: name ?? "Not Found",
     state: state ?? "CA",
     image: image ?? fallbackImage
   };

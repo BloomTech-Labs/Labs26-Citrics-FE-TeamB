@@ -70,7 +70,11 @@ export default function RenderComparison({ citiesData }) {
   const getStateName = () => {
     const stateName = [];
     for (let id in citiesData) {
-      stateName.push(citiesData[id].state);
+      stateName.push({
+        state: citiesData[id].state,
+        plotX: citiesData[id].x,
+        plotY: citiesData[id].y
+      });
     }
     return stateName;
   };

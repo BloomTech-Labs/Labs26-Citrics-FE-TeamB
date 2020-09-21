@@ -8,13 +8,15 @@ export default function RenderSearchBar({
   onSelect
 }) {
   return (
-    <AutoComplete
-      value={searchTerm}
-      options={options}
-      style={{ width: 200 }}
-      onSelect={onSelect}
-      onChange={onChange}
-      placeholder="Enter City.."
-    />
+    <div className="search-bar">
+      <AutoComplete
+        value={searchTerm}
+        options={options}
+        style={{ width: 200 }}
+        onSelect={onSelect}
+        onChange={onChange}
+        placeholder="Enter City.."
+      />
+    </div>
   );
 }

@@ -1,23 +1,25 @@
 .comparison-container {
-  .background-image("/compare_screen_full.jpg");
+  // .background-image("/compare_screen_full.jpg");
   display: flex;
-  justify-content: center;
+  // justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .card-container {
   display: flex;
   justify-content: space-evenly;
-  margin-top: 15%;
+  margin: 6% 0;
 }
 .card {
   margin: 0 5%;
 }
 
-.more-info-btn{
+.more-info-btn {
   .button(95px, 32px, 1.4rem, @buttonBG-compare);
   border: 1px solid @buttonBG-compare;
 
-  &:hover{
+  &:hover {
     background-color: @buttonBG-compare-hover;
     border: 1px solid @buttonBG-compare-hover;
   }

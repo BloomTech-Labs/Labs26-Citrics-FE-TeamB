@@ -44,14 +44,14 @@ export const getCityDetails = ({ id, name, state }) => async dispatch => {
     .then(r => r.blob())
     .catch(console.error);
 
-  const image = URL.createObjectURL(imageURLQuery);
+  const image = photoRef ? URL.createObjectURL(imageURLQuery) : fallbackImage;
   const details = {
     population: 100,
     weather: "perfect",
     rent: 10000,
     name: name ?? "Not Found",
     state: state ?? "CA",
-    image: image ?? fallbackImage
+    image
   };
   dispatch({
     type: ADD_CITY_DETAILS,

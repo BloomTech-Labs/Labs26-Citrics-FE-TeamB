@@ -1,5 +1,5 @@
 import React from "react";
-import GraphContainer from "../../common/GraphContainer";
+import GraphContainer from "../../common/Graphs/GraphContainer";
 
 export default function RenderCityDetail({ city }) {
   return (

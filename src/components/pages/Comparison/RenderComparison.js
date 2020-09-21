@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Card, Button, Tabs } from "antd";
 import ModalComponent from "../../common/Modal.js";
 import LoadingComponent from "../../common/LoadingComponent.js";
-import GraphContainer from "../../common/GraphContainer";
+import GraphContainer from "../../common/Graphs/GraphContainer";
 
 export default function RenderComparison({ citiesData }) {
   const [visible, setVisible] = useState(false);

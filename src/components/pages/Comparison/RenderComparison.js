@@ -80,21 +80,22 @@ export default function RenderComparison({ citiesData }) {
       {/* Renders the tabs for the user to navigate for different visuals */}
       {citiesData ? (
         <Tabs
+          className="metrics-container"
           defaultActiveKey="1"
           onChange={callback}
-          style={{ width: "100%" }}
+          // style={{ width: "100%" }}
         >
-          <TabPane tab="Unemployment Rate" key="1">
+          <TabPane className="graph-holder" tab="Unemployment Rate" key="1">
             <LineGraph
               state={getStateName()[0]}
               state2={getStateName()[1]}
               state3={getStateName()[2]}
             />
           </TabPane>
-          <TabPane tab="Example Bar" key="2">
+          <TabPane className="graph-holder" tab="Example Bar" key="2">
             <BarGraph />
           </TabPane>
-          <TabPane tab="Example Pie" key="3">
+          <TabPane className="graph-holder" tab="Example Pie" key="3">
             <PieChart />
           </TabPane>
         </Tabs>

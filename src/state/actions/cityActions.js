@@ -8,7 +8,7 @@ export const addCity = city => async dispatch => {
   });
   // changing the param to the entire city for now just to test actions
   // once we have the proper endpoints will change back
-  dispatch(getCityDetails(city));
+  getCityDetails(city);
 };
 export const removeCity = cityId => ({
   type: REMOVE_CITY,

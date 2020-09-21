@@ -15,17 +15,20 @@ export const removeCity = cityId => ({
   payload: { cityId }
 });
 
-export const getCityDetails = ({ id, name, state }) => {
+export const getCityDetails = ({ id, name, state }) => async dispatch => {
   // TODO: Add API call here to get detailed data
+  const fallbackImage = "https://i.imgur.com/YXdssOR.jpeg";
+  const image = null;
   const details = {
     population: 100,
     weather: "perfect",
     rent: 10000,
     name: name ?? "Example City",
-    state: state ?? "CA"
+    state: state ?? "CA",
+    image: image ?? fallbackImage
   };
-  return {
+  dispatch({
     type: ADD_CITY_DETAILS,
     payload: { id, details }
-  };
+  });
 };

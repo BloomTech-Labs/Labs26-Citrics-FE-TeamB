@@ -33,18 +33,14 @@ export default function RenderComparison({ citiesData }) {
             data-testid="city-cards"
           >
             <div className="custom-image">
-              <img
-                alt="example"
-                width="100%"
-                src="https://i.imgur.com/YXdssOR.jpeg"
-              />
+              <img alt="example" width="100%" src={citiesData[data].image} />
             </div>
             {!citiesData[data] ? (
               <LoadingComponent message="Loading city data..." />
             ) : (
               <div className="custom-card">
                 <h3>
-                  City Name: {citiesData[data].name}, {citiesData[data].state}
+                  {citiesData[data].name}, {citiesData[data].state}
                 </h3>
                 <p>Population: {citiesData[data].population}</p>
                 <p>Rental Prices: ${citiesData[data].rent}</p>

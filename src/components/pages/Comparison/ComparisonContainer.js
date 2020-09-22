@@ -16,10 +16,10 @@ class ComparisonContainer extends React.Component {
     };
   }
   componentDidMount() {
+    document.title = "Citrics | Comparison Page";
     // Upon mounting, get cityDetails from Redux
     // and also request new data from the server if needed
     this.retrieveCityDataIfNeeded(this.state.selectedCities);
-    document.title = "Citrics | Comparison Page";
   }
   componentDidUpdate(prevProps) {
     // If we're viewing a new comparison
@@ -52,7 +52,11 @@ class ComparisonContainer extends React.Component {
     }
     // Get citiesData using the latest information from Redux passed thru props
     let citiesData = selectedCities.map(id => this.props.cityDetails[id]);
-    // console.log("citiesData", citiesData);
+    // Update page title to match city data
+    document.title = `Citrics | ${citiesData.reduce(
+      (ac, { name, state }) => `${ac} ${name}, ${state}`,
+      ""
+    )}`;
     this.setState({ citiesData });
   };
   render() {

@@ -16,6 +16,9 @@ import {
 export default function RenderCityDetail({ city }) {
   return (
     <div className="city-detail-card">
+      <h3 className="one-render-h3">
+        {city.name}, {city.state}
+      </h3>
       <DetailPane
         Icon={TeamOutlined}
         graphData={{
@@ -26,50 +29,17 @@ export default function RenderCityDetail({ city }) {
           type: "line"
         }}
       >
-        <PopulationPane city={city} />
+        <PopulationPane population={city.population} />
       </DetailPane>
       <DetailPane Icon={CloudOutlined}>
-        <WeatherPane city={city} />
+        <WeatherPane weather={city.weather} />
       </DetailPane>
       <DetailPane Icon={HomeOutlined}>
-        <HousingPane city={city} />
+        <HousingPane rent={city.rent} />
       </DetailPane>
       <DetailPane Icon={CarOutlined}>
-        <JobsPane city={city} />
+        <JobsPane jobs={city.jobs} />
       </DetailPane>
     </div>
-    // <div>
-    //   <h3 className="one-render-h3">
-    //     City: {city.name}, {city.state}
-    //   </h3>
-    //   <p className="one-render-p">
-    //     Population: {city.population.data.total_pop}
-    //   </p>
-    //   <p className="one-render-p">Rental Prices: ${city.rent.studio}</p>
-    //   <p className="one-render-p">
-    //     Weather: {city.weather.summer_maxtempF_mean}
-    //   </p>
-
-    //   {/* Unemployment Graph */}
-    //   <Graph
-    //     dataSet={{
-    //       state: city.state,
-    //       plotX: city.unemployRate.x,
-    //       plotY: city.unemployRate.y,
-    //       graphName: "Unemployment Rate",
-    //       type: "line"
-    //     }}
-    //   />
-    //   {/* Population Graph */}
-    // <Graph
-    // dataSet={{
-    //   state: city.state,
-    //   plotX: JSON.parse(city.population.viz).data[0].x,
-    //   plotY: JSON.parse(city.population.viz).data[0].y,
-    //   graphName: "Population Trend",
-    //   type: "line"
-    // }}
-    // />
-    // </div>
   );
 }

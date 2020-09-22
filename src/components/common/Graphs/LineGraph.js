@@ -70,7 +70,7 @@ export default function LineGraph({ state, state2, state3 }) {
         color: "rgba(245,246,249,1)"
       },
 
-      showlegend: true,
+      showlegend: false,
       title: state.graphName
     };
     return <Plot data={dataPlot} layout={layout} />;

@@ -4,7 +4,11 @@ import React from "react";
 function LoadingComponent(props) {
   const { message } = props;
 
-  return <div style={{ color: "white", height: "155vh" }}>{message}</div>;
+  return (
+    <div data-testid="loadingComp" style={{ color: "white", height: "155vh" }}>
+      {message}
+    </div>
+  );
 }
 
 export default LoadingComponent;

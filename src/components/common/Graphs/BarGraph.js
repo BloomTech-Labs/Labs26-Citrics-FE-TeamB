@@ -44,7 +44,7 @@ const BarGraph = ({ city, city2, city3 }) => {
         type: "bar",
         name: data2.state,
         marker: {
-          color: "rgb(204,204,204)",
+          color: "rgb(247, 77, 77,.5)",
           opacity: 0.5
         }
       };
@@ -78,6 +78,7 @@ const BarGraph = ({ city, city2, city3 }) => {
         size: 14,
         color: "rgba(245,246,249,1)"
       },
+      showlegend: false,
       barmode: "group"
     };
 

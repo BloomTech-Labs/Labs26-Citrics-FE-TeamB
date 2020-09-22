@@ -6,9 +6,26 @@ export default function HousingPane({ rent }) {
   // This list will be the titles of the tabs
   // it also matches the keys in rent (although they're all lowercase in rent)
   const aptTypes = ["Studio", "1BR", "2BR", "3BR", "4BR"];
+
+  // Make a color-coded price change display
+  const generatePriceDisplay = change => {
+    change = Math.round(change * 100);
+    let indicator = "";
+    if (change < 0) {
+      indicator = " down";
+      change += "%";
+    } else {
+      change = "+" + change + "%";
+      if (change > 0) {
+        indicator = " up";
+      }
+    }
+    return <div className={"rent-percent-change" + indicator}>{change}</div>;
+  };
+
   return (
     <div className="housing-pane">
-      <div className="rent-percent-change">{rent.rental_pct_chg}</div>
+      {generatePriceDisplay(rent.rental_pct_chg)}
       <Tabs defaultActiveKey="1">
         {aptTypes.map((name, idx) => (
           <TabPane key={idx} tab={name} className="rental-price-tab">

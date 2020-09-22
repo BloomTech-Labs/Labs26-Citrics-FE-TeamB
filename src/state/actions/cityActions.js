@@ -36,7 +36,6 @@ export const getCityDetails = ({ id, name, state }) => async dispatch => {
   const unemploymentRate = await axios.get(
     `https://b-ds.citrics.dev/viz/${state}`
   );
-  console.log(unemploymentRate);
   const proxyURL = "https://cors-anywhere.herokuapp.com/";
   const placesLookupURL = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${name} ${state}&key=${process.env.REACT_APP_PLACES_API_KEY}&inputtype=textquery&fields=name,photos`;
   const initialImageQuery = await axios

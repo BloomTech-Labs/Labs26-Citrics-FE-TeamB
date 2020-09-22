@@ -74,8 +74,8 @@ export default function RenderComparison({ citiesData }) {
     for (let id in citiesData) {
       stateName.push({
         state: citiesData[id].state,
-        plotX: citiesData[id].x,
-        plotY: citiesData[id].y
+        plotX: citiesData[id].unemployRate.x,
+        plotY: citiesData[id].unemployRate.y
       });
     }
     return stateName;

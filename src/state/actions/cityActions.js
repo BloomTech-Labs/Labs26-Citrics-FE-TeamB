@@ -22,29 +22,40 @@ export const getCityDetails = city => async (dispatch, getState) => {
   if (cityDetails[id]) return;
 
   //Placeholder image to use as a fallback
-  let fallbackImage = "https://i.imgur.com/YXdssOR.jpeg";
+  let image = "https://i.imgur.com/YXdssOR.jpeg";
 
-  // If we aren't given name and state, look them up from the backend
-  if (!(name && state)) {
-    const cityList = await axios
-      .get("https://b-ds.citrics.dev/cities")
-      .then(r => r.data.cities);
+  // Get rent first since it also echoes city name and state
+  const rent = await axios
+    .get(`https://b-ds.citrics.dev/rental/${id}`)
+    .then(r => r?.data?.data)
+    .catch(console.error);
 
-    const city = cityList.find(
-      ({ id: cityId }) => Number(cityId) === Number(id)
-    );
-    name = city?.name;
-    state = city?.state;
-  }
+  // Update city name and state if they weren't successfully passed in thru arguments
+  state = state ?? rent?.state ?? "CA";
+  name = name ?? rent?.city ?? "Not found";
 
   // awaiting the unemployment data
-  const unemploymentRate = await axios.get(
-    `https://b-ds.citrics.dev/viz/${state}`
-  );
+  const unemployRate = await axios
+    .get(`https://b-ds.citrics.dev/viz/${state}`)
+    .then(r => {
+      try {
+        return JSON.parse(r?.data)?.data[0];
+      } catch {
+        return null;
+      }
+    })
+    .catch(console.error);
+
   // awaiting the population data
-  const population = await axios.get(
-    `https://b-ds.citrics.dev/population/${id}`
-  );
+  const population = await axios
+    .get(`https://b-ds.citrics.dev/population/${id}`)
+    .then(r => r?.data)
+    .catch(console.error);
+  // awaiting weather data
+  const weather = await axios
+    .get(`https://b-ds.citrics.dev/weather/${id}`)
+    .then(r => r?.data?.data)
+    .catch(console.error);
 
   // All requests are routed thru this proxy to circumvent CORS issues
   const proxyURL = "https://cors-anywhere-citrics.herokuapp.com/";
@@ -59,21 +70,21 @@ export const getCityDetails = city => async (dispatch, getState) => {
 
   // If we succeeded in getting a photo ref, get the image
   // if it failed, image will instead be the placeholder above
-  const imageLookupURL = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&key=${process.env.REACT_APP_PLACES_API_KEY}&maxwidth=700&maxheight=700`;
-  const imageURLQuery = await fetch(proxyURL + imageLookupURL)
-    .then(r => r.blob())
-    .catch(console.error);
+  if (photoRef) {
+    const imageLookupURL = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&key=${process.env.REACT_APP_PLACES_API_KEY}&maxwidth=700&maxheight=700`;
+    const imageURLQuery = await fetch(proxyURL + imageLookupURL)
+      .then(r => r.blob())
+      .catch(console.error);
 
-  const image = photoRef ? URL.createObjectURL(imageURLQuery) : fallbackImage;
-
+    image = URL.createObjectURL(imageURLQuery);
+  }
   const details = {
-    // population: 100,
-    weather: "perfect",
-    rent: 10000,
-    unemployRate: JSON.parse(unemploymentRate.data).data[0],
-    population: population.data ?? "NA",
-    name: name ?? "Not Found",
-    state: state ?? "CA",
+    weather,
+    rent,
+    unemployRate,
+    population,
+    name,
+    state,
     image
   };
 

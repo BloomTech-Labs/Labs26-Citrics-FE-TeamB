@@ -30,8 +30,6 @@ export default function Graph({ dataSet, dataSet2, dataSet3 }) {
   const renderGraph = () => {
     if (data.type === "line") {
       const { dataPlot, layout } = lineGraph(data, data2, data3);
-      console.log(dataPlot);
-      console.log(layout);
       return <Plot data={dataPlot} layout={layout} />;
     } else if (dataSet.type === "bar") {
       const { dataPlot, layout } = barGraph(data, data2, data3);
@@ -39,7 +37,7 @@ export default function Graph({ dataSet, dataSet2, dataSet3 }) {
     }
   };
 
-  return dataSet ? (
+  return data ? (
     renderGraph()
   ) : (
     <LoadingComponent message={"Retrieving Graph Data... "} />

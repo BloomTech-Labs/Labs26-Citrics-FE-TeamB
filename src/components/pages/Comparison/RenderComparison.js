@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import { Card, Button, Tabs } from "antd";
 import ModalComponent from "../../common/Modal.js";
 import LoadingComponent from "../../common/LoadingComponent.js";
-// Graphs
-import LineGraph from "../../common/Graphs/LineGraph";
-import BarGraph from "../../common/Graphs/BarGraph";
-import PieChart from "../../common/Graphs/PieChart";
+// Graph
+import Graph from "../../common/Graphs/renderGraph";
 
 export default function RenderComparison({ citiesData }) {
   const [visible, setVisible] = useState(false);
@@ -45,8 +43,11 @@ export default function RenderComparison({ citiesData }) {
                   {citiesData[data].name}, {citiesData[data].state}
                 </h3>
                 <p>Population: {citiesData[data].population.data.total_pop}</p>
-                <p>Rental Prices: ${citiesData[data].rent}</p>
-                <p>Weather: {citiesData[data].weather}</p>
+                <p>Rental Prices: ${citiesData[data].rent.studio}</p>
+                <p>
+                  Weather: {citiesData[data].weather.summer_maxtempF_mean}{" "}
+                  degrees
+                </p>
                 <Button
                   className="more-info-btn"
                   data-testid="more-info-btn"
@@ -72,7 +73,8 @@ export default function RenderComparison({ citiesData }) {
         state: citiesData[id].state,
         plotX: citiesData[id].unemployRate.x,
         plotY: citiesData[id].unemployRate.y,
-        graphName: "Unemployment Rate"
+        graphName: "Unemployment Rate",
+        type: "line"
       });
     }
     return stateName;
@@ -84,7 +86,8 @@ export default function RenderComparison({ citiesData }) {
         state: citiesData[id].state,
         plotX: JSON.parse(citiesData[id].population.viz).data[0].x,
         plotY: JSON.parse(citiesData[id].population.viz).data[0].y,
-        graphName: "Population Trend"
+        graphName: "Population Trend",
+        type: "bar"
       });
     }
     return cityPop;
@@ -105,18 +108,18 @@ export default function RenderComparison({ citiesData }) {
               color: "white"
             }}
           >
-            <TabPane className="graph-holder" tab="Unemployment Rate" key="1">
-              <LineGraph
-                state={getStateName()[0]}
-                state2={getStateName()[1]}
-                state3={getStateName()[2]}
+            <TabPane className="graph-holder" tab="Population Trend" key="1">
+              <Graph
+                dataSet={getCityPop()[0]}
+                dataSet2={getCityPop()[1]}
+                dataSet3={getCityPop()[2]}
               />
             </TabPane>
-            <TabPane className="graph-holder" tab="Population Trend" key="2">
-              <BarGraph
-                city={getCityPop()[0]}
-                city2={getCityPop()[1]}
-                city3={getCityPop()[2]}
+            <TabPane className="graph-holder" tab="Unemployment Rate" key="2">
+              <Graph
+                dataSet={getStateName()[0]}
+                dataSet2={getStateName()[1]}
+                dataSet3={getStateName()[2]}
               />
             </TabPane>
             {/* Will implement  */}

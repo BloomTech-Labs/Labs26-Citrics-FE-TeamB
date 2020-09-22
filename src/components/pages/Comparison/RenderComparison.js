@@ -79,34 +79,43 @@ export default function RenderComparison({ citiesData }) {
   };
   return (
     <div className="comparison-container">
-      <div className="card-container">{renderCard()}</div>
-      {/* Renders the tabs for the user to navigate for different visuals */}
-      {citiesData ? (
-        <Tabs
-          className="metrics-container"
-          defaultActiveKey="1"
-          onChange={callback}
-          // style={{ width: "100%" }}
-        >
-          <TabPane className="graph-holder" tab="Unemployment Rate" key="1">
-            <LineGraph
-              state={getStateName()[0]}
-              state2={getStateName()[1]}
-              state3={getStateName()[2]}
-            />
-          </TabPane>
-          <TabPane className="graph-holder" tab="Example Bar" key="2">
-            <BarGraph />
-          </TabPane>
-          <TabPane className="graph-holder" tab="Example Pie" key="3">
-            <PieChart />
-          </TabPane>
-        </Tabs>
-      ) : (
-        <LoadingComponent message="Loading graphs.." />
-      )}
+      {citiesData.length ? (
+        <>
+          <div className="card-container">{renderCard()}</div>
 
-      <ModalComponent visible={visible} setVisible={setVisible} city={city} />
+          {/* Renders the tabs for the user to navigate for different visuals */}
+          <Tabs
+            className="metrics-container"
+            defaultActiveKey="1"
+            onChange={callback}
+            centered="true"
+            tabBarStyle={{
+              color: "white"
+            }}
+          >
+            <TabPane className="graph-holder" tab="Unemployment Rate" key="1">
+              <LineGraph
+                state={getStateName()[0]}
+                state2={getStateName()[1]}
+                state3={getStateName()[2]}
+              />
+            </TabPane>
+            <TabPane className="graph-holder" tab="Example Bar" key="2">
+              <BarGraph />
+            </TabPane>
+            <TabPane className="graph-holder" tab="Example Pie" key="3">
+              <PieChart />
+            </TabPane>
+          </Tabs>
+          <ModalComponent
+            visible={visible}
+            setVisible={setVisible}
+            city={city}
+          />
+        </>
+      ) : (
+        <LoadingComponent message="Loading cities..." />
+      )}
     </div>
   );
 }

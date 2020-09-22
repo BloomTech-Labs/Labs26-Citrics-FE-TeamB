@@ -21,7 +21,6 @@ class SearchBar extends React.Component {
       // ID is stored as the last part of url path
       selectedCities = [Number(pathname.split("/").pop())];
     }
-    // console.log("selected cities", selectedCities);
     // Retrieve city list from the backend
     axios
       .get("https://b-ds.citrics.dev/cities")
@@ -59,9 +58,15 @@ class SearchBar extends React.Component {
   // When clicking on a city, add it to the selected cities
   // and empty the search term
   onSelect = data => {
-    const entry = this.state.cityList.find(({ value }) => value === data);
-    this.props.addCity(entry);
-    this.setState({ searchTerm: "" });
+    console.log(this.props);
+    if (this.props.selectedCities.length < 3) {
+      const entry = this.state.cityList.find(({ value }) => value === data);
+      this.props.addCity(entry);
+      this.setState({ searchTerm: "" });
+    } else {
+      alert("You can only add 3 cities");
+      this.setState({ searchTerm: "" });
+    }
   };
   render() {
     return (
@@ -74,5 +79,8 @@ class SearchBar extends React.Component {
     );
   }
 }
-const mapPropsToState = (reduxProps, props) => props;
+const mapPropsToState = ({ cities: { selectedCities } }, props) => ({
+  ...props,
+  selectedCities
+});
 export default connect(mapPropsToState, { addCity })(withRouter(SearchBar));

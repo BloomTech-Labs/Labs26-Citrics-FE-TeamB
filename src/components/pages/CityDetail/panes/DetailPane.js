@@ -11,11 +11,12 @@ export default function DetailPane({ Icon, GraphIcon, graphData, children }) {
   };
   return (
     <div className="one-render-p">
-      <Icon />
-      {
-        children /*This is where the child component (a specific type of pane) is rendered.*/
-      }
-      <br />
+      <div className="main-detail-content">
+        <Icon className="detail-pane-icon" />
+        {
+          children /*This is where the child component (a specific type of pane) is rendered.*/
+        }
+      </div>
       {graphData && (
         <div className={"graph-icons"}>
           <RightOutlined

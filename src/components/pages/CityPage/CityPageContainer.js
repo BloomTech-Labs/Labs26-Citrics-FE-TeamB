@@ -15,6 +15,7 @@ class CityPage extends React.Component {
       await this.props.getCityDetails({ id });
     }
     this.setState({ city: this.props.cityDetails[id] });
+    document.title = `Citrics | ${this.props.cityDetails[id].name}, ${this.props.cityDetails[id].state}`;
   };
   componentDidMount() {
     this.fetchDataIfNeeded();

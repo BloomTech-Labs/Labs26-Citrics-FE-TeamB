@@ -25,28 +25,43 @@ export const getCityDetails = city => async (dispatch, getState) => {
   let fallbackImage = "https://i.imgur.com/YXdssOR.jpeg";
 
   // If we aren't given name and state, look them up from the backend
-  if (!(name && state)) {
-    const cityList = await axios
-      .get("https://b-ds.citrics.dev/cities")
-      .then(r => r.data.cities);
+  // if (!(name && state)) {
+  //   const cityList = await axios
+  //     .get("https://b-ds.citrics.dev/cities")
+  //     .then(r => r.data.cities);
 
-    const city = cityList.find(
-      ({ id: cityId }) => Number(cityId) === Number(id)
-    );
-    name = city?.name;
-    state = city?.state;
-  }
+  //   const city = cityList.find(
+  //     ({ id: cityId }) => Number(cityId) === Number(id)
+  //   );
+  //   name = city?.name;
+  //   state = city?.state;
+  // }
+
+  // Get rent first since it also echoes city name and state
+  const rent = await axios
+    .get(`https://b-ds.citrics.dev/rental/${id}`)
+    .then(r => r?.data?.data)
+    .catch(console.error);
+
+  state = state ?? rent.state ?? "CA";
+  name = name ?? rent.city ?? "Not found";
 
   // awaiting the unemployment data
-  const unemploymentRate = await axios.get(
-    `https://b-ds.citrics.dev/viz/${state}`
-  );
-  // awaiting the population data
-  const population = await axios.get(
-    `https://b-ds.citrics.dev/population/${id}`
-  );
+  const unemployRate = await axios
+    .get(`https://b-ds.citrics.dev/viz/${state}`)
+    .then(r => JSON.parse(r.data).data[0])
+    .catch(console.error);
 
-  const weather = await axios.get(`https://b-ds.citrics.dev/weather/${id}`);
+  // awaiting the population data
+  const population = await axios
+    .get(`https://b-ds.citrics.dev/population/${id}`)
+    .then(r => r?.data)
+    .catch(console.error);
+
+  const weather = await axios
+    .get(`https://b-ds.citrics.dev/weather/${id}`)
+    .then(r => r?.data?.data)
+    .catch(console.error);
 
   // All requests are routed thru this proxy to circumvent CORS issues
   const proxyURL = "https://cors-anywhere-citrics.herokuapp.com/";
@@ -69,12 +84,12 @@ export const getCityDetails = city => async (dispatch, getState) => {
   const image = photoRef ? URL.createObjectURL(imageURLQuery) : fallbackImage;
 
   const details = {
-    weather: weather.data.data,
-    rent: 10000,
-    unemployRate: JSON.parse(unemploymentRate.data).data[0],
-    population: population.data ?? "NA",
-    name: name ?? "Not Found",
-    state: state ?? "CA",
+    weather,
+    rent,
+    unemployRate,
+    population,
+    name,
+    state,
     image
   };
 

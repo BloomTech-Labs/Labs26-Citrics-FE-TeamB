@@ -19,6 +19,9 @@ export default function RenderCityDetail({ city }) {
       <h3 className="one-render-h3">
         {city.name}, {city.state}
       </h3>
+      {/* Each DetailPane expects an Icon component, 
+        graphData to help it render a graph of that info, 
+        and a specific type of pane as a child component */}
       <DetailPane
         Icon={TeamOutlined}
         graphData={{

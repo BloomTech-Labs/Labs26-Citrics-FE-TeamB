@@ -10,7 +10,14 @@ export default function RenderCityDetail({ city }) {
       <p>Population: {city.population}</p>
       <p>Rental Prices: ${city.rent}</p>
       <p>Weather: {city.weather}</p>
-      <LineGraph state={city.state} />
+      {console.log(city)}
+      <LineGraph
+        state={{
+          state: city.state,
+          plotX: city.unemployRate.x,
+          plotY: city.unemployRate.y
+        }}
+      />
     </div>
   );
 }

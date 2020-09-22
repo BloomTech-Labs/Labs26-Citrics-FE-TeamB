@@ -26,6 +26,7 @@ const BarGraph = ({ city, city2, city3 }) => {
   }, [city, city2, city3]);
   const renderGraph = () => {
     let trace2, trace3;
+
     let trace1 = {
       x: data.plotX,
       y: data.plotY,
@@ -37,7 +38,7 @@ const BarGraph = ({ city, city2, city3 }) => {
       }
     };
     if (data2) {
-      let trace2 = {
+      trace2 = {
         x: data2.plotX,
         y: data2.plotY,
         type: "bar",
@@ -49,7 +50,7 @@ const BarGraph = ({ city, city2, city3 }) => {
       };
     }
     if (data3) {
-      let trace3 = {
+      trace3 = {
         x: data3.plotX,
         y: data3.plotY,
         type: "bar",

@@ -1,5 +1,5 @@
 .comparison-container {
-  // .background-image("/compare_screen_full.jpg");
+  .background-image("/compare_screen_full.jpg");
   display: flex;
   // justify-content: center;
   align-items: center;
@@ -14,7 +14,20 @@
 .card {
   margin: 0 5%;
 }
-
+.comparison-card {
+  width: 240px;
+  .custom-image {
+    width: 240px;
+    height: 130px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    img {
+      opacity: 0;
+    }
+  }
+}
 .more-info-btn {
   .button(95px, 32px, 1.4rem, @buttonBG-compare);
   border: 1px solid @buttonBG-compare;
@@ -23,4 +36,20 @@
     background-color: @buttonBG-compare-hover;
     border: 1px solid @buttonBG-compare-hover;
   }
+}
+
+//for the tabs and the graphs
+.metrics-container {
+  width: 60%;
+}
+
+//tabs
+.ant-tabs-nav-list{
+  background: @white;
+  border-radius: 2px;
+}
+//just the graphs
+.graph-holder{
+  display: flex;
+  justify-content: center;
 }

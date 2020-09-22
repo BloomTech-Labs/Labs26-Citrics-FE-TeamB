@@ -8,8 +8,9 @@ export default function LineGraph({ state, state2, state3 }) {
   const [data3, setData3] = React.useState(null);
 
   React.useEffect(() => {
-    console.log(state, state3, state3);
-    setData(state);
+    if (state) {
+      setData(state);
+    }
     if (state2) {
       setData2(state2);
     }

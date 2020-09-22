@@ -70,12 +70,18 @@ class SearchBar extends React.Component {
   };
   render() {
     return (
-      <RenderSearchBar
-        searchTerm={this.state.searchTerm}
-        options={this.state.options}
-        onChange={this.onChange}
-        onSelect={this.onSelect}
-      />
+      <>
+        <RenderSearchBar
+          searchTerm={this.state.searchTerm}
+          options={this.state.options}
+          onChange={this.onChange}
+          onSelect={this.onSelect}
+        />
+        <br />
+        {this.props.selectedCities.length < 3
+          ? ""
+          : "Only 3 cities may be selected."}
+      </>
     );
   }
 }

@@ -27,11 +27,7 @@ export default function RenderComparison({ citiesData }) {
     for (const data in citiesData) {
       cities.push(
         <div className="card" key={data}>
-          <Card
-            className="comparison-card"
-            bodyStyle={{ padding: 0 }}
-            data-testid="city-cards"
-          >
+          <Card className="comparison-card" data-testid="city-cards">
             <div
               className="custom-image"
               style={{ backgroundImage: `url(${citiesData[data].image})` }}
@@ -48,7 +44,7 @@ export default function RenderComparison({ citiesData }) {
                 <h3>
                   {citiesData[data].name}, {citiesData[data].state}
                 </h3>
-                <p>Population: {citiesData[data].population}</p>
+                <p>Population: {citiesData[data].population.data.total_pop}</p>
                 <p>Rental Prices: ${citiesData[data].rent}</p>
                 <p>Weather: {citiesData[data].weather}</p>
                 <Button
@@ -75,7 +71,8 @@ export default function RenderComparison({ citiesData }) {
       stateName.push({
         state: citiesData[id].state,
         plotX: citiesData[id].unemployRate.x,
-        plotY: citiesData[id].unemployRate.y
+        plotY: citiesData[id].unemployRate.y,
+        graphName: "Unemployment Rate"
       });
     }
     return stateName;

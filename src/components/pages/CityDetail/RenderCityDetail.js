@@ -23,6 +23,7 @@ export default function RenderCityDetail({ city }) {
       </h3>
       {/* Each DetailPane expects an Icon component, 
         graphData to help it render a graph of that info, 
+        a GraphIcon representing the type of graph,
         and a specific type of pane as a child component */}
       <DetailPane
         Icon={TeamOutlined}

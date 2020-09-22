@@ -4,9 +4,9 @@ import Graph from "../../../common/Graphs/renderGraph";
 import { RightOutlined } from "@ant-design/icons";
 
 export default function DetailPane({ Icon, GraphIcon, graphData, children }) {
+  // Keep track of whether the graph is open or not
   const [isOpen, setIsOpen] = React.useState(false);
   const toggleGraph = () => {
-    console.log("Toggle");
     setIsOpen(!isOpen);
   };
   return (
@@ -18,6 +18,8 @@ export default function DetailPane({ Icon, GraphIcon, graphData, children }) {
         }
       </div>
       {graphData && (
+        // Only render if there is graph data given
+        // Show the open/close icon (which rotates) and an icon that matches the type of graph to be shown
         <div className={"graph-icons"}>
           <RightOutlined
             onClick={toggleGraph}

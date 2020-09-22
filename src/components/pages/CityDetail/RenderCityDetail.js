@@ -4,12 +4,14 @@ import Graph from "../../common/Graphs/renderGraph";
 export default function RenderCityDetail({ city }) {
   return (
     <div>
-      <h3>
+      <h3 className="one-render-h3">
         City: {city.name}, {city.state}
       </h3>
-      <p>Population: {city.population.data.total_pop}</p>
-      <p>Rental Prices: ${city.rent}</p>
-      <p>Weather: {city.weather}</p>
+      <p className="one-render-p">
+        Population: {city.population.data.total_pop}
+      </p>
+      <p className="one-render-p">Rental Prices: ${city.rent}</p>
+      <p className="one-render-p">Weather: {city.weather}</p>
 
       {/* Unemployment Graph */}
       <Graph

@@ -1,21 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
 import LoadingComponent from "../../common/LoadingComponent";
 
 export default function LineGraph({ state, state2, state3 }) {
-  const [data, setData] = React.useState(null);
-  const [data2, setData2] = React.useState(null);
-  const [data3, setData3] = React.useState(null);
+  const [data, setData] = useState(null);
+  const [data2, setData2] = useState(null);
+  const [data3, setData3] = useState(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (state) {
       setData(state);
+    } else {
+      setData(null);
     }
     if (state2) {
       setData2(state2);
+    } else {
+      setData2(null);
     }
     if (state3) {
       setData3(state3);
+    } else {
+      setData3(null);
     }
   }, [state, state2, state3]);
 

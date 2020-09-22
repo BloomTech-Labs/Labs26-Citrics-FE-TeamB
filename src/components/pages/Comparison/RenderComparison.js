@@ -27,16 +27,14 @@ export default function RenderComparison({ citiesData }) {
     for (const data in citiesData) {
       cities.push(
         <div className="card" key={data}>
-          <Card
-            style={{ width: 240 }}
-            bodyStyle={{ padding: 0 }}
-            data-testid="city-cards"
-          >
-            <div className="custom-image">
+          <Card className="comparison-card" data-testid="city-cards">
+            <div
+              className="custom-image"
+              style={{ backgroundImage: `url(${citiesData[data].image})` }}
+            >
               <img
-                alt="example"
-                width="100%"
-                src="https://i.imgur.com/YXdssOR.jpeg"
+                alt={`Thumbnail for ${citiesData[data].name}, ${citiesData[data].state}`}
+                src={citiesData[data].image}
               />
             </div>
             {!citiesData[data] ? (
@@ -44,9 +42,9 @@ export default function RenderComparison({ citiesData }) {
             ) : (
               <div className="custom-card">
                 <h3>
-                  City Name: {citiesData[data].name}, {citiesData[data].state}
+                  {citiesData[data].name}, {citiesData[data].state}
                 </h3>
-                <p>Population: {citiesData[data].population}</p>
+                <p>Population: {citiesData[data].population.data.total_pop}</p>
                 <p>Rental Prices: ${citiesData[data].rent}</p>
                 <p>Weather: {citiesData[data].weather}</p>
                 <Button
@@ -70,40 +68,71 @@ export default function RenderComparison({ citiesData }) {
   const getStateName = () => {
     const stateName = [];
     for (let id in citiesData) {
-      stateName.push(citiesData[id].state);
+      stateName.push({
+        state: citiesData[id].state,
+        plotX: citiesData[id].unemployRate.x,
+        plotY: citiesData[id].unemployRate.y,
+        graphName: "Unemployment Rate"
+      });
     }
     return stateName;
   };
+  const getCityPop = () => {
+    const cityPop = [];
+    for (let id in citiesData) {
+      cityPop.push({
+        state: citiesData[id].state,
+        plotX: JSON.parse(citiesData[id].population.viz).data[0].x,
+        plotY: JSON.parse(citiesData[id].population.viz).data[0].y,
+        graphName: "Population Trend"
+      });
+    }
+    return cityPop;
+  };
   return (
     <div className="comparison-container">
-      <div className="card-container">{renderCard()}</div>
-      {/* Renders the tabs for the user to navigate for different visuals */}
-      {citiesData ? (
-        <Tabs
-          className="metrics-container"
-          defaultActiveKey="1"
-          onChange={callback}
-          // style={{ width: "100%" }}
-        >
-          <TabPane className="graph-holder" tab="Unemployment Rate" key="1">
-            <LineGraph
-              state={getStateName()[0]}
-              state2={getStateName()[1]}
-              state3={getStateName()[2]}
-            />
-          </TabPane>
-          <TabPane className="graph-holder" tab="Example Bar" key="2">
-            <BarGraph />
-          </TabPane>
-          <TabPane className="graph-holder" tab="Example Pie" key="3">
-            <PieChart />
-          </TabPane>
-        </Tabs>
-      ) : (
-        <LoadingComponent message="Loading graphs.." />
-      )}
+      {citiesData.length ? (
+        <>
+          <div className="card-container">{renderCard()}</div>
 
-      <ModalComponent visible={visible} setVisible={setVisible} city={city} />
+          {/* Renders the tabs for the user to navigate for different visuals */}
+          <Tabs
+            className="metrics-container"
+            defaultActiveKey="1"
+            onChange={callback}
+            centered="true"
+            tabBarStyle={{
+              color: "white"
+            }}
+          >
+            <TabPane className="graph-holder" tab="Unemployment Rate" key="1">
+              <LineGraph
+                state={getStateName()[0]}
+                state2={getStateName()[1]}
+                state3={getStateName()[2]}
+              />
+            </TabPane>
+            <TabPane className="graph-holder" tab="Population Trend" key="2">
+              <BarGraph
+                city={getCityPop()[0]}
+                city2={getCityPop()[1]}
+                city3={getCityPop()[2]}
+              />
+            </TabPane>
+            {/* Will implement  */}
+            {/* <TabPane className="graph-holder" tab="Example Pie" key="3">
+              <PieChart />
+            </TabPane> */}
+          </Tabs>
+          <ModalComponent
+            visible={visible}
+            setVisible={setVisible}
+            city={city}
+          />
+        </>
+      ) : (
+        <LoadingComponent message="Loading cities..." />
+      )}
     </div>
   );
 }

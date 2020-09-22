@@ -1,71 +1,88 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
 import LoadingComponent from "../../common/LoadingComponent";
 
-const BarGraph = props => {
-  const phonyData = true;
+const BarGraph = ({ city, city2, city3 }) => {
+  const [data, setData] = useState(null);
+  const [data2, setData2] = useState(null);
+  const [data3, setData3] = useState(null);
+
+  useEffect(() => {
+    if (city) {
+      setData(city);
+    } else {
+      setData(null);
+    }
+    if (city2) {
+      setData2(city2);
+    } else {
+      setData2(null);
+    }
+    if (city3) {
+      setData3(city3);
+    } else {
+      setData3(null);
+    }
+  }, [city, city2, city3]);
   const renderGraph = () => {
+    let trace2, trace3;
     let trace1 = {
-      x: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
-      ],
-      y: [20, 14, 25, 16, 18, 22, 19, 15, 12, 16, 14, 17],
+      x: data.plotX,
+      y: data.plotY,
       type: "bar",
-      name: "Primary Product",
+      name: data.state,
       marker: {
         color: "rgb(49,130,189)",
         opacity: 0.7
       }
     };
-
-    let trace2 = {
-      x: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec"
-      ],
-      y: [19, 14, 22, 14, 16, 19, 15, 14, 10, 12, 12, 16],
-      type: "bar",
-      name: "Secondary Product",
-      marker: {
-        color: "rgb(204,204,204)",
-        opacity: 0.5
-      }
-    };
-
-    let data = [trace1, trace2];
+    if (data2) {
+      let trace2 = {
+        x: data2.plotX,
+        y: data2.plotY,
+        type: "bar",
+        name: data2.state,
+        marker: {
+          color: "rgb(204,204,204)",
+          opacity: 0.5
+        }
+      };
+    }
+    if (data3) {
+      let trace3 = {
+        x: data3.plotX,
+        y: data3.plotY,
+        type: "bar",
+        name: data3.state,
+        marker: {
+          color: "rgb(158,202,225)",
+          opacity: 0.5
+        }
+      };
+    }
+    let dataPlot = [trace1, data2 ? trace2 : {}, data3 ? trace3 : {}];
 
     let layout = {
-      title: "2013 Sales Report",
+      title: city.graphName,
+      paper_bgcolor: "transparent",
+      plot_bgcolor: "transparent",
+      yaxis: {
+        showgrid: false
+      },
       xaxis: {
+        showgrid: false,
         tickangle: -45
+      },
+      font: {
+        size: 14,
+        color: "rgba(245,246,249,1)"
       },
       barmode: "group"
     };
 
-    return <Plot data={data} layout={layout} />;
+    return <Plot data={dataPlot} layout={layout} />;
   };
-  return phonyData ? (
+  return data ? (
     renderGraph()
   ) : (
     <LoadingComponent message={"Retrieving Graph Data... "} />

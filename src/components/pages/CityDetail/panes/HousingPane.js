@@ -7,12 +7,15 @@ export default function HousingPane({ rent }) {
   // it also matches the keys in rent (although they're all lowercase in rent)
   const aptTypes = ["Studio", "1BR", "2BR", "3BR", "4BR"];
   return (
-    <Tabs defaultActiveKey="1">
-      {aptTypes.map((name, idx) => (
-        <TabPane key={idx} tab={name} className="rental-price-tab">
-          ${rent[name.toLowerCase()]}
-        </TabPane>
-      ))}
-    </Tabs>
+    <div className="housing-pane">
+      <div className="rent-percent-change">{rent.rental_pct_chg}</div>
+      <Tabs defaultActiveKey="1">
+        {aptTypes.map((name, idx) => (
+          <TabPane key={idx} tab={name} className="rental-price-tab">
+            ${rent[name.toLowerCase()]}
+          </TabPane>
+        ))}
+      </Tabs>
+    </div>
   );
 }

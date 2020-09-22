@@ -23,6 +23,7 @@ export default function RenderSelectedCities({
         ))
       )}
 
+      <br />
       {/* Dynamic Button that responds to how many cities are selected */}
       <div className="btn-container">
         {selectedCities.length > 1 ? (

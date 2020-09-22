@@ -1,6 +1,5 @@
 import React from "react";
-import LineGraph from "../../common/Graphs/LineGraph";
-import BarGraph from "../../common/Graphs/BarGraph";
+import Graph from "../../common/Graphs/renderGraph";
 
 export default function RenderCityDetail({ city }) {
   return (
@@ -13,21 +12,23 @@ export default function RenderCityDetail({ city }) {
       <p>Weather: {city.weather}</p>
 
       {/* Unemployment Graph */}
-      <LineGraph
-        state={{
+      <Graph
+        dataSet={{
           state: city.state,
           plotX: city.unemployRate.x,
           plotY: city.unemployRate.y,
-          graphName: "Unemployment Rate"
+          graphName: "Unemployment Rate",
+          type: "line"
         }}
       />
       {/* Population Graph */}
-      <BarGraph
-        city={{
+      <Graph
+        dataSet={{
           state: city.state,
           plotX: JSON.parse(city.population.viz).data[0].x,
           plotY: JSON.parse(city.population.viz).data[0].y,
-          graphName: "Population Trend"
+          graphName: "Population Trend",
+          type: "bar"
         }}
       />
     </div>

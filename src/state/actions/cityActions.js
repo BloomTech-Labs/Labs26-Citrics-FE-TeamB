@@ -67,7 +67,6 @@ export const getCityDetails = city => async (dispatch, getState) => {
   const image = photoRef ? URL.createObjectURL(imageURLQuery) : fallbackImage;
 
   const details = {
-    // population: 100,
     weather: "perfect",
     rent: 10000,
     unemployRate: JSON.parse(unemploymentRate.data).data[0],

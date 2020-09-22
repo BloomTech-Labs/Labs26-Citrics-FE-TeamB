@@ -14,7 +14,6 @@ export const removeCity = cityId => ({
   payload: { cityId }
 });
 
-
 export const getCityDetails = city => async (dispatch, getState) => {
   let { id, name, state } = city;
 
@@ -23,7 +22,7 @@ export const getCityDetails = city => async (dispatch, getState) => {
   if (cityDetails[id]) return;
 
   //Placeholder image to use as a fallback
-  let image = "https://i.imgur.com/YXdssOR.jpeg";
+  let fallbackImage = "https://i.imgur.com/YXdssOR.jpeg";
 
   // If we aren't given name and state, look them up from the backend
   if (!(name && state)) {
@@ -37,7 +36,6 @@ export const getCityDetails = city => async (dispatch, getState) => {
     name = city?.name;
     state = city?.state;
   }
-
 
   // awaiting the unemployment data
   const unemploymentRate = await axios.get(
@@ -59,18 +57,14 @@ export const getCityDetails = city => async (dispatch, getState) => {
   const photoRef =
     initialImageQuery?.data?.candidates?.[0]?.photos?.[0]?.photo_reference;
 
-
   // If we succeeded in getting a photo ref, get the image
   // if it failed, image will instead be the placeholder above
-  if (photoRef) {
-    const imageLookupURL = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&key=${process.env.REACT_APP_PLACES_API_KEY}&maxwidth=700&maxheight=700`;
-    // Data is sent as a blob, which axios handles poorly, hence the use of fetch
-    const imageURLQuery = await fetch(proxyURL + imageLookupURL)
-      .then(r => r.blob())
-      .catch(console.error);
-    // Create a url for the image to be compatible with <img src='' />
-    const image = photoRef ? URL.createObjectURL(imageURLQuery) : fallbackImage;
-  }
+  const imageLookupURL = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&key=${process.env.REACT_APP_PLACES_API_KEY}&maxwidth=700&maxheight=700`;
+  const imageURLQuery = await fetch(proxyURL + imageLookupURL)
+    .then(r => r.blob())
+    .catch(console.error);
+
+  const image = photoRef ? URL.createObjectURL(imageURLQuery) : fallbackImage;
 
   const details = {
     // population: 100,

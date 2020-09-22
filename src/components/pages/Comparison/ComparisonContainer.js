@@ -19,6 +19,7 @@ class ComparisonContainer extends React.Component {
     // Upon mounting, get cityDetails from Redux
     // and also request new data from the server if needed
     this.retrieveCityDataIfNeeded(this.state.selectedCities);
+    document.title = "Citrics | Comparison Page";
   }
   componentDidUpdate(prevProps) {
     // If we're viewing a new comparison

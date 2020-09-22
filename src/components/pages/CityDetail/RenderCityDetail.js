@@ -11,7 +11,9 @@ export default function RenderCityDetail({ city }) {
         Population: {city.population.data.total_pop}
       </p>
       <p className="one-render-p">Rental Prices: ${city.rent.studio}</p>
-      <p className="one-render-p">Weather: {city.weather.summer_maxtempF_mean}</p>
+      <p className="one-render-p">
+        Weather: {city.weather.summer_maxtempF_mean}
+      </p>
 
       {/* Unemployment Graph */}
       <Graph
@@ -30,7 +32,7 @@ export default function RenderCityDetail({ city }) {
           plotX: JSON.parse(city.population.viz).data[0].x,
           plotY: JSON.parse(city.population.viz).data[0].y,
           graphName: "Population Trend",
-          type: "bar"
+          type: "line"
         }}
       />
     </div>

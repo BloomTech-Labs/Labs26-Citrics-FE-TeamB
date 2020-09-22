@@ -4,7 +4,9 @@ import {
   TeamOutlined,
   CloudOutlined,
   HomeOutlined,
-  CarOutlined
+  CarOutlined,
+  PieChartOutlined,
+  LineChartOutlined
 } from "@ant-design/icons";
 import {
   DetailPane,
@@ -21,9 +23,11 @@ export default function RenderCityDetail({ city }) {
       </h3>
       {/* Each DetailPane expects an Icon component, 
         graphData to help it render a graph of that info, 
+        a GraphIcon representing the type of graph,
         and a specific type of pane as a child component */}
       <DetailPane
         Icon={TeamOutlined}
+        GraphIcon={LineChartOutlined}
         graphData={{
           state: city.state,
           plotX: JSON.parse(city.population.viz).data[0].x,
@@ -34,13 +38,13 @@ export default function RenderCityDetail({ city }) {
       >
         <PopulationPane population={city.population} />
       </DetailPane>
-      <DetailPane Icon={CloudOutlined}>
+      <DetailPane Icon={CloudOutlined} GraphIcon={LineChartOutlined}>
         <WeatherPane weather={city.weather} />
       </DetailPane>
-      <DetailPane Icon={HomeOutlined}>
+      <DetailPane Icon={HomeOutlined} GraphIcon={LineChartOutlined}>
         <HousingPane rent={city.rent} />
       </DetailPane>
-      <DetailPane Icon={CarOutlined}>
+      <DetailPane Icon={CarOutlined} GraphIcon={PieChartOutlined}>
         <JobsPane jobs={city.jobs} />
       </DetailPane>
     </div>

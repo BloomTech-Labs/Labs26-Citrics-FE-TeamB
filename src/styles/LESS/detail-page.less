@@ -1,7 +1,7 @@
 .city-page {
-    display: flex;
-    justify-content: center;
-    .background-image("/compare_screen_full.jpg");
+  display: flex;
+  justify-content: center;
+  .background-image("/compare_screen_full.jpg");
 }
 
 .city-details {
@@ -10,15 +10,36 @@
     margin: 3.5% 0 3.5% 0;
     border-radius: 2px;
     background: rgba(255, 255, 255, .5);
-
 }
 
-.one-render-h3{
-    font-size: 3.5rem;
+.one-render-h3 {
+  font-size: 3.5rem;
 }
 
 .one-render-p {
-    font-size: @par;
+  font-size: @par;
+}
+.main-detail-content {
+  display: flex;
+  align-items: center;
+}
+.detail-pane-icon {
+  font-size: @h0size;
+}
+.graph-icons {
+  display: flex;
+  margin: 0px 5px;
+  align-items: center;
+  &.open {
+    background-color: rgba(255, 255, 255, 100);
+  }
+  .graph-icon {
+    font-size: @h3size;
+  }
+  .graph-toggle {
+    font-size: @h4size;
+    padding-right: 5px;
+  }
 }
 
 // .js-plotly-plot {

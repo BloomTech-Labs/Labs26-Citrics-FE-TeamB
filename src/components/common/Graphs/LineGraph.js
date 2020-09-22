@@ -51,8 +51,21 @@ export default function LineGraph({ state, state2, state3 }) {
 
     let dataPlot = [trace1, data2 ? trace2 : {}, data3 ? trace3 : {}];
     let layout = {
+      paper_bgcolor: "transparent",
+      plot_bgcolor: "transparent",
+      yaxis: {
+        showgrid: false
+      },
+      xaxis: {
+        showgrid: false
+      },
+      font: {
+        size: 14,
+        color: "rgba(245,246,249,1)"
+      },
+
       showlegend: true,
-      title: "Unemployment Rate"
+      title: state.graphName
     };
     return <Plot data={dataPlot} layout={layout} />;
   };

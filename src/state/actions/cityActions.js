@@ -28,14 +28,15 @@ export const getCityDetails = ({ id, name, state }) => async dispatch => {
     const city = cityList.find(
       ({ id: cityId }) => Number(cityId) === Number(id)
     );
-    console.log(city);
     name = city?.name;
     state = city?.state;
   }
 
+  // awaiting the unemployment data
   const unemploymentRate = await axios.get(
     `https://b-ds.citrics.dev/viz/${state}`
   );
+  // google places api call to retrieve images for city
   const proxyURL = "https://cors-anywhere.herokuapp.com/";
   const placesLookupURL = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${name} ${state}&key=${process.env.REACT_APP_PLACES_API_KEY}&inputtype=textquery&fields=name,photos`;
   const initialImageQuery = await axios

@@ -77,6 +77,18 @@ export default function RenderComparison({ citiesData }) {
     }
     return stateName;
   };
+  const getCityPop = () => {
+    const cityPop = [];
+    for (let id in citiesData) {
+      cityPop.push({
+        state: citiesData[id].state,
+        plotX: JSON.parse(citiesData[id].population.viz).data[0].x,
+        plotY: JSON.parse(citiesData[id].population.viz).data[0].y,
+        graphName: "Population Trend"
+      });
+    }
+    return cityPop;
+  };
   return (
     <div className="comparison-container">
       {citiesData.length ? (
@@ -100,12 +112,17 @@ export default function RenderComparison({ citiesData }) {
                 state3={getStateName()[2]}
               />
             </TabPane>
-            <TabPane className="graph-holder" tab="Example Bar" key="2">
-              <BarGraph />
+            <TabPane className="graph-holder" tab="Population Trend" key="2">
+              <BarGraph
+                city={getCityPop()[0]}
+                city2={getCityPop()[1]}
+                city3={getCityPop()[2]}
+              />
             </TabPane>
-            <TabPane className="graph-holder" tab="Example Pie" key="3">
+            {/* Will implement  */}
+            {/* <TabPane className="graph-holder" tab="Example Pie" key="3">
               <PieChart />
-            </TabPane>
+            </TabPane> */}
           </Tabs>
           <ModalComponent
             visible={visible}

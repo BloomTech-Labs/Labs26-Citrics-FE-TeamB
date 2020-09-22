@@ -41,7 +41,6 @@ export const getCityDetails = ({ id, name, state }) => async dispatch => {
   const population = await axios.get(
     `https://b-ds.citrics.dev/population/${id}`
   );
-  console.log(population.data);
 
   // google places api call to retrieve images for city
   const proxyURL = "https://cors-anywhere.herokuapp.com/";
@@ -64,7 +63,7 @@ export const getCityDetails = ({ id, name, state }) => async dispatch => {
     weather: "perfect",
     rent: 10000,
     unemployRate: JSON.parse(unemploymentRate.data).data[0],
-    population: population.data ?? 100,
+    population: population.data ?? "NA",
     name: name ?? "Not Found",
     state: state ?? "CA",
     image

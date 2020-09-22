@@ -10,8 +10,8 @@ export default function RenderCityDetail({ city }) {
       <p className="one-render-p">
         Population: {city.population.data.total_pop}
       </p>
-      <p className="one-render-p">Rental Prices: ${city.rent}</p>
-      <p className="one-render-p">Weather: {city.weather}</p>
+      <p className="one-render-p">Rental Prices: ${city.rent.studio}</p>
+      <p className="one-render-p">Weather: {city.weather.summer_maxtempF_mean}</p>
 
       {/* Unemployment Graph */}
       <Graph

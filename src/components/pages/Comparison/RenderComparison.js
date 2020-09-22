@@ -43,8 +43,11 @@ export default function RenderComparison({ citiesData }) {
                   {citiesData[data].name}, {citiesData[data].state}
                 </h3>
                 <p>Population: {citiesData[data].population.data.total_pop}</p>
-                <p>Rental Prices: ${citiesData[data].rent}</p>
-                <p>Weather: {citiesData[data].weather}</p>
+                <p>Rental Prices: ${citiesData[data].rent.studio}</p>
+                <p>
+                  Weather: {citiesData[data].weather.summer_maxtempF_mean}{" "}
+                  degrees
+                </p>
                 <Button
                   className="more-info-btn"
                   data-testid="more-info-btn"

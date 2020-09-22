@@ -8,7 +8,7 @@ export const addCity = city => async dispatch => {
   });
   // changing the param to the entire city for now just to test actions
   // once we have the proper endpoints will change back
-  getCityDetails(city);
+  dispatch(getCityDetails(city));
 };
 export const removeCity = cityId => ({
   type: REMOVE_CITY,
@@ -27,7 +27,7 @@ export const getCityDetails = ({ id, name, state }) => async dispatch => {
     const city = cityList.find(
       ({ id: cityId }) => Number(cityId) === Number(id)
     );
-    console.log(city);
+    // console.log(city);
     name = city?.name;
     state = city?.state;
   }

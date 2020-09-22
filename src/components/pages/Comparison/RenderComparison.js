@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 import { Card, Button, Tabs } from "antd";
 import ModalComponent from "../../common/Modal.js";
 import LoadingComponent from "../../common/LoadingComponent.js";
@@ -92,50 +92,44 @@ export default function RenderComparison({ citiesData }) {
     }
     return cityPop;
   };
+
+  if (citiesData.length === 0) {
+    return <LoadingComponent message="Loading city data..." />;
+  }
   return (
     <div className="comparison-container">
-      {citiesData.length ? (
-        <>
-          <div className="card-container">{renderCard()}</div>
+      <div className="card-container">{renderCard()}</div>
 
-          {/* Renders the tabs for the user to navigate for different visuals */}
-          <Tabs
-            className="metrics-container"
-            defaultActiveKey="1"
-            onChange={callback}
-            centered="true"
-            tabBarStyle={{
-              color: "white"
-            }}
-          >
-            <TabPane className="graph-holder" tab="Population Trend" key="1">
-              <Graph
-                dataSet={getCityPop()[0]}
-                dataSet2={getCityPop()[1]}
-                dataSet3={getCityPop()[2]}
-              />
-            </TabPane>
-            <TabPane className="graph-holder" tab="Unemployment Rate" key="2">
-              <Graph
-                dataSet={getStateName()[0]}
-                dataSet2={getStateName()[1]}
-                dataSet3={getStateName()[2]}
-              />
-            </TabPane>
-            {/* Will implement  */}
-            {/* <TabPane className="graph-holder" tab="Example Pie" key="3">
+      {/* Renders the tabs for the user to navigate for different visuals */}
+      <Tabs
+        className="metrics-container"
+        defaultActiveKey="1"
+        onChange={callback}
+        centered="true"
+        tabBarStyle={{
+          color: "white"
+        }}
+      >
+        <TabPane className="graph-holder" tab="Population Trend" key="1">
+          <Graph
+            dataSet={getCityPop()[0]}
+            dataSet2={getCityPop()[1]}
+            dataSet3={getCityPop()[2]}
+          />
+        </TabPane>
+        <TabPane className="graph-holder" tab="Unemployment Rate" key="2">
+          <Graph
+            dataSet={getStateName()[0]}
+            dataSet2={getStateName()[1]}
+            dataSet3={getStateName()[2]}
+          />
+        </TabPane>
+        {/* Will implement  */}
+        {/* <TabPane className="graph-holder" tab="Example Pie" key="3">
               <PieChart />
             </TabPane> */}
-          </Tabs>
-          <ModalComponent
-            visible={visible}
-            setVisible={setVisible}
-            city={city}
-          />
-        </>
-      ) : (
-        <LoadingComponent message="Loading cities..." />
-      )}
+      </Tabs>
+      <ModalComponent visible={visible} setVisible={setVisible} city={city} />
     </div>
   );
 }

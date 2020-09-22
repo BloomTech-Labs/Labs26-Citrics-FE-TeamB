@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import routeData from "react-router";
 import { render, fireEvent, waitFor, cleanup } from "@testing-library/react";
 
 import RenderComparison from "../components/pages/Comparison/RenderComparison";
@@ -11,8 +10,8 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-const mockCityDetails = {
-  43: {
+const mockCityDetails = [
+  {
     image: "https://i.imgur.com/YXdssOR.jpeg",
     name: "Baton Rouge",
     state: "LA",
@@ -35,13 +34,13 @@ const mockCityDetails = {
       winter_mintempF_mean: 47
     }
   },
-  432: {
+  {
     image: "https://i.imgur.com/YXdssOR.jpeg",
     name: "Sacramento",
     state: "CA",
     population: {
       data: {
-        total_pop: 221606
+        total_pop: 22160216
       },
       viz: JSON.stringify({
         data: [{ x: [3, 5, 6, 8, 9] }, { y: [10, 2, 5, 21] }]
@@ -58,7 +57,7 @@ const mockCityDetails = {
       winter_mintempF_mean: 47
     }
   }
-};
+];
 
 // Renders the comparison page
 it("Renders the comparison without errors", () => {
@@ -67,7 +66,7 @@ it("Renders the comparison without errors", () => {
 });
 
 it("Renders the loading component", () => {
-  const { getAllByTestId } = render(<RenderComparison citiesData={{}} />);
+  const { getAllByTestId } = render(<RenderComparison citiesData={[]} />);
   const loading = getAllByTestId("loadingComp");
   expect(loading[0]).toBeInTheDocument();
 });
@@ -80,45 +79,41 @@ it("renders the city cards to the page", async () => {
   );
 
   const CityCards = await waitFor(() => findAllByTestId("city-cards"));
-
   CityCards.forEach(ele => {
     expect(ele).toBeInTheDocument();
   });
 });
 
-// it("renders the view more info button for each card", () => {
-//   const { getAllByTestId } = component;
-//   const InfoBtn = getAllByTestId("more-info-btn");
-//   InfoBtn.forEach((ele) => {
-//     expect(ele).toBeInTheDocument();
-//   });
-// });
+it("renders the view more info button for each card", async () => {
+  const { findAllByTestId } = render(
+    <RenderComparison citiesData={mockCityDetails} />
+  );
+  const InfoBtn = await waitFor(() => findAllByTestId("more-info-btn"));
+  InfoBtn.forEach(ele => {
+    expect(ele).toBeInTheDocument();
+  });
+});
 
-// it("changes visit state to true when btn is clicked", () => {
-//   // mock the function
-//   const setVisible = jest.fn();
-//   const handleClick = jest.spyOn(React, "useState");
-//   handleClick.mockImplementation((visible) => [visible, setVisible]);
+it("changes visit state to true when btn is clicked", async () => {
+  const { findAllByTestId } = render(
+    <RenderComparison citiesData={mockCityDetails} />
+  );
+  const InfoBtn = await waitFor(() => findAllByTestId("more-info-btn"));
+  fireEvent.click(InfoBtn[0]);
+  expect(InfoBtn[0]).toBeTruthy();
+});
 
-//   const { getAllByTestId } = component;
-//   const InfoBtn = getAllByTestId("more-info-btn");
+it("displays the detailed city page after the button is clicked", async () => {
+  const { findAllByTestId } = render(
+    <RenderComparison citiesData={mockCityDetails} />
+  );
+  const InfoBtn = await waitFor(() => findAllByTestId("more-info-btn"));
+  fireEvent.click(InfoBtn[0]);
 
-//   fireEvent.click(InfoBtn[0]);
-//   expect(setVisible).toBeTruthy();
-// });
-
-// it("displays the detailed city page after the button is clicked", () => {
-//   // mock the function
-//   const setVisible = jest.fn();
-//   const handleClick = jest.spyOn(React, "useState");
-//   handleClick.mockImplementation((visible) => [visible, setVisible]);
-
-//   const { getAllByTestId } = component;
-//   const InfoBtn = getAllByTestId("more-info-btn");
-//   fireEvent.click(InfoBtn[0]);
-
-//   // gets updated dom elements after button is clicked
-//   const { getByTestId } = component;
-//   const CityDetail = getByTestId("city-details");
-//   expect(CityDetail).toBeInTheDocument();
-// });
+  // gets updated dom elements after button is clicked
+  const { getByTestId } = render(
+    <RenderComparison citiesData={mockCityDetails} />
+  );
+  const CityDetail = getByTestId("city-details");
+  expect(CityDetail).toBeInTheDocument();
+});

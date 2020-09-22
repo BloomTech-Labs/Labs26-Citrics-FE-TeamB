@@ -1,95 +1,90 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import routeData from "react-router";
-import { render, fireEvent, waitFor } from "@testing-library/react";
-import { Provider } from "react-redux";
-import configureStore from "redux-mock-store";
+import { render, fireEvent, waitFor, cleanup } from "@testing-library/react";
+
 import RenderComparison from "../components/pages/Comparison/RenderComparison";
 
-const mockStore = configureStore([]);
-const mockLocation = {
-  pathname: "/welcome",
-  hash: "",
-  search: "",
-  state: ""
+afterEach(() => {
+  cleanup();
+  jest.restoreAllMocks();
+  jest.clearAllMocks();
+});
+
+const mockCityDetails = {
+  43: {
+    image: "https://i.imgur.com/YXdssOR.jpeg",
+    name: "Baton Rouge",
+    state: "LA",
+    population: {
+      data: {
+        total_pop: 221606
+      },
+      viz: JSON.stringify({
+        data: [{ x: [3, 5, 6, 8, 9] }, { y: [10, 2, 5, 21] }]
+      })
+    },
+    unemployRate: {
+      x: [1, 2, 3, 4, 5],
+      y: [753, 928, 1235, 5918, 30192]
+    },
+    rent: { studio: 3412 },
+    weather: {
+      summer_humidity_mean: 77,
+      summer_maxtempF_mean: 91,
+      winter_mintempF_mean: 47
+    }
+  },
+  432: {
+    image: "https://i.imgur.com/YXdssOR.jpeg",
+    name: "Sacramento",
+    state: "CA",
+    population: {
+      data: {
+        total_pop: 221606
+      },
+      viz: JSON.stringify({
+        data: [{ x: [3, 5, 6, 8, 9] }, { y: [10, 2, 5, 21] }]
+      })
+    },
+    unemployRate: {
+      x: [1, 2, 3, 4, 5],
+      y: [753, 928, 1235, 5918, 30192]
+    },
+    rent: { studio: 3412 },
+    weather: {
+      summer_humidity_mean: 77,
+      summer_maxtempF_mean: 91,
+      winter_mintempF_mean: 47
+    }
+  }
 };
 
-let store, component;
-beforeEach(() => {
-  store = mockStore({
-    cities: {
-      selectedCities: [{ id: 100 }, { id: 124 }, { id: 562 }],
-      cityDetails: {
-        100: {
-          name: "Los Angeles",
-          state: "CA",
-          pop: 4721923,
-          rental: 4851,
-          weather: 33
-        },
-        124: {
-          name: "Phoenix",
-          state: "AZ",
-          pop: 5462312,
-          rental: 1203,
-          weather: 42
-        },
-        562: {
-          name: "Salt Lake City",
-          state: "UT",
-          pop: 928481,
-          rental: 28123,
-          weather: 38
-        }
-      }
-    }
-  });
-  jest.spyOn(routeData, "useLocation").mockReturnValue(mockLocation);
-  component = render(
-    <Provider store={store}>
-      <RenderComparison citiesData={store.getState().cities.cityDetails} />
-    </Provider>
-  );
-});
 // Renders the comparison page
 it("Renders the comparison without errors", () => {
   const div = document.createElement("div");
-  ReactDOM.render(
-    <Provider store={store}>
-      <RenderComparison citiesData={store.getState().cities.cityDetails} />
-    </Provider>,
-    div
-  );
+  ReactDOM.render(<RenderComparison citiesData={mockCityDetails} />, div);
 });
 
 it("Renders the loading component", () => {
-  const { getAllByTestId } = component;
+  const { getAllByTestId } = render(<RenderComparison citiesData={{}} />);
   const loading = getAllByTestId("loadingComp");
   expect(loading[0]).toBeInTheDocument();
 });
 
 // Tests Below are not passing at the moment. Finding a solution for conditional rendering tests
 
-// it("renders the city cards to the page", async () => {
-//   const props = {
-//     citiesData: {
-//       562: {
-//         name: "Salt Lake City",
-//         state: "UT",
-//         pop: 928481,
-//         rental: 28123,
-//         weather: 38,
-//       },
-//     },
-//   };
-//   const { findAllByTestId } = render(<RenderComparison {...props} />);
+it("renders the city cards to the page", async () => {
+  const { findAllByTestId } = render(
+    <RenderComparison citiesData={mockCityDetails} />
+  );
 
-//   const CityCards = await waitFor(() => findAllByTestId("city-cards"));
-//   console.log(CityCards);
-// CityCards.forEach((ele) => {
-//   expect(ele).toBeInTheDocument();
-// });
-// });
+  const CityCards = await waitFor(() => findAllByTestId("city-cards"));
+
+  CityCards.forEach(ele => {
+    expect(ele).toBeInTheDocument();
+  });
+});
 
 // it("renders the view more info button for each card", () => {
 //   const { getAllByTestId } = component;

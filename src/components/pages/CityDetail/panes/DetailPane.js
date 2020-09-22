@@ -22,6 +22,7 @@ export default function DetailPane({ Icon, GraphIcon, graphData, children }) {
         // Show the open/close icon (which rotates) and an icon that matches the type of graph to be shown
         <div className={"graph-icons"}>
           <RightOutlined
+            role="button"
             onClick={toggleGraph}
             className="graph-toggle"
             rotate={isOpen ? 90 : 0}

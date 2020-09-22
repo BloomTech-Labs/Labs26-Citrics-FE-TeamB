@@ -14,6 +14,7 @@ export const removeCity = cityId => ({
   payload: { cityId }
 });
 
+
 export const getCityDetails = city => async (dispatch, getState) => {
   let { id, name, state } = city;
 
@@ -29,12 +30,24 @@ export const getCityDetails = city => async (dispatch, getState) => {
     const cityList = await axios
       .get("https://b-ds.citrics.dev/cities")
       .then(r => r.data.cities);
+
     const city = cityList.find(
       ({ id: cityId }) => Number(cityId) === Number(id)
     );
     name = city?.name;
     state = city?.state;
   }
+
+
+  // awaiting the unemployment data
+  const unemploymentRate = await axios.get(
+    `https://b-ds.citrics.dev/viz/${state}`
+  );
+  // awaiting the population data
+  const population = await axios.get(
+    `https://b-ds.citrics.dev/population/${id}`
+  );
+
   // All requests are routed thru this proxy to circumvent CORS issues
   const proxyURL = "https://cors-anywhere-citrics.herokuapp.com/";
 
@@ -46,6 +59,7 @@ export const getCityDetails = city => async (dispatch, getState) => {
   const photoRef =
     initialImageQuery?.data?.candidates?.[0]?.photos?.[0]?.photo_reference;
 
+
   // If we succeeded in getting a photo ref, get the image
   // if it failed, image will instead be the placeholder above
   if (photoRef) {
@@ -55,16 +69,20 @@ export const getCityDetails = city => async (dispatch, getState) => {
       .then(r => r.blob())
       .catch(console.error);
     // Create a url for the image to be compatible with <img src='' />
-    image = URL.createObjectURL(imageURLQuery);
+    const image = photoRef ? URL.createObjectURL(imageURLQuery) : fallbackImage;
   }
+
   const details = {
-    population: 100,
+    // population: 100,
     weather: "perfect",
     rent: 10000,
+    unemployRate: JSON.parse(unemploymentRate.data).data[0],
+    population: population.data ?? "NA",
     name: name ?? "Not Found",
     state: state ?? "CA",
     image
   };
+
   dispatch({
     type: ADD_CITY_DETAILS,
     payload: { id, details }

@@ -1,28 +1,27 @@
-import React from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
 import LoadingComponent from "../../common/LoadingComponent";
 
 export default function LineGraph({ state, state2, state3 }) {
-  const [data, setData] = React.useState(null);
-  const [data2, setData2] = React.useState(null);
-  const [data3, setData3] = React.useState(null);
+  const [data, setData] = useState(null);
+  const [data2, setData2] = useState(null);
+  const [data3, setData3] = useState(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (state) {
-      axios
-        .get(`https://b-ds.citrics.dev/viz/${state}`)
-        .then(({ data }) => setData(JSON.parse(data).data));
+      setData(state);
+    } else {
+      setData(null);
     }
     if (state2) {
-      axios
-        .get(`https://b-ds.citrics.dev/viz/${state2}`)
-        .then(({ data }) => setData2(JSON.parse(data).data));
+      setData2(state2);
+    } else {
+      setData2(null);
     }
     if (state3) {
-      axios
-        .get(`https://b-ds.citrics.dev/viz/${state3}`)
-        .then(({ data }) => setData3(JSON.parse(data).data));
+      setData3(state3);
+    } else {
+      setData3(null);
     }
   }, [state, state2, state3]);
 
@@ -30,36 +29,49 @@ export default function LineGraph({ state, state2, state3 }) {
     let trace2, trace3;
 
     let trace1 = {
-      x: data[0].x,
-      y: data[0].y,
+      x: data.plotX,
+      y: data.plotY,
       line: { color: "rgba(222,45,38,0.8)" },
       mode: "lines",
-      name: state,
+      name: data.state,
       type: "scatter"
     };
     if (data2) {
       trace2 = {
-        x: data2[0].x,
-        y: data2[0].y,
+        x: data2.plotX,
+        y: data2.plotY,
         line: { color: "rgb(49,130,189)" },
         mode: "lines",
-        name: state2 ? state2 : "State 2"
+        name: state2 ? data2.state : "Fix me"
       };
     }
     if (data3) {
       trace3 = {
-        x: data3[0].x,
-        y: data3[0].y,
+        x: data3.plotX,
+        y: data3.plotY,
         line: { color: "rgb(204,204,204)" },
         mode: "lines",
-        name: state3 ? state3 : "state 3"
+        name: state3 ? data3.state : "Fix me too"
       };
     }
 
     let dataPlot = [trace1, data2 ? trace2 : {}, data3 ? trace3 : {}];
     let layout = {
-      showlegend: true,
-      title: "Unemployment Rate"
+      paper_bgcolor: "transparent",
+      plot_bgcolor: "transparent",
+      yaxis: {
+        showgrid: false
+      },
+      xaxis: {
+        showgrid: false
+      },
+      font: {
+        size: 14,
+        color: "rgba(245,246,249,1)"
+      },
+
+      showlegend: false,
+      title: state.graphName
     };
     return <Plot data={dataPlot} layout={layout} />;
   };

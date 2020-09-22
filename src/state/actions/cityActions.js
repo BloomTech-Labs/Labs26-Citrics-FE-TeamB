@@ -46,6 +46,8 @@ export const getCityDetails = city => async (dispatch, getState) => {
     `https://b-ds.citrics.dev/population/${id}`
   );
 
+  const weather = await axios.get(`https://b-ds.citrics.dev/weather/${id}`);
+
   // All requests are routed thru this proxy to circumvent CORS issues
   const proxyURL = "https://cors-anywhere-citrics.herokuapp.com/";
 
@@ -67,8 +69,7 @@ export const getCityDetails = city => async (dispatch, getState) => {
   const image = photoRef ? URL.createObjectURL(imageURLQuery) : fallbackImage;
 
   const details = {
-    // population: 100,
-    weather: "perfect",
+    weather: weather.data.data,
     rent: 10000,
     unemployRate: JSON.parse(unemploymentRate.data).data[0],
     population: population.data ?? "NA",

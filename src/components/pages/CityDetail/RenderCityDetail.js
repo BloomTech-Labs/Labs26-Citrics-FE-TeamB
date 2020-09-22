@@ -10,7 +10,7 @@ export default function RenderCityDetail({ city }) {
       </h3>
       <p>Population: {city.population.data.total_pop}</p>
       <p>Rental Prices: ${city.rent}</p>
-      <p>Weather: {city.weather}</p>
+      <p>Weather: {city.weather.summer_maxtempF_mean}</p>
 
       {/* Unemployment Graph */}
       <LineGraph

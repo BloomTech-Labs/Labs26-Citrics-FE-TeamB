@@ -30,13 +30,20 @@ export const getCityDetails = city => async (dispatch, getState) => {
     .then(r => r?.data?.data)
     .catch(console.error);
 
-  state = state ?? rent.state ?? "CA";
-  name = name ?? rent.city ?? "Not found";
+  // Update city name and state if they weren't successfully passed in thru arguments
+  state = state ?? rent?.state ?? "CA";
+  name = name ?? rent?.city ?? "Not found";
 
   // awaiting the unemployment data
   const unemployRate = await axios
     .get(`https://b-ds.citrics.dev/viz/${state}`)
-    .then(r => JSON.parse(r.data).data[0])
+    .then(r => {
+      try {
+        return JSON.parse(r?.data)?.data[0];
+      } catch {
+        return null;
+      }
+    })
     .catch(console.error);
 
   // awaiting the population data
@@ -44,7 +51,7 @@ export const getCityDetails = city => async (dispatch, getState) => {
     .get(`https://b-ds.citrics.dev/population/${id}`)
     .then(r => r?.data)
     .catch(console.error);
-
+  // awaiting weather data
   const weather = await axios
     .get(`https://b-ds.citrics.dev/weather/${id}`)
     .then(r => r?.data?.data)

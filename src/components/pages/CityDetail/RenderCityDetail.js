@@ -1,5 +1,6 @@
 import React from "react";
 import LineGraph from "../../common/Graphs/LineGraph";
+import BarGraph from "../../common/Graphs/BarGraph";
 
 export default function RenderCityDetail({ city }) {
   return (
@@ -21,8 +22,8 @@ export default function RenderCityDetail({ city }) {
         }}
       />
       {/* Population Graph */}
-      <LineGraph
-        state={{
+      <BarGraph
+        city={{
           state: city.state,
           plotX: JSON.parse(city.population.viz).data[0].x,
           plotY: JSON.parse(city.population.viz).data[0].y,

@@ -25,6 +25,7 @@ export const getCityDetails = ({ id, name, state }) => async dispatch => {
     const cityList = await axios
       .get("https://b-ds.citrics.dev/cities")
       .then(r => r.data.cities);
+
     const city = cityList.find(
       ({ id: cityId }) => Number(cityId) === Number(id)
     );
@@ -36,6 +37,12 @@ export const getCityDetails = ({ id, name, state }) => async dispatch => {
   const unemploymentRate = await axios.get(
     `https://b-ds.citrics.dev/viz/${state}`
   );
+  // awaiting the population data
+  const population = await axios.get(
+    `https://b-ds.citrics.dev/population/${id}`
+  );
+  console.log(population.data);
+
   // google places api call to retrieve images for city
   const proxyURL = "https://cors-anywhere.herokuapp.com/";
   const placesLookupURL = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${name} ${state}&key=${process.env.REACT_APP_PLACES_API_KEY}&inputtype=textquery&fields=name,photos`;
@@ -53,10 +60,11 @@ export const getCityDetails = ({ id, name, state }) => async dispatch => {
   const image = photoRef ? URL.createObjectURL(imageURLQuery) : fallbackImage;
 
   const details = {
-    population: 100,
+    // population: 100,
     weather: "perfect",
     rent: 10000,
     unemployRate: JSON.parse(unemploymentRate.data).data[0],
+    population: population.data ?? 100,
     name: name ?? "Not Found",
     state: state ?? "CA",
     image

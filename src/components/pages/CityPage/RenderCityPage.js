@@ -4,7 +4,7 @@ import LoadingComponent from "../../common/LoadingComponent";
 
 export default function RenderCityPage({ city, isLoading }) {
   return (
-    <div className="city-page" style={{ background: "#0062ad" }}>
+    <div className="city-page">
       {isLoading ? (
         <LoadingComponent message={"Retrieving City Data... "} />
       ) : (

@@ -23,7 +23,11 @@ export default function DetailPane({ Icon, GraphIcon, graphData, children }) {
           </>
         ) : (
           <>
-            <img src={weather} />
+            <img
+              className="main-weather-icon"
+              src={weather}
+              alt="Weather icon featuring sun, storm cloud, and rain"
+            />
             {children}
           </>
         )}

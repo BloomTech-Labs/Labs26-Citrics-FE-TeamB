@@ -61,12 +61,15 @@ export const getCityDetails = city => async (dispatch, getState) => {
   const proxyURL = "https://cors-anywhere-citrics.herokuapp.com/";
 
   // Initial places lookup request gives up a photo ref for the given city
-  const placesLookupURL = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${name} ${state}&key=${process.env.REACT_APP_PLACES_API_KEY}&inputtype=textquery&fields=name,photos`;
-  const initialImageQuery = await axios
+  const placesLookupURL = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${name} ${state}&key=${process.env.REACT_APP_PLACES_API_KEY}&inputtype=textquery&fields=name,photos,geometry`;
+  const initialQuery = await axios
     .get(proxyURL + placesLookupURL)
     .catch(console.error);
   const photoRef =
-    initialImageQuery?.data?.candidates?.[0]?.photos?.[0]?.photo_reference;
+    initialQuery?.data?.candidates?.[0]?.photos?.[0]?.photo_reference;
+
+  //  Lat and Lng to use for open weather api
+  const geoLocation = initialQuery?.data?.candidates?.[0]?.geometry?.location;
 
   // If we succeeded in getting a photo ref, get the image
   // if it failed, image will instead be the placeholder above
@@ -78,7 +81,17 @@ export const getCityDetails = city => async (dispatch, getState) => {
 
     image = URL.createObjectURL(imageURLQuery);
   }
+
+  // Open weather api using Lat and Lng points for more accurate search
+  const currentWeather = await axios
+    .get(
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${geoLocation.lat}&lon=${geoLocation.lng}&exclude=minutely,hourly,daily&units=imperial&appid=${process.env.REACT_APP_OPEN_WEATHER_API}`
+    )
+    .then(r => r?.data)
+    .catch(console.error);
+
   const details = {
+    currentWeather,
     weather,
     rent,
     unemployRate,

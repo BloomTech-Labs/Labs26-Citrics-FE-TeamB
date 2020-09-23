@@ -2,6 +2,8 @@ import React from "react";
 import Graph from "../../../common/Graphs/renderGraph";
 // import { Collapse } from "antd";
 import { RightOutlined } from "@ant-design/icons";
+//importing weather icon
+import weather from "../../../../styles/icons/weather-96.png";
 
 export default function DetailPane({ Icon, GraphIcon, graphData, children }) {
   // Keep track of whether the graph is open or not
@@ -12,10 +14,19 @@ export default function DetailPane({ Icon, GraphIcon, graphData, children }) {
   return (
     <div className="one-render-p">
       <div className="main-detail-content">
-        <Icon className="detail-pane-icon" />
-        {
-          children /*This is where the child component (a specific type of pane) is rendered.*/
-        }
+        {Icon ? (
+          <>
+            <Icon className="detail-pane-icon" />
+            {
+              children /*This is where the child component (a specific type of pane) is rendered.*/
+            }
+          </>
+        ) : (
+          <>
+            <img src={weather} />
+            {children}
+          </>
+        )}
       </div>
       {graphData && (
         // Only render if there is graph data given

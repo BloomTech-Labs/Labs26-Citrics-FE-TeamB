@@ -1,70 +1,89 @@
-import React from "react";
-//Styling
-// import { Carousel } from 'antd';
+// import React from "react";
+import React, { useState } from "react";
+import {
+  Carousel,
+  CarouselItem,
+  CarouselControl,
+  CarouselIndicators,
+  CarouselCaption
+} from "reactstrap";
 
-const slider = document.querySelector(".items");
-const slides = document.querySelectorAll(".item");
-const button = document.querySelectorAll(".button");
-
-let current = 0;
-let prev = 4;
-let next = 1;
-
-for (let i = 0; i < button.length; i++) {
-  button[i].addEventListener("click", () =>
-    i === 0 ? gotoPrev() : gotoNext()
-  );
-}
-
-const gotoPrev = () =>
-  current > 0 ? gotoNum(current - 1) : gotoNum(slides.length - 1);
-
-const gotoNext = () => (current < 4 ? gotoNum(current + 1) : gotoNum(0));
-
-const gotoNum = number => {
-  current = number;
-  prev = current - 1;
-  next = current + 1;
-
-  for (let i = 0; i < slides.length; i++) {
-    slides[i].classList.remove("active");
-    slides[i].classList.remove("prev");
-    slides[i].classList.remove("next");
+const items = [
+  {
+    src:
+      "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15ba800aa1d%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15ba800aa1d%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.921875%22%20y%3D%22218.3%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+    altText: "Slide 1",
+    caption: "Slide 1"
+  },
+  {
+    src:
+      "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15ba800aa20%20text%20%7B%20fill%3A%23444%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15ba800aa20%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23666%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22247.3203125%22%20y%3D%22218.3%22%3ESecond%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+    altText: "Slide 2",
+    caption: "Slide 2"
+  },
+  {
+    src:
+      "data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15ba800aa21%20text%20%7B%20fill%3A%23333%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15ba800aa21%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23555%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22277%22%20y%3D%22218.3%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E",
+    altText: "Slide 3",
+    caption: "Slide 3"
   }
-
-  if (next === 5) {
-    next = 0;
-  }
-
-  if (prev === -1) {
-    prev = 4;
-  }
-
-  slides[current].classList.add("active");
-  slides[prev].classList.add("prev");
-  slides[next].classList.add("next");
-};
+];
 
 export default function WeatherPane({ weather }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [animating, setAnimating] = useState(false);
+
+  const next = () => {
+    if (animating) return;
+    const nextIndex = activeIndex === items.length - 1 ? 0 : activeIndex + 1;
+    setActiveIndex(nextIndex);
+  };
+
+  const previous = () => {
+    if (animating) return;
+    const nextIndex = activeIndex === 0 ? items.length - 1 : activeIndex - 1;
+    setActiveIndex(nextIndex);
+  };
+
+  const goToIndex = newIndex => {
+    if (animating) return;
+    setActiveIndex(newIndex);
+  };
+
+  const slides = items.map(item => {
+    return (
+      <CarouselItem
+        onExiting={() => setAnimating(true)}
+        onExited={() => setAnimating(false)}
+        key={item.src}
+      >
+        <img src={item.src} alt={item.altText} />
+        <CarouselCaption
+          captionText={item.caption}
+          captionHeader={item.caption}
+        />
+      </CarouselItem>
+    );
+  });
+
   return (
-    <div class="items">
-      <div class="item active">
-        <img src="http://via.placeholder.com/500x500" />
-      </div>
-      <div class=" item next">
-        <img src="http://via.placeholder.com/500x500" />
-      </div>
-      <div class="item">
-        <img src="http://via.placeholder.com/500x500" />
-      </div>
-      <div class="button-container">
-        <div class="button">
-          <i class="fas fa-angle-left"></i>
-        </div>
-        <div class="button">
-          <i class="fas fa-angle-right"></i>
-        </div>
-      </div>
-    </div>
+    <Carousel activeIndex={activeIndex} next={next} previous={previous}>
+      <CarouselIndicators
+        items={items}
+        activeIndex={activeIndex}
+        onClickHandler={goToIndex}
+      />
+      {slides}
+      <CarouselControl
+        direction="prev"
+        directionText="Previous"
+        onClickHandler={previous}
+      />
+      <CarouselControl
+        direction="next"
+        directionText="Next"
+        onClickHandler={next}
+      />
+    </Carousel>
   );
 }

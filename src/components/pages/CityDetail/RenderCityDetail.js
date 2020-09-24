@@ -38,7 +38,7 @@ export default function RenderCityDetail({ city }) {
       >
         <PopulationPane population={city.population} />
       </DetailPane>
-      <DetailPane Icon={CloudOutlined} GraphIcon={LineChartOutlined}>
+      <DetailPane GraphIcon={LineChartOutlined}>
         <WeatherPane weather={city.weather} />
       </DetailPane>
       <DetailPane Icon={HomeOutlined} GraphIcon={LineChartOutlined}>

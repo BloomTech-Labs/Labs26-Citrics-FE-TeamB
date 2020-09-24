@@ -39,8 +39,8 @@ class RenderComparison extends Component {
     for (let id in this.props.citiesData) {
       rentals.push({
         name: this.props.citiesData[id].name,
-        plotX: ["Studio", "1BR", "2BR", "3BR", "4BR"],
-        plotY: [
+        plotY: ["Studio", "1BR", "2BR", "3BR", "4BR"],
+        plotX: [
           this.props.citiesData[id].rent.studio,
           this.props.citiesData[id].rent["1br"],
           this.props.citiesData[id].rent["2br"],
@@ -48,7 +48,8 @@ class RenderComparison extends Component {
           this.props.citiesData[id].rent["4br"]
         ],
         graphName: "Apartment Prices",
-        type: "histogram"
+        type: "bar",
+        orientation: "h"
       });
     }
     return rentals;
@@ -90,11 +91,7 @@ class RenderComparison extends Component {
               dataSet3={getCityPop()[2]}
             />
           </Tabs.TabPane>
-          <Tabs.TabPane
-            className="graph-holder"
-            tab="Unemployment Rate"
-            key="2"
-          >
+          <Tabs.TabPane className="graph-holder" tab="Apartment Prices" key="2">
             <Graph
               dataSet={getRentals()[0]}
               dataSet2={getRentals()[1]}

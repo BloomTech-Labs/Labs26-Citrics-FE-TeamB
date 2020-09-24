@@ -36,16 +36,10 @@ export const getCityDetails = city => async (dispatch, getState) => {
 
   // awaiting the unemployment data
   const unemployRate = await axios
-    .get(`https://b-ds.citrics.dev/viz/${state}`)
-    .then(r => {
-      try {
-        return JSON.parse(r?.data)?.data[0];
-      } catch {
-        return null;
-      }
-    })
+    .get(`https://b-ds.citrics.dev/unemployment/${id}`)
+    .then(r => r?.data)
     .catch(console.error);
-
+  console.log(unemployRate);
   // awaiting the population data
   const population = await axios
     .get(`https://b-ds.citrics.dev/population/${id}`)

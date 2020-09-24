@@ -42,7 +42,6 @@ export default function RenderCityDetail({ city }) {
           weather={city.weather}
           currentWeather={city.currentWeather}
         />
-        {/* {console.log('RCD:',city.currentWeather)} */}
       </DetailPane>
       <DetailPane Icon={HomeOutlined} GraphIcon={LineChartOutlined}>
         <HousingPane rent={city.rent} />

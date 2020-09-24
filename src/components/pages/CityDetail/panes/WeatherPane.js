@@ -3,7 +3,7 @@ import humidity from "../../../../styles/icons/humidity-96.png";
 import summer from "../../../../styles/icons/summer-96.png";
 import winter from "../../../../styles/icons/winter-96.png";
 
-export default function WeatherPane({ weather }) {
+export default function WeatherPane({ weather, currentWeather }) {
   return (
     <div className="weather-pane-container">
       <h4>Weather</h4>
@@ -21,7 +21,7 @@ export default function WeatherPane({ weather }) {
           src={humidity}
           alt="Three vertical zigzag lines to represent humidity icon"
         />
-        <h6>Humidity: {weather.summer_humidity_mean}%</h6>
+        <h6>Humidity: {currentWeather.current.humidity}%</h6>
       </div>
     </div>
   );

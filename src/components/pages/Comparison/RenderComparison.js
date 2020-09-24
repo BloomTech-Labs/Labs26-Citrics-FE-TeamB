@@ -6,25 +6,25 @@ import Graph from "../../common/Graphs/renderGraph";
 
 class RenderComparison extends Component {
   // puts state name in an array for easier acccess
-  getStateName = () => {
-    const stateName = [];
+  getUnemployRate = () => {
+    const unemployRate = [];
     for (let id in this.props.citiesData) {
-      stateName.push({
-        state: this.props.citiesData[id].state,
-        plotX: this.props.citiesData[id].unemployRate.x,
-        plotY: this.props.citiesData[id].unemployRate.y,
+      unemployRate.push({
+        name: this.props.citiesData[id].name,
+        plotX: JSON.parse(this.props.citiesData[id].unemployRate.viz).data[0].x,
+        plotY: JSON.parse(this.props.citiesData[id].unemployRate.viz).data[0].y,
         graphName: "Unemployment Rate",
         type: "line"
       });
     }
-    return stateName;
+    return unemployRate;
   };
   // puts plot data  in an array for easier acccess
   getCityPop = () => {
     const cityPop = [];
     for (let id in this.props.citiesData) {
       cityPop.push({
-        state: this.props.citiesData[id].state,
+        name: this.props.citiesData[id].name,
         plotX: JSON.parse(this.props.citiesData[id].population.viz).data[0].x,
         plotY: JSON.parse(this.props.citiesData[id].population.viz).data[0].y,
         graphName: "Population Trend",
@@ -36,7 +36,7 @@ class RenderComparison extends Component {
 
   render() {
     const { citiesData } = this.props;
-    const { getCityPop, getStateName } = this;
+    const { getCityPop, getUnemployRate } = this;
     if (citiesData.length === 0) {
       return <LoadingComponent message="Loading city data..." />;
     }
@@ -76,9 +76,9 @@ class RenderComparison extends Component {
             key="2"
           >
             <Graph
-              dataSet={getStateName()[0]}
-              dataSet2={getStateName()[1]}
-              dataSet3={getStateName()[2]}
+              dataSet={getUnemployRate()[0]}
+              dataSet2={getUnemployRate()[1]}
+              dataSet3={getUnemployRate()[2]}
             />
           </Tabs.TabPane>
         </Tabs>

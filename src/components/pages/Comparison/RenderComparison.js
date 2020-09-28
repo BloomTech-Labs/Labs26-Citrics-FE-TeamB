@@ -58,6 +58,7 @@ class RenderComparison extends Component {
   render() {
     const { citiesData } = this.props;
     const { getCityPop, getUnemployRate, getRentals } = this;
+    const { TabPane } = Tabs;
     if (citiesData.length === 0) {
       return <LoadingComponent message="Loading city data..." />;
     }
@@ -84,31 +85,27 @@ class RenderComparison extends Component {
             color: "white"
           }}
         >
-          <Tabs.TabPane className="graph-holder" tab="Population Trend" key="1">
+          <TabPane className="graph-holder" tab="Population Trend" key="1">
             <Graph
               dataSet={getCityPop()[0]}
               dataSet2={getCityPop()[1]}
               dataSet3={getCityPop()[2]}
             />
-          </Tabs.TabPane>
-          <Tabs.TabPane className="graph-holder" tab="Apartment Prices" key="2">
+          </TabPane>
+          <TabPane className="graph-holder" tab="Apartment Prices" key="2">
             <Graph
               dataSet={getRentals()[0]}
               dataSet2={getRentals()[1]}
               dataSet3={getRentals()[2]}
             />
-          </Tabs.TabPane>
-          <Tabs.TabPane
-            className="graph-holder"
-            tab="Unemployment Rate"
-            key="3"
-          >
+          </TabPane>
+          <TabPane className="graph-holder" tab="Unemployment Rate" key="3">
             <Graph
               dataSet={getUnemployRate()[0]}
               dataSet2={getUnemployRate()[1]}
               dataSet3={getUnemployRate()[2]}
             />
-          </Tabs.TabPane>
+          </TabPane>
         </Tabs>
       </div>
     );

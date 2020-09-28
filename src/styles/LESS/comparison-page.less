@@ -1,5 +1,6 @@
 .comparison-container {
   // .background-image("/compare_screen_full.jpg");
+  background-color: #fafafa;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -10,24 +11,38 @@
   display: flex;
   justify-content: space-evenly;
   margin: 6% 0;
-}
-.card {
-  margin: 0 5%;
-}
-.comparison-card {
-  // width: 240px;
-  .custom-image {
-    width: 240px;
-    height: 130px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
-    img {
-      opacity: 0;
+  width: 100%;
+
+  .card {
+    margin: 0 5%;
+    width: 25%;
+    padding: 0 0 3%;
+    box-shadow: 3px 4px 22px -4px rgba(0, 0, 0, 0.46);
+    border-radius: 3%;
+    .comparison-card {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .custom-image {
+        width: 100%;
+        height: 130px;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        object-fit: cover;
+        overflow: hidden;
+        border-radius: 3% 3% 0 0;
+        img {
+          opacity: 0;
+        }
+      }
     }
   }
 }
+
 .more-info-btn {
   .button(95px, 32px, 1.4rem, @buttonBG-compare);
   border: 1px solid @buttonBG-compare;

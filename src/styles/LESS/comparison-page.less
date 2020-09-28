@@ -58,6 +58,7 @@
       border-radius: 0 0 10px 10px;
       width: 100%;
       cursor: pointer;
+      transition: 0.2s all;
       &:hover {
         background-color: @buttonBG-compare-hover;
         border: 1px solid @buttonBG-compare-hover;
@@ -81,19 +82,6 @@
 .graph-holder {
   display: flex;
   justify-content: center;
-}
-
-//ant design overrides
-.ant-card.comparison-card {
-  width: 100%;
-
-  .ant-card-body {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
 }
 
 .ant-tabs-nav-list {

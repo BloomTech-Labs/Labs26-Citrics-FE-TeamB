@@ -33,21 +33,23 @@ class ComparisonCard extends Component {
           {!citiesData ? (
             <LoadingComponent message="Loading city data..." />
           ) : (
-            <div className="custom-card">
+            <div className="basic-card-info">
               <h3>
                 {citiesData.name}, {citiesData.state}
               </h3>
               <p>Population: {citiesData.population.data.total_pop}</p>
               <p>Rental Prices: ${citiesData.rent.studio}</p>
               <p>Weather: {citiesData.weather.summer_maxtempF_mean} degrees</p>
-              <Button
-                className="more-info-btn"
-                data-testid="more-info-btn"
-                type="primary"
-                onClick={() => onSelectCity(citiesData)}
-              >
-                More Info
-              </Button>
+              <div className="btn-container">
+                <button
+                  className="more-info-btn"
+                  data-testid="more-info-btn"
+                  type="primary"
+                  onClick={() => onSelectCity(citiesData)}
+                >
+                  More Info
+                </button>
+              </div>
             </div>
           )}
         </div>

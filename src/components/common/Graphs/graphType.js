@@ -63,7 +63,8 @@ export const barGraph = (set1, set2, set3) => {
     marker: {
       color: "rgb(49,130,189)",
       opacity: 0.7
-    }
+    },
+    orientation: set1.orientation ? set1.orientation : "v"
   };
   if (set2) {
     trace2 = {
@@ -74,7 +75,8 @@ export const barGraph = (set1, set2, set3) => {
       marker: {
         color: "rgb(247, 77, 77,.5)",
         opacity: 0.5
-      }
+      },
+      orientation: set1.orientation ? set1.orientation : "v"
     };
   }
   if (set3) {
@@ -86,7 +88,8 @@ export const barGraph = (set1, set2, set3) => {
       marker: {
         color: "rgb(158,202,225)",
         opacity: 0.5
-      }
+      },
+      orientation: set1.orientation ? set1.orientation : "v"
     };
   }
   let dataPlot = [trace1, set2 ? trace2 : {}, set3 ? trace3 : {}];
@@ -99,15 +102,14 @@ export const barGraph = (set1, set2, set3) => {
       showgrid: false
     },
     xaxis: {
-      showgrid: false,
-      tickangle: -45
+      showgrid: false
     },
     font: {
       size: 14,
       color: "rgba(245,246,249,1)"
     },
     showlegend: false,
-    barmode: "group"
+    barmode: set1.mode ? set1.mode : "group"
   };
 
   return { dataPlot, layout };

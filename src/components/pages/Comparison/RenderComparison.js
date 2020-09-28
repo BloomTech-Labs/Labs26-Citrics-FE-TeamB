@@ -34,9 +34,30 @@ class RenderComparison extends Component {
     return cityPop;
   };
 
+  getRentals = () => {
+    const rentals = [];
+    for (let id in this.props.citiesData) {
+      rentals.push({
+        name: this.props.citiesData[id].name,
+        plotY: ["Studio", "1BR", "2BR", "3BR", "4BR"],
+        plotX: [
+          this.props.citiesData[id].rent.studio,
+          this.props.citiesData[id].rent["1br"],
+          this.props.citiesData[id].rent["2br"],
+          this.props.citiesData[id].rent["3br"],
+          this.props.citiesData[id].rent["4br"]
+        ],
+        graphName: "Apartment Prices",
+        type: "bar",
+        orientation: "h"
+      });
+    }
+    return rentals;
+  };
+
   render() {
     const { citiesData } = this.props;
-    const { getCityPop, getUnemployRate } = this;
+    const { getCityPop, getUnemployRate, getRentals } = this;
     if (citiesData.length === 0) {
       return <LoadingComponent message="Loading city data..." />;
     }
@@ -70,10 +91,17 @@ class RenderComparison extends Component {
               dataSet3={getCityPop()[2]}
             />
           </Tabs.TabPane>
+          <Tabs.TabPane className="graph-holder" tab="Apartment Prices" key="2">
+            <Graph
+              dataSet={getRentals()[0]}
+              dataSet2={getRentals()[1]}
+              dataSet3={getRentals()[2]}
+            />
+          </Tabs.TabPane>
           <Tabs.TabPane
             className="graph-holder"
             tab="Unemployment Rate"
-            key="2"
+            key="3"
           >
             <Graph
               dataSet={getUnemployRate()[0]}

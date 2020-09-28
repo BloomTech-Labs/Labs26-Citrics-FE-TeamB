@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Button } from "antd";
+import { Button } from "antd";
 import ModalComponent from "../../common/Modal.js";
 import LoadingComponent from "../../common/LoadingComponent";
 
@@ -20,7 +20,7 @@ class ComparisonCard extends Component {
     const { visible, city } = this.state;
     return (
       <div className="card">
-        <Card className="comparison-card" data-testid="city-cards">
+        <div className="comparison-card" data-testid="city-cards">
           <div
             className="custom-image"
             style={{ backgroundImage: `url(${citiesData.image})` }}
@@ -50,7 +50,7 @@ class ComparisonCard extends Component {
               </Button>
             </div>
           )}
-        </Card>
+        </div>
         <ModalComponent
           visible={visible}
           setVisible={onToggleModal}

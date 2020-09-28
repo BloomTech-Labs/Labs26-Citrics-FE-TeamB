@@ -32,15 +32,15 @@ export const lineGraph = (set1, set2, set3) => {
   let layout = {
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
-    yaxis: {
-      showgrid: false
-    },
-    xaxis: {
-      showgrid: false
-    },
+    // yaxis: {
+    //   showgrid: false
+    // },
+    // xaxis: {
+    //   showgrid: false
+    // },
     font: {
       size: 14,
-      color: "rgba(245,246,249,1)"
+      color: "#000"
     },
 
     showlegend: false,
@@ -98,15 +98,15 @@ export const barGraph = (set1, set2, set3) => {
     title: set1.graphName,
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
-    yaxis: {
-      showgrid: false
-    },
-    xaxis: {
-      showgrid: false
-    },
+    // yaxis: {
+    //   showgrid: false
+    // },
+    // xaxis: {
+    //   showgrid: false
+    // },
     font: {
       size: 14,
-      color: "rgba(245,246,249,1)"
+      color: "#000"
     },
     showlegend: false,
     barmode: set1.mode ? set1.mode : "group"

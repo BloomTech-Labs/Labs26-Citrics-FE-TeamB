@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Card, Button } from "antd";
 import ModalComponent from "../../common/Modal.js";
 import LoadingComponent from "../../common/LoadingComponent";
 
@@ -20,7 +19,7 @@ class ComparisonCard extends Component {
     const { visible, city } = this.state;
     return (
       <div className="card">
-        <Card className="comparison-card" data-testid="city-cards">
+        <div className="comparison-card" data-testid="city-cards">
           <div
             className="custom-image"
             style={{ backgroundImage: `url(${citiesData.image})` }}
@@ -33,24 +32,26 @@ class ComparisonCard extends Component {
           {!citiesData ? (
             <LoadingComponent message="Loading city data..." />
           ) : (
-            <div className="custom-card">
+            <div className="basic-card-info">
               <h3>
                 {citiesData.name}, {citiesData.state}
               </h3>
               <p>Population: {citiesData.population.data.total_pop}</p>
               <p>Rental Prices: ${citiesData.rent.studio}</p>
-              <p>Current Weather: {citiesData.currentWeather.current.temp}°</p>
-              <Button
-                className="more-info-btn"
-                data-testid="more-info-btn"
-                type="primary"
-                onClick={() => onSelectCity(citiesData)}
-              >
-                More Info
-              </Button>
+              <p>Weather: {citiesData.weather.summer_maxtempF_mean} degrees</p>
+              <div className="btn-container">
+                <button
+                  className="more-info-btn"
+                  data-testid="more-info-btn"
+                  type="primary"
+                  onClick={() => onSelectCity(citiesData)}
+                >
+                  More Info
+                </button>
+              </div>
             </div>
           )}
-        </Card>
+        </div>
         <ModalComponent
           visible={visible}
           setVisible={onToggleModal}

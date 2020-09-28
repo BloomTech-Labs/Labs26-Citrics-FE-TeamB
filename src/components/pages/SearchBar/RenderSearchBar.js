@@ -8,7 +8,7 @@ const steps = [
     title: "Bedrooms",
     content: (
       <div>
-        <label for="rooms">Select Bedrooms: </label>
+        <label htmlFor="rooms">Select Bedrooms: </label>
         <select id="rooms" name="rooms">
           <option value="studio">Studio</option>
           <option value="1bd">1BR</option>
@@ -24,7 +24,7 @@ const steps = [
     content: (
       <div>
         <Input.Group compact>
-          <label for="between">Population: </label>&nbsp;&nbsp;
+          <label htmlFor="between">Prices: </label>&nbsp;&nbsp;
           <InputNumber
             style={{ width: 100, textAlign: "center" }}
             placeholder="Minimum"
@@ -70,14 +70,14 @@ export default function RenderSearchBar({
 }) {
   const [current, setCurrent] = useState(0);
 
-  const next = () => {
-    const newCurrent = current + 1;
-    setCurrent({ newCurrent });
+  let next = () => {
+    const newNext = current + 1;
+    setCurrent(newNext);
   };
 
-  const prev = () => {
-    const newCurrent = current - 1;
-    setCurrent({ newCurrent });
+  let prev = () => {
+    const newPrev = current - 1;
+    setCurrent(newPrev);
   };
 
   return (
@@ -96,7 +96,7 @@ export default function RenderSearchBar({
       <div className="site-input-group-wrapper">
         {/* For job industry--type and autocomplete */}
         <Input.Group compact>
-          <label for="jobs">Job Industry:</label>
+          <label htmlFor="jobs">Job Industry:</label>
           <br />
           <Input style={{ width: "50%" }} placeholder="Ex: Tech" />
         </Input.Group>
@@ -104,7 +104,7 @@ export default function RenderSearchBar({
         {/* For population and rent price */}
         <br />
         <Input.Group compact>
-          <label for="between">Population: </label>
+          <label htmlFor="between">Population: </label>
           <br />
           <Input
             style={{ width: 90, textAlign: "center" }}
@@ -138,6 +138,7 @@ export default function RenderSearchBar({
           <Step key={item.title} title={item.title} />
         ))}
       </Steps>
+      {console.log("TESTING", current)}
       <div className="steps-content">{steps[current].content}</div>
       <div className="steps-action">
         {current < steps.length - 1 && (

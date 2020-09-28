@@ -2,7 +2,6 @@ import React from "react";
 // TODO: Replace these with better icons
 import {
   TeamOutlined,
-  CloudOutlined,
   HomeOutlined,
   CarOutlined,
   PieChartOutlined,
@@ -39,7 +38,10 @@ export default function RenderCityDetail({ city }) {
         <PopulationPane population={city.population} />
       </DetailPane>
       <DetailPane GraphIcon={LineChartOutlined}>
-        <WeatherPane weather={city.weather} />
+        <WeatherPane
+          weather={city.weather}
+          currentWeather={city.currentWeather}
+        />
       </DetailPane>
       <DetailPane Icon={HomeOutlined} GraphIcon={LineChartOutlined}>
         <HousingPane rent={city.rent} />

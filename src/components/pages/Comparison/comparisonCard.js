@@ -39,7 +39,7 @@ class ComparisonCard extends Component {
               </h3>
               <p>Population: {citiesData.population.data.total_pop}</p>
               <p>Rental Prices: ${citiesData.rent.studio}</p>
-              <p>Weather: {citiesData.weather.summer_maxtempF_mean} degrees</p>
+              <p>Current Weather: {citiesData.currentWeather.current.temp}°</p>
               <Button
                 className="more-info-btn"
                 data-testid="more-info-btn"

@@ -12,13 +12,10 @@ import useLocalStorage from "../../../hooks/useLocalStorage";
 
 const { Step } = Steps;
 
+// The 'rooms' value for rental prices defaults to 1 bedroom
+// All other values default to null/undefined, so they don't need to be manually set here
 const initialSearchPrefs = {
-  pop_max: null,
-  pop_min: null,
-  rent_max: null,
-  rent_min: null,
-  rooms: "1bd",
-  jobs: null
+  rooms: "1bd"
 };
 export default function RenderSearchBar({
   searchTerm,
@@ -27,14 +24,21 @@ export default function RenderSearchBar({
   onSelect
 }) {
   const [current, setCurrent] = useState(0);
+  const [showAdvancedView, setShowAdvancedView] = useState(false);
+  const toggleAdvancedView = () => setShowAdvancedView(!showAdvancedView);
+
+  // useLocalStorage is a custom hook made by David Horstman
+  // For more info hover over it or see the docs in /hooks/useLocalStorage.js
   const [searchPrefs, setSearchPrefs] = useLocalStorage(
     "searchPrefs",
     initialSearchPrefs
   );
-  const [showAdvancedView, setShowAdvancedView] = useState(false);
-
-  const toggleAdvancedView = () => setShowAdvancedView(!showAdvancedView);
+  // I opted to store searchPrefs in an object to simplify getting/setting values
+  // Otherwise we'd need many different useLocalStorage calls
+  // It can potentially impact performance, but in my testing everything was plenty fast
   const updateSearchPrefs = ({ target: { name, value } }) =>
+    // This function expects an event triggered by an element with 'name' and 'value' attributes
+    // that match a key-value pair in the searchPrefs object
     setSearchPrefs({ ...searchPrefs, [name]: value });
 
   let next = () => {
@@ -47,6 +51,7 @@ export default function RenderSearchBar({
     setCurrent(newPrev);
   };
 
+  // Need this inside the component closure to give it access to the values and setter function
   const steps = [
     {
       title: "Bedrooms",
@@ -78,6 +83,10 @@ export default function RenderSearchBar({
               style={{ width: 100, textAlign: "center" }}
               placeholder="Minimum"
               name="rent_min"
+              // This input invokes the event handler with just a value
+              // instead of an event object
+              // The onChange function here essentially wraps that value into
+              // a "synthetic" event object
               onChange={value =>
                 updateSearchPrefs({ target: { value, name: "rent_min" } })
               }
@@ -106,6 +115,7 @@ export default function RenderSearchBar({
               }}
               placeholder="Maximum"
               name="rent_max"
+              // onChange here wraps the value in a synthetic event as described above
               onChange={value =>
                 updateSearchPrefs({ target: { value, name: "rent_max" } })
               }

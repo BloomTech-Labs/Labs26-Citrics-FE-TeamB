@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 /**
  * This hook works similarly to useState, except that it caches values in localStorage
  * and can retrieve a value stored in a previous session, adding data persistence.
@@ -8,7 +8,7 @@ import React from "react";
  * @param {any} [initialValue] (Optional) The initial value
  */
 export default function useLocalStorage(key, initialValue = null) {
-  const [value, setValue] = React.useState(() => {
+  const [value, setValue] = useState(() => {
     const item = window.localStorage.getItem(key);
     //null indicates that no item exists for that key
     if (item === null) {

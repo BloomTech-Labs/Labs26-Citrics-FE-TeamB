@@ -15,7 +15,7 @@ const { Step } = Steps;
 // The 'rooms' value for rental prices defaults to 1 bedroom
 // All other values default to null/undefined, so they don't need to be manually set here
 const initialSearchPrefs = {
-  rooms: "1bd"
+  rooms: "1br"
 };
 export default function RenderSearchBar({
   searchTerm,
@@ -65,10 +65,10 @@ export default function RenderSearchBar({
             value={searchPrefs.rooms}
           >
             <option value="studio">Studio</option>
-            <option value="1bd">1BR</option>
-            <option value="2bd">2BR</option>
-            <option value="3bd">3BR</option>
-            <option value="4bd">4BR</option>
+            <option value="1br">1BR</option>
+            <option value="2br">2BR</option>
+            <option value="3br">3BR</option>
+            <option value="4br">4BR</option>
           </select>
         </div>
       )

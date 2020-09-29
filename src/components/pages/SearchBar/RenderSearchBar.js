@@ -24,9 +24,8 @@ const steps = [
     content: (
       <div>
         <Input.Group compact>
-          <label htmlFor="between">Prices: </label>&nbsp;&nbsp;
           <InputNumber
-            style={{ width: 100, textAlign: "center" }}
+            style={{ width: 85, textAlign: "center" }}
             placeholder="Minimum"
             formatter={value =>
               `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
@@ -47,7 +46,7 @@ const steps = [
           <InputNumber
             className="site-input-right"
             style={{
-              width: 100,
+              width: 85,
               textAlign: "center"
             }}
             placeholder="Maximum"
@@ -92,16 +91,15 @@ export default function RenderSearchBar({
       />
       <br />
       <br />
-
       <div className="site-input-group-wrapper">
-        {/* For job industry--type and autocomplete */}
+        {/* For job industry--type and autocomplete (or have a dropdown with options) */}
         <Input.Group compact>
           <label htmlFor="jobs">Job Industry:</label>
           <br />
           <Input style={{ width: "50%" }} placeholder="Ex: Tech" />
         </Input.Group>
 
-        {/* For population and rent price */}
+        {/* For population */}
         <br />
         <Input.Group compact>
           <label htmlFor="between">Population: </label>
@@ -130,8 +128,8 @@ export default function RenderSearchBar({
             placeholder="Maximum"
           />
         </Input.Group>
-      </div>
-
+      </div>{" "}
+      <br />
       {/* Steps format for Bedroom and Rental price search */}
       <Steps current={current}>
         {steps.map(item => (

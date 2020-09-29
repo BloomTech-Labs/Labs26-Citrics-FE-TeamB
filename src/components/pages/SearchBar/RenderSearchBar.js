@@ -86,6 +86,7 @@ export default function RenderSearchBar({
       <Button onClick={toggleAdvancedView}>
         {showAdvancedView ? "Basic Search" : "Advanced Search"}
       </Button>
+      {/* If we're not in advanced view, show the city autocomplete */}
       {!showAdvancedView ? (
         <AutoComplete
           value={searchTerm}
@@ -97,6 +98,7 @@ export default function RenderSearchBar({
         />
       ) : (
         <>
+          {/* If we are in advanced view, show the preferences pane */}
           <div className="site-input-group-wrapper">
             {/* For job industry--type and autocomplete */}
             <Input.Group compact>

@@ -12,11 +12,13 @@ import useLocalStorage from "../../../hooks/useLocalStorage";
 
 const { Step } = Steps;
 
+
 // The 'rooms' value for rental prices defaults to 1 bedroom
 // All other values default to null/undefined, so they don't need to be manually set here
 const initialSearchPrefs = {
   rooms: "1br"
 };
+
 export default function RenderSearchBar({
   searchTerm,
   options,
@@ -80,7 +82,7 @@ export default function RenderSearchBar({
           <Input.Group compact>
             <label htmlFor="between">Prices: </label>&nbsp;&nbsp;
             <InputNumber
-              style={{ width: 100, textAlign: "center" }}
+              style={{ width: 85, textAlign: "center" }}
               placeholder="Minimum"
               name="rent_min"
               // This input invokes the event handler with just a value
@@ -110,7 +112,7 @@ export default function RenderSearchBar({
             <InputNumber
               className="site-input-right"
               style={{
-                width: 100,
+                width: 85,
                 textAlign: "center"
               }}
               placeholder="Maximum"
@@ -133,6 +135,7 @@ export default function RenderSearchBar({
 
   return (
     <div className="search-bar">
+
       <label>
         <Switch onChange={toggleAdvancedView} checked={showAdvancedView} />
         {showAdvancedView ? "Advanced Search" : "Basic Search"}
@@ -200,7 +203,7 @@ export default function RenderSearchBar({
               />
             </Input.Group>
           </div>
-
+          <br/>
           {/* Steps format for Bedroom and Rental price search */}
           <Steps current={current}>
             {steps.map(item => (
@@ -231,6 +234,8 @@ export default function RenderSearchBar({
           </div>
         </>
       )}
+
+    
     </div>
   );
 }

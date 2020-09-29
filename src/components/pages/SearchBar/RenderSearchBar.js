@@ -69,7 +69,8 @@ export default function RenderSearchBar({
   onSelect
 }) {
   const [current, setCurrent] = useState(0);
-
+  const [showAdvancedView, setShowAdvancedView] = useState(false);
+  const toggleAdvancedView = () => setShowAdvancedView(!showAdvancedView);
   let next = () => {
     const newNext = current + 1;
     setCurrent(newNext);
@@ -82,84 +83,89 @@ export default function RenderSearchBar({
 
   return (
     <div className="search-bar">
-      <AutoComplete
-        value={searchTerm}
-        options={options}
-        style={{ width: 200 }}
-        onSelect={onSelect}
-        onChange={onChange}
-        placeholder="Enter City.."
-      />
-      <br />
-      <br />
+      <Button onClick={toggleAdvancedView}>
+        {showAdvancedView ? "Basic Search" : "Advanced Search"}
+      </Button>
+      {!showAdvancedView ? (
+        <AutoComplete
+          value={searchTerm}
+          options={options}
+          style={{ width: 200 }}
+          onSelect={onSelect}
+          onChange={onChange}
+          placeholder="Enter City.."
+        />
+      ) : (
+        <>
+          <div className="site-input-group-wrapper">
+            {/* For job industry--type and autocomplete */}
+            <Input.Group compact>
+              <label htmlFor="jobs">Job Industry:</label>
+              <br />
+              <Input style={{ width: "50%" }} placeholder="Ex: Tech" />
+            </Input.Group>
 
-      <div className="site-input-group-wrapper">
-        {/* For job industry--type and autocomplete */}
-        <Input.Group compact>
-          <label htmlFor="jobs">Job Industry:</label>
-          <br />
-          <Input style={{ width: "50%" }} placeholder="Ex: Tech" />
-        </Input.Group>
+            {/* For population and rent price */}
+            <br />
+            <Input.Group compact>
+              <label htmlFor="between">Population: </label>
+              <br />
+              <Input
+                style={{ width: 90, textAlign: "center" }}
+                placeholder="Minimum"
+              />
+              <Input
+                className="site-input-split"
+                style={{
+                  width: 30,
+                  borderLeft: 0,
+                  borderRight: 0,
+                  pointerEvents: "none"
+                }}
+                placeholder="-"
+                disabled
+              />
+              <Input
+                className="site-input-right"
+                style={{
+                  width: 90,
+                  textAlign: "center"
+                }}
+                placeholder="Maximum"
+              />
+            </Input.Group>
+          </div>
 
-        {/* For population and rent price */}
-        <br />
-        <Input.Group compact>
-          <label htmlFor="between">Population: </label>
-          <br />
-          <Input
-            style={{ width: 90, textAlign: "center" }}
-            placeholder="Minimum"
-          />
-          <Input
-            className="site-input-split"
-            style={{
-              width: 30,
-              borderLeft: 0,
-              borderRight: 0,
-              pointerEvents: "none"
-            }}
-            placeholder="-"
-            disabled
-          />
-          <Input
-            className="site-input-right"
-            style={{
-              width: 90,
-              textAlign: "center"
-            }}
-            placeholder="Maximum"
-          />
-        </Input.Group>
-      </div>
-
-      {/* Steps format for Bedroom and Rental price search */}
-      <Steps current={current}>
-        {steps.map(item => (
-          <Step key={item.title} title={item.title} />
-        ))}
-      </Steps>
-      {console.log("TESTING", current)}
-      <div className="steps-content">{steps[current].content}</div>
-      <div className="steps-action">
-        {current < steps.length - 1 && (
-          <Button type="primary" onClick={() => next()}>
-            Next
-          </Button>
-        )}
-        {current === steps.length - 1 && (
-          <Button
-            type="primary"
-            onClick={() => message.success("Processing complete!")}
-          >
-            Done
-          </Button>
-        )}
-        {current > 0 && (
-          <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
-            Previous
-          </Button>
-        )}
-      </div>
+          {/* Steps format for Bedroom and Rental price search */}
+          <Steps current={current}>
+            {steps.map(item => (
+              <Step key={item.title} title={item.title} />
+            ))}
+          </Steps>
+          {console.log("TESTING", current)}
+          <div className="steps-content">{steps[current].content}</div>
+          <div className="steps-action">
+            {current < steps.length - 1 && (
+              <Button type="primary" onClick={() => next()}>
+                Next
+              </Button>
+            )}
+            {current === steps.length - 1 && (
+              <Button
+                type="primary"
+                onClick={() => message.success("Processing complete!")}
+              >
+                Done
+              </Button>
+            )}
+            {current > 0 && (
+              <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
+                Previous
+              </Button>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }

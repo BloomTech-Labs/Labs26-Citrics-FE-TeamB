@@ -1,6 +1,6 @@
 import { TOGGLE_DRAWER } from "../contexts";
 const initialState = {
-  isOpen: false
+  isOpen: true
 };
 export default function drawerReducer(state = initialState, { type }) {
   switch (type) {

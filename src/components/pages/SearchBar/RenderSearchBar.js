@@ -19,7 +19,8 @@ export default function RenderSearchBar({
   const [showAdvancedView, setShowAdvancedView] = useState(false);
 
   const toggleAdvancedView = () => setShowAdvancedView(!showAdvancedView);
-  const updateSearchPrefs = ({ target }) => console.log(target);
+  const updateSearchPrefs = ({ target: { name, value } }) =>
+    console.log(name, value);
 
   let next = () => {
     const newNext = current + 1;
@@ -56,11 +57,14 @@ export default function RenderSearchBar({
             <InputNumber
               style={{ width: 100, textAlign: "center" }}
               placeholder="Minimum"
+              name="rent_min"
+              onChange={value =>
+                updateSearchPrefs({ target: { value, name: "rent_min" } })
+              }
               formatter={value =>
                 `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
               }
               parser={value => value.replace(/\$\s?|(,*)/g, "")}
-              onChange={updateSearchPrefs}
             />
             <Input
               className="site-input-split"
@@ -80,7 +84,10 @@ export default function RenderSearchBar({
                 textAlign: "center"
               }}
               placeholder="Maximum"
-              onChange={updateSearchPrefs}
+              name="rent_max"
+              onChange={value =>
+                updateSearchPrefs({ target: { value, name: "rent_max" } })
+              }
               formatter={value =>
                 `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
               }
@@ -118,6 +125,7 @@ export default function RenderSearchBar({
               <Input
                 style={{ width: "50%" }}
                 placeholder="Ex: Tech"
+                name="jobs"
                 onChange={updateSearchPrefs}
               />
             </Input.Group>
@@ -130,6 +138,7 @@ export default function RenderSearchBar({
               <Input
                 style={{ width: 90, textAlign: "center" }}
                 placeholder="Minimum"
+                name="pop_min"
                 onChange={updateSearchPrefs}
               />
               <Input
@@ -150,6 +159,7 @@ export default function RenderSearchBar({
                   textAlign: "center"
                 }}
                 placeholder="Maximum"
+                name="pop_max"
                 onChange={updateSearchPrefs}
               />
             </Input.Group>

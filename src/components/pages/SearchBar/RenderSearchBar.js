@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { AutoComplete, Input, InputNumber, Steps, Button, message } from "antd";
+import {
+  AutoComplete,
+  Input,
+  InputNumber,
+  Steps,
+  Button,
+  message,
+  Switch
+} from "antd";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
 const { Step } = Steps;
@@ -23,7 +31,7 @@ export default function RenderSearchBar({
     "searchPrefs",
     initialSearchPrefs
   );
-  const [showAdvancedView, setShowAdvancedView] = useState(true);
+  const [showAdvancedView, setShowAdvancedView] = useState(false);
 
   const toggleAdvancedView = () => setShowAdvancedView(!showAdvancedView);
   const updateSearchPrefs = ({ target: { name, value } }) =>
@@ -115,9 +123,10 @@ export default function RenderSearchBar({
 
   return (
     <div className="search-bar">
-      <Button onClick={toggleAdvancedView}>
-        {showAdvancedView ? "Basic Search" : "Advanced Search"}
-      </Button>
+      <label>
+        <Switch onChange={toggleAdvancedView} checked={showAdvancedView} />
+        {showAdvancedView ? "Advanced Search" : "Basic Search"}
+      </label>
       {/* If we're not in advanced view, show the city autocomplete */}
       {!showAdvancedView ? (
         <AutoComplete

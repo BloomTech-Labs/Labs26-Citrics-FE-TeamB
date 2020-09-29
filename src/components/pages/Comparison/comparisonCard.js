@@ -40,7 +40,7 @@ class ComparisonCard extends Component {
                 Population:{" "}
                 {citiesData.population.data.total_pop.toLocaleString()}
               </p>
-              <p>Rental Prices: ${citiesData.rent.studio}</p>
+              <p>Rent: ${citiesData.rent["1br"]}/month (1BR)</p>
               <p>Weather: {citiesData.weather.summer_maxtempF_mean} degrees</p>
               <div className="btn-container">
                 <button

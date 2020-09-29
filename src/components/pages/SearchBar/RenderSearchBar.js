@@ -4,7 +4,14 @@ import useLocalStorage from "../../../hooks/useLocalStorage";
 
 const { Step } = Steps;
 
-const initialSearchPrefs = {};
+const initialSearchPrefs = {
+  pop_max: null,
+  pop_min: null,
+  rent_max: null,
+  rent_min: null,
+  rooms: "1bd",
+  jobs: null
+};
 export default function RenderSearchBar({
   searchTerm,
   options,
@@ -16,11 +23,11 @@ export default function RenderSearchBar({
     "searchPrefs",
     initialSearchPrefs
   );
-  const [showAdvancedView, setShowAdvancedView] = useState(false);
+  const [showAdvancedView, setShowAdvancedView] = useState(true);
 
   const toggleAdvancedView = () => setShowAdvancedView(!showAdvancedView);
   const updateSearchPrefs = ({ target: { name, value } }) =>
-    console.log(name, value);
+    setSearchPrefs({ ...searchPrefs, [name]: value });
 
   let next = () => {
     const newNext = current + 1;
@@ -38,7 +45,12 @@ export default function RenderSearchBar({
       content: (
         <div>
           <label htmlFor="rooms">Select Bedrooms: </label>
-          <select id="rooms" name="rooms" onChange={updateSearchPrefs}>
+          <select
+            id="rooms"
+            name="rooms"
+            onChange={updateSearchPrefs}
+            value={searchPrefs.rooms}
+          >
             <option value="studio">Studio</option>
             <option value="1bd">1BR</option>
             <option value="2bd">2BR</option>
@@ -61,6 +73,7 @@ export default function RenderSearchBar({
               onChange={value =>
                 updateSearchPrefs({ target: { value, name: "rent_min" } })
               }
+              value={searchPrefs.rent_min}
               formatter={value =>
                 `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
               }
@@ -88,6 +101,7 @@ export default function RenderSearchBar({
               onChange={value =>
                 updateSearchPrefs({ target: { value, name: "rent_max" } })
               }
+              value={searchPrefs.rent_max}
               formatter={value =>
                 `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
               }
@@ -127,6 +141,7 @@ export default function RenderSearchBar({
                 placeholder="Ex: Tech"
                 name="jobs"
                 onChange={updateSearchPrefs}
+                value={searchPrefs.jobs}
               />
             </Input.Group>
 
@@ -140,6 +155,7 @@ export default function RenderSearchBar({
                 placeholder="Minimum"
                 name="pop_min"
                 onChange={updateSearchPrefs}
+                value={searchPrefs.pop_min}
               />
               <Input
                 className="site-input-split"
@@ -161,6 +177,7 @@ export default function RenderSearchBar({
                 placeholder="Maximum"
                 name="pop_max"
                 onChange={updateSearchPrefs}
+                value={searchPrefs.pop_max}
               />
             </Input.Group>
           </div>

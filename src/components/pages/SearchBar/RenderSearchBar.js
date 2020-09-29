@@ -1,67 +1,10 @@
 import React, { useState } from "react";
 import { AutoComplete, Input, InputNumber, Steps, Button, message } from "antd";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 
 const { Step } = Steps;
 
-const steps = [
-  {
-    title: "Bedrooms",
-    content: (
-      <div>
-        <label htmlFor="rooms">Select Bedrooms: </label>
-        <select id="rooms" name="rooms">
-          <option value="studio">Studio</option>
-          <option value="1bd">1BR</option>
-          <option value="2bd">2BR</option>
-          <option value="3bd">3BR</option>
-          <option value="4bd">4BR</option>
-        </select>
-      </div>
-    )
-  },
-  {
-    title: "Rental Prices",
-    content: (
-      <div>
-        <Input.Group compact>
-          <label htmlFor="between">Prices: </label>&nbsp;&nbsp;
-          <InputNumber
-            style={{ width: 100, textAlign: "center" }}
-            placeholder="Minimum"
-            formatter={value =>
-              `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            }
-            parser={value => value.replace(/\$\s?|(,*)/g, "")}
-          />
-          <Input
-            className="site-input-split"
-            style={{
-              width: 30,
-              borderLeft: 0,
-              borderRight: 0,
-              pointerEvents: "none"
-            }}
-            placeholder="-"
-            disabled
-          />
-          <InputNumber
-            className="site-input-right"
-            style={{
-              width: 100,
-              textAlign: "center"
-            }}
-            placeholder="Maximum"
-            formatter={value =>
-              `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            }
-            parser={value => value.replace(/\$\s?|(,*)/g, "")}
-          />
-        </Input.Group>
-      </div>
-    )
-  }
-];
-
+const initialSearchPrefs = {};
 export default function RenderSearchBar({
   searchTerm,
   options,
@@ -69,8 +12,15 @@ export default function RenderSearchBar({
   onSelect
 }) {
   const [current, setCurrent] = useState(0);
+  const [searchPrefs, setSearchPrefs] = useLocalStorage(
+    "searchPrefs",
+    initialSearchPrefs
+  );
   const [showAdvancedView, setShowAdvancedView] = useState(false);
+
   const toggleAdvancedView = () => setShowAdvancedView(!showAdvancedView);
+  const updateSearchPrefs = ({ target }) => console.log(target);
+
   let next = () => {
     const newNext = current + 1;
     setCurrent(newNext);
@@ -80,6 +30,67 @@ export default function RenderSearchBar({
     const newPrev = current - 1;
     setCurrent(newPrev);
   };
+
+  const steps = [
+    {
+      title: "Bedrooms",
+      content: (
+        <div>
+          <label htmlFor="rooms">Select Bedrooms: </label>
+          <select id="rooms" name="rooms" onChange={updateSearchPrefs}>
+            <option value="studio">Studio</option>
+            <option value="1bd">1BR</option>
+            <option value="2bd">2BR</option>
+            <option value="3bd">3BR</option>
+            <option value="4bd">4BR</option>
+          </select>
+        </div>
+      )
+    },
+    {
+      title: "Rental Prices",
+      content: (
+        <div>
+          <Input.Group compact>
+            <label htmlFor="between">Prices: </label>&nbsp;&nbsp;
+            <InputNumber
+              style={{ width: 100, textAlign: "center" }}
+              placeholder="Minimum"
+              formatter={value =>
+                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              }
+              parser={value => value.replace(/\$\s?|(,*)/g, "")}
+              onChange={updateSearchPrefs}
+            />
+            <Input
+              className="site-input-split"
+              style={{
+                width: 30,
+                borderLeft: 0,
+                borderRight: 0,
+                pointerEvents: "none"
+              }}
+              placeholder="-"
+              disabled
+            />
+            <InputNumber
+              className="site-input-right"
+              style={{
+                width: 100,
+                textAlign: "center"
+              }}
+              placeholder="Maximum"
+              onChange={updateSearchPrefs}
+              formatter={value =>
+                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+              }
+              parser={value => value.replace(/\$\s?|(,*)/g, "")}
+            />
+          </Input.Group>
+        </div>
+      )
+    }
+  ];
 
   return (
     <div className="search-bar">
@@ -104,7 +115,11 @@ export default function RenderSearchBar({
             <Input.Group compact>
               <label htmlFor="jobs">Job Industry:</label>
               <br />
-              <Input style={{ width: "50%" }} placeholder="Ex: Tech" />
+              <Input
+                style={{ width: "50%" }}
+                placeholder="Ex: Tech"
+                onChange={updateSearchPrefs}
+              />
             </Input.Group>
 
             {/* For population and rent price */}
@@ -115,6 +130,7 @@ export default function RenderSearchBar({
               <Input
                 style={{ width: 90, textAlign: "center" }}
                 placeholder="Minimum"
+                onChange={updateSearchPrefs}
               />
               <Input
                 className="site-input-split"
@@ -134,6 +150,7 @@ export default function RenderSearchBar({
                   textAlign: "center"
                 }}
                 placeholder="Maximum"
+                onChange={updateSearchPrefs}
               />
             </Input.Group>
           </div>

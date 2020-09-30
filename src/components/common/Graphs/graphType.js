@@ -43,7 +43,7 @@ export const lineGraph = (set1, set2, set3) => {
       color: "#000"
     },
 
-    showlegend: false,
+    showlegend: true,
     title: set1.graphName
   };
   return {
@@ -108,9 +108,99 @@ export const barGraph = (set1, set2, set3) => {
       size: 14,
       color: "#000"
     },
-    showlegend: false,
+    showlegend: true,
     barmode: set1.mode ? set1.mode : "group"
   };
 
   return { dataPlot, layout };
+};
+export const pieChart = (set1, set2, set3) => {
+  var ultimateColors = [
+    [
+      "rgb(56, 75, 126)",
+      "rgb(18, 36, 37)",
+      "rgb(34, 53, 101)",
+      "rgb(36, 55, 57)",
+      "rgb(6, 4, 4)"
+    ],
+    [
+      "rgb(177, 127, 38)",
+      "rgb(205, 152, 36)",
+      "rgb(99, 79, 37)",
+      "rgb(129, 180, 179)",
+      "rgb(124, 103, 37)"
+    ],
+    [
+      "rgb(33, 75, 99)",
+      "rgb(79, 129, 102)",
+      "rgb(151, 179, 100)",
+      "rgb(175, 49, 35)",
+      "rgb(36, 73, 147)"
+    ],
+    [
+      "rgb(146, 123, 21)",
+      "rgb(177, 180, 34)",
+      "rgb(206, 206, 40)",
+      "rgb(175, 51, 21)",
+      "rgb(35, 36, 21)"
+    ]
+  ];
+  let pieData = [
+    {
+      values: set1.values,
+      labels: set1.labels,
+      type: "pie",
+      name: set1.name,
+      marker: {
+        colors: ultimateColors[0]
+      },
+      domain: {
+        row: 0,
+        column: 0
+      },
+      hoverinfo: "label+percent+name",
+      textinfo: "none"
+    },
+    set2
+      ? {
+          values: set2.values,
+          labels: set2.labels,
+          type: "pie",
+          name: set2.name,
+          marker: {
+            colors: ultimateColors[1]
+          },
+          domain: {
+            row: 1,
+            column: 0
+          },
+          hoverinfo: "label+percent+name",
+          textinfo: "none"
+        }
+      : {},
+    set3
+      ? {
+          values: set3.values,
+          labels: set3.labels,
+          type: "pie",
+          name: set3.name,
+          marker: {
+            colors: ultimateColors[2]
+          },
+          domain: {
+            row: 0,
+            column: 1
+          },
+          hoverinfo: "label+percent+name",
+          textinfo: "none"
+        }
+      : {}
+  ];
+
+  var layout = {
+    height: 400,
+    width: 500,
+    grid: { rows: 2, columns: 2 }
+  };
+  return { pieData, layout };
 };

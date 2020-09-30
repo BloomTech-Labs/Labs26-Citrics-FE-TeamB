@@ -1,5 +1,6 @@
 import React from "react";
 import { Tabs } from "antd";
+import { HomeOutlined } from "@ant-design/icons";
 export default function HousingPane({ rent }) {
   console.log(rent);
   const { TabPane } = Tabs;
@@ -24,15 +25,23 @@ export default function HousingPane({ rent }) {
   };
 
   return (
-    <div className="housing-pane">
-      {generatePriceDisplay(rent.rental_pct_chg)}
-      <Tabs defaultActiveKey="1">
-        {aptTypes.map((name, idx) => (
-          <TabPane key={idx} tab={name} className="rental-price-tab">
-            ${rent[name.toLowerCase()]}
-          </TabPane>
-        ))}
-      </Tabs>
+    <div className="one-render-p">
+      <div className="main-detail-content">
+        <div>
+          <h2>Rent prices:</h2>
+          <HomeOutlined className="detail-pane-icon" />
+        </div>
+        <div className="housing-pane">
+          {generatePriceDisplay(rent.rental_pct_chg)}
+          <Tabs defaultActiveKey="1">
+            {aptTypes.map((name, idx) => (
+              <TabPane key={idx} tab={name} className="rental-price-tab">
+                ${rent[name.toLowerCase()]}
+              </TabPane>
+            ))}
+          </Tabs>
+        </div>
+      </div>
     </div>
   );
 }

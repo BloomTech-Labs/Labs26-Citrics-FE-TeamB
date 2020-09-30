@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
 import LoadingComponent from "../../common/LoadingComponent";
 
-import { lineGraph, barGraph } from "./graphType";
+import { lineGraph, barGraph, pieChart } from "./graphType";
 
 export default function Graph({ dataSet, dataSet2, dataSet3 }) {
   const [data, setData] = useState(null);
@@ -34,6 +34,9 @@ export default function Graph({ dataSet, dataSet2, dataSet3 }) {
     } else if (dataSet.type === "bar") {
       const { dataPlot, layout } = barGraph(data, data2, data3);
       return <Plot data={dataPlot} layout={layout} />;
+    } else if (dataSet.type === "pie") {
+      const { pieData, layout } = pieChart(data, data2, data3);
+      return <Plot data={pieData} layout={layout} />;
     }
   };
 

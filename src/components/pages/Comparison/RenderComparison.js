@@ -3,7 +3,6 @@ import { Tabs } from "antd";
 import LoadingComponent from "../../common/LoadingComponent.js";
 import ComparisonCard from "./comparisonCard";
 import Graph from "../../common/Graphs/renderGraph";
-
 class RenderComparison extends Component {
   // puts state name in an array for easier acccess
   getUnemployRate = () => {
@@ -55,9 +54,22 @@ class RenderComparison extends Component {
     return rentals;
   };
 
+  getJobs = () => {
+    const jobs = [];
+    for (let id in this.props.citiesData) {
+      jobs.push({
+        name: this.props.citiesData[id].name,
+        labels: JSON.parse(this.props.citiesData[id].jobs.viz).data[0].labels,
+        values: JSON.parse(this.props.citiesData[id].jobs.viz).data[0].values,
+        type: "pie"
+      });
+    }
+    return jobs;
+  };
+
   render() {
     const { citiesData } = this.props;
-    const { getCityPop, getUnemployRate, getRentals } = this;
+    const { getCityPop, getUnemployRate, getRentals, getJobs } = this;
     const { TabPane } = Tabs;
     if (citiesData.length === 0) {
       return <LoadingComponent message="Loading city data..." />;
@@ -74,7 +86,6 @@ class RenderComparison extends Component {
             );
           })}
         </div>
-
         {/* Renders the tabs for the user to navigate for different visuals */}
         <Tabs
           data-testid="ant-d-tabs"
@@ -107,6 +118,13 @@ class RenderComparison extends Component {
             />
           </TabPane>
         </Tabs>
+        <div className="metrics-container">
+          <Graph
+            dataSet={getJobs()[0]}
+            dataSet2={getJobs()[1]}
+            dataSet3={getJobs()[2]}
+          />
+        </div>
       </div>
     );
   }

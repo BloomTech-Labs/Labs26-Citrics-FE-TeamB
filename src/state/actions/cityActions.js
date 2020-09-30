@@ -51,6 +51,12 @@ export const getCityDetails = city => async (dispatch, getState) => {
     .then(r => r?.data?.data)
     .catch(console.error);
 
+  // awaiting job data
+  const jobs = await axios
+    .get(`https://b-ds.citrics.dev/jobs/${id}`)
+    .then(r => r?.data)
+    .catch(console.error);
+
   // All requests are routed thru this proxy to circumvent CORS issues
   const proxyURL = "https://cors-anywhere-citrics.herokuapp.com/";
 
@@ -92,7 +98,8 @@ export const getCityDetails = city => async (dispatch, getState) => {
     population,
     name,
     state,
-    image
+    image,
+    jobs
   };
 
   dispatch({

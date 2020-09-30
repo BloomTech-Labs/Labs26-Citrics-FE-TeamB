@@ -197,10 +197,10 @@ export const pieChart = (set1, set2, set3) => {
       : {}
   ];
 
-  var layout = {
-    height: 400,
-    width: 500,
-    grid: { rows: 2, columns: 2 }
+  let layout = {
+    height: 1000,
+    width: 1000,
+    grid: { rows: 1, columns: 2 }
   };
   return { pieData, layout };
 };

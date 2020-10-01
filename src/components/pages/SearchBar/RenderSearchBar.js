@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import { AutoComplete, Input, Steps, Switch, Slider } from "antd";
+import { AutoComplete, Input, Switch, Slider } from "antd";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
-const { Step } = Steps;
-
-// The 'rooms' value for rental prices defaults to 1 bedroom
-// All other values default to null/undefined, so they don't need to be manually set here
 const initialSearchPrefs = {
   rooms: "1br",
   pop_min: 10000,
-  pop_max: 2100000
+  pop_max: 2100000,
+  rent_min: 100,
+  rent_max: 10000
 };
 
 export default function RenderSearchBar({
@@ -18,23 +16,23 @@ export default function RenderSearchBar({
   onChange,
   onSelect
 }) {
-  const [current, setCurrent] = useState(0);
   const [showAdvancedView, setShowAdvancedView] = useState(false);
   const toggleAdvancedView = () => setShowAdvancedView(!showAdvancedView);
 
-  // useLocalStorage is a custom hook made by David Horstman
-  // For more info hover over it or see the docs in /hooks/useLocalStorage.js
+  // I opted to store searchPrefs in an object to simplify getting/setting values
+  // Otherwise we'd need many different useLocalStorage calls
+  // It can potentially impact performance, but in my testing everything was plenty fast
   const [searchPrefs, setSearchPrefs] = useLocalStorage(
     "searchPrefs",
     initialSearchPrefs
   );
-  // I opted to store searchPrefs in an object to simplify getting/setting values
-  // Otherwise we'd need many different useLocalStorage calls
-  // It can potentially impact performance, but in my testing everything was plenty fast
-  const updateSearchPrefs = ({ target: { name, value } }) =>
-    // This function expects an event triggered by an element with 'name' and 'value' attributes
-    // that match a key-value pair in the searchPrefs object
-    setSearchPrefs({ ...searchPrefs, [name]: value });
+  // useLocalStorage is a custom hook made by David Horstman
+  // For more info hover over it or see the docs in /hooks/useLocalStorage.js
+
+  // This function expects an event triggered by an element with 'name' and 'value' attributes
+  // that match a key-value pair in the searchPrefs object
+  const processSearchPrefsEvent = ({ target: { name, value } }) =>
+    updateNamedSearchPrefs({ [name]: value });
 
   // Simultaneously update any number of search prefs
   // based on key-value pairs on the object passed in
@@ -81,12 +79,11 @@ export default function RenderSearchBar({
                 style={{ width: "50%" }}
                 placeholder="Ex: Tech"
                 name="jobs"
-                onChange={updateSearchPrefs}
+                onChange={processSearchPrefsEvent}
                 value={searchPrefs.jobs}
               />
             </Input.Group>
 
-            {/* For population and rent price */}
             <br />
             <label>
               Population:
@@ -164,11 +161,11 @@ export default function RenderSearchBar({
           </div>
           <br />
           <label htmlFor="rent">
-            {"Rental Prices "}
+            {"Rent for "}
             <select
               id="rooms"
               name="rooms"
-              onChange={updateSearchPrefs}
+              onChange={processSearchPrefsEvent}
               value={searchPrefs.rooms}
             >
               <option value="studio">Studio</option>
@@ -177,7 +174,7 @@ export default function RenderSearchBar({
               <option value="3br">3BR</option>
               <option value="4br">4BR</option>
             </select>
-            :
+            {" apt:"}
           </label>
           <Slider
             id="rent"

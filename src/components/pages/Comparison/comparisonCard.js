@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ModalComponent from "../../common/Modal.js";
 import LoadingComponent from "../../common/LoadingComponent";
+import { Divider } from "antd";
 //icons
 import weather from "../../../styles/icons/weather-48.png";
 import population from "../../../styles/icons/pop-48.png";
@@ -41,20 +42,47 @@ class ComparisonCard extends Component {
                 <h3>
                   {citiesData.name}, {citiesData.state}
                 </h3>
-                <div>
-                  <img src={population} alt="Population icon" />
-                  <p>Population:</p>
-                  {citiesData.population.data.total_pop.toLocaleString()}
+                <Divider className="divider" />
+                <div className="metrics-parent">
+                  <img
+                    className="metrics-icon"
+                    src={population}
+                    alt="Population icon"
+                  />
+                  <div className="metrics-child">
+                    <p>
+                      <b>Population:</b>
+                    </p>
+                    <p>
+                      {citiesData.population.data.total_pop.toLocaleString()}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <img src={pricing} alt="Rental pricing icon" />
-                  <p>Rental Prices:</p>
-                  {`${"$" + citiesData.rent["1br"]}/month (1BR)`}
+                <div className="metrics-parent">
+                  <img
+                    className="metrics-icon"
+                    src={pricing}
+                    alt="Rental pricing icon"
+                  />
+                  <div className="metrics-child">
+                    <p>
+                      <b>Rental Prices:</b>
+                    </p>
+                    <p>{`${"$" + citiesData.rent["1br"]}/month (1BR)`}</p>
+                  </div>
                 </div>
-                <div>
-                  <img src={weather} alt="Weather icon" />
-                  <p>Weather:</p>
-                  {`${citiesData.weather.winter_mintempF_mean}°F - ${citiesData.weather.summer_maxtempF_mean}°F`}
+                <div className="metrics-parent">
+                  <img
+                    className="metrics-icon"
+                    src={weather}
+                    alt="Weather icon"
+                  />
+                  <div className="metrics-child">
+                    <p>
+                      <b>Weather:</b>
+                    </p>
+                    <p>{`${citiesData.weather.winter_mintempF_mean}°F - ${citiesData.weather.summer_maxtempF_mean}°F`}</p>
+                  </div>
                 </div>
               </div>
               <div className="btn-container">

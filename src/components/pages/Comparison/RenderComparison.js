@@ -3,6 +3,7 @@ import { Tabs } from "antd";
 import LoadingComponent from "../../common/LoadingComponent.js";
 import ComparisonCard from "./comparisonCard";
 import Graph from "../../common/Graphs/renderGraph";
+import Plot from "plotly.js";
 class RenderComparison extends Component {
   // puts state name in an array for easier acccess
   getUnemployRate = () => {
@@ -86,44 +87,40 @@ class RenderComparison extends Component {
             );
           })}
         </div>
-        {/* Renders the tabs for the user to navigate for different visuals */}
-        <Tabs
-          data-testid="ant-d-tabs"
-          className="metrics-container"
-          defaultActiveKey="1"
-          centered="true"
-          tabBarStyle={{
-            color: "white"
-          }}
-        >
-          <TabPane className="graph-holder" tab="Population Trend" key="1">
-            <Graph
-              dataSet={getCityPop()[0]}
-              dataSet2={getCityPop()[1]}
-              dataSet3={getCityPop()[2]}
-            />
-          </TabPane>
-          <TabPane className="graph-holder" tab="Apartment Prices" key="2">
-            <Graph
-              dataSet={getRentals()[0]}
-              dataSet2={getRentals()[1]}
-              dataSet3={getRentals()[2]}
-            />
-          </TabPane>
-          <TabPane className="graph-holder" tab="Unemployment Rate" key="3">
-            <Graph
-              dataSet={getUnemployRate()[0]}
-              dataSet2={getUnemployRate()[1]}
-              dataSet3={getUnemployRate()[2]}
-            />
-          </TabPane>
-        </Tabs>
-        <div className="metrics-container">
-          <Graph
-            dataSet={getJobs()[0]}
-            dataSet2={getJobs()[1]}
-            dataSet3={getJobs()[2]}
-          />
+
+        <div className="graph-container">
+          {/* Renders the tabs for the user to navigate for different visuals */}
+          <Tabs
+            data-testid="ant-d-tabs"
+            className="metrics-container graphs"
+            defaultActiveKey="1"
+            centered="true"
+            tabBarStyle={{
+              color: "white"
+            }}
+          >
+            <TabPane className="graph-holder" tab="Population Trend" key="2">
+              <Graph
+                dataSet={getCityPop()[0]}
+                dataSet2={getCityPop()[1]}
+                dataSet3={getCityPop()[2]}
+              />
+            </TabPane>
+            <TabPane className="graph-holder" tab="Apartment Prices" key="1">
+              <Graph
+                dataSet={getRentals()[0]}
+                dataSet2={getRentals()[1]}
+                dataSet3={getRentals()[2]}
+              />
+            </TabPane>
+            <TabPane className="graph-holder" tab="Unemployment Rate" key="3">
+              <Graph
+                dataSet={getUnemployRate()[0]}
+                dataSet2={getUnemployRate()[1]}
+                dataSet3={getUnemployRate()[2]}
+              />
+            </TabPane>
+          </Tabs>
         </div>
       </div>
     );

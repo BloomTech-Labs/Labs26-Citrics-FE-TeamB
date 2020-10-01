@@ -7,9 +7,9 @@ import AboutPageContainer from "./AboutPageContainer";
 // Styling
 import { Card, Avatar } from "antd";
 import {
-  EditOutlined,
-  EllipsisOutlined,
-  SettingOutlined
+  GithubOutlined,
+  MailOutlined,
+  LinkedinOutlined
 } from "@ant-design/icons";
 
 const { Meta } = Card;
@@ -35,9 +35,9 @@ const RenderAboutPage = ({ isLoading }) => {
             <img alt="Bhavani Rajan" src="https://i.imgur.com/9TcokzL.png" />
           }
           actions={[
-            <SettingOutlined key="setting" />,
-            <EditOutlined key="edit" />,
-            <EllipsisOutlined key="ellipsis" />
+            <GithubOutlined key="github" />,
+            <MailOutlined key="email" />,
+            <LinkedinOutlined key="linkedin" />
           ]}
         >
           <Meta
@@ -58,9 +58,9 @@ const RenderAboutPage = ({ isLoading }) => {
             <img alt="Ekram Ahmed" src="https://i.imgur.com/vBnpIEC.png" />
           }
           actions={[
-            <SettingOutlined key="setting" />,
-            <EditOutlined key="edit" />,
-            <EllipsisOutlined key="ellipsis" />
+            <GithubOutlined key="github" />,
+            <MailOutlined key="email" />,
+            <LinkedinOutlined key="linkedin" />
           ]}
         >
           <Meta
@@ -77,9 +77,9 @@ const RenderAboutPage = ({ isLoading }) => {
             <img alt="Zack Murray" src="https://i.imgur.com/jaELQtg.png" />
           }
           actions={[
-            <SettingOutlined key="setting" />,
-            <EditOutlined key="edit" />,
-            <EllipsisOutlined key="ellipsis" />
+            <GithubOutlined key="github" />,
+            <MailOutlined key="email" />,
+            <LinkedinOutlined key="linkedin" />
           ]}
         >
           <Meta
@@ -98,9 +98,9 @@ const RenderAboutPage = ({ isLoading }) => {
           style={{ width: 200 }}
           cover={<img alt="Alan Lee" src="https://i.imgur.com/ueHbN2x.png" />}
           actions={[
-            <SettingOutlined key="setting" />,
-            <EditOutlined key="edit" />,
-            <EllipsisOutlined key="ellipsis" />
+            <GithubOutlined key="github" />,
+            <MailOutlined key="email" />,
+            <LinkedinOutlined key="linkedin" />
           ]}
         >
           <Meta
@@ -117,9 +117,9 @@ const RenderAboutPage = ({ isLoading }) => {
             <img alt="David Horstman" src="https://i.imgur.com/jF51x65.png" />
           }
           actions={[
-            <SettingOutlined key="setting" />,
-            <EditOutlined key="edit" />,
-            <EllipsisOutlined key="ellipsis" />
+            <GithubOutlined key="github" />,
+            <MailOutlined key="email" />,
+            <LinkedinOutlined key="linkedin" />
           ]}
         >
           <Meta
@@ -136,9 +136,9 @@ const RenderAboutPage = ({ isLoading }) => {
             <img alt="Lyndsi Williams" src="https://i.imgur.com/KpOZXeg.png" />
           }
           actions={[
-            <SettingOutlined key="setting" />,
-            <EditOutlined key="edit" />,
-            <EllipsisOutlined key="ellipsis" />
+            <GithubOutlined key="github" />,
+            <MailOutlined key="email" />,
+            <LinkedinOutlined key="linkedin" />
           ]}
         >
           <Meta
@@ -155,9 +155,9 @@ const RenderAboutPage = ({ isLoading }) => {
             <img alt="Rachele Edwards" src="https://i.imgur.com/UR0sA0t.png" />
           }
           actions={[
-            <SettingOutlined key="setting" />,
-            <EditOutlined key="edit" />,
-            <EllipsisOutlined key="ellipsis" />
+            <GithubOutlined key="github" />,
+            <MailOutlined key="email" />,
+            <LinkedinOutlined key="linkedin" />
           ]}
         >
           <Meta

@@ -45,7 +45,7 @@ export default function AdvancedSearchContainer(props) {
   // Currently unimplemented
   useEffect(() => {
     //await axios.something
-    setSearchResults([]);
+    setSearchResults(initialResults);
   }, [searchPrefs]);
 
   return (
@@ -55,7 +55,7 @@ export default function AdvancedSearchContainer(props) {
         updateSearchPrefs={updateNamedSearchPrefs}
       />
       {searchResults.map(elem => (
-        <SearchResult {...elem} />
+        <SearchResult {...elem} key={elem.id} />
       ))}
     </div>
   );

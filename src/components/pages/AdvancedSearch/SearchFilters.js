@@ -8,10 +8,7 @@ import {
   WEATHER_MIN,
   WEATHER_MAX
 } from "./constants";
-export default function RenderSearchFilters({
-  searchPrefs,
-  updateSearchPrefs
-}) {
+export default function SearchFilters({ searchPrefs, updateSearchPrefs }) {
   // This function expects an event triggered by an element with 'name' and 'value' attributes
   // that match a key-value pair in the searchPrefs object
   const processSearchPrefsEvent = ({ target: { name, value } }) =>

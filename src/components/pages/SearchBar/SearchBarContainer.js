@@ -84,7 +84,6 @@ class SearchBar extends React.Component {
     );
   }
 }
-
 const mapPropsToState = ({ cities: { selectedCities } }, props) => ({
   ...props,
   selectedCities

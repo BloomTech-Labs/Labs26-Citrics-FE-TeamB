@@ -82,19 +82,7 @@ export default function RenderSearchBar({
         <>
           {/* If we are in advanced view, show the preferences pane */}
           <div className="site-input-group-wrapper">
-            {/* For job industry--type and autocomplete */}
-            <Input.Group compact>
-              <label htmlFor="jobs">Job Industry:</label>
-              <br />
-              <Input
-                style={{ width: "50%" }}
-                placeholder="Ex: Tech"
-                name="jobs"
-                onChange={processSearchPrefsEvent}
-                value={searchPrefs.jobs}
-              />
-            </Input.Group>
-
+            {/* Population*/}
             <br />
             <label>
               Population:
@@ -170,6 +158,32 @@ export default function RenderSearchBar({
               />
             </Input.Group> */}
           </div>
+
+          {/* Weather */}
+          <br />
+          <label htmlFor="weather">Weather:</label>
+          <Slider
+            id="weather"
+            range
+            min={15}
+            max={105}
+            step={5}
+            value={[searchPrefs.weather_min, searchPrefs.weather_max]}
+            tipFormatter={formatWeather}
+            onChange={([weather_min, weather_max]) =>
+              updateNamedSearchPrefs({
+                weather_min,
+                weather_max
+              })
+            }
+          />
+          <div className="advanced-search-range-display">
+            <span>{formatWeather(searchPrefs.weather_min)}</span>
+            <span> to </span>
+            <span>{formatWeather(searchPrefs.weather_max)}</span>
+          </div>
+
+          {/* Rent */}
           <br />
           <label htmlFor="rent">
             {"Rent for "}
@@ -207,28 +221,20 @@ export default function RenderSearchBar({
             <span> to </span>
             <span>{formatMoney(searchPrefs.rent_max)}</span>
           </div>
+
+          {/* Job industries */}
           <br />
-          <label htmlFor="weather">Weather:</label>
-          <Slider
-            id="weather"
-            range
-            min={15}
-            max={105}
-            step={5}
-            value={[searchPrefs.weather_min, searchPrefs.weather_max]}
-            tipFormatter={formatWeather}
-            onChange={([weather_min, weather_max]) =>
-              updateNamedSearchPrefs({
-                weather_min,
-                weather_max
-              })
-            }
-          />
-          <div className="advanced-search-range-display">
-            <span>{formatWeather(searchPrefs.weather_min)}</span>
-            <span> to </span>
-            <span>{formatWeather(searchPrefs.weather_max)}</span>
-          </div>
+          <Input.Group compact>
+            <label htmlFor="jobs">Job Industries:</label>
+            <br />
+            <Input
+              style={{ width: "50%" }}
+              placeholder="Ex: Tech"
+              name="jobs"
+              onChange={processSearchPrefsEvent}
+              value={searchPrefs.jobs}
+            />
+          </Input.Group>
         </>
       )}
     </div>

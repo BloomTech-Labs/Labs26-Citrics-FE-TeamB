@@ -176,9 +176,18 @@ export default function RenderSearchBar({
                 range
                 min={10000}
                 max={10000000}
-                step={1000}
+                step={10000}
                 defaultValue={[10000, 10000000]}
+                value={[searchPrefs.pop_min, searchPrefs.pop_max]}
                 tipFormatter={val => val.toLocaleString()}
+                onChange={([min, max]) => {
+                  updateSearchPrefs({
+                    target: { value: min, name: "pop_min" }
+                  });
+                  updateSearchPrefs({
+                    target: { value: max, name: "pop_max" }
+                  });
+                }}
               />
             </label>
             <Input.Group compact>
@@ -194,7 +203,9 @@ export default function RenderSearchBar({
                   updateSearchPrefs({ target: { value, name: "pop_min" } })
                 }
                 value={searchPrefs.pop_min}
-                formatter={val => val.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                formatter={val =>
+                  `${val}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }
                 parser={value => value.replace(/\$\s?|(,*)/g, "")}
               />
               <Input
@@ -224,7 +235,9 @@ export default function RenderSearchBar({
                   updateSearchPrefs({ target: { value, name: "pop_max" } })
                 }
                 value={searchPrefs.pop_max}
-                formatter={val => val.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                formatter={val =>
+                  `${val}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                }
                 parser={value => value.replace(/\$\s?|(,*)/g, "")}
               />
             </Input.Group>
@@ -236,7 +249,7 @@ export default function RenderSearchBar({
               <Step key={item.title} title={item.title} />
             ))}
           </Steps>
-          {console.log("TESTING", current)}
+          {/*console.log("TESTING", current)*/}
           <div className="steps-content">{steps[current].content}</div>
           <div className="steps-action">
             {current < steps.length - 1 && (

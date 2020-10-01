@@ -60,7 +60,6 @@ export const barGraph = (set1, set2, set3) => {
     y: set1.plotY,
     type: "bar",
     name: set1.name,
-    width: 0.3,
     marker: {
       color: "rgb(49,130,189)",
       opacity: 0.7
@@ -74,7 +73,6 @@ export const barGraph = (set1, set2, set3) => {
       y: set2.plotY,
       type: "bar",
       name: set2.name,
-      width: 0.3,
       marker: {
         color: "rgb(247, 77, 77,.5)",
         opacity: 0.5
@@ -89,7 +87,6 @@ export const barGraph = (set1, set2, set3) => {
       y: set3.plotY,
       type: "bar",
       name: set3.name,
-      width: 0.3,
       marker: {
         color: "rgb(158,202,225)",
         opacity: 0.5

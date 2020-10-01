@@ -84,8 +84,15 @@ class SearchBar extends React.Component {
     );
   }
 }
+
+const SearchBarFunctionWrapper = props => {
+  return <SearchBar {...props} />;
+};
+
 const mapPropsToState = ({ cities: { selectedCities } }, props) => ({
   ...props,
   selectedCities
 });
-export default connect(mapPropsToState, { addCity })(withRouter(SearchBar));
+export default connect(mapPropsToState, { addCity })(
+  withRouter(SearchBarFunctionWrapper)
+);

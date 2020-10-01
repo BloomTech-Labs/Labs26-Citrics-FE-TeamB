@@ -3,13 +3,14 @@ import useLocalStorage from "../../../hooks/useLocalStorage";
 
 import RenderSearchFilters from "./RenderSearchFilters";
 import RenderSearchResult from "./RenderSearchResult";
-
-const POP_MIN = 10000;
-const POP_MAX = 2100000;
-const RENT_MIN = 100;
-const RENT_MAX = 5100;
-const WEATHER_MIN = 15;
-const WEATHER_MAX = 105;
+import {
+  POP_MIN,
+  POP_MAX,
+  RENT_MIN,
+  RENT_MAX,
+  WEATHER_MIN,
+  WEATHER_MAX
+} from "./constants";
 
 const initialSearchPrefs = {
   rooms: "1br",
@@ -31,19 +32,19 @@ export default function AdvancedSearchContainer(props) {
     "searchPrefs",
     initialSearchPrefs
   );
-  // useLocalStorage is a custom hook made by David Horstman
-  // For more info hover over it or see the docs in /hooks/useLocalStorage.js
 
   // Simultaneously update any number of search prefs
   // based on key-value pairs on the object passed in
-  // This is used by sliders to set both ends at once
   const updateNamedSearchPrefs = changes =>
     setSearchPrefs({ ...searchPrefs, ...changes });
 
   return (
     <div className="advanced-search-container">
-      <RenderSearchFilters />
-      {this.state.searchResults.map(elem => (
+      <RenderSearchFilters
+        searchPrefs={searchPrefs}
+        updateSearchPrefs={updateNamedSearchPrefs}
+      />
+      {searchResults.map(elem => (
         <RenderSearchResult {...elem} />
       ))}
     </div>

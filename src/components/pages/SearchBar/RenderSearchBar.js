@@ -79,10 +79,9 @@ export default function RenderSearchBar({
       content: (
         <div>
           <Input.Group compact>
-            <label htmlFor="between">Prices: </label>&nbsp;&nbsp;
             <InputNumber
               style={{ width: 85, textAlign: "center" }}
-              placeholder="Minimum"
+              placeholder="Min"
               name="rent_min"
               // This input invokes the event handler with just a value
               // instead of an event object
@@ -114,7 +113,7 @@ export default function RenderSearchBar({
                 width: 85,
                 textAlign: "center"
               }}
-              placeholder="Maximum"
+              placeholder="Max"
               name="rent_max"
               // onChange here wraps the value in a synthetic event as described above
               onChange={value =>
@@ -134,20 +133,19 @@ export default function RenderSearchBar({
 
   return (
     <div className="search-bar">
-      <label>
-        <Switch onChange={toggleAdvancedView} checked={showAdvancedView} />
-        {showAdvancedView ? "Advanced Search" : "Basic Search"}
-      </label>
       {/* If we're not in advanced view, show the city autocomplete */}
       {!showAdvancedView ? (
-        <AutoComplete
-          value={searchTerm}
-          options={options}
-          style={{ width: 200 }}
-          onSelect={onSelect}
-          onChange={onChange}
-          placeholder="Enter City.."
-        />
+        <>
+          <AutoComplete
+            value={searchTerm}
+            options={options}
+            style={{ width: 200 }}
+            onSelect={onSelect}
+            onChange={onChange}
+            placeholder="Enter City.."
+          />
+          <br />
+        </>
       ) : (
         <>
           {/* If we are in advanced view, show the preferences pane */}
@@ -157,7 +155,7 @@ export default function RenderSearchBar({
               <label htmlFor="jobs">Job Industry:</label>
               <br />
               <Input
-                style={{ width: "50%" }}
+                style={{ width: "100%" }}
                 placeholder="Ex: Tech"
                 name="jobs"
                 onChange={updateSearchPrefs}
@@ -232,6 +230,12 @@ export default function RenderSearchBar({
           </div>
         </>
       )}
+      <br />
+      <label>
+        <Switch onChange={toggleAdvancedView} checked={showAdvancedView} />
+        &nbsp;
+        {showAdvancedView ? "Advanced Search" : "Basic Search"}
+      </label>
     </div>
   );
 }

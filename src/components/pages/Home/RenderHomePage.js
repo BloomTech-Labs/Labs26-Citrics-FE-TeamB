@@ -23,14 +23,17 @@ function RenderHomePage({ toggleDrawer }) {
         <h1>Citrics</h1>
         <h2>One-stop for City Metrics!</h2>
         <br />
-        <EnvironmentFilled className="bullet-points" />
-        &nbsp;<Text className="bullet-points">Search for a city</Text>
-        <br />
-        <CloudFilled className="bullet-points" />
-        &nbsp;<Text className="bullet-points">View popular demographics</Text>
-        <br />
-        <ProfileFilled className="bullet-points" />
-        &nbsp;<Text className="bullet-points">Compare with other cities</Text>
+        <div className="bullet-points">
+          <EnvironmentFilled />
+          &nbsp;<Text>Search for a city</Text>
+          <br />
+          <CloudFilled />
+          &nbsp;<Text>View popular demographics</Text>
+          <br />
+          <ProfileFilled />
+          &nbsp;<Text>Compare with other cities</Text>
+        </div>
+
         <br />
         <br />
         <Button type="primary" className="GSbutton" onClick={openNav}>

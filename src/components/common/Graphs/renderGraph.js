@@ -47,7 +47,7 @@ export default function Graph({ dataSet, dataSet2, dataSet3 }) {
       );
     } else if (dataSet.type === "table") {
       const { tableData, layout } = table(data);
-      return <Plot data={tableData} layout={layout} />;
+      return <Plot data={tableData} layout={layout} style={style} />;
     }
   };
 

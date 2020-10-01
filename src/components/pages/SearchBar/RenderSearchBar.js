@@ -114,57 +114,6 @@ export default function RenderSearchBar({
               <span> to </span>
               <span>{formatPop(searchPrefs.pop_max)}</span>
             </div>
-            {/* <Input.Group compact>
-              <InputNumber
-                style={{ width: 90, textAlign: "center" }}
-                placeholder="Minimum"
-                name="pop_min"
-                // This input invokes the event handler with just a value
-                // instead of an event object
-                // The onChange function here essentially wraps that value into
-                // a "synthetic" event object
-                onChange={value =>
-                  updateSearchPrefs({ target: { value, name: "pop_min" } })
-                }
-                value={searchPrefs.pop_min}
-                formatter={val =>
-                  `${val}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                }
-                parser={value => value.replace(/\$\s?|(,*)/g, "")}
-              />
-              <Input
-                className="site-input-split"
-                style={{
-                  width: 30,
-                  borderLeft: 0,
-                  borderRight: 0,
-                  pointerEvents: "none"
-                }}
-                placeholder="-"
-                disabled
-              />
-              <InputNumber
-                className="site-input-right"
-                style={{
-                  width: 90,
-                  textAlign: "center"
-                }}
-                placeholder="Maximum"
-                name="pop_max"
-                // This input invokes the event handler with just a value
-                // instead of an event object
-                // The onChange function here essentially wraps that value into
-                // a "synthetic" event object
-                onChange={value =>
-                  updateSearchPrefs({ target: { value, name: "pop_max" } })
-                }
-                value={searchPrefs.pop_max}
-                formatter={val =>
-                  `${val}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                }
-                parser={value => value.replace(/\$\s?|(,*)/g, "")}
-              />
-            </Input.Group> */}
           </div>
 
           {/* Weather */}

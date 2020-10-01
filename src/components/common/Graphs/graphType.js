@@ -37,11 +37,11 @@ export const lineGraph = (set1, set2, set3) => {
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
     font: {
-      size: 14,
+      size: 12,
       color: "#000"
     },
     showlegend: true,
-    title: set1.graphName,
+    // title: set1.graphName,
     autosize: true
   };
   return {
@@ -60,6 +60,7 @@ export const barGraph = (set1, set2, set3) => {
     y: set1.plotY,
     type: "bar",
     name: set1.name,
+    width: 0.3,
     marker: {
       color: "rgb(49,130,189)",
       opacity: 0.7
@@ -73,6 +74,7 @@ export const barGraph = (set1, set2, set3) => {
       y: set2.plotY,
       type: "bar",
       name: set2.name,
+      width: 0.3,
       marker: {
         color: "rgb(247, 77, 77,.5)",
         opacity: 0.5
@@ -87,6 +89,7 @@ export const barGraph = (set1, set2, set3) => {
       y: set3.plotY,
       type: "bar",
       name: set3.name,
+      width: 0.3,
       marker: {
         color: "rgb(158,202,225)",
         opacity: 0.5
@@ -97,12 +100,12 @@ export const barGraph = (set1, set2, set3) => {
   let dataPlot = [trace1, set2 ? trace2 : {}, set3 ? trace3 : {}];
 
   let layout = {
-    title: set1.graphName,
+    // title: set1.graphName,
     autosize: true,
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
     font: {
-      size: 14,
+      size: 12,
       color: "#000"
     },
     showlegend: true,
@@ -149,23 +152,21 @@ export const pieChart = set1 => {
 
 // TABLE CONFIG
 export const table = set1 => {
-  var values = set1.values;
-
-  var tableData = [
+  let tableData = [
     {
       type: "table",
       header: {
         values: set1.headers,
         align: "center",
-        line: { width: 1, color: "black" },
-        fill: { color: "grey" },
-        font: { family: "Arial", size: 12, color: "white" }
+        line: { width: 0.5, color: "black" },
+        fill: { color: "#de2817" },
+        font: { size: 12, color: "white" }
       },
       cells: {
-        values: values,
+        values: set1.values,
         align: "left",
-        line: { color: "black", width: 1 },
-        font: { family: "Arial", size: 11, color: ["black"] }
+        line: { color: "black", width: 0.5 },
+        font: { size: 10, color: ["black"] }
       }
     }
   ];

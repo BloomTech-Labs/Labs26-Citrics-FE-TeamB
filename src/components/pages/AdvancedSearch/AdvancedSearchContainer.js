@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
 import RenderSearchFilters from "./RenderSearchFilters";
@@ -22,8 +22,11 @@ const initialSearchPrefs = {
   weather_max: WEATHER_MAX
 };
 
+//TEMPORARY - delete once a search endpoint is implemented
+const initialResults = [{ id: 1, name: "San Francisco", state: "CA" }];
+
 export default function AdvancedSearchContainer(props) {
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState(initialResults);
 
   // I opted to store searchPrefs in an object to simplify getting/setting values
   // Otherwise we'd need many different useLocalStorage calls
@@ -37,6 +40,13 @@ export default function AdvancedSearchContainer(props) {
   // based on key-value pairs on the object passed in
   const updateNamedSearchPrefs = changes =>
     setSearchPrefs({ ...searchPrefs, ...changes });
+
+  // This function will update searchResults whenever the user changes their preferences
+  // Currently unimplemented
+  useEffect(() => {
+    //await axios.something
+    setSearchResults([]);
+  }, [searchPrefs]);
 
   return (
     <div className="advanced-search-container">

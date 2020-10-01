@@ -42,7 +42,6 @@ export default function RenderSearchFilters({
     <div className="search-bar">
       <div className="site-input-group-wrapper">
         {/* Population*/}
-
         <br />
         <label>
           Population:

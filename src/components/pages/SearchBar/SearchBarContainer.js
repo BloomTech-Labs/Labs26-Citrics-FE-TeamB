@@ -48,7 +48,7 @@ class SearchBar extends React.Component {
   onChange = searchTerm => {
     this.setState({ searchTerm });
     const searchResults = this.state.cityList.filter(item =>
-      item.value.toLowerCase().includes(searchTerm)
+      item.value.toLowerCase().includes(searchTerm.toLowerCase())
     );
     this.setState({
       options: !this.state.searchTerm ? [] : searchResults.slice(0, 5)
@@ -58,7 +58,6 @@ class SearchBar extends React.Component {
   // When clicking on a city, add it to the selected cities
   // and empty the search term
   onSelect = data => {
-    console.log(this.props);
     if (this.props.selectedCities.length < 3) {
       const entry = this.state.cityList.find(({ value }) => value === data);
       this.props.addCity(entry);

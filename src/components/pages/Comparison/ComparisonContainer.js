@@ -38,7 +38,7 @@ class ComparisonContainer extends React.Component {
     const selectedCities = Array.from(queryParams.values()).map(id =>
       Number(id)
     );
-    // console.log("selectedCities", selectedCities);
+
     return selectedCities;
   };
   // Retrieving selectedCities from this.state instead of as a function argument

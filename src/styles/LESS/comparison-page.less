@@ -1,50 +1,81 @@
 .comparison-container {
-  .background-image("/compare_screen_full.jpg");
+  background-color: #fafafa;
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 100%;
 }
 
 .card-container {
   display: flex;
   justify-content: space-evenly;
   margin: 6% 0;
-}
-.card {
-  margin: 0 5%;
-}
-.comparison-card {
-  width: 240px;
-  .custom-image {
-    width: 240px;
-    height: 130px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: hidden;
-    img {
-      opacity: 0;
+  width: 100%;
+
+  .card {
+    margin: 0 5%;
+    width: 25%;
+    box-shadow: 3px 4px 22px -4px rgba(0, 0, 0, 0.46);
+    border-radius: 10px;
+    .comparison-card {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .custom-image {
+        width: 100%;
+        height: 130px;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        object-fit: cover;
+        overflow: hidden;
+        border-radius: 10px 10px 0 0;
+        img {
+          opacity: 0;
+        }
+      }
     }
   }
 }
-.more-info-btn {
-  .button(95px, 32px, 1.4rem, @buttonBG-compare);
-  border: 1px solid @buttonBG-compare;
 
-  &:hover {
-    background-color: @buttonBG-compare-hover;
-    border: 1px solid @buttonBG-compare-hover;
+.basic-card-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-top: 5%;
+  text-align: center;
+  h3 {
+    font-size: 2.5rem;
+  }
+  .btn-container {
+    width: 100%;
+    .more-info-btn {
+      .button(95px, 32px, 1.4rem, @buttonBG-compare);
+      border: 1px solid @buttonBG-compare;
+      border-radius: 0 0 10px 10px;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.2s all;
+      &:hover {
+        background-color: @buttonBG-compare-hover;
+        border: 1px solid @buttonBG-compare-hover;
+      }
+    }
   }
 }
 
 //for the tabs and the graphs
 .metrics-container {
-  width: 60%;
+  box-shadow: 3px 4px 22px -4px rgba(0, 0, 0, 0.46);
+  margin-bottom: 3%;
+  border-radius: 10px;
 }
 
 //tabs
 .ant-tabs-nav-list {
-  background: @white;
   border-radius: 2px;
 }
 //just the graphs
@@ -53,23 +84,6 @@
   justify-content: center;
 }
 
-//ant design overrides
-.ant-card.comparison-card {
-  background: rgba(255, 255, 255, .5);
-  color: @white;
-  width: 100%;
-
-  .ant-card-body {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
 .ant-tabs-nav-list {
-  background-color: transparent;
-  color: @white;
-  width: 50%;
+  color: #000;
 }

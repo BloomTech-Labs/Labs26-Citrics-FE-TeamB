@@ -11,8 +11,8 @@ const ModalComponent = ({ visible, setVisible, city }) => {
           title={`Info for ${city.name}`}
           centered
           visible={visible}
-          onOk={() => setVisible(false)}
-          onCancel={() => setVisible(false)}
+          onOk={() => setVisible()}
+          onCancel={() => setVisible()}
           style={{ top: 20 }}
           width={1000}
         >

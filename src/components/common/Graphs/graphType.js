@@ -6,7 +6,7 @@ export const lineGraph = (set1, set2, set3) => {
     y: set1.plotY,
     line: { color: "rgba(222,45,38,0.8)" },
     mode: "lines",
-    name: set1.state,
+    name: set1.name,
     type: "scatter"
   };
   if (set2) {
@@ -15,7 +15,7 @@ export const lineGraph = (set1, set2, set3) => {
       y: set2.plotY,
       line: { color: "rgb(49,130,189)" },
       mode: "lines",
-      name: set2 ? set2.state : "Fix me"
+      name: set2 ? set2.name : "Fix me"
     };
   }
   if (set3) {
@@ -24,7 +24,7 @@ export const lineGraph = (set1, set2, set3) => {
       y: set3.plotY,
       line: { color: "rgb(204,204,204)" },
       mode: "lines",
-      name: set3 ? set3.state : "Fix me too"
+      name: set3 ? set3.name : "Fix me too"
     };
   }
 
@@ -32,15 +32,15 @@ export const lineGraph = (set1, set2, set3) => {
   let layout = {
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
-    yaxis: {
-      showgrid: false
-    },
-    xaxis: {
-      showgrid: false
-    },
+    // yaxis: {
+    //   showgrid: false
+    // },
+    // xaxis: {
+    //   showgrid: false
+    // },
     font: {
       size: 14,
-      color: "rgba(245,246,249,1)"
+      color: "#000"
     },
 
     showlegend: false,
@@ -59,22 +59,24 @@ export const barGraph = (set1, set2, set3) => {
     x: set1.plotX,
     y: set1.plotY,
     type: "bar",
-    name: set1.state,
+    name: set1.name,
     marker: {
       color: "rgb(49,130,189)",
       opacity: 0.7
-    }
+    },
+    orientation: set1.orientation ? set1.orientation : "v"
   };
   if (set2) {
     trace2 = {
       x: set2.plotX,
       y: set2.plotY,
       type: "bar",
-      name: set2.state,
+      name: set2.name,
       marker: {
         color: "rgb(247, 77, 77,.5)",
         opacity: 0.5
-      }
+      },
+      orientation: set1.orientation ? set1.orientation : "v"
     };
   }
   if (set3) {
@@ -82,11 +84,12 @@ export const barGraph = (set1, set2, set3) => {
       x: set3.plotX,
       y: set3.plotY,
       type: "bar",
-      name: set3.state,
+      name: set3.name,
       marker: {
         color: "rgb(158,202,225)",
         opacity: 0.5
-      }
+      },
+      orientation: set1.orientation ? set1.orientation : "v"
     };
   }
   let dataPlot = [trace1, set2 ? trace2 : {}, set3 ? trace3 : {}];
@@ -95,19 +98,18 @@ export const barGraph = (set1, set2, set3) => {
     title: set1.graphName,
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
-    yaxis: {
-      showgrid: false
-    },
-    xaxis: {
-      showgrid: false,
-      tickangle: -45
-    },
+    // yaxis: {
+    //   showgrid: false
+    // },
+    // xaxis: {
+    //   showgrid: false
+    // },
     font: {
       size: 14,
-      color: "rgba(245,246,249,1)"
+      color: "#000"
     },
     showlegend: false,
-    barmode: "group"
+    barmode: set1.mode ? set1.mode : "group"
   };
 
   return { dataPlot, layout };

@@ -1,3 +1,4 @@
+//Global Detail / card styling
 .city-page {
   display: flex;
   justify-content: center;
@@ -19,13 +20,17 @@
 .one-render-p {
   font-size: @par;
 }
+
+//DetailPane 
 .main-detail-content {
   display: flex;
   align-items: center;
 }
+
 .detail-pane-icon {
   font-size: @h0size;
 }
+
 .graph-icons {
   display: flex;
   margin: 0px 5px;
@@ -33,16 +38,13 @@
   &.open {
     background-color: rgba(255, 255, 255, 100);
   }
+
   .graph-icon {
     font-size: @h3size;
   }
+
   .graph-toggle {
     font-size: @h4size;
     padding-right: 5px;
   }
 }
-
-// .js-plotly-plot {
-//     display: flex; //won't override the antd origin inline-block
-//     justify-content: center;
-// }

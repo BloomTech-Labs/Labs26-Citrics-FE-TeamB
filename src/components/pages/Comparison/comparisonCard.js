@@ -41,18 +41,21 @@ class ComparisonCard extends Component {
                 <h3>
                   {citiesData.name}, {citiesData.state}
                 </h3>
-                <p>
+                <div>
                   <img src={population} alt="Population icon" />
+                  <p>Population:</p>
                   {citiesData.population.data.total_pop.toLocaleString()}
-                </p>
-                <p>
+                </div>
+                <div>
                   <img src={pricing} alt="Rental pricing icon" />
+                  <p>Rental Prices:</p>
                   {`${"$" + citiesData.rent["1br"]}/month (1BR)`}
-                </p>
-                <p>
+                </div>
+                <div>
                   <img src={weather} alt="Weather icon" />
+                  <p>Weather:</p>
                   {`${citiesData.weather.winter_mintempF_mean}°F - ${citiesData.weather.summer_maxtempF_mean}°F`}
-                </p>
+                </div>
               </div>
               <div className="btn-container">
                 <button

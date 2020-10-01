@@ -6,17 +6,19 @@ import {
   Steps,
   Button,
   message,
-  Switch
+  Switch,
+  Slider
 } from "antd";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
 const { Step } = Steps;
 
-
 // The 'rooms' value for rental prices defaults to 1 bedroom
 // All other values default to null/undefined, so they don't need to be manually set here
 const initialSearchPrefs = {
-  rooms: "1br"
+  rooms: "1br",
+  pop_min: 10000,
+  pop_max: 10000000
 };
 
 export default function RenderSearchBar({
@@ -135,7 +137,6 @@ export default function RenderSearchBar({
 
   return (
     <div className="search-bar">
-
       <label>
         <Switch onChange={toggleAdvancedView} checked={showAdvancedView} />
         {showAdvancedView ? "Advanced Search" : "Basic Search"}
@@ -169,15 +170,32 @@ export default function RenderSearchBar({
 
             {/* For population and rent price */}
             <br />
+            <label>
+              Population:
+              <Slider
+                range
+                min={10000}
+                max={10000000}
+                step={1000}
+                defaultValue={[10000, 10000000]}
+                tipFormatter={val => val.toLocaleString()}
+              />
+            </label>
             <Input.Group compact>
-              <label htmlFor="between">Population: </label>
-              <br />
-              <Input
+              <InputNumber
                 style={{ width: 90, textAlign: "center" }}
                 placeholder="Minimum"
                 name="pop_min"
-                onChange={updateSearchPrefs}
+                // This input invokes the event handler with just a value
+                // instead of an event object
+                // The onChange function here essentially wraps that value into
+                // a "synthetic" event object
+                onChange={value =>
+                  updateSearchPrefs({ target: { value, name: "pop_min" } })
+                }
                 value={searchPrefs.pop_min}
+                formatter={val => val.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                parser={value => value.replace(/\$\s?|(,*)/g, "")}
               />
               <Input
                 className="site-input-split"
@@ -190,7 +208,7 @@ export default function RenderSearchBar({
                 placeholder="-"
                 disabled
               />
-              <Input
+              <InputNumber
                 className="site-input-right"
                 style={{
                   width: 90,
@@ -198,12 +216,20 @@ export default function RenderSearchBar({
                 }}
                 placeholder="Maximum"
                 name="pop_max"
-                onChange={updateSearchPrefs}
+                // This input invokes the event handler with just a value
+                // instead of an event object
+                // The onChange function here essentially wraps that value into
+                // a "synthetic" event object
+                onChange={value =>
+                  updateSearchPrefs({ target: { value, name: "pop_max" } })
+                }
                 value={searchPrefs.pop_max}
+                formatter={val => val.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                parser={value => value.replace(/\$\s?|(,*)/g, "")}
               />
             </Input.Group>
           </div>
-          <br/>
+          <br />
           {/* Steps format for Bedroom and Rental price search */}
           <Steps current={current}>
             {steps.map(item => (
@@ -234,8 +260,6 @@ export default function RenderSearchBar({
           </div>
         </>
       )}
-
-    
     </div>
   );
 }

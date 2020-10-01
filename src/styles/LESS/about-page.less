@@ -1,23 +1,34 @@
 .about-container {
-  .ant-card {
-    box-shadow: 3px 4px 22px -4px rgba(0, 0, 0, 0.46);
+  .background-image("/compare_screen_full.jpg");
+  // background-color: #fafafa;
+
+  .about-introduction {
+    text-align: center;
+    margin: 0 10% 0 10%;
+    padding: 2% 3% 1% 2%;
+    background-color: @white;
+    opacity: .85;
   }
-  
+
   .about-tpl {
     display: flex;
-    justify-content: center;
-    padding-top: 5%;
+    justify-content: space-evenly;
+    padding-top: 2%;
   }
 
   .about-ds {
     display: flex;
     justify-content: space-evenly;
-    padding-top: 5%;
+    padding-top: 2%;
   }
 
   .about-web {
     display: flex;
     justify-content: space-evenly;
-    padding-top: 5%;
+    padding-top: 2%;
+  }
+
+  .ant-card {
+    box-shadow: 3px 4px 22px -4px rgba(0, 0, 0, 0.46);
   }
 }

@@ -27,177 +27,146 @@ const RenderAboutPage = ({ isLoading }) => {
 
       {/* ----- Team cards ----- */}
 
-      {/* TPL - Bhavani */}
-      <Card
-        style={{ width: 300 }}
-        cover={
-          <img
-            alt="example"
-            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-          />
-        }
-        actions={[
-          <SettingOutlined key="setting" />,
-          <EditOutlined key="edit" />,
-          <EllipsisOutlined key="ellipsis" />
-        ]}
-      >
-        <Meta
-          avatar={
-            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+      <section className="about-tpl">
+        {/* TPL - Bhavani */}
+        <Card
+          style={{ width: 200 }}
+          cover={
+            <img alt="Bhavani Rajan" src="https://i.imgur.com/9TcokzL.png" />
           }
-          title="Card title"
-          description="This is the description"
-        />
-      </Card>
-
-      {/* Web - Alan, David, Lyndsi, Rachele */}
-
-      {/* Alan */}
-      <Card
-        style={{ width: 300 }}
-        cover={
-          <img
-            alt="example"
-            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+          actions={[
+            <SettingOutlined key="setting" />,
+            <EditOutlined key="edit" />,
+            <EllipsisOutlined key="ellipsis" />
+          ]}
+        >
+          <Meta
+            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            title="Team Project Lead"
+            description="This is the description"
           />
-        }
-        actions={[
-          <SettingOutlined key="setting" />,
-          <EditOutlined key="edit" />,
-          <EllipsisOutlined key="ellipsis" />
-        ]}
-      >
-        <Meta
-          avatar={
-            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-          }
-          title="Card title"
-          description="This is the description"
-        />
-      </Card>
-
-      {/* David */}
-      <Card
-        style={{ width: 300 }}
-        cover={
-          <img
-            alt="example"
-            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-          />
-        }
-        actions={[
-          <SettingOutlined key="setting" />,
-          <EditOutlined key="edit" />,
-          <EllipsisOutlined key="ellipsis" />
-        ]}
-      >
-        <Meta
-          avatar={
-            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-          }
-          title="Card title"
-          description="This is the description"
-        />
-      </Card>
-
-      {/* Lyndsi */}
-      <Card
-        style={{ width: 300 }}
-        cover={
-          <img
-            alt="example"
-            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-          />
-        }
-        actions={[
-          <SettingOutlined key="setting" />,
-          <EditOutlined key="edit" />,
-          <EllipsisOutlined key="ellipsis" />
-        ]}
-      >
-        <Meta
-          avatar={
-            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-          }
-          title="Card title"
-          description="This is the description"
-        />
-      </Card>
-
-      {/* Rachele */}
-      <Card
-        style={{ width: 300 }}
-        cover={
-          <img
-            alt="example"
-            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-          />
-        }
-        actions={[
-          <SettingOutlined key="setting" />,
-          <EditOutlined key="edit" />,
-          <EllipsisOutlined key="ellipsis" />
-        ]}
-      >
-        <Meta
-          avatar={
-            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-          }
-          title="Card title"
-          description="This is the description"
-        />
-      </Card>
+        </Card>
+      </section>
 
       {/* Data Science - Ekram, Zack */}
 
-      {/* Ekram */}
-      <Card
-        style={{ width: 300 }}
-        cover={
-          <img
-            alt="example"
-            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-          />
-        }
-        actions={[
-          <SettingOutlined key="setting" />,
-          <EditOutlined key="edit" />,
-          <EllipsisOutlined key="ellipsis" />
-        ]}
-      >
-        <Meta
-          avatar={
-            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+      <section className="about-ds">
+        {/* Ekram */}
+        <Card
+          style={{ width: 200 }}
+          cover={
+            <img alt="Ekram Ahmed" src="https://i.imgur.com/vBnpIEC.png" />
           }
-          title="Card title"
-          description="This is the description"
-        />
-      </Card>
+          actions={[
+            <SettingOutlined key="setting" />,
+            <EditOutlined key="edit" />,
+            <EllipsisOutlined key="ellipsis" />
+          ]}
+        >
+          <Meta
+            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            title="Data Scientist"
+            description="This is the description"
+          />
+        </Card>
 
-      {/* Zack */}
-      <Card
-        style={{ width: 300 }}
-        cover={
-          <img
-            alt="example"
-            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-          />
-        }
-        actions={[
-          <SettingOutlined key="setting" />,
-          <EditOutlined key="edit" />,
-          <EllipsisOutlined key="ellipsis" />
-        ]}
-      >
-        <Meta
-          avatar={
-            <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+        {/* Zack */}
+        <Card
+          style={{ width: 200 }}
+          cover={
+            <img alt="Zack Murray" src="https://i.imgur.com/jaELQtg.png" />
           }
-          title="Card title"
-          description="This is the description"
-        />
-      </Card>
+          actions={[
+            <SettingOutlined key="setting" />,
+            <EditOutlined key="edit" />,
+            <EllipsisOutlined key="ellipsis" />
+          ]}
+        >
+          <Meta
+            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            title="Data Scientist"
+            description="This is the description"
+          />
+        </Card>
+      </section>
+
+      {/* Web - Alan, David, Lyndsi, Rachele */}
+
+      <section className="about-web">
+        {/* Alan */}
+        <Card
+          style={{ width: 200 }}
+          cover={<img alt="Alan Lee" src="https://i.imgur.com/ueHbN2x.png" />}
+          actions={[
+            <SettingOutlined key="setting" />,
+            <EditOutlined key="edit" />,
+            <EllipsisOutlined key="ellipsis" />
+          ]}
+        >
+          <Meta
+            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            title="Web Developer"
+            description="This is the description"
+          />
+        </Card>
+
+        {/* David */}
+        <Card
+          style={{ width: 200 }}
+          cover={
+            <img alt="David Horstman" src="https://i.imgur.com/jF51x65.png" />
+          }
+          actions={[
+            <SettingOutlined key="setting" />,
+            <EditOutlined key="edit" />,
+            <EllipsisOutlined key="ellipsis" />
+          ]}
+        >
+          <Meta
+            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            title="Web Developer"
+            description="This is the description"
+          />
+        </Card>
+
+        {/* Lyndsi */}
+        <Card
+          style={{ width: 200 }}
+          cover={
+            <img alt="Lyndsi Williams" src="https://i.imgur.com/KpOZXeg.png" />
+          }
+          actions={[
+            <SettingOutlined key="setting" />,
+            <EditOutlined key="edit" />,
+            <EllipsisOutlined key="ellipsis" />
+          ]}
+        >
+          <Meta
+            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            title="Web Developer"
+            description="This is the description"
+          />
+        </Card>
+
+        {/* Rachele */}
+        <Card
+          style={{ width: 200 }}
+          cover={
+            <img alt="Rachele Edwards" src="https://i.imgur.com/UR0sA0t.png" />
+          }
+          actions={[
+            <SettingOutlined key="setting" />,
+            <EditOutlined key="edit" />,
+            <EllipsisOutlined key="ellipsis" />
+          ]}
+        >
+          <Meta
+            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            title="Web Developer"
+            description="This is the description"
+          />
+        </Card>
+      </section>
     </div>
   );
 };

@@ -49,6 +49,7 @@ export default function RenderSearchBar({
   const updateNamedSearchPrefs = changes =>
     setSearchPrefs({ ...searchPrefs, ...changes });
 
+
   const formatPop = pop => {
     if (pop >= POP_MAX) {
       return ">2 million";
@@ -56,6 +57,7 @@ export default function RenderSearchBar({
       return `${(pop / 1000000).toFixed(1)} million`;
     } else {
       return pop.toLocaleString();
+
     }
   };
   const formatMoney = price =>
@@ -72,25 +74,32 @@ export default function RenderSearchBar({
 
   return (
     <div className="search-bar">
+
       <label>
         <Switch onChange={toggleAdvancedView} checked={showAdvancedView} />
         {showAdvancedView ? "Advanced Search" : "Basic Search"}
       </label>
+
       {/* If we're not in advanced view, show the city autocomplete */}
       {!showAdvancedView ? (
-        <AutoComplete
-          value={searchTerm}
-          options={options}
-          style={{ width: 200 }}
-          onSelect={onSelect}
-          onChange={onChange}
-          placeholder="Enter City.."
-        />
+        <>
+          <AutoComplete
+            value={searchTerm}
+            options={options}
+            style={{ width: 200 }}
+            onSelect={onSelect}
+            onChange={onChange}
+            placeholder="Enter City.."
+          />
+          <br />
+        </>
       ) : (
         <>
           {/* If we are in advanced view, show the preferences pane */}
           <div className="site-input-group-wrapper">
+
             {/* Population*/}
+
             <br />
             <label>
               Population:
@@ -140,6 +149,7 @@ export default function RenderSearchBar({
             <span>{formatWeather(searchPrefs.weather_max)}</span>
           </div>
 
+
           {/* Rent */}
           <br />
           <label htmlFor="rent">
@@ -177,6 +187,7 @@ export default function RenderSearchBar({
             <span>{formatMoney(searchPrefs.rent_min)}</span>
             <span> to </span>
             <span>{formatMoney(searchPrefs.rent_max)}</span>
+
           </div>
 
           {/* Job industries */}

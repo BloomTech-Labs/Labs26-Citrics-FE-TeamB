@@ -27,6 +27,7 @@ import { MainPageContainer } from "./components/pages/MainPageContainer";
 // import NavContainer from './components/pages/Nav/NavContainer';
 import { ComparisonPage } from "./components/pages/Comparison";
 import { CityPage } from "./components/pages/CityPage";
+import { AboutPage } from "./components/pages/AboutPage";
 import { Provider } from "react-redux";
 import { store } from "./state";
 
@@ -88,6 +89,7 @@ function App() {
             </MainPageContainer>
           )}
         />
+        <Route path="/about" component={AboutPage} />
         <Route component={NotFoundPage} />
       </Switch>
       <NavPage />

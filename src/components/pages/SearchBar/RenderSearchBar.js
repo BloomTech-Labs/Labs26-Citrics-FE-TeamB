@@ -7,7 +7,7 @@ const initialSearchPrefs = {
   pop_min: 10000,
   pop_max: 2100000,
   rent_min: 100,
-  rent_max: 10000,
+  rent_max: 5100,
   weather_min: 15,
   weather_max: 105
 };
@@ -51,7 +51,8 @@ export default function RenderSearchBar({
       return pop.toLocaleString();
     }
   };
-  const formatMoney = price => `$ ${price.toLocaleString()}`;
+  const formatMoney = price =>
+    price > 5000 ? ">$5,000" : `$ ${price.toLocaleString()}`;
   const formatWeather = temp => {
     if (temp > 100) {
       return ">100°F";
@@ -205,7 +206,7 @@ export default function RenderSearchBar({
             id="rent"
             range
             min={100}
-            max={10000}
+            max={5100}
             step={100}
             value={[searchPrefs.rent_min, searchPrefs.rent_max]}
             tipFormatter={formatMoney}

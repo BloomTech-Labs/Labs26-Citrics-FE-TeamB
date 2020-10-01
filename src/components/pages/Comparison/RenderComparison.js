@@ -4,6 +4,7 @@ import LoadingComponent from "../../common/LoadingComponent.js";
 import ComparisonCard from "./comparisonCard";
 import Graph from "../../common/Graphs/renderGraph";
 import Plot from "plotly.js";
+import { ConsoleSqlOutlined } from "@ant-design/icons";
 class RenderComparison extends Component {
   // puts state name in an array for easier acccess
   getUnemployRate = () => {
@@ -56,16 +57,64 @@ class RenderComparison extends Component {
   };
 
   getJobs = () => {
-    const jobs = [];
+    const headers = this.props.citiesData.map(city => city.name);
+
+    // helper function to build keys to filter
+    const helperFunc = (str = "job_ranked_") => {
+      const allowed = [];
+      if (!str.includes("%")) {
+        for (let i = 1; i < 6; i++) {
+          allowed.push(`${str}${i}`);
+        }
+      } else {
+        for (let i = 1; i < 6; i++) {
+          allowed.push(`job_ranked_${i}_%`);
+        }
+      }
+      return allowed;
+    };
+    const allowedRanks = helperFunc();
+    const allowedPercent = helperFunc("%");
+
+    // helper function to filter and build array of top 5
+    const helperBuild = (topArray, id) => {
+      return Object.keys(this.props.citiesData[id].jobs.data)
+        .filter(keys => topArray.includes(keys))
+        .map(rankValue => {
+          return this.props.citiesData[id].jobs.data[rankValue];
+        });
+    };
+    // array to hold top 5 of each city
+    const topJobs = [];
+    const topJobPercent = [];
+    // iterates through the citiesDta
+    // gets all the keys and filters it only getting the allowedRanks
+    // creates a new array of top 5 jobs for the city and pushes it into the topJobs array
     for (let id in this.props.citiesData) {
-      jobs.push({
-        name: this.props.citiesData[id].name,
-        labels: JSON.parse(this.props.citiesData[id].jobs.viz).data[0].labels,
-        values: JSON.parse(this.props.citiesData[id].jobs.viz).data[0].values,
-        type: "pie"
-      });
+      topJobs.push(helperBuild(allowedRanks, id));
+      topJobPercent.push(helperBuild(allowedPercent, id));
     }
-    return jobs;
+
+    // zip the job and % together
+    const value = [];
+    for (let i = 0; i < topJobs.length; i++) {
+      for (let j = 0; j < topJobPercent[0].length; j++) {
+        value.push(`${topJobs[i][j]} - ${topJobPercent[i][j]}`);
+      }
+    }
+    // chunk helper function to split jobs and % for the plotly table
+    function chunk(array, size) {
+      let newArr = [];
+      for (let i = 0; i < array.length; i += size) {
+        newArr.push(array.slice(i, i + size));
+      }
+      return newArr;
+    }
+    return {
+      headers: chunk(headers, 1),
+      values: chunk(value, 5),
+      type: "table"
+    };
   };
 
   render() {
@@ -88,39 +137,40 @@ class RenderComparison extends Component {
           })}
         </div>
 
-        <div className="graph-container">
-          {/* Renders the tabs for the user to navigate for different visuals */}
-          <Tabs
-            data-testid="ant-d-tabs"
-            className="metrics-container graphs"
-            defaultActiveKey="1"
-            centered="true"
-            tabBarStyle={{
-              color: "white"
-            }}
-          >
-            <TabPane className="graph-holder" tab="Population Trend" key="2">
-              <Graph
-                dataSet={getCityPop()[0]}
-                dataSet2={getCityPop()[1]}
-                dataSet3={getCityPop()[2]}
-              />
-            </TabPane>
-            <TabPane className="graph-holder" tab="Apartment Prices" key="1">
-              <Graph
-                dataSet={getRentals()[0]}
-                dataSet2={getRentals()[1]}
-                dataSet3={getRentals()[2]}
-              />
-            </TabPane>
-            <TabPane className="graph-holder" tab="Unemployment Rate" key="3">
-              <Graph
-                dataSet={getUnemployRate()[0]}
-                dataSet2={getUnemployRate()[1]}
-                dataSet3={getUnemployRate()[2]}
-              />
-            </TabPane>
-          </Tabs>
+        {/* Renders the tabs for the user to navigate for different visuals */}
+        <Tabs
+          data-testid="ant-d-tabs"
+          className="metrics-container graphs"
+          defaultActiveKey="1"
+          centered="true"
+          tabBarStyle={{
+            color: "white"
+          }}
+        >
+          <TabPane className="graph-holder" tab="Population Trend" key="1">
+            <Graph
+              dataSet={getCityPop()[0]}
+              dataSet2={getCityPop()[1]}
+              dataSet3={getCityPop()[2]}
+            />
+          </TabPane>
+          <TabPane className="graph-holder" tab="Apartment Prices" key="2">
+            <Graph
+              dataSet={getRentals()[0]}
+              dataSet2={getRentals()[1]}
+              dataSet3={getRentals()[2]}
+            />
+          </TabPane>
+          <TabPane className="graph-holder" tab="Unemployment Rate" key="3">
+            <Graph
+              dataSet={getUnemployRate()[0]}
+              dataSet2={getUnemployRate()[1]}
+              dataSet3={getUnemployRate()[2]}
+            />
+          </TabPane>
+        </Tabs>
+        <div className="job-table">
+          <Graph dataSet={getJobs()} />
         </div>
       </div>
     );

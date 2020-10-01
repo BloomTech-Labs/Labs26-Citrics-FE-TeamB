@@ -1,3 +1,4 @@
+// LINE GRAPH CONFIG
 export const lineGraph = (set1, set2, set3) => {
   let trace2, trace3;
 
@@ -49,6 +50,7 @@ export const lineGraph = (set1, set2, set3) => {
   };
 };
 
+// BAR GRAPH CONFIG
 export const barGraph = (set1, set2, set3) => {
   let trace2, trace3;
 
@@ -109,6 +111,8 @@ export const barGraph = (set1, set2, set3) => {
 
   return { dataPlot, layout };
 };
+
+// PIE CHART CONFIG
 export const pieChart = set1 => {
   let pieData = [
     {
@@ -119,15 +123,15 @@ export const pieChart = set1 => {
       // marker: {
       //   colors: ultimateColors[0],
       // },
-      hoverinfo: "label+percent+name",
-      textinfo: "none",
-      automargin: true
+      automargin: true,
+      textinfo: "percent",
+      insidetextorientation: "radial"
     }
   ];
 
   let layout = {
     title: "Job Market",
-    showlegend: false,
+    showlegend: true,
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
     yaxis: {
@@ -136,9 +140,37 @@ export const pieChart = set1 => {
     xaxis: {
       showgrid: false
     },
-    autosize: true,
-    width: 300
+    autosize: true
+    // width: 300,
   };
 
   return { pieData, layout };
+};
+
+// TABLE CONFIG
+export const table = set1 => {
+  var values = set1.values;
+
+  var tableData = [
+    {
+      type: "table",
+      header: {
+        values: set1.headers,
+        align: "center",
+        line: { width: 1, color: "black" },
+        fill: { color: "grey" },
+        font: { family: "Arial", size: 12, color: "white" }
+      },
+      cells: {
+        values: values,
+        align: "left",
+        line: { color: "black", width: 1 },
+        font: { family: "Arial", size: 11, color: ["black"] }
+      }
+    }
+  ];
+  let layout = {
+    title: "Top Job Markets"
+  };
+  return { tableData, layout };
 };

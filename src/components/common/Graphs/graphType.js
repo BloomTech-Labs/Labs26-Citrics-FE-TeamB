@@ -1,7 +1,9 @@
+// LINE GRAPH CONFIG
 export const lineGraph = (set1, set2, set3) => {
   let trace2, trace3;
 
   let trace1 = {
+    automargin: true,
     x: set1.plotX,
     y: set1.plotY,
     line: { color: "rgba(222,45,38,0.8)" },
@@ -11,6 +13,7 @@ export const lineGraph = (set1, set2, set3) => {
   };
   if (set2) {
     trace2 = {
+      automargin: true,
       x: set2.plotX,
       y: set2.plotY,
       line: { color: "rgb(49,130,189)" },
@@ -20,6 +23,7 @@ export const lineGraph = (set1, set2, set3) => {
   }
   if (set3) {
     trace3 = {
+      automargin: true,
       x: set3.plotX,
       y: set3.plotY,
       line: { color: "rgb(204,204,204)" },
@@ -32,19 +36,13 @@ export const lineGraph = (set1, set2, set3) => {
   let layout = {
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
-    // yaxis: {
-    //   showgrid: false
-    // },
-    // xaxis: {
-    //   showgrid: false
-    // },
     font: {
-      size: 14,
+      size: 12,
       color: "#000"
     },
-
-    showlegend: false,
-    title: set1.graphName
+    showlegend: true,
+    // title: set1.graphName,
+    autosize: true
   };
   return {
     dataPlot,
@@ -52,10 +50,12 @@ export const lineGraph = (set1, set2, set3) => {
   };
 };
 
+// BAR GRAPH CONFIG
 export const barGraph = (set1, set2, set3) => {
   let trace2, trace3;
 
   let trace1 = {
+    automargin: true,
     x: set1.plotX,
     y: set1.plotY,
     type: "bar",
@@ -68,6 +68,7 @@ export const barGraph = (set1, set2, set3) => {
   };
   if (set2) {
     trace2 = {
+      automargin: true,
       x: set2.plotX,
       y: set2.plotY,
       type: "bar",
@@ -81,6 +82,7 @@ export const barGraph = (set1, set2, set3) => {
   }
   if (set3) {
     trace3 = {
+      automargin: true,
       x: set3.plotX,
       y: set3.plotY,
       type: "bar",
@@ -95,22 +97,80 @@ export const barGraph = (set1, set2, set3) => {
   let dataPlot = [trace1, set2 ? trace2 : {}, set3 ? trace3 : {}];
 
   let layout = {
-    title: set1.graphName,
+    // title: set1.graphName,
+    autosize: true,
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
-    // yaxis: {
-    //   showgrid: false
-    // },
-    // xaxis: {
-    //   showgrid: false
-    // },
     font: {
-      size: 14,
+      size: 12,
       color: "#000"
     },
-    showlegend: false,
+    showlegend: true,
     barmode: set1.mode ? set1.mode : "group"
   };
 
   return { dataPlot, layout };
+};
+
+// PIE CHART CONFIG
+export const pieChart = set1 => {
+  let pieData = [
+    {
+      values: set1.values,
+      labels: set1.labels,
+      type: "pie",
+      name: set1.name,
+      // marker: {
+      //   colors: ultimateColors[0],
+      // },
+      automargin: true,
+      textinfo: "percent",
+      insidetextorientation: "radial"
+    }
+  ];
+
+  let layout = {
+    title: "Job Market",
+    showlegend: true,
+    paper_bgcolor: "transparent",
+    plot_bgcolor: "transparent",
+    yaxis: {
+      showgrid: false
+    },
+    xaxis: {
+      showgrid: false
+    },
+    autosize: true
+    // width: 300,
+  };
+
+  return { pieData, layout };
+};
+
+// TABLE CONFIG
+export const table = set1 => {
+  let tableData = [
+    {
+      type: "table",
+      header: {
+        values: set1.headers,
+        align: "center",
+        line: { width: 0.5, color: "black" },
+        fill: { color: "#de2817" },
+        font: { size: 12, color: "white" }
+      },
+      cells: {
+        values: set1.values,
+        align: "left",
+        line: { color: "black", width: 0.5 },
+        font: { size: 10, color: ["black"] }
+      }
+    }
+  ];
+  let layout = {
+    title: "Top Job Industries",
+    paper_bgcolor: "transparent",
+    plot_bgcolor: "transparent"
+  };
+  return { tableData, layout };
 };

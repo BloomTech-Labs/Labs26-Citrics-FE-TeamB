@@ -22,7 +22,7 @@ const initialSearchPrefs = {
   weather_max: WEATHER_MAX
 };
 
-//TEMPORARY - delete once a search endpoint is implemented
+//TEMPORARY - replace with [] once search endpoint is implemented
 const initialResults = [{ id: 1, name: "San Francisco", state: "CA" }];
 
 export default function AdvancedSearchContainer(props) {
@@ -54,9 +54,13 @@ export default function AdvancedSearchContainer(props) {
         searchPrefs={searchPrefs}
         updateSearchPrefs={updateNamedSearchPrefs}
       />
-      {searchResults.map(elem => (
-        <SearchResult {...elem} key={elem.id} />
-      ))}
+      <br />
+      <div className="search-results">
+        <h2>Results:</h2>
+        {searchResults.map(elem => (
+          <SearchResult {...elem} key={elem.id} />
+        ))}
+      </div>
     </div>
   );
 }

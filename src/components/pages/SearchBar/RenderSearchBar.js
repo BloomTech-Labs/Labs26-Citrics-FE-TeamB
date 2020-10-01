@@ -45,6 +45,11 @@ export default function RenderSearchBar({
     // that match a key-value pair in the searchPrefs object
     setSearchPrefs({ ...searchPrefs, [name]: value });
 
+  // Simultaneously update any number of search prefs
+  // based on key-value pairs on the object passed in
+  // This is used by sliders to set both ends at once
+  const updateNamedSearchPrefs = changes =>
+    setSearchPrefs({ ...searchPrefs, ...changes });
   let next = () => {
     const newNext = current + 1;
     setCurrent(newNext);
@@ -180,14 +185,12 @@ export default function RenderSearchBar({
                 defaultValue={[10000, 10000000]}
                 value={[searchPrefs.pop_min, searchPrefs.pop_max]}
                 tipFormatter={val => val.toLocaleString()}
-                onChange={([min, max]) => {
-                  updateSearchPrefs({
-                    target: { value: min, name: "pop_min" }
-                  });
-                  updateSearchPrefs({
-                    target: { value: max, name: "pop_max" }
-                  });
-                }}
+                onChange={([pop_min, pop_max]) =>
+                  updateNamedSearchPrefs({
+                    pop_min,
+                    pop_max
+                  })
+                }
               />
             </label>
             <Input.Group compact>

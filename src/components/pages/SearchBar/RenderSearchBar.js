@@ -18,7 +18,7 @@ const { Step } = Steps;
 const initialSearchPrefs = {
   rooms: "1br",
   pop_min: 10000,
-  pop_max: 10000000
+  pop_max: 2100000
 };
 
 export default function RenderSearchBar({
@@ -60,6 +60,15 @@ export default function RenderSearchBar({
     setCurrent(newPrev);
   };
 
+  let formatPop = pop => {
+    if (pop > 2000000) {
+      return ">2 million";
+    } else if (pop >= 1000000) {
+      return `${(pop / 1000000).toFixed(1)} million`;
+    } else {
+      return pop.toLocaleString();
+    }
+  };
   // Need this inside the component closure to give it access to the values and setter function
   const steps = [
     {
@@ -180,9 +189,8 @@ export default function RenderSearchBar({
               <Slider
                 range
                 min={10000}
-                max={10000000}
+                max={2100000}
                 step={10000}
-                defaultValue={[10000, 10000000]}
                 value={[searchPrefs.pop_min, searchPrefs.pop_max]}
                 tipFormatter={val => val.toLocaleString()}
                 onChange={([pop_min, pop_max]) =>
@@ -193,7 +201,12 @@ export default function RenderSearchBar({
                 }
               />
             </label>
-            <Input.Group compact>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <span>{formatPop(searchPrefs.pop_min)}</span>
+              <span> to </span>
+              <span>{formatPop(searchPrefs.pop_max)}</span>
+            </div>
+            {/* <Input.Group compact>
               <InputNumber
                 style={{ width: 90, textAlign: "center" }}
                 placeholder="Minimum"
@@ -243,7 +256,7 @@ export default function RenderSearchBar({
                 }
                 parser={value => value.replace(/\$\s?|(,*)/g, "")}
               />
-            </Input.Group>
+            </Input.Group> */}
           </div>
           <br />
           {/* Steps format for Bedroom and Rental price search */}

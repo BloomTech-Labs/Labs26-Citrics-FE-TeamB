@@ -7,6 +7,7 @@ import Graph from "../../common/Graphs/renderGraph";
 class RenderComparison extends Component {
   // puts state name in an array for easier acccess
   getUnemployRate = () => {
+    console.log("fired unemply");
     const unemployRate = [];
     for (let id in this.props.citiesData) {
       unemployRate.push({
@@ -21,6 +22,7 @@ class RenderComparison extends Component {
   };
   // puts plot data  in an array for easier acccess
   getCityPop = () => {
+    console.log("fired pop data");
     const cityPop = [];
     for (let id in this.props.citiesData) {
       cityPop.push({
@@ -35,6 +37,7 @@ class RenderComparison extends Component {
   };
 
   getRentals = () => {
+    console.log("fired rental graph");
     const rentals = [];
     for (let id in this.props.citiesData) {
       rentals.push({
@@ -55,10 +58,11 @@ class RenderComparison extends Component {
     return rentals;
   };
 
-  getJobs = () => {
+  getJobs = cities => {
+    console.log("fired job data");
     const headers = [];
     // creates headers for the table
-    this.props.citiesData.map(city => headers.push(city.name));
+    cities.map(city => headers.push(city.name));
 
     // helper function to build keys to filter
     const helperFunc = (str = "job_ranked_") => {
@@ -72,10 +76,10 @@ class RenderComparison extends Component {
 
     // helper function to filter and build array of top 5
     const helperBuild = (topArray, id) => {
-      return Object.keys(this.props.citiesData[id].jobs.data)
+      return Object.keys(cities[id].jobs.data)
         .filter(keys => topArray.includes(keys))
         .map(rankValue => {
-          return this.props.citiesData[id].jobs.data[rankValue];
+          return cities[id].jobs.data[rankValue];
         });
     };
     // array to hold top 5 of each city
@@ -83,7 +87,7 @@ class RenderComparison extends Component {
     // iterates through the citiesDta
     // gets all the keys and filters it only getting the allowedRanks
     // creates a new array of top 5 jobs for the city and pushes it into the topJobs array
-    for (let id in this.props.citiesData) {
+    for (let id in cities) {
       topJobs.push(helperBuild(allowedRanks, id));
     }
 
@@ -113,41 +117,44 @@ class RenderComparison extends Component {
             );
           })}
         </div>
-
-        {/* Renders the tabs for the user to navigate for different visuals */}
-        <Tabs
-          data-testid="ant-d-tabs"
-          className="metrics-container graphs"
-          defaultActiveKey="1"
-          centered="true"
-          tabBarStyle={{
-            color: "white"
-          }}
-        >
-          <TabPane className="graph-holder" tab="Population Trend" key="1">
-            <Graph
-              dataSet={getCityPop()[0]}
-              dataSet2={getCityPop()[1]}
-              dataSet3={getCityPop()[2]}
-            />
-          </TabPane>
-          <TabPane className="graph-holder" tab="Apartment Prices" key="2">
-            <Graph
-              dataSet={getRentals()[0]}
-              dataSet2={getRentals()[1]}
-              dataSet3={getRentals()[2]}
-            />
-          </TabPane>
-          <TabPane className="graph-holder" tab="Unemployment Rate" key="3">
-            <Graph
-              dataSet={getUnemployRate()[0]}
-              dataSet2={getUnemployRate()[1]}
-              dataSet3={getUnemployRate()[2]}
-            />
-          </TabPane>
-        </Tabs>
-        <div className="job-table">
-          <Graph dataSet={getJobs()} />
+        <div className="visual-container">
+          {/* Renders the tabs for the user to navigate for different visuals */}
+          <Tabs
+            data-testid="ant-d-tabs"
+            className="metrics-container graphs"
+            defaultActiveKey="1"
+            tabBarStyle={{
+              color: "white"
+            }}
+          >
+            <TabPane className="graph-holder" tab="Population Trend" key="1">
+              <Graph
+                dataSet={getCityPop()[0]}
+                dataSet2={getCityPop()[1]}
+                dataSet3={getCityPop()[2]}
+              />
+            </TabPane>
+            <TabPane className="graph-holder" tab="Apartment Prices" key="2">
+              <Graph
+                dataSet={getRentals()[0]}
+                dataSet2={getRentals()[1]}
+                dataSet3={getRentals()[2]}
+              />
+            </TabPane>
+            <TabPane className="graph-holder" tab="Unemployment Rate" key="3">
+              <Graph
+                dataSet={getUnemployRate()[0]}
+                dataSet2={getUnemployRate()[1]}
+                dataSet3={getUnemployRate()[2]}
+              />
+            </TabPane>
+            {/* <TabPane className="graph-holder" tab="Job Market" key="4">
+              <Graph dataSet={getJobs(citiesData)} />
+            </TabPane> */}
+          </Tabs>
+          <div className="job-table">
+            <Graph dataSet={getJobs(citiesData)} />
+          </div>
         </div>
       </div>
     );

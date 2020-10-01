@@ -20,6 +20,7 @@ import { NotFoundPage } from "./components/pages/NotFound";
 
 import { NavPage } from "./components/pages/Nav";
 import { HomePage } from "./components/pages/Home";
+import { AdvancedSearchPage } from "./components/pages/AdvancedSearch";
 import { MainPageContainer } from "./components/pages/MainPageContainer";
 // import { ExampleDataViz } from "./components/pages/ExampleDataViz";
 // import { config } from './utils/oktaConfig';
@@ -77,6 +78,14 @@ function App() {
           )}
         />
         <Route
+          path="/advanced-search"
+          render={p => (
+            <MainPageContainer>
+              <AdvancedSearchPage {...p} />
+            </MainPageContainer>
+          )}
+        />
+        <Route
           exact
           path="/city-detail-page"
           render={() => <Redirect to="/" />}
@@ -89,7 +98,14 @@ function App() {
             </MainPageContainer>
           )}
         />
-        <Route path="/about" component={AboutPage} />
+        <Route
+          path="/about"
+          render={p => (
+            <MainPageContainer>
+              <AboutPage {...p} />
+            </MainPageContainer>
+          )}
+        />
         <Route component={NotFoundPage} />
       </Switch>
       <NavPage />

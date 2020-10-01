@@ -1,5 +1,5 @@
 import React from "react";
-import { AutoComplete, Button } from "antd";
+import { AutoComplete } from "antd";
 import { Link } from "react-router-dom";
 
 export default function RenderSearchBar({

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
-import RenderSearchFilters from "./RenderSearchFilters";
-import RenderSearchResult from "./RenderSearchResult";
+import SearchFilters from "./SearchFilters";
+import SearchResult from "./SearchResult";
 import {
   POP_MIN,
   POP_MAX,
@@ -50,12 +50,12 @@ export default function AdvancedSearchContainer(props) {
 
   return (
     <div className="advanced-search-container">
-      <RenderSearchFilters
+      <SearchFilters
         searchPrefs={searchPrefs}
         updateSearchPrefs={updateNamedSearchPrefs}
       />
       {searchResults.map(elem => (
-        <RenderSearchResult {...elem} />
+        <SearchResult {...elem} />
       ))}
     </div>
   );

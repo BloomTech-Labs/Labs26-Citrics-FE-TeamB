@@ -7,7 +7,9 @@ const initialSearchPrefs = {
   pop_min: 10000,
   pop_max: 2100000,
   rent_min: 100,
-  rent_max: 10000
+  rent_max: 10000,
+  weather_min: 15,
+  weather_max: 105
 };
 
 export default function RenderSearchBar({
@@ -50,6 +52,15 @@ export default function RenderSearchBar({
     }
   };
   const formatMoney = price => `$ ${price.toLocaleString()}`;
+  const formatWeather = temp => {
+    if (temp > 100) {
+      return ">100°F";
+    } else if (temp < 20) {
+      return "<20°F";
+    } else {
+      return `${temp}°F`;
+    }
+  };
 
   return (
     <div className="search-bar">
@@ -195,6 +206,28 @@ export default function RenderSearchBar({
             <span>{formatMoney(searchPrefs.rent_min)}</span>
             <span> to </span>
             <span>{formatMoney(searchPrefs.rent_max)}</span>
+          </div>
+          <br />
+          <label htmlFor="weather">Weather:</label>
+          <Slider
+            id="weather"
+            range
+            min={15}
+            max={105}
+            step={5}
+            value={[searchPrefs.weather_min, searchPrefs.weather_max]}
+            tipFormatter={formatWeather}
+            onChange={([weather_min, weather_max]) =>
+              updateNamedSearchPrefs({
+                weather_min,
+                weather_max
+              })
+            }
+          />
+          <div className="advanced-search-range-display">
+            <span>{formatWeather(searchPrefs.weather_min)}</span>
+            <span> to </span>
+            <span>{formatWeather(searchPrefs.weather_max)}</span>
           </div>
         </>
       )}

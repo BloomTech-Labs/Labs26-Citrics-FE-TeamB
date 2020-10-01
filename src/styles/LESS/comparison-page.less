@@ -1,6 +1,6 @@
 .comparison-container {
-  background-color: #fafafa;
-  display: flex;
+  background-color: @bgColor;
+  // display: flex;
   align-items: center;
   flex-direction: column;
   width: 100%;
@@ -94,23 +94,30 @@
   }
 }
 
-//for the tabs and the graphs
-.metrics-container {
-  box-shadow: 3px 4px 22px -4px rgba(0, 0, 0, 0.46);
-  margin-bottom: 3%;
-  border-radius: 10px;
+.visual-container {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0 4%;
+  width: 100%;
 }
+// .metrics-container.graphs {
+//   width: 70%;
+// }
 
-//tabs
+//ant design tab styles
+.ant-tabs-nav {
+  width: 100%;
+}
 .ant-tabs-nav-list {
-  border-radius: 2px;
+  background-color: transparent;
 }
 //just the graphs
 .graph-holder {
-  display: flex;
-  justify-content: center;
+  width: 100%;
 }
-
+.ant-tabs-content-holder {
+  width: 100%;
+}
 .ant-tabs-nav-list {
   color: #000;
 }

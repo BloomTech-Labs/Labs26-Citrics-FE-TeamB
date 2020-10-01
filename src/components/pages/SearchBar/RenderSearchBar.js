@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import {
-  AutoComplete,
-  Input,
-  InputNumber,
-  Steps,
-  Button,
-  message,
-  Switch,
-  Slider
-} from "antd";
+import { AutoComplete, Input, Steps, Switch, Slider } from "antd";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
 const { Step } = Steps;
@@ -50,17 +41,8 @@ export default function RenderSearchBar({
   // This is used by sliders to set both ends at once
   const updateNamedSearchPrefs = changes =>
     setSearchPrefs({ ...searchPrefs, ...changes });
-  let next = () => {
-    const newNext = current + 1;
-    setCurrent(newNext);
-  };
 
-  let prev = () => {
-    const newPrev = current - 1;
-    setCurrent(newPrev);
-  };
-
-  let formatPop = pop => {
+  const formatPop = pop => {
     if (pop > 2000000) {
       return ">2 million";
     } else if (pop >= 1000000) {
@@ -69,85 +51,7 @@ export default function RenderSearchBar({
       return pop.toLocaleString();
     }
   };
-  // Need this inside the component closure to give it access to the values and setter function
-  const steps = [
-    {
-      title: "Bedrooms",
-      content: (
-        <div>
-          <label htmlFor="rooms">Select Bedrooms: </label>
-          <select
-            id="rooms"
-            name="rooms"
-            onChange={updateSearchPrefs}
-            value={searchPrefs.rooms}
-          >
-            <option value="studio">Studio</option>
-            <option value="1br">1BR</option>
-            <option value="2br">2BR</option>
-            <option value="3br">3BR</option>
-            <option value="4br">4BR</option>
-          </select>
-        </div>
-      )
-    },
-    {
-      title: "Rental Prices",
-      content: (
-        <div>
-          <Input.Group compact>
-            <label htmlFor="between">Prices: </label>&nbsp;&nbsp;
-            <InputNumber
-              style={{ width: 85, textAlign: "center" }}
-              placeholder="Minimum"
-              name="rent_min"
-              // This input invokes the event handler with just a value
-              // instead of an event object
-              // The onChange function here essentially wraps that value into
-              // a "synthetic" event object
-              onChange={value =>
-                updateSearchPrefs({ target: { value, name: "rent_min" } })
-              }
-              value={searchPrefs.rent_min}
-              formatter={value =>
-                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-              }
-              parser={value => value.replace(/\$\s?|(,*)/g, "")}
-            />
-            <Input
-              className="site-input-split"
-              style={{
-                width: 30,
-                borderLeft: 0,
-                borderRight: 0,
-                pointerEvents: "none"
-              }}
-              placeholder="-"
-              disabled
-            />
-            <InputNumber
-              className="site-input-right"
-              style={{
-                width: 85,
-                textAlign: "center"
-              }}
-              placeholder="Maximum"
-              name="rent_max"
-              // onChange here wraps the value in a synthetic event as described above
-              onChange={value =>
-                updateSearchPrefs({ target: { value, name: "rent_max" } })
-              }
-              value={searchPrefs.rent_max}
-              formatter={value =>
-                `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-              }
-              parser={value => value.replace(/\$\s?|(,*)/g, "")}
-            />
-          </Input.Group>
-        </div>
-      )
-    }
-  ];
+  const formatMoney = price => `$ ${price.toLocaleString()}`;
 
   return (
     <div className="search-bar">
@@ -192,7 +96,7 @@ export default function RenderSearchBar({
                 max={2100000}
                 step={10000}
                 value={[searchPrefs.pop_min, searchPrefs.pop_max]}
-                tipFormatter={val => val.toLocaleString()}
+                tipFormatter={formatPop}
                 onChange={([pop_min, pop_max]) =>
                   updateNamedSearchPrefs({
                     pop_min,
@@ -201,7 +105,7 @@ export default function RenderSearchBar({
                 }
               />
             </label>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div className="advanced-search-range-display">
               <span>{formatPop(searchPrefs.pop_min)}</span>
               <span> to </span>
               <span>{formatPop(searchPrefs.pop_max)}</span>
@@ -259,33 +163,41 @@ export default function RenderSearchBar({
             </Input.Group> */}
           </div>
           <br />
-          {/* Steps format for Bedroom and Rental price search */}
-          <Steps current={current}>
-            {steps.map(item => (
-              <Step key={item.title} title={item.title} />
-            ))}
-          </Steps>
-          {/*console.log("TESTING", current)*/}
-          <div className="steps-content">{steps[current].content}</div>
-          <div className="steps-action">
-            {current < steps.length - 1 && (
-              <Button type="primary" onClick={() => next()}>
-                Next
-              </Button>
-            )}
-            {current === steps.length - 1 && (
-              <Button
-                type="primary"
-                onClick={() => message.success("Processing complete!")}
-              >
-                Done
-              </Button>
-            )}
-            {current > 0 && (
-              <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
-                Previous
-              </Button>
-            )}
+          <label htmlFor="rent">
+            {"Rental Prices "}
+            <select
+              id="rooms"
+              name="rooms"
+              onChange={updateSearchPrefs}
+              value={searchPrefs.rooms}
+            >
+              <option value="studio">Studio</option>
+              <option value="1br">1BR</option>
+              <option value="2br">2BR</option>
+              <option value="3br">3BR</option>
+              <option value="4br">4BR</option>
+            </select>
+            :
+          </label>
+          <Slider
+            id="rent"
+            range
+            min={100}
+            max={10000}
+            step={100}
+            value={[searchPrefs.rent_min, searchPrefs.rent_max]}
+            tipFormatter={formatMoney}
+            onChange={([rent_min, rent_max]) =>
+              updateNamedSearchPrefs({
+                rent_min,
+                rent_max
+              })
+            }
+          />
+          <div className="advanced-search-range-display">
+            <span>{formatMoney(searchPrefs.rent_min)}</span>
+            <span> to </span>
+            <span>{formatMoney(searchPrefs.rent_max)}</span>
           </div>
         </>
       )}

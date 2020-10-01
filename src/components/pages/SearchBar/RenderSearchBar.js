@@ -2,14 +2,21 @@ import React, { useState } from "react";
 import { AutoComplete, Input, Switch, Slider } from "antd";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
+const POP_MIN = 10000;
+const POP_MAX = 2100000;
+const RENT_MIN = 100;
+const RENT_MAX = 5100;
+const WEATHER_MIN = 15;
+const WEATHER_MAX = 105;
+
 const initialSearchPrefs = {
   rooms: "1br",
-  pop_min: 10000,
-  pop_max: 2100000,
-  rent_min: 100,
-  rent_max: 5100,
-  weather_min: 15,
-  weather_max: 105
+  pop_min: POP_MIN,
+  pop_max: POP_MAX,
+  rent_min: RENT_MIN,
+  rent_max: RENT_MAX,
+  weather_min: WEATHER_MIN,
+  weather_max: WEATHER_MAX
 };
 
 export default function RenderSearchBar({
@@ -43,7 +50,7 @@ export default function RenderSearchBar({
     setSearchPrefs({ ...searchPrefs, ...changes });
 
   const formatPop = pop => {
-    if (pop > 2000000) {
+    if (pop >= POP_MAX) {
       return ">2 million";
     } else if (pop >= 1000000) {
       return `${(pop / 1000000).toFixed(1)} million`;
@@ -52,11 +59,11 @@ export default function RenderSearchBar({
     }
   };
   const formatMoney = price =>
-    price > 5000 ? ">$5,000" : `$ ${price.toLocaleString()}`;
+    price >= RENT_MAX ? ">$5,000" : `$ ${price.toLocaleString()}`;
   const formatWeather = temp => {
-    if (temp > 100) {
+    if (temp >= WEATHER_MAX) {
       return ">100°F";
-    } else if (temp < 20) {
+    } else if (temp <= WEATHER_MIN) {
       return "<20°F";
     } else {
       return `${temp}°F`;
@@ -89,8 +96,8 @@ export default function RenderSearchBar({
               Population:
               <Slider
                 range
-                min={10000}
-                max={2100000}
+                min={POP_MIN}
+                max={POP_MAX}
                 step={10000}
                 value={[searchPrefs.pop_min, searchPrefs.pop_max]}
                 tipFormatter={formatPop}
@@ -166,8 +173,8 @@ export default function RenderSearchBar({
           <Slider
             id="weather"
             range
-            min={15}
-            max={105}
+            min={WEATHER_MIN}
+            max={WEATHER_MAX}
             step={5}
             value={[searchPrefs.weather_min, searchPrefs.weather_max]}
             tipFormatter={formatWeather}
@@ -205,8 +212,8 @@ export default function RenderSearchBar({
           <Slider
             id="rent"
             range
-            min={100}
-            max={5100}
+            min={RENT_MIN}
+            max={RENT_MAX}
             step={100}
             value={[searchPrefs.rent_min, searchPrefs.rent_max]}
             tipFormatter={formatMoney}

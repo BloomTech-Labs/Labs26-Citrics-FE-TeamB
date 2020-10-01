@@ -170,7 +170,9 @@ export const table = set1 => {
     }
   ];
   let layout = {
-    title: "Top Job Markets"
+    title: "Top Job Markets",
+    paper_bgcolor: "transparent",
+    plot_bgcolor: "transparent"
   };
   return { tableData, layout };
 };

@@ -41,7 +41,7 @@ export const lineGraph = (set1, set2, set3) => {
       color: "#000"
     },
     showlegend: true,
-    // title: set1.graphName,
+    title: set1.graphName,
     autosize: true
   };
   return {
@@ -97,7 +97,7 @@ export const barGraph = (set1, set2, set3) => {
   let dataPlot = [trace1, set2 ? trace2 : {}, set3 ? trace3 : {}];
 
   let layout = {
-    // title: set1.graphName,
+    title: set1.graphName,
     autosize: true,
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent",
@@ -141,7 +141,6 @@ export const pieChart = set1 => {
       showgrid: false
     },
     autosize: true
-    // width: 300,
   };
 
   return { pieData, layout };

@@ -10,7 +10,7 @@ export default function JobsPane({ jobs }) {
     // helper function to build keys to filter
     const helperFunc = (str = "job_ranked_") => {
       const allowed = [];
-      for (let i = 1; i < 10; i++) {
+      for (let i = 1; i < 11; i++) {
         allowed.push(`${str}${i}`);
       }
       return allowed;
@@ -23,8 +23,26 @@ export default function JobsPane({ jobs }) {
         return jobs.data[jobValue];
       });
 
+    // color array
+    const colors = [
+      "magenta",
+      "red",
+      "volcano",
+      "orange",
+      "gold",
+      "lime",
+      "green",
+      "cyan",
+      "blue",
+      "geekblue",
+      "purple"
+    ];
     return topJobArray.map(jobName => {
-      return <Tag color={"magenta"}>{jobName}</Tag>;
+      return (
+        <Tag color={colors[Math.floor(Math.random() * colors.length)]}>
+          {jobName}
+        </Tag>
+      );
     });
   };
   return (

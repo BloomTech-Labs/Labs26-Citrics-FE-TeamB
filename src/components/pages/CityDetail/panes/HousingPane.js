@@ -1,5 +1,6 @@
 import React from "react";
 import { Tabs } from "antd";
+import LoadingSkeleton from "./LoadingSkeleton";
 import { HomeOutlined } from "@ant-design/icons";
 export default function HousingPane({ rent }) {
   console.log(rent);
@@ -31,15 +32,22 @@ export default function HousingPane({ rent }) {
           <h2>Rental Prices:</h2>
           <HomeOutlined className="detail-pane-icon" />
         </div>
+
         <div className="housing-pane">
-          {generatePriceDisplay(rent.rental_pct_chg)}
-          <Tabs defaultActiveKey="1">
-            {aptTypes.map((name, idx) => (
-              <TabPane key={idx} tab={name} className="rental-price-tab">
-                ${rent[name.toLowerCase()]}
-              </TabPane>
-            ))}
-          </Tabs>
+          {rent ? (
+            <>
+              {generatePriceDisplay(rent.rental_pct_chg)}
+              <Tabs defaultActiveKey="1">
+                {aptTypes.map((name, idx) => (
+                  <TabPane key={idx} tab={name} className="rental-price-tab">
+                    ${rent[name.toLowerCase()]}
+                  </TabPane>
+                ))}
+              </Tabs>
+            </>
+          ) : (
+            <LoadingSkeleton />
+          )}
         </div>
       </div>
     </div>

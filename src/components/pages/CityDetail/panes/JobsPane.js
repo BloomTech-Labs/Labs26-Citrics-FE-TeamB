@@ -16,14 +16,14 @@ export default function JobsPane({ jobs }) {
       return allowed;
     };
     const filterdJobKeys = helperFunc();
-    //
+    // filters the job keys creating an array of the values for given key
     const topJobArray = Object.keys(jobs.data)
       .filter(keys => filterdJobKeys.includes(keys))
       .map(jobValue => {
         return jobs.data[jobValue];
       });
 
-    // color array
+    // color array to randomly choose from everytime a tag component is created
     const colors = [
       "magenta",
       "red",

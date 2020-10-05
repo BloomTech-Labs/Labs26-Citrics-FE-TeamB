@@ -167,7 +167,7 @@ export const table = set1 => {
     }
   ];
   let layout = {
-    title: "Top Job Industries",
+    title: set1.graphName,
     paper_bgcolor: "transparent",
     plot_bgcolor: "transparent"
   };

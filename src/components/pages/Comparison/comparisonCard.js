@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ModalComponent from "../../common/Modal.js";
+import ModalComponent from "./Modal";
 import LoadingComponent from "../../common/LoadingComponent";
 import { Divider } from "antd";
 //icons

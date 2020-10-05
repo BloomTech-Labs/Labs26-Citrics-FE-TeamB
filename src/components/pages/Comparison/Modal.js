@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "antd";
-import { CityDetailPage } from "../pages/CityDetail";
+import { CityDetailPage } from "../CityDetail";
 
 const ModalComponent = ({ visible, setVisible, city }) => {
   return (
@@ -8,7 +8,6 @@ const ModalComponent = ({ visible, setVisible, city }) => {
       {/* Checks to see if theres something in city object */}
       {city ? (
         <Modal
-          title={`Info for ${city.name}`}
           centered
           visible={visible}
           onOk={() => setVisible()}

@@ -28,12 +28,7 @@ class CityPage extends React.Component {
     }
   }
   render() {
-    return (
-      <RenderCityPage
-        city={this.state.city}
-        isLoading={!this.state.city?.name}
-      />
-    );
+    return <RenderCityPage city={this.state.city} />;
   }
 }
 const mapPropsToState = (

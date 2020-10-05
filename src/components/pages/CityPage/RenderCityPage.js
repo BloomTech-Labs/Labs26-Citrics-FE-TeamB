@@ -1,15 +1,10 @@
 import React from "react";
 import { CityDetailPage } from "../CityDetail";
-import LoadingComponent from "../../common/LoadingComponent";
 
-export default function RenderCityPage({ city, isLoading }) {
+export default function RenderCityPage({ city }) {
   return (
     <div className="city-page">
-      {isLoading ? (
-        <LoadingComponent message={"Retrieving City Data... "} />
-      ) : (
-        <CityDetailPage city={city} />
-      )}
+      <CityDetailPage city={city} />
     </div>
   );
 }

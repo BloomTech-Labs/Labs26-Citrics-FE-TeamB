@@ -44,6 +44,7 @@ class ComparisonContainer extends React.Component {
   // Retrieving selectedCities from this.state instead of as a function argument
   // would result in cityDetails using out-of-date information
   retrieveCityDataIfNeeded = async selectedCities => {
+    this.setState({ citiesData: selectedCities });
     for (const id of selectedCities) {
       if (!this.props.cityDetails[id]) {
         // Make sure each server request finished before proceeding

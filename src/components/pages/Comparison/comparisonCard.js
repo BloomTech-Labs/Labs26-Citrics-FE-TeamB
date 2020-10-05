@@ -34,7 +34,7 @@ class ComparisonCard extends Component {
               src={citiesData.image}
             />
           </div>
-          {!citiesData ? (
+          {!citiesData.population ? (
             <LoadingComponent message="Loading city data..." />
           ) : (
             <div className="basic-card-info">

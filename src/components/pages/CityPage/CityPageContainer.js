@@ -33,6 +33,10 @@ class CityPage extends React.Component {
     this.fetchDataIfNeeded();
   }
   componentDidUpdate(prevProps) {
+    // Update name/state info if selectedCities is updated
+    if (prevProps.selectedCities !== this.props.selectedCities) {
+      this.retrieveFromSelectedCities();
+    }
     const { id } = this.props.match.params;
     // If component remained mounted but user changed the cityId
     // Update the city info to match the new city

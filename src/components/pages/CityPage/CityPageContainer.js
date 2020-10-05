@@ -28,8 +28,7 @@ class CityPage extends React.Component {
       // If we have data on this city stored in selectedCities, use it
       const city = this.props.selectedCities.find(
         ({ id: cityId }) => Number(id) === Number(cityId)
-        // If not, city object should just contain an "id" while we load
-      ) ?? { id };
+      ) ?? { id }; // If not, city object should just contain an "id" while we load
       // Clear out old city data while we load new data
       this.setState({ city });
       // Load new data

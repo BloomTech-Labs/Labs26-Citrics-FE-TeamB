@@ -48,14 +48,14 @@ class ComparisonContainer extends React.Component {
     const tempCitiesData = selectedCities.map(({ id }) => {
       const { cityDetails, selectedCities } = this.props;
       return (
-        // If the city data is available in selectedCities, use it
+        // If we already have all data return it
+        cityDetails[id] ??
+        // If we have name and state data from selectedCities, return it
         selectedCities.find(
           ({ id: cityId }) => Number(cityId) === Number(id)
         ) ?? {
-          // If not, try finding its name in cityDetails
-          id,
-          name: cityDetails?.[id]?.name,
-          state: cityDetails?.[id]?.state
+          // If we have no info, just return id
+          id
         }
       );
     });

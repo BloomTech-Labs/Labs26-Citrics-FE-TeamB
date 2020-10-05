@@ -1,6 +1,7 @@
 import React from "react";
 import { CarOutlined } from "@ant-design/icons";
 import { Tag } from "antd";
+import Plot from "react-plotly.js";
 
 export default function JobsPane({ jobs }) {
   console.log(jobs, "job industry");
@@ -37,14 +38,52 @@ export default function JobsPane({ jobs }) {
       "geekblue",
       "purple"
     ];
-    return topJobArray.map(jobName => {
+    return topJobArray.map((jobName, indx) => {
       return (
-        <Tag color={colors[Math.floor(Math.random() * colors.length)]}>
+        <Tag
+          color={colors[Math.floor(Math.random() * colors.length)]}
+          key={indx}
+        >
           {jobName}
         </Tag>
       );
     });
   };
+
+  // function that parses and renders the given pie chart
+  const renderPie = () => {
+    const data = JSON.parse(jobs.viz).data[0];
+    const pieData = [
+      {
+        ...data,
+        automargin: true,
+        hoverinfo: "label",
+        textinfo: "percent",
+        insidetextorientation: "radial"
+      }
+    ];
+    const layout = {
+      title: "Top Industry",
+      showlegend: false,
+      paper_bgcolor: "transparent",
+      plot_bgcolor: "transparent",
+      yaxis: {
+        showgrid: false
+      },
+      xaxis: {
+        showgrid: false
+      },
+      autosize: true
+    };
+    return (
+      <Plot
+        data={pieData}
+        layout={layout}
+        style={{ width: "100%", height: "100%" }}
+      />
+    );
+  };
+
   return (
     <div className="one-render-p">
       <div className="main-detail-content">
@@ -52,9 +91,10 @@ export default function JobsPane({ jobs }) {
           <CarOutlined className="detail-pane-icon" />
           <h2>Jobs:</h2>
         </div>
-        <div className="">
+        <div className="job-info-container">
           <h3>Top 10 Industries</h3>
           <div className="job-tags">{renderJobTags()}</div>
+          <div className="job-charts">{renderPie()}</div>
         </div>
       </div>
     </div>

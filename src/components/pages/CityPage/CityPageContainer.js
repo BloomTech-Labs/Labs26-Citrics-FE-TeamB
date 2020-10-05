@@ -22,14 +22,16 @@ class CityPage extends React.Component {
   retrieveFromSelectedCities = () => {
     const { id } = this.props.match.params;
     // If we have data on this city stored in selectedCities, use it
-    const city = this.props.selectedCities.find(
+    const tempCity = this.props.selectedCities.find(
       ({ id: cityId }) => Number(id) === Number(cityId)
     ) ?? { id }; // If not, city object should just contain an "id" while we load
     // Clear out old city data while we load new data
-    this.setState({ city });
+    this.setState({ city: { ...tempCity, ...this.state.city } });
   };
   componentDidMount() {
+    // Get name/state from selectedCities
     this.retrieveFromSelectedCities();
+    // Retrieve other data if needed
     this.fetchDataIfNeeded();
   }
   componentDidUpdate(prevProps) {
@@ -42,7 +44,6 @@ class CityPage extends React.Component {
     // Update the city info to match the new city
     if (prevProps.match.params.id !== id) {
       this.retrieveFromSelectedCities();
-      // Load new data
       this.fetchDataIfNeeded();
     }
   }

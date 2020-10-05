@@ -50,7 +50,6 @@ class ComparisonCard extends Component {
               ) : (
                 <Skeleton.Input size={"large"} style={{ width: "200px" }} />
               )}
-
               {/* <Divider className='divider' />
               <div className='metrics-parent'>
                 <img

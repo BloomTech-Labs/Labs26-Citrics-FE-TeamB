@@ -114,6 +114,7 @@ class RenderComparison extends Component {
       <div className="comparison-container">
         <div className="card-container">
           {citiesData.map(city => {
+            console.log(city);
             return <ComparisonCard citiesData={city} key={city.id} />;
           })}
         </div>

@@ -35,24 +35,30 @@ class ComparisonContainer extends React.Component {
     // Using the new URLSearchParams class to extract values from the query
     const queryParams = new URLSearchParams(props.location.search);
     // Must convert from iterator to array, and convert id from string to number
-    const selectedCities = Array.from(queryParams.values()).map(id =>
-      Number(id)
-    );
+    const selectedCities = Array.from(queryParams.values()).map(id => ({
+      id: Number(id)
+    }));
 
     return selectedCities;
   };
   // Retrieving selectedCities from this.state instead of as a function argument
   // would result in cityDetails using out-of-date information
   retrieveCityDataIfNeeded = async selectedCities => {
-    this.setState({ citiesData: selectedCities });
-    for (const id of selectedCities) {
+    // Generate temporary citiesData while loading
+    const tempCitiesData = selectedCities.map(({ id }) => ({
+      id,
+      name: this.props.cityDetails?.[id]?.name,
+      state: this.props.cityDetails?.[id]?.state
+    }));
+    this.setState({ citiesData: tempCitiesData });
+    for (const { id } of selectedCities) {
       if (!this.props.cityDetails[id]) {
         // Make sure each server request finished before proceeding
         await this.props.getCityDetails({ id });
       }
     }
     // Get citiesData using the latest information from Redux passed thru props
-    let citiesData = selectedCities.map(id => this.props.cityDetails[id]);
+    let citiesData = selectedCities.map(({ id }) => this.props.cityDetails[id]);
     // Update page title to match city data
     document.title = `Citrics | ${citiesData.reduce(
       (ac, { name, state }) => `${ac} ${name}, ${state}`,
@@ -70,8 +76,9 @@ class ComparisonContainer extends React.Component {
     );
   }
 }
-const mapState = ({ cities: { cityDetails } }, props) => ({
+const mapState = ({ cities: { cityDetails, selectedCities } }, props) => ({
   ...props,
-  cityDetails
+  cityDetails,
+  selectedCities
 });
 export default connect(mapState, { getCityDetails })(ComparisonContainer);

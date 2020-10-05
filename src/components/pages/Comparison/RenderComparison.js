@@ -99,8 +99,14 @@ class RenderComparison extends Component {
     const { getCityPop, getUnemployRate, getRentals, getJobs } = this;
     const { TabPane } = Tabs;
 
+    // To determine if we're done loading, check every city for a "weather" prop
     const finishedLoading = Object.values(this.props.citiesData).reduce(
       (ac, { weather }) => weather && ac,
+      true
+    );
+    // Some cities are missing job data, hence a separate check for jobs having been loaded
+    const finishedLoadingJobs = Object.values(this.props.citiesData).reduce(
+      (ac, { jobs }) => jobs && ac,
       true
     );
 
@@ -160,7 +166,7 @@ class RenderComparison extends Component {
             </TabPane> */}
           </Tabs>
           <div className="job-table">
-            {finishedLoading ? (
+            {finishedLoadingJobs ? (
               <Graph dataSet={getJobs()} />
             ) : (
               <div style={{ textAlign: "center" }}>

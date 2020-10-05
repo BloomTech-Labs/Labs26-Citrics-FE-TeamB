@@ -130,7 +130,7 @@ class RenderComparison extends Component {
                   dataSet3={getCityPop()[2]}
                 />
               ) : (
-                <Skeleton />
+                <Skeleton active />
               )}
             </TabPane>
             <TabPane className="graph-holder" tab="Apartment Prices" key="2">
@@ -141,7 +141,7 @@ class RenderComparison extends Component {
                   dataSet3={getRentals()[2]}
                 />
               ) : (
-                <Skeleton />
+                <Skeleton active />
               )}
             </TabPane>
             <TabPane className="graph-holder" tab="Unemployment Rate" key="3">
@@ -152,7 +152,7 @@ class RenderComparison extends Component {
                   dataSet3={getUnemployRate()[2]}
                 />
               ) : (
-                <Skeleton />
+                <Skeleton active />
               )}
             </TabPane>
             {/* <TabPane className="graph-holder" tab="Job Market" key="4">

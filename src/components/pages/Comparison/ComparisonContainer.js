@@ -59,7 +59,9 @@ class ComparisonContainer extends React.Component {
         }
       );
     });
+    // Apply that temporary city data
     this.setState({ citiesData: tempCitiesData });
+    // Retrieve the real city data
     for (const { id } of selectedCities) {
       if (!this.props.cityDetails[id]) {
         // Make sure each server request finished before proceeding
@@ -73,6 +75,7 @@ class ComparisonContainer extends React.Component {
       (ac, { name, state }) => `${ac} ${name}, ${state}`,
       ""
     )}`;
+    // Save the finished city data
     this.setState({ citiesData });
   };
   render() {

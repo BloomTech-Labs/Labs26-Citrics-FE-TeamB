@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Plot from "react-plotly.js";
 import LoadingComponent from "../../common/LoadingComponent";
 
-import { lineGraph, barGraph, pieChart, table } from "./graphType";
+import { lineGraph, barGraph, table } from "./graphType";
 
 export default function Graph({ dataSet, dataSet2, dataSet3 }) {
   const [data, setData] = useState(null);
@@ -39,11 +39,6 @@ export default function Graph({ dataSet, dataSet2, dataSet3 }) {
       const { dataPlot, layout } = barGraph(data, data2, data3);
       return (
         <Plot data={dataPlot} layout={layout} config={config} style={style} />
-      );
-    } else if (dataSet.type === "pie") {
-      const { pieData, layout } = pieChart(data);
-      return (
-        <Plot data={pieData} layout={layout} config={config} style={style} />
       );
     } else if (dataSet.type === "table") {
       const { tableData, layout } = table(data);

@@ -2,7 +2,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { addCity } from "../../../state/actions";
+import { addCity, addCityNoDetails } from "../../../state/actions";
 import axios from "axios";
 import RenderSearchBar from "./RenderSearchBar";
 
@@ -38,7 +38,7 @@ class SearchBar extends React.Component {
         // add any already selected cities to the Redux store
         selectedCities.forEach(cityId => {
           const city = cityList.find(({ id }) => Number(id) === cityId);
-          this.props.addCity(city);
+          this.props.addCityNoDetails(city);
         });
       });
   }
@@ -88,4 +88,6 @@ const mapPropsToState = ({ cities: { selectedCities } }, props) => ({
   ...props,
   selectedCities
 });
-export default connect(mapPropsToState, { addCity })(withRouter(SearchBar));
+export default connect(mapPropsToState, { addCity, addCityNoDetails })(
+  withRouter(SearchBar)
+);

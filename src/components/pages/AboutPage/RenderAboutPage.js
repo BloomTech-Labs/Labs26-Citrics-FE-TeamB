@@ -11,6 +11,9 @@ import {
   MailOutlined,
   LinkedinOutlined
 } from "@ant-design/icons";
+import projectLead from "../../../styles/icons/projectLead.jpg";
+import dataScience from "../../../styles/icons/dataScience.png";
+import webDev from "../../../styles/icons/webDev.png";
 
 const { Meta } = Card;
 
@@ -45,7 +48,7 @@ const RenderAboutPage = ({ isLoading }) => {
       <section className="about-tpl">
         {/* TPL - Bhavani */}
         <Card
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           cover={
             <img alt="Bhavani Rajan" src="https://i.imgur.com/9TcokzL.png" />
           }
@@ -56,19 +59,19 @@ const RenderAboutPage = ({ isLoading }) => {
           ]}
         >
           <Meta
-            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            avatar={<Avatar src={projectLead} />}
             title="Team Project Lead"
             description="This is the description"
           />
         </Card>
-      </section>
+      {/* </section> */}
 
       {/* Data Science - Ekram, Zack */}
 
-      <section className="about-ds">
+      {/* <section className="about-ds"> */}
         {/* Ekram */}
         <Card
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           cover={
             <img alt="Ekram Ahmed" src="https://i.imgur.com/vBnpIEC.png" />
           }
@@ -79,7 +82,7 @@ const RenderAboutPage = ({ isLoading }) => {
           ]}
         >
           <Meta
-            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            avatar={<Avatar src={dataScience} />}
             title="Data Scientist"
             description="This is the description"
           />
@@ -87,7 +90,7 @@ const RenderAboutPage = ({ isLoading }) => {
 
         {/* Zack */}
         <Card
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           cover={
             <img alt="Zack Murray" src="https://i.imgur.com/jaELQtg.png" />
           }
@@ -98,7 +101,7 @@ const RenderAboutPage = ({ isLoading }) => {
           ]}
         >
           <Meta
-            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            avatar={<Avatar src={dataScience} />}
             title="Data Scientist"
             description="This is the description"
           />
@@ -110,7 +113,7 @@ const RenderAboutPage = ({ isLoading }) => {
       <section className="about-web">
         {/* Alan */}
         <Card
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           cover={<img alt="Alan Lee" src="https://i.imgur.com/ueHbN2x.png" />}
           actions={[
             <GithubOutlined key="github" />,
@@ -119,7 +122,7 @@ const RenderAboutPage = ({ isLoading }) => {
           ]}
         >
           <Meta
-            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            avatar={<Avatar src={webDev} />}
             title="Web Developer"
             description="This is the description"
           />
@@ -127,7 +130,7 @@ const RenderAboutPage = ({ isLoading }) => {
 
         {/* David */}
         <Card
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           cover={
             <img alt="David Horstman" src="https://i.imgur.com/jF51x65.png" />
           }
@@ -138,7 +141,7 @@ const RenderAboutPage = ({ isLoading }) => {
           ]}
         >
           <Meta
-            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            avatar={<Avatar src={webDev} />}
             title="Web Developer"
             description="This is the description"
           />
@@ -146,7 +149,7 @@ const RenderAboutPage = ({ isLoading }) => {
 
         {/* Lyndsi */}
         <Card
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           cover={
             <img alt="Lyndsi Williams" src="https://i.imgur.com/KpOZXeg.png" />
           }
@@ -157,7 +160,7 @@ const RenderAboutPage = ({ isLoading }) => {
           ]}
         >
           <Meta
-            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            avatar={<Avatar src={webDev} />}
             title="Web Developer"
             description="This is the description"
           />
@@ -165,7 +168,7 @@ const RenderAboutPage = ({ isLoading }) => {
 
         {/* Rachele */}
         <Card
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           cover={
             <img alt="Rachele Edwards" src="https://i.imgur.com/UR0sA0t.png" />
           }
@@ -176,7 +179,7 @@ const RenderAboutPage = ({ isLoading }) => {
           ]}
         >
           <Meta
-            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            avatar={<Avatar src={webDev} />}
             title="Web Developer"
             description="This is the description"
           />

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Tabs } from "antd";
+import { Skeleton, Space, Tabs } from "antd";
 import LoadingComponent from "../../common/LoadingComponent.js";
 import ComparisonCard from "./comparisonCard";
 import Graph from "../../common/Graphs/renderGraph";
@@ -58,35 +58,35 @@ class RenderComparison extends Component {
   getJobs = cities => {
     const headers = [];
 
-    // // creates headers for the table
-    // this.props.citiesData.map(city => headers.push(city.name));
+    // creates headers for the table
+    this.props.citiesData.map(city => headers.push(city.name));
 
-    // // helper function to build keys to filter
-    // const helperFunc = (str = "job_ranked_") => {
-    //   const allowed = [];
-    //   for (let i = 1; i < 6; i++) {
-    //     allowed.push(`${str}${i}`);
-    //   }
-    //   return allowed;
-    // };
-    // const allowedRanks = helperFunc();
+    // helper function to build keys to filter
+    const helperFunc = (str = "job_ranked_") => {
+      const allowed = [];
+      for (let i = 1; i < 6; i++) {
+        allowed.push(`${str}${i}`);
+      }
+      return allowed;
+    };
+    const allowedRanks = helperFunc();
 
-    // // helper function to filter and build array of top 5
-    // const helperBuild = (topArray, id) => {
-    //   return Object.keys(this.props.citiesData[id].jobs.data)
-    //     .filter(keys => topArray.includes(keys))
-    //     .map(rankValue => {
-    //       return this.props.citiesData[id].jobs.data[rankValue];
-    //     });
-    // };
-    // // array to hold top 5 of each city
+    // helper function to filter and build array of top 5
+    const helperBuild = (topArray, id) => {
+      return Object.keys(this.props.citiesData[id].jobs.data)
+        .filter(keys => topArray.includes(keys))
+        .map(rankValue => {
+          return this.props.citiesData[id].jobs.data[rankValue];
+        });
+    };
+    // array to hold top 5 of each city
     const topJobs = [];
-    // // iterates through the citiesDta
-    // // gets all the keys and filters it only getting the allowedRanks
-    // // creates a new array of top 5 jobs for the city and pushes it into the topJobs array
-    // for (let id in this.props.citiesData) {
-    //   topJobs.push(helperBuild(allowedRanks, id));
-    // }
+    // iterates through the citiesDta
+    // gets all the keys and filters it only getting the allowedRanks
+    // creates a new array of top 5 jobs for the city and pushes it into the topJobs array
+    for (let id in this.props.citiesData) {
+      topJobs.push(helperBuild(allowedRanks, id));
+    }
 
     return {
       headers,
@@ -99,6 +99,12 @@ class RenderComparison extends Component {
     const { citiesData } = this.props;
     const { getCityPop, getUnemployRate, getRentals, getJobs } = this;
     const { TabPane } = Tabs;
+
+    const finishedLoading = Object.values(this.props.citiesData).reduce(
+      (ac, { weather }) => weather && ac,
+      true
+    );
+
     return (
       <div className="comparison-container">
         <div className="card-container">
@@ -143,7 +149,20 @@ class RenderComparison extends Component {
             </TabPane> */}
           </Tabs>
           <div className="job-table">
-            <Graph dataSet={getJobs()} />
+            {finishedLoading ? (
+              <Graph dataSet={getJobs()} />
+            ) : (
+              <div style={{ textAlign: "center" }}>
+                <h3>Top Job Industries</h3>
+                <Space>
+                  <Skeleton.Input
+                    active
+                    size={"large"}
+                    style={{ width: "800px" }}
+                  />
+                </Space>
+              </div>
+            )}
           </div>
         </div>
       </div>

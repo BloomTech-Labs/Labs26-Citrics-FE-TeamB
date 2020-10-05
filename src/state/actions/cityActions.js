@@ -9,6 +9,9 @@ export const addCity = city => async dispatch => {
   // I'm not 100% sure why wrapping this in dispatch is necessary, but it is
   dispatch(getCityDetails(city));
 };
+
+export const addCityNoDetails = city => ({ type: ADD_CITY, payload: { city } });
+
 export const removeCity = cityId => ({
   type: REMOVE_CITY,
   payload: { cityId }

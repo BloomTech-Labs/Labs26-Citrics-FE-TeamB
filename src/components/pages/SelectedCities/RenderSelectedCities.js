@@ -41,7 +41,7 @@ export default function RenderSelectedCities({
             disabled={selectedCities.length === 0}
             onClick={openDetailPage}
           >
-            Search
+            Details
           </Button>
         )}
       </div>

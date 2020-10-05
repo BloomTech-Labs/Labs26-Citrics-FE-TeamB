@@ -1,5 +1,6 @@
 import React from "react";
 import { CarOutlined } from "@ant-design/icons";
+import LoadingSkeleton from "./LoadingSkeleton";
 
 export default function JobsPane({ jobs }) {
   return (
@@ -9,7 +10,14 @@ export default function JobsPane({ jobs }) {
           <h2>Jobs:</h2>
           <CarOutlined className="detail-pane-icon" />
         </div>
-        Jobs not implemented yet!
+        {jobs ? (
+          <>
+            {/* This JSX fragment contains everything shown while not loading */}
+            Jobs not implemented yet!
+          </>
+        ) : (
+          <LoadingSkeleton />
+        )}
       </div>
     </div>
   );

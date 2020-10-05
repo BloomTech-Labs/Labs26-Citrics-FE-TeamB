@@ -1,8 +1,8 @@
 import React from "react";
 import { Tabs } from "antd";
+import LoadingSkeleton from "./LoadingSkeleton";
 import { HomeOutlined } from "@ant-design/icons";
 export default function HousingPane({ rent }) {
-  console.log(rent);
   const { TabPane } = Tabs;
   // This list will be the titles of the tabs
   // it also matches the keys in rent (although they're all lowercase in rent)
@@ -31,15 +31,23 @@ export default function HousingPane({ rent }) {
           <h2>Rental Prices:</h2>
           <HomeOutlined className="detail-pane-icon" />
         </div>
+
         <div className="housing-pane">
-          {generatePriceDisplay(rent.rental_pct_chg)}
-          <Tabs defaultActiveKey="1">
-            {aptTypes.map((name, idx) => (
-              <TabPane key={idx} tab={name} className="rental-price-tab">
-                ${rent[name.toLowerCase()]}
-              </TabPane>
-            ))}
-          </Tabs>
+          {rent ? (
+            <>
+              {/* This JSX fragment contains everything shown when not loading */}
+              {generatePriceDisplay(rent.rental_pct_chg)}
+              <Tabs defaultActiveKey="1">
+                {aptTypes.map((name, idx) => (
+                  <TabPane key={idx} tab={name} className="rental-price-tab">
+                    ${rent[name.toLowerCase()]}
+                  </TabPane>
+                ))}
+              </Tabs>
+            </>
+          ) : (
+            <LoadingSkeleton />
+          )}
         </div>
       </div>
     </div>

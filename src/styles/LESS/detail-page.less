@@ -23,11 +23,7 @@
 //DetailPane
 .main-detail-content {
   display: flex;
-  align-items: center;
-}
-
-.detail-pane-icon {
-  font-size: @h0size;
+  flex-direction: column;
 }
 
 .graph-icons {
@@ -45,5 +41,14 @@
   .graph-toggle {
     font-size: @h4size;
     padding-right: 5px;
+  }
+}
+
+// pane heading
+.detail-header {
+  display: flex;
+  align-items: center;
+  .detail-pane-icon {
+    font-size: @h0size;
   }
 }

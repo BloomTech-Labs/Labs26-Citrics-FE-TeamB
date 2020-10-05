@@ -13,7 +13,7 @@ export default function JobsPane({ jobs }) {
         {jobs ? (
           <>
             {/* This JSX fragment contains everything shown while not loading */}
-            "Jobs not implemented yet!"
+            Jobs not implemented yet!
           </>
         ) : (
           <LoadingSkeleton />

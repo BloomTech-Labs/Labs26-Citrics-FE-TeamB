@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 import ModalComponent from "./Modal";
-import LoadingComponent from "../../common/LoadingComponent";
-import { Divider } from "antd";
+import { Divider, Skeleton } from "antd";
 //icons
 import weather from "../../../styles/icons/weather-48.png";
 import population from "../../../styles/icons/pop-48.png";
 import pricing from "../../../styles/icons/pricing-48.png";
+
+function LoadingSkeleton() {
+  return (
+    <div style={{ minWidth: "200px" }}>
+      <Skeleton active title={false} paragraph={{ rows: 3 }} />
+    </div>
+  );
+}
 
 class ComparisonCard extends Component {
   state = {
@@ -35,7 +42,7 @@ class ComparisonCard extends Component {
             />
           </div>
           {!citiesData.population ? (
-            <LoadingComponent message="Loading city data..." />
+            <LoadingSkeleton />
           ) : (
             <div className="basic-card-info">
               <div className="card-metrics">

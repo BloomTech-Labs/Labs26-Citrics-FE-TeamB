@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Skeleton, Space, Tabs } from "antd";
-import LoadingComponent from "../../common/LoadingComponent.js";
 import ComparisonCard from "./comparisonCard";
 import Graph from "../../common/Graphs/renderGraph";
 
@@ -8,50 +7,50 @@ class RenderComparison extends Component {
   // puts state name in an array for easier access
   getUnemployRate = () => {
     const unemployRate = [];
-    // for (let id in this.props.citiesData) {
-    //   unemployRate.push({
-    //     name: this.props.citiesData[id].name,
-    //     plotX: JSON.parse(this.props.citiesData[id].unemployRate.viz).data[0].x,
-    //     plotY: JSON.parse(this.props.citiesData[id].unemployRate.viz).data[0].y,
-    //     graphName: "Unemployment Rate",
-    //     type: "line"
-    //   });
-    // }
+    for (let id in this.props.citiesData) {
+      unemployRate.push({
+        name: this.props.citiesData[id].name,
+        plotX: JSON.parse(this.props.citiesData[id].unemployRate.viz).data[0].x,
+        plotY: JSON.parse(this.props.citiesData[id].unemployRate.viz).data[0].y,
+        graphName: "Unemployment Rate",
+        type: "line"
+      });
+    }
     return unemployRate;
   };
   // puts plot data  in an array for easier access
   getCityPop = () => {
     const cityPop = [];
-    // for (let id in this.props.citiesData) {
-    //   cityPop.push({
-    //     name: this.props.citiesData[id].name,
-    //     plotX: JSON.parse(this.props.citiesData[id].population.viz).data[0].x,
-    //     plotY: JSON.parse(this.props.citiesData[id].population.viz).data[0].y,
-    //     graphName: "Population Trend",
-    //     type: "bar"
-    //   });
-    // }
+    for (let id in this.props.citiesData) {
+      cityPop.push({
+        name: this.props.citiesData[id].name,
+        plotX: JSON.parse(this.props.citiesData[id].population.viz).data[0].x,
+        plotY: JSON.parse(this.props.citiesData[id].population.viz).data[0].y,
+        graphName: "Population Trend",
+        type: "bar"
+      });
+    }
     return cityPop;
   };
 
   getRentals = () => {
     const rentals = [];
-    // for (let id in this.props.citiesData) {
-    //   rentals.push({
-    //     name: this.props.citiesData[id].name,
-    //     plotY: ["Studio", "1BR", "2BR", "3BR", "4BR"],
-    //     plotX: [
-    //       this.props.citiesData[id].rent.studio,
-    //       this.props.citiesData[id].rent["1br"],
-    //       this.props.citiesData[id].rent["2br"],
-    //       this.props.citiesData[id].rent["3br"],
-    //       this.props.citiesData[id].rent["4br"]
-    //     ],
-    //     graphName: "Apartment Prices",
-    //     type: "bar",
-    //     orientation: "h"
-    //   });
-    // }
+    for (let id in this.props.citiesData) {
+      rentals.push({
+        name: this.props.citiesData[id].name,
+        plotY: ["Studio", "1BR", "2BR", "3BR", "4BR"],
+        plotX: [
+          this.props.citiesData[id].rent.studio,
+          this.props.citiesData[id].rent["1br"],
+          this.props.citiesData[id].rent["2br"],
+          this.props.citiesData[id].rent["3br"],
+          this.props.citiesData[id].rent["4br"]
+        ],
+        graphName: "Apartment Prices",
+        type: "bar",
+        orientation: "h"
+      });
+    }
     return rentals;
   };
 
@@ -124,25 +123,37 @@ class RenderComparison extends Component {
             }}
           >
             <TabPane className="graph-holder" tab="Population Trend" key="1">
-              <Graph
-                dataSet={getCityPop()[0]}
-                dataSet2={getCityPop()[1]}
-                dataSet3={getCityPop()[2]}
-              />
+              {finishedLoading ? (
+                <Graph
+                  dataSet={getCityPop()[0]}
+                  dataSet2={getCityPop()[1]}
+                  dataSet3={getCityPop()[2]}
+                />
+              ) : (
+                <Skeleton />
+              )}
             </TabPane>
             <TabPane className="graph-holder" tab="Apartment Prices" key="2">
-              <Graph
-                dataSet={getRentals()[0]}
-                dataSet2={getRentals()[1]}
-                dataSet3={getRentals()[2]}
-              />
+              {finishedLoading ? (
+                <Graph
+                  dataSet={getRentals()[0]}
+                  dataSet2={getRentals()[1]}
+                  dataSet3={getRentals()[2]}
+                />
+              ) : (
+                <Skeleton />
+              )}
             </TabPane>
             <TabPane className="graph-holder" tab="Unemployment Rate" key="3">
-              <Graph
-                dataSet={getUnemployRate()[0]}
-                dataSet2={getUnemployRate()[1]}
-                dataSet3={getUnemployRate()[2]}
-              />
+              {finishedLoading ? (
+                <Graph
+                  dataSet={getUnemployRate()[0]}
+                  dataSet2={getUnemployRate()[1]}
+                  dataSet3={getUnemployRate()[2]}
+                />
+              ) : (
+                <Skeleton />
+              )}
             </TabPane>
             {/* <TabPane className="graph-holder" tab="Job Market" key="4">
               <Graph dataSet={getJobs()} />

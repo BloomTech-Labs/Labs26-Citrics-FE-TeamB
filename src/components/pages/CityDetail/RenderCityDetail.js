@@ -6,17 +6,13 @@ export default function RenderCityDetail({ city }) {
       <h3 className="one-render-h3">
         {city.name}, {city.state}
       </h3>
-
-      <PopulationPane population={city.population} />
-
       <WeatherPane
         weather={city.weather}
         currentWeather={city.currentWeather}
       />
-
       <HousingPane rent={city.rent} />
-
       <JobsPane jobs={city.jobs} />
+      <PopulationPane population={city.population} />
     </div>
   );
 }

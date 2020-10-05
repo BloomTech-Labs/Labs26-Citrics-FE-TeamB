@@ -8,7 +8,7 @@ import pricing from "../../../styles/icons/pricing-48.png";
 
 function LoadingSkeleton() {
   return (
-    <div style={{ minWidth: "200px" }}>
+    <div style={{ minWidth: "150px" }}>
       <Skeleton active title={false} paragraph={{ rows: 1 }} />
     </div>
   );
@@ -50,46 +50,60 @@ class ComparisonCard extends Component {
               ) : (
                 <Skeleton.Input size={"large"} style={{ width: "200px" }} />
               )}
-              {/* <Divider className='divider' />
-              <div className='metrics-parent'>
+              <Divider className="divider" />
+              <div className="metrics-parent">
                 <img
-                  className='metrics-icon'
+                  className="metrics-icon"
                   src={population}
-                  alt='Population icon'
+                  alt="Population icon"
                 />
-                <div className='metrics-child'>
+                <div className="metrics-child">
                   <p>
                     <b>Population:</b>
                   </p>
-                  <p>{citiesData.population.data.total_pop.toLocaleString()}</p>
+                  {citiesData.population ? (
+                    <p>
+                      {citiesData.population.data.total_pop.toLocaleString()}
+                    </p>
+                  ) : (
+                    <LoadingSkeleton />
+                  )}
                 </div>
               </div>
-              <div className='metrics-parent'>
+              <div className="metrics-parent">
                 <img
-                  className='metrics-icon'
+                  className="metrics-icon"
                   src={pricing}
-                  alt='Rental pricing icon'
+                  alt="Rental pricing icon"
                 />
-                <div className='metrics-child'>
+                <div className="metrics-child">
                   <p>
                     <b>Rental Prices:</b>
                   </p>
-                  <p>{`${"$" + citiesData.rent["1br"]}/month (1BR)`}</p>
+                  {citiesData.rent ? (
+                    <p>{`${"$" + citiesData.rent["1br"]}/month (1BR)`}</p>
+                  ) : (
+                    <LoadingSkeleton />
+                  )}
                 </div>
               </div>
-              <div className='metrics-parent'>
+              <div className="metrics-parent">
                 <img
-                  className='metrics-icon'
+                  className="metrics-icon"
                   src={weather}
-                  alt='Weather icon'
+                  alt="Weather icon"
                 />
-                <div className='metrics-child'>
+                <div className="metrics-child">
                   <p>
                     <b>Weather:</b>
                   </p>
-                  <p>{`${citiesData.weather.winter_mintempF_mean}°F - ${citiesData.weather.summer_maxtempF_mean}°F`}</p>
+                  {citiesData.weather ? (
+                    <p>{`${citiesData.weather.winter_mintempF_mean}°F - ${citiesData.weather.summer_maxtempF_mean}°F`}</p>
+                  ) : (
+                    <LoadingSkeleton />
+                  )}
                 </div>
-              </div> */}
+              </div>
             </div>
             <div className="btn-container">
               <button

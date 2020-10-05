@@ -5,6 +5,7 @@ import { Divider, Skeleton } from "antd";
 import weather from "../../../styles/icons/weather-48.png";
 import population from "../../../styles/icons/pop-48.png";
 import pricing from "../../../styles/icons/pricing-48.png";
+import { connect } from "react-redux";
 
 function LoadingSkeleton() {
   return (
@@ -26,7 +27,11 @@ class ComparisonCard extends Component {
     this.setState({ visible: !this.state.visible });
   };
   render() {
-    const { citiesData } = this.props;
+    let { citiesData, selectedCities } = this.props;
+    const dataFromSelectedCities = selectedCities.find(
+      ({ id }) => Number(id) === Number(citiesData.id)
+    );
+    citiesData = { ...dataFromSelectedCities, ...citiesData };
     const { onToggleModal, onSelectCity } = this;
     const { visible, city } = this.state;
     return (
@@ -134,5 +139,8 @@ class ComparisonCard extends Component {
     );
   }
 }
-
-export default ComparisonCard;
+const mapPropsToState = ({ cities: { selectedCities } }, props) => ({
+  selectedCities,
+  ...props
+});
+export default connect(mapPropsToState, {})(ComparisonCard);

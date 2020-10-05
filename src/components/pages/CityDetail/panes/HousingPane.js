@@ -3,7 +3,6 @@ import { Tabs } from "antd";
 import LoadingSkeleton from "./LoadingSkeleton";
 import { HomeOutlined } from "@ant-design/icons";
 export default function HousingPane({ rent }) {
-  console.log(rent);
   const { TabPane } = Tabs;
   // This list will be the titles of the tabs
   // it also matches the keys in rent (although they're all lowercase in rent)

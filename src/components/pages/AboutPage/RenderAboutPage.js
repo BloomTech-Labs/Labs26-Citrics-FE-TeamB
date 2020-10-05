@@ -1,4 +1,4 @@
-// React
+// Library imports
 import React from "react";
 // Placeholder loading component
 // import LoadingComponent from '../../common/LoadingComponent';
@@ -17,7 +17,7 @@ const { Meta } = Card;
 const RenderAboutPage = ({ isLoading }) => {
   return (
     <div className="about-container">
-      {/*  Use this is loading component is needed
+      {/*  Use this as loading component if needed
       {isLoading ? (
         <LoadingComponent message={"Retrieving About Page..."} />
       ) : (

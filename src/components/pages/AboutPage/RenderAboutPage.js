@@ -45,7 +45,7 @@ const RenderAboutPage = ({ isLoading }) => {
 
       {/* ----- Team cards ----- */}
 
-      <section className="about-tpl">
+      <section className="about-tpl-ds">
         {/* TPL - Bhavani */}
         <Card
           style={{ width: 250 }}
@@ -64,11 +64,10 @@ const RenderAboutPage = ({ isLoading }) => {
             description="This is the description"
           />
         </Card>
-      {/* </section> */}
+        {/* </section> */}
 
-      {/* Data Science - Ekram, Zack */}
+        {/* Data Science - Ekram, Zack */}
 
-      {/* <section className="about-ds"> */}
         {/* Ekram */}
         <Card
           style={{ width: 250 }}

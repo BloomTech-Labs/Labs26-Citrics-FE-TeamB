@@ -55,7 +55,9 @@ const RenderAboutPage = ({ isLoading }) => {
           actions={[
             <GithubOutlined key="github" />,
             <MailOutlined key="email" />,
-            <LinkedinOutlined key="linkedin" />
+            <a href="https://www.linkedin.com/in/bhavani-rajan/">
+              <LinkedinOutlined key="linkedin" />
+            </a>
           ]}
         >
           <Meta
@@ -77,7 +79,9 @@ const RenderAboutPage = ({ isLoading }) => {
           actions={[
             <GithubOutlined key="github" />,
             <MailOutlined key="email" />,
-            <LinkedinOutlined key="linkedin" />
+            <a href="https://www.linkedin.com/in/ekram-ullah-ahmed/">
+              <LinkedinOutlined key="linkedin" />
+            </a>
           ]}
         >
           <Meta
@@ -96,7 +100,9 @@ const RenderAboutPage = ({ isLoading }) => {
           actions={[
             <GithubOutlined key="github" />,
             <MailOutlined key="email" />,
-            <LinkedinOutlined key="linkedin" />
+            <a href="https://www.linkedin.com/in/zack-murray/">
+              <LinkedinOutlined key="linkedin" />
+            </a>
           ]}
         >
           <Meta
@@ -117,7 +123,9 @@ const RenderAboutPage = ({ isLoading }) => {
           actions={[
             <GithubOutlined key="github" />,
             <MailOutlined key="email" />,
-            <LinkedinOutlined key="linkedin" />
+            <a href="https://www.linkedin.com/in/alanlee321/">
+              <LinkedinOutlined key="linkedin" />
+            </a>
           ]}
         >
           <Meta
@@ -136,7 +144,9 @@ const RenderAboutPage = ({ isLoading }) => {
           actions={[
             <GithubOutlined key="github" />,
             <MailOutlined key="email" />,
-            <LinkedinOutlined key="linkedin" />
+            <a href="https://www.linkedin.com/in/david-horstman/">
+              <LinkedinOutlined key="linkedin" />
+            </a>
           ]}
         >
           <Meta
@@ -148,6 +158,7 @@ const RenderAboutPage = ({ isLoading }) => {
 
         {/* Lyndsi */}
         <Card
+          hoverable
           style={{ width: 250 }}
           cover={
             <img alt="Lyndsi Williams" src="https://i.imgur.com/KpOZXeg.png" />
@@ -155,7 +166,9 @@ const RenderAboutPage = ({ isLoading }) => {
           actions={[
             <GithubOutlined key="github" />,
             <MailOutlined key="email" />,
-            <LinkedinOutlined key="linkedin" />
+            <a href="https://www.linkedin.com/in/lyndsiwilliams/">
+              <LinkedinOutlined key="linkedin" />
+            </a>
           ]}
         >
           <Meta
@@ -174,7 +187,9 @@ const RenderAboutPage = ({ isLoading }) => {
           actions={[
             <GithubOutlined key="github" />,
             <MailOutlined key="email" />,
-            <LinkedinOutlined key="linkedin" />
+            <a href="https://www.linkedin.com/in/berachele/">
+              <LinkedinOutlined key="linkedin" />
+            </a>
           ]}
         >
           <Meta

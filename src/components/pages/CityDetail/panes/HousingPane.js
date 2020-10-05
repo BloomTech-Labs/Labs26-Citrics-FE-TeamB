@@ -35,6 +35,7 @@ export default function HousingPane({ rent }) {
         <div className="housing-pane">
           {rent ? (
             <>
+              {/* This JSX fragment contains everything shown when not loading */}
               {generatePriceDisplay(rent.rental_pct_chg)}
               <Tabs defaultActiveKey="1">
                 {aptTypes.map((name, idx) => (

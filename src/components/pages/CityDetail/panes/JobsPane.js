@@ -10,7 +10,14 @@ export default function JobsPane({ jobs }) {
           <h2>Jobs:</h2>
           <CarOutlined className="detail-pane-icon" />
         </div>
-        {jobs ? "Jobs not implemented yet!" : <LoadingSkeleton />}
+        {jobs ? (
+          <>
+            {/* This JSX fragment contains everything shown while not loading */}
+            "Jobs not implemented yet!"
+          </>
+        ) : (
+          <LoadingSkeleton />
+        )}
       </div>
     </div>
   );

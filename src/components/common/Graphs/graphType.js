@@ -112,40 +112,6 @@ export const barGraph = (set1, set2, set3) => {
   return { dataPlot, layout };
 };
 
-// PIE CHART CONFIG
-export const pieChart = set1 => {
-  let pieData = [
-    {
-      values: set1.values,
-      labels: set1.labels,
-      type: "pie",
-      name: set1.name,
-      // marker: {
-      //   colors: ultimateColors[0],
-      // },
-      automargin: true,
-      textinfo: "percent",
-      insidetextorientation: "radial"
-    }
-  ];
-
-  let layout = {
-    title: "Job Market",
-    showlegend: true,
-    paper_bgcolor: "transparent",
-    plot_bgcolor: "transparent",
-    yaxis: {
-      showgrid: false
-    },
-    xaxis: {
-      showgrid: false
-    },
-    autosize: true
-  };
-
-  return { pieData, layout };
-};
-
 // TABLE CONFIG
 export const table = set1 => {
   let tableData = [

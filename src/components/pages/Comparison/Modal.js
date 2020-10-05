@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal } from "antd";
+import { Button, Modal } from "antd";
 import { CityDetailPage } from "../CityDetail";
 
 const ModalComponent = ({ visible, setVisible, city }) => {
@@ -10,10 +10,15 @@ const ModalComponent = ({ visible, setVisible, city }) => {
         <Modal
           centered
           visible={visible}
-          onOk={() => setVisible()}
-          onCancel={() => setVisible()}
+          onOk={setVisible}
+          onCancel={setVisible}
           style={{ top: 20 }}
           width={1000}
+          footer={[
+            <Button type="primary" key="close" onClick={setVisible}>
+              Close
+            </Button>
+          ]}
         >
           <CityDetailPage city={city} />
         </Modal>

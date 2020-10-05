@@ -32,15 +32,19 @@ class ComparisonCard extends Component {
     return (
       <div className="card">
         <div className="comparison-card" data-testid="city-cards">
-          <div
-            className="custom-image"
-            style={{ backgroundImage: `url(${citiesData.image})` }}
-          >
-            <img
-              alt={`Thumbnail for ${citiesData.name}, ${citiesData.state}`}
-              src={citiesData.image}
-            />
-          </div>
+          {citiesData.image ? (
+            <div
+              className="custom-image"
+              style={{ backgroundImage: `url(${citiesData.image})` }}
+            >
+              <img
+                alt={`Thumbnail for ${citiesData.name}, ${citiesData.state}`}
+                src={citiesData.image}
+              />
+            </div>
+          ) : (
+            <Skeleton.Image active className="custom-image" />
+          )}
           <div className="basic-card-info">
             <div className="card-metrics">
               {citiesData.name ? (
@@ -48,7 +52,11 @@ class ComparisonCard extends Component {
                   {citiesData.name}, {citiesData.state}
                 </h3>
               ) : (
-                <Skeleton.Input size={"large"} style={{ width: "200px" }} />
+                <Skeleton.Input
+                  active
+                  size={"large"}
+                  style={{ width: "200px" }}
+                />
               )}
               <Divider className="divider" />
               <div className="metrics-parent">

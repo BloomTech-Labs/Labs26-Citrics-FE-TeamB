@@ -45,11 +45,20 @@ class ComparisonContainer extends React.Component {
   // would result in cityDetails using out-of-date information
   retrieveCityDataIfNeeded = async selectedCities => {
     // Generate temporary citiesData while loading
-    const tempCitiesData = selectedCities.map(({ id }) => ({
-      id,
-      name: this.props.cityDetails?.[id]?.name,
-      state: this.props.cityDetails?.[id]?.state
-    }));
+    const tempCitiesData = selectedCities.map(({ id }) => {
+      const { cityDetails, selectedCities } = this.props;
+      return (
+        // If the city data is available in selectedCities, use it
+        selectedCities.find(
+          ({ id: cityId }) => Number(cityId) === Number(id)
+        ) ?? {
+          // If not, try finding its name in cityDetails
+          id,
+          name: cityDetails?.[id]?.name,
+          state: cityDetails?.[id]?.state
+        }
+      );
+    });
     this.setState({ citiesData: tempCitiesData });
     for (const { id } of selectedCities) {
       if (!this.props.cityDetails[id]) {

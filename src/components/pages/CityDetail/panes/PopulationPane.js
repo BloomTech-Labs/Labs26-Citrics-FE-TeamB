@@ -4,11 +4,15 @@ import { TeamOutlined } from "@ant-design/icons";
 import { lineGraph, barGraph } from "../../../common/Graphs/graphType";
 
 export default function PopulationPane({ population }) {
+  // stlye object for making the graphs responsive
   let style = { width: "100%", height: "100%" };
+  // Functions to generate graphs for age group
   const generateAgeGraph = () => {
+    // Creates array for the x axis
     const ageGroups = Object.keys(population.data).filter(keys => {
       return keys.includes("age");
     });
+    // Creates array for the y axis
     const groupPercent = Object.keys(population.data)
       .filter(keys => {
         return keys.includes("age");
@@ -16,6 +20,7 @@ export default function PopulationPane({ population }) {
       .map(ageGroup => {
         return population.data[ageGroup];
       });
+    // Uses the function from graphType file to build out the plots
     const { dataPlot, layout } = barGraph({
       name: "%",
       plotX: ageGroups,
@@ -30,6 +35,7 @@ export default function PopulationPane({ population }) {
       />
     );
   };
+  // Function to create the trand graph
   const generateTrendGraph = () => {
     const { dataPlot, layout } = lineGraph({
       name: "",
@@ -53,14 +59,14 @@ export default function PopulationPane({ population }) {
           <h2>Population:</h2>
         </div>
         <div>
+          <p>
+            Current total population:{" "}
+            <span>{population.data.total_pop.toLocaleString()}</span>
+          </p>
           <div className="population-graph-container">
             <div className="population-graph">{generateAgeGraph()}</div>
             <div className="population-graph">{generateTrendGraph()}</div>
           </div>
-          <p>
-            Total Population:{" "}
-            <span>{population.data.total_pop.toLocaleString()}</span>
-          </p>
         </div>
       </div>
     </div>

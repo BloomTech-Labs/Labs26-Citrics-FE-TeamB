@@ -35,6 +35,9 @@ export default function AdvancedSearchContainer(props) {
     "searchPrefs",
     initialSearchPrefs
   );
+  // Error checking
+  // If the data cached in localStorage doesn't contain a value for every expected key
+  // Set all values to their defaults
   if (
     !(
       searchPrefs.rooms &&

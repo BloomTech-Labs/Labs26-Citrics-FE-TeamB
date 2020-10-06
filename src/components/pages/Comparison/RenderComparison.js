@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { Tabs } from "antd";
-import LoadingComponent from "../../common/LoadingComponent.js";
+import { Skeleton, Space, Tabs } from "antd";
 import ComparisonCard from "./comparisonCard";
 import Graph from "../../common/Graphs/renderGraph";
 
 class RenderComparison extends Component {
-  // puts state name in an array for easier acccess
+  // puts state name in an array for easier access
   getUnemployRate = () => {
     const unemployRate = [];
     for (let id in this.props.citiesData) {
@@ -19,7 +18,7 @@ class RenderComparison extends Component {
     }
     return unemployRate;
   };
-  // puts plot data  in an array for easier acccess
+  // puts plot data  in an array for easier access
   getCityPop = () => {
     const cityPop = [];
     for (let id in this.props.citiesData) {
@@ -57,6 +56,7 @@ class RenderComparison extends Component {
 
   getJobs = cities => {
     const headers = [];
+
     // creates headers for the table
     this.props.citiesData.map(city => headers.push(city.name));
 
@@ -99,9 +99,18 @@ class RenderComparison extends Component {
     const { citiesData } = this.props;
     const { getCityPop, getUnemployRate, getRentals, getJobs } = this;
     const { TabPane } = Tabs;
-    if (citiesData.length === 0) {
-      return <LoadingComponent message="Loading city data..." />;
-    }
+
+    // To determine if we're done loading, check every city for a "weather" prop
+    const finishedLoading = Object.values(this.props.citiesData).reduce(
+      (ac, { weather }) => weather && ac,
+      true
+    );
+    // Some cities are missing job data, hence a separate check for jobs having been loaded
+    const finishedLoadingJobs = Object.values(this.props.citiesData).reduce(
+      (ac, { jobs }) => jobs && ac,
+      true
+    );
+
     return (
       <div className="comparison-container">
         <div className="card-container">
@@ -109,7 +118,7 @@ class RenderComparison extends Component {
             return (
               <ComparisonCard
                 citiesData={city}
-                key={city.population.data.total_pop}
+                key={city.id ?? city.name + city.state}
               />
             );
           })}
@@ -126,29 +135,54 @@ class RenderComparison extends Component {
             }}
           >
             <TabPane className="graph-holder" tab="Population Trend" key="1">
-              <Graph
-                dataSet={getCityPop()[0]}
-                dataSet2={getCityPop()[1]}
-                dataSet3={getCityPop()[2]}
-              />
+              {finishedLoading ? (
+                <Graph
+                  dataSet={getCityPop()[0]}
+                  dataSet2={getCityPop()[1]}
+                  dataSet3={getCityPop()[2]}
+                />
+              ) : (
+                <Skeleton active />
+              )}
             </TabPane>
             <TabPane className="graph-holder" tab="Apartment Prices" key="2">
-              <Graph
-                dataSet={getRentals()[0]}
-                dataSet2={getRentals()[1]}
-                dataSet3={getRentals()[2]}
-              />
+              {finishedLoading ? (
+                <Graph
+                  dataSet={getRentals()[0]}
+                  dataSet2={getRentals()[1]}
+                  dataSet3={getRentals()[2]}
+                />
+              ) : (
+                <Skeleton active />
+              )}
             </TabPane>
             <TabPane className="graph-holder" tab="Unemployment Rate" key="3">
-              <Graph
-                dataSet={getUnemployRate()[0]}
-                dataSet2={getUnemployRate()[1]}
-                dataSet3={getUnemployRate()[2]}
-              />
+              {finishedLoading ? (
+                <Graph
+                  dataSet={getUnemployRate()[0]}
+                  dataSet2={getUnemployRate()[1]}
+                  dataSet3={getUnemployRate()[2]}
+                />
+              ) : (
+                <Skeleton active />
+              )}
             </TabPane>
           </Tabs>
           <div className="job-table">
-            <Graph dataSet={getJobs()} />
+            {finishedLoadingJobs ? (
+              <Graph dataSet={getJobs()} />
+            ) : (
+              <div style={{ textAlign: "center" }}>
+                <h3>Top Job Industries</h3>
+                <Space>
+                  <Skeleton.Input
+                    active
+                    size={"large"}
+                    style={{ width: "800px" }}
+                  />
+                </Space>
+              </div>
+            )}
           </div>
         </div>
       </div>

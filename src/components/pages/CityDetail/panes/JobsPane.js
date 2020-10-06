@@ -2,6 +2,7 @@ import React from "react";
 import { CarOutlined } from "@ant-design/icons";
 import { lineGraph } from "../../../common/Graphs/graphType";
 import Plot from "react-plotly.js";
+import LoadingSkeleton from "./LoadingSkeleton";
 
 export default function JobsPane({ jobs, unemployment }) {
   let style = { width: "100%", height: "100%" };
@@ -62,10 +63,14 @@ export default function JobsPane({ jobs, unemployment }) {
           <CarOutlined className="detail-pane-icon" />
           <h2>Jobs:</h2>
         </div>
-        <div className="job-info-container">
-          <div className="job-charts">{renderPie()}</div>
-          <div className="job-charts-unemploy">{generateTrendGraph()}</div>
-        </div>
+        {jobs && unemployment ? (
+          <div className="job-info-container">
+            <div className="job-charts">{renderPie()}</div>
+            <div className="job-charts-unemploy">{generateTrendGraph()}</div>
+          </div>
+        ) : (
+          <LoadingSkeleton />
+        )}
       </div>
     </div>
   );

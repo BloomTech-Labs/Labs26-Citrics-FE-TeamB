@@ -2,6 +2,7 @@ import React from "react";
 import Plot from "react-plotly.js";
 import { TeamOutlined } from "@ant-design/icons";
 import { lineGraph, barGraph } from "../../../common/Graphs/graphType";
+import LoadingSkeleton from "./LoadingSkeleton";
 
 export default function PopulationPane({ population }) {
   // stlye object for making the graphs responsive
@@ -61,16 +62,20 @@ export default function PopulationPane({ population }) {
           <TeamOutlined className="detail-pane-icon" />
           <h2>Population:</h2>
         </div>
-        <div>
-          <p>
-            Current total population:{" "}
-            <span>{population.data.total_pop.toLocaleString()}</span>
-          </p>
-          <div className="population-graph-container">
-            <div className="population-graph">{generateAgeGraph()}</div>
-            <div className="population-graph">{generateTrendGraph()}</div>
+        {population ? (
+          <div>
+            <p>
+              Current total population:{" "}
+              <span>{population.data.total_pop.toLocaleString()}</span>
+            </p>
+            <div className="population-graph-container">
+              <div className="population-graph">{generateAgeGraph()}</div>
+              <div className="population-graph">{generateTrendGraph()}</div>
+            </div>
           </div>
-        </div>
+        ) : (
+          <LoadingSkeleton />
+        )}
       </div>
     </div>
   );

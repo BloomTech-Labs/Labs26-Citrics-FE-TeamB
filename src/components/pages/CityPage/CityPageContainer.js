@@ -17,23 +17,42 @@ class CityPage extends React.Component {
     this.setState({ city: this.props.cityDetails[id] });
     document.title = `Citrics | ${this.props.cityDetails[id].name}, ${this.props.cityDetails[id].state}`;
   };
+
+  // Get name/state info from selectedCites, if applicable
+  retrieveFromSelectedCities = () => {
+    const { id } = this.props.match.params;
+    // If we have data on this city stored in selectedCities, use it
+    const city = this.props.selectedCities.find(
+      ({ id: cityId }) => Number(id) === Number(cityId)
+    ) ?? { id }; // If not, city object should just contain an "id" while we load
+    // Clear out old city data while we load new data
+    this.setState({ city });
+  };
   componentDidMount() {
+    // Get name/state from selectedCities
+    this.retrieveFromSelectedCities();
+    // Retrieve other data if needed
     this.fetchDataIfNeeded();
   }
   componentDidUpdate(prevProps) {
+    const { id } = this.props.match.params;
     // If component remained mounted but user changed the cityId
     // Update the city info to match the new city
-    if (prevProps.match.params.id !== this.props.match.params.id) {
+    if (prevProps.match.params.id !== id) {
+      this.retrieveFromSelectedCities();
       this.fetchDataIfNeeded();
+    }
+    // Update name/state info if selectedCities is updated
+    // and we don't yet know the name
+    else if (
+      !this.state.city.name &&
+      prevProps.selectedCities !== this.props.selectedCities
+    ) {
+      this.retrieveFromSelectedCities();
     }
   }
   render() {
-    return (
-      <RenderCityPage
-        city={this.state.city}
-        isLoading={!this.state.city?.name}
-      />
-    );
+    return <RenderCityPage city={this.state.city} />;
   }
 }
 const mapPropsToState = (

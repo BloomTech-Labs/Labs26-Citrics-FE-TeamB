@@ -18,8 +18,10 @@ import { NotFoundPage } from "./components/pages/NotFound";
 // import { ProfileListPage } from "./components/pages/ProfileList";
 // import { LoginPage } from "./components/pages/Login";
 
+import { PageNav } from "./components/pages/PageNav";
 import { NavPage } from "./components/pages/Nav";
 import { HomePage } from "./components/pages/Home";
+import { AdvancedSearchPage } from "./components/pages/AdvancedSearch";
 import { MainPageContainer } from "./components/pages/MainPageContainer";
 // import { ExampleDataViz } from "./components/pages/ExampleDataViz";
 // import { config } from './utils/oktaConfig';
@@ -27,6 +29,7 @@ import { MainPageContainer } from "./components/pages/MainPageContainer";
 // import NavContainer from './components/pages/Nav/NavContainer';
 import { ComparisonPage } from "./components/pages/Comparison";
 import { CityPage } from "./components/pages/CityPage";
+import { AboutPage } from "./components/pages/AboutPage";
 import { Provider } from "react-redux";
 import { store } from "./state";
 
@@ -53,6 +56,7 @@ function App() {
   return (
     // <Security {...config} onAuthRequired={authHandler}>
     <>
+      <PageNav />
       <Switch>
         {/* <Route path="/login" component={LoginPage} /> */}
         {/* <Route path="/implicit/callback" component={LoginCallback} /> */}
@@ -76,6 +80,14 @@ function App() {
           )}
         />
         <Route
+          path="/advanced-search"
+          render={p => (
+            <MainPageContainer>
+              <AdvancedSearchPage {...p} />
+            </MainPageContainer>
+          )}
+        />
+        <Route
           exact
           path="/city-detail-page"
           render={() => <Redirect to="/" />}
@@ -85,6 +97,14 @@ function App() {
           render={p => (
             <MainPageContainer>
               <CityPage {...p} />
+            </MainPageContainer>
+          )}
+        />
+        <Route
+          path="/about"
+          render={p => (
+            <MainPageContainer>
+              <AboutPage {...p} />
             </MainPageContainer>
           )}
         />

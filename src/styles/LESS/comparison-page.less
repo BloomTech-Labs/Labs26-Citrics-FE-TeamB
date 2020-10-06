@@ -4,12 +4,13 @@
   align-items: center;
   flex-direction: column;
   width: 100%;
+  padding: 0 2%;
 }
 
 .card-container {
   display: flex;
   justify-content: space-evenly;
-  margin: 6% 0;
+  margin: 4% 0;
   width: 100%;
 
   .card {
@@ -54,24 +55,25 @@
   .divider {
     margin: 0 0 2% 0;
   }
-  .card-metrics{
+  .card-metrics {
     display: flex;
     flex-direction: column;
     text-align: left;
-    padding-left: 5%;
+    padding: 0 5% 3%;
 
-    .metrics-icon{
+    .metrics-icon {
       width: 40px;
       height: 40px;
+      margin-right: 5%;
     }
-    .metrics-parent{
+    .metrics-parent {
       display: flex;
       padding: 1% 0 1% 5%;
 
-      .metrics-child{
+      .metrics-child {
         padding-left: 2%;
 
-        p{
+        p {
           margin-bottom: 0px;
         }
       }
@@ -96,13 +98,13 @@
 
 .visual-container {
   display: flex;
-  flex-direction: column-reverse;
-  padding: 0 4%;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
 }
-// .metrics-container.graphs {
-//   width: 70%;
-// }
+.metrics-container.graphs {
+  width: 100%;
+}
 
 //ant design tab styles
 .ant-tabs-nav {
@@ -120,4 +122,8 @@
 }
 .ant-tabs-nav-list {
   color: #000;
+}
+
+.job-table {
+  width: 100%;
 }

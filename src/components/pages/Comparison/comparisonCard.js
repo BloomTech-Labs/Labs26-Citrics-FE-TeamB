@@ -53,7 +53,7 @@ class ComparisonCard extends Component {
           <div className="basic-card-info">
             <div className="card-metrics">
               {citiesData.name ? (
-                <h3>
+                <h3 className="city-name">
                   {citiesData.name}, {citiesData.state}
                 </h3>
               ) : (

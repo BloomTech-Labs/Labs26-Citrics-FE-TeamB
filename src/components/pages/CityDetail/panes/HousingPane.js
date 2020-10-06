@@ -27,9 +27,9 @@ export default function HousingPane({ rent }) {
   return (
     <div className="one-render-p">
       <div className="main-detail-content">
-        <div>
-          <h2>Rental Prices:</h2>
+        <div className="detail-header">
           <HomeOutlined className="detail-pane-icon" />
+          <h2>Rental Prices:</h2>
         </div>
 
         <div className="housing-pane">

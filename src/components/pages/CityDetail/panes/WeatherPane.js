@@ -10,13 +10,13 @@ export default function WeatherPane({ weather, currentWeather }) {
   return (
     <div className="one-render-p">
       <div className="main-detail-content">
-        <div>
-          <h2>Weather:</h2>
+        <div className="detail-header">
           <img
             className="main-weather-icon"
             src={weatherIcon}
             alt="Weather icon featuring sun, storm cloud, and rain"
           />
+          <h2>Weather:</h2>
         </div>
         <div className="weather-pane-container">
           {weather ? (

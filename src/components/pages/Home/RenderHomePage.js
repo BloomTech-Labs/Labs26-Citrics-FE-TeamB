@@ -35,7 +35,6 @@ function RenderHomePage({ toggleDrawer }) {
         </div>
 
         <br />
-        <br />
         <Button type="primary" className="GSbutton" onClick={openNav}>
           Get Started
         </Button>

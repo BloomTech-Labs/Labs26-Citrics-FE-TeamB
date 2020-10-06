@@ -35,8 +35,6 @@ export default function RenderNav({ toggleDrawer, isOpen }) {
         width={drawerWidth}
       >
         <SearchBar />
-        {/* TODO: remove these and clean up formatting of this element */}
-        <br />
         <br />
         <br />
         <br />

@@ -18,7 +18,7 @@ import { NotFoundPage } from "./components/pages/NotFound";
 // import { ProfileListPage } from "./components/pages/ProfileList";
 // import { LoginPage } from "./components/pages/Login";
 
-import { PageNav } from "./components/pages/PageNav";
+// import { PageNav } from "./components/pages/PageNav";
 import { NavPage } from "./components/pages/Nav";
 import { HomePage } from "./components/pages/Home";
 import { AdvancedSearchPage } from "./components/pages/AdvancedSearch";
@@ -56,7 +56,7 @@ function App() {
   return (
     // <Security {...config} onAuthRequired={authHandler}>
     <>
-      <PageNav />
+      {/* <PageNav /> */}
       <Switch>
         {/* <Route path="/login" component={LoginPage} /> */}
         {/* <Route path="/implicit/callback" component={LoginCallback} /> */}

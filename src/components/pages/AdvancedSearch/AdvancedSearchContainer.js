@@ -35,7 +35,19 @@ export default function AdvancedSearchContainer(props) {
     "searchPrefs",
     initialSearchPrefs
   );
-
+  if (
+    !(
+      searchPrefs.rooms &&
+      searchPrefs.pop_min &&
+      searchPrefs.pop_max &&
+      searchPrefs.rent_max &&
+      searchPrefs.rent_min &&
+      searchPrefs.weather_max &&
+      searchPrefs.weather_min
+    )
+  ) {
+    setSearchPrefs(initialSearchPrefs);
+  }
   // Simultaneously update any number of search prefs
   // based on key-value pairs on the object passed in
   const updateNamedSearchPrefs = changes =>

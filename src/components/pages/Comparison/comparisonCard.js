@@ -108,10 +108,12 @@ class ComparisonCard extends Component {
                 />
                 <div className="metrics-child">
                   <p>
-                    <b>Weather:</b>
+                    <b>Current Weather:</b>
                   </p>
-                  {citiesData.weather ? (
-                    <p>{`${citiesData.weather.winter_mintempF_mean}°F - ${citiesData.weather.summer_maxtempF_mean}°F`}</p>
+                  {citiesData.currentWeather ? (
+                    <p>{`${Math.round(
+                      citiesData.currentWeather.current.temp
+                    )}°F`}</p>
                   ) : (
                     <LoadingSkeleton />
                   )}

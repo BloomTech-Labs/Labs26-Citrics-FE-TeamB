@@ -3,7 +3,7 @@ import React from "react";
 // Placeholder loading component
 // import LoadingComponent from '../../common/LoadingComponent';
 // About page
-import AboutPageContainer from "./AboutPageContainer";
+// import AboutPageContainer from "./AboutPageContainer";
 // Styling
 import { Card, Avatar } from "antd";
 import {
@@ -11,6 +11,9 @@ import {
   MailOutlined,
   LinkedinOutlined
 } from "@ant-design/icons";
+import projectLead from "../../../styles/icons/projectLead.jpg";
+import dataScience from "../../../styles/icons/dataScience.png";
+import webDev from "../../../styles/icons/webDev.png";
 
 const { Meta } = Card;
 
@@ -42,44 +45,66 @@ const RenderAboutPage = ({ isLoading }) => {
 
       {/* ----- Team cards ----- */}
 
-      <section className="about-tpl">
+      <section className="about-tpl-ds">
         {/* TPL - Bhavani */}
         <Card
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           cover={
             <img alt="Bhavani Rajan" src="https://i.imgur.com/9TcokzL.png" />
           }
           actions={[
-            <GithubOutlined key="github" />,
+            <a
+              href="https://github.com/Bhavani-Rajan"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GithubOutlined key="github" />
+            </a>,
             <MailOutlined key="email" />,
-            <LinkedinOutlined key="linkedin" />
+            <a
+              href="https://www.linkedin.com/in/bhavani-rajan/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkedinOutlined key="linkedin" />
+            </a>
           ]}
         >
           <Meta
-            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            avatar={<Avatar src={projectLead} />}
             title="Team Project Lead"
             description="This is the description"
           />
         </Card>
-      </section>
 
-      {/* Data Science - Ekram, Zack */}
+        {/* Data Science - Ekram, Zack */}
 
-      <section className="about-ds">
         {/* Ekram */}
         <Card
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           cover={
             <img alt="Ekram Ahmed" src="https://i.imgur.com/vBnpIEC.png" />
           }
           actions={[
-            <GithubOutlined key="github" />,
+            <a
+              href="https://github.com/Ekram49"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GithubOutlined key="github" />
+            </a>,
             <MailOutlined key="email" />,
-            <LinkedinOutlined key="linkedin" />
+            <a
+              href="https://www.linkedin.com/in/ekram-ullah-ahmed/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkedinOutlined key="linkedin" />
+            </a>
           ]}
         >
           <Meta
-            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            avatar={<Avatar src={dataScience} />}
             title="Data Scientist"
             description="This is the description"
           />
@@ -87,18 +112,30 @@ const RenderAboutPage = ({ isLoading }) => {
 
         {/* Zack */}
         <Card
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           cover={
             <img alt="Zack Murray" src="https://i.imgur.com/jaELQtg.png" />
           }
           actions={[
-            <GithubOutlined key="github" />,
+            <a
+              href="https://github.com/zack-murray"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GithubOutlined key="github" />
+            </a>,
             <MailOutlined key="email" />,
-            <LinkedinOutlined key="linkedin" />
+            <a
+              href="https://www.linkedin.com/in/zack-murray/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkedinOutlined key="linkedin" />
+            </a>
           ]}
         >
           <Meta
-            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            avatar={<Avatar src={dataScience} />}
             title="Data Scientist"
             description="This is the description"
           />
@@ -110,16 +147,28 @@ const RenderAboutPage = ({ isLoading }) => {
       <section className="about-web">
         {/* Alan */}
         <Card
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           cover={<img alt="Alan Lee" src="https://i.imgur.com/ueHbN2x.png" />}
           actions={[
-            <GithubOutlined key="github" />,
+            <a
+              href="https://github.com/alanblee"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GithubOutlined key="github" />
+            </a>,
             <MailOutlined key="email" />,
-            <LinkedinOutlined key="linkedin" />
+            <a
+              href="https://www.linkedin.com/in/alanlee321/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkedinOutlined key="linkedin" />
+            </a>
           ]}
         >
           <Meta
-            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            avatar={<Avatar src={webDev} />}
             title="Web Developer"
             description="This is the description"
           />
@@ -127,18 +176,30 @@ const RenderAboutPage = ({ isLoading }) => {
 
         {/* David */}
         <Card
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           cover={
             <img alt="David Horstman" src="https://i.imgur.com/jF51x65.png" />
           }
           actions={[
-            <GithubOutlined key="github" />,
+            <a
+              href="https://github.com/ddhorstman"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GithubOutlined key="github" />
+            </a>,
             <MailOutlined key="email" />,
-            <LinkedinOutlined key="linkedin" />
+            <a
+              href="https://www.linkedin.com/in/david-horstman/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkedinOutlined key="linkedin" />
+            </a>
           ]}
         >
           <Meta
-            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            avatar={<Avatar src={webDev} />}
             title="Web Developer"
             description="This is the description"
           />
@@ -146,18 +207,31 @@ const RenderAboutPage = ({ isLoading }) => {
 
         {/* Lyndsi */}
         <Card
-          style={{ width: 200 }}
+          hoverable
+          style={{ width: 250 }}
           cover={
             <img alt="Lyndsi Williams" src="https://i.imgur.com/KpOZXeg.png" />
           }
           actions={[
-            <GithubOutlined key="github" />,
+            <a
+              href="https://github.com/lyndsiWilliams"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GithubOutlined key="github" />
+            </a>,
             <MailOutlined key="email" />,
-            <LinkedinOutlined key="linkedin" />
+            <a
+              href="https://www.linkedin.com/in/lyndsiwilliams/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkedinOutlined key="linkedin" />
+            </a>
           ]}
         >
           <Meta
-            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            avatar={<Avatar src={webDev} />}
             title="Web Developer"
             description="This is the description"
           />
@@ -165,18 +239,30 @@ const RenderAboutPage = ({ isLoading }) => {
 
         {/* Rachele */}
         <Card
-          style={{ width: 200 }}
+          style={{ width: 250 }}
           cover={
             <img alt="Rachele Edwards" src="https://i.imgur.com/UR0sA0t.png" />
           }
           actions={[
-            <GithubOutlined key="github" />,
+            <a
+              href="https://github.com/berachele"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <GithubOutlined key="github" />
+            </a>,
             <MailOutlined key="email" />,
-            <LinkedinOutlined key="linkedin" />
+            <a
+              href="https://www.linkedin.com/in/berachele/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <LinkedinOutlined key="linkedin" />
+            </a>
           ]}
         >
           <Meta
-            // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+            avatar={<Avatar src={webDev} />}
             title="Web Developer"
             description="This is the description"
           />

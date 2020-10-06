@@ -11,7 +11,6 @@ class CityPage extends React.Component {
     const { id } = this.props.match.params;
     // If we don't have cached data on this city, retrieve it
     if (!this.props.cityDetails[id]) {
-      this.retrieveFromSelectedCities();
       // We need to wait for getCityDetails to finish before proceeding
       await this.props.getCityDetails({ id });
     }
@@ -21,8 +20,6 @@ class CityPage extends React.Component {
 
   // Get name/state info from selectedCites, if applicable
   retrieveFromSelectedCities = () => {
-    // Do nothing if we already know the city name
-    if (this.state.city.name) return;
     const { id } = this.props.match.params;
     // If we have data on this city stored in selectedCities, use it
     const city = this.props.selectedCities.find(
@@ -32,6 +29,7 @@ class CityPage extends React.Component {
     this.setState({ city });
   };
   componentDidMount() {
+    this.retrieveFromSelectedCities();
     // Retrieve data if needed
     this.fetchDataIfNeeded();
   }
@@ -40,11 +38,15 @@ class CityPage extends React.Component {
     // If component remained mounted but user changed the cityId
     // Update the city info to match the new city
     if (prevProps.match.params.id !== id) {
+      this.retrieveFromSelectedCities();
       this.fetchDataIfNeeded();
     }
     // Update name/state info if selectedCities is updated
     // but the page wasn't reloaded
-    else if (prevProps.selectedCities !== this.props.selectedCities) {
+    else if (
+      !this.state.city.name &&
+      prevProps.selectedCities !== this.props.selectedCities
+    ) {
       this.retrieveFromSelectedCities();
     }
   }

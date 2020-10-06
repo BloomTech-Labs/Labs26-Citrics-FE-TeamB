@@ -1,6 +1,5 @@
 // Library imports
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
 import { Drawer, Button } from "antd";
 import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
 
@@ -14,7 +13,7 @@ import drawerWidth from "./drawerWidth";
 
 export default function RenderNav({ toggleDrawer, isOpen }) {
   const buttonTransform = isOpen ? `translate(${drawerWidth}px,0px)` : "";
-  //to be able to move button in right direction when reaches 1000px screen width (see render below)
+  //for media query (see ternary below)--allows floating button to slide in and out with the nav
   const reverseButtonTransform = !isOpen
     ? `translate(${drawerWidth}px,0px)`
     : "";
@@ -30,7 +29,7 @@ export default function RenderNav({ toggleDrawer, isOpen }) {
   }, [width]);
 
   useEffect(() => {
-    width < 600 && handleSideNavToggle();
+    width < 1000 && handleSideNavToggle();
   }, [width]);
 
   function handleSideNavToggle() {

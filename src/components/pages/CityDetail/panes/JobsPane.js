@@ -1,14 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { CarOutlined } from "@ant-design/icons";
 import { lineGraph } from "../../../common/Graphs/graphType";
 import Plot from "react-plotly.js";
 import LoadingSkeleton from "./LoadingSkeleton";
 
 export default function JobsPane({ jobs, unemployment }) {
-  useEffect(() => {
-    console.log(jobs);
-    console.log(unemployment);
-  }, [jobs, unemployment]);
   let style = { width: "100%", height: "100%" };
   // function that parses and renders the given pie chart
   const renderPie = () => {

@@ -35,7 +35,22 @@ export default function AdvancedSearchContainer(props) {
     "searchPrefs",
     initialSearchPrefs
   );
-
+  // Error checking
+  // If the data cached in localStorage doesn't contain a value for every expected key
+  // Set all values to their defaults
+  if (
+    !(
+      searchPrefs.rooms &&
+      searchPrefs.pop_min &&
+      searchPrefs.pop_max &&
+      searchPrefs.rent_max &&
+      searchPrefs.rent_min &&
+      searchPrefs.weather_max &&
+      searchPrefs.weather_min
+    )
+  ) {
+    setSearchPrefs(initialSearchPrefs);
+  }
   // Simultaneously update any number of search prefs
   // based on key-value pairs on the object passed in
   const updateNamedSearchPrefs = changes =>

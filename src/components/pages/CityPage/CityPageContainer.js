@@ -29,9 +29,8 @@ class CityPage extends React.Component {
     this.setState({ city });
   };
   componentDidMount() {
-    // Get name/state from selectedCities
     this.retrieveFromSelectedCities();
-    // Retrieve other data if needed
+    // Retrieve data if needed
     this.fetchDataIfNeeded();
   }
   componentDidUpdate(prevProps) {
@@ -43,7 +42,7 @@ class CityPage extends React.Component {
       this.fetchDataIfNeeded();
     }
     // Update name/state info if selectedCities is updated
-    // and we don't yet know the name
+    // but the page wasn't reloaded
     else if (
       !this.state.city.name &&
       prevProps.selectedCities !== this.props.selectedCities

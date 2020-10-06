@@ -9,6 +9,9 @@ export const addCity = city => async dispatch => {
   // I'm not 100% sure why wrapping this in dispatch is necessary, but it is
   dispatch(getCityDetails(city));
 };
+
+export const addCityNoDetails = city => ({ type: ADD_CITY, payload: { city } });
+
 export const removeCity = cityId => ({
   type: REMOVE_CITY,
   payload: { cityId }
@@ -85,7 +88,7 @@ export const getCityDetails = city => async (dispatch, getState) => {
   // Open weather api using Lat and Lng points for more accurate search
   const currentWeather = await axios
     .get(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${geoLocation.lat}&lon=${geoLocation.lng}&exclude=minutely,hourly,daily&units=imperial&appid=${process.env.REACT_APP_OPEN_WEATHER_API}`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${geoLocation?.lat}&lon=${geoLocation?.lng}&exclude=minutely,hourly,daily&units=imperial&appid=${process.env.REACT_APP_OPEN_WEATHER_API}`
     )
     .then(r => r?.data)
     .catch(console.error);

@@ -23,7 +23,7 @@ const initialSearchPrefs = {
 };
 
 //TEMPORARY - replace with [] once search endpoint is implemented
-const initialResults = [{ id: 1, name: "San Francisco", state: "CA" }];
+const initialResults = [{ id: 1, name: "Chandler", state: "AZ" }];
 
 export default function AdvancedSearchContainer(props) {
   const [searchResults, setSearchResults] = useState(initialResults);

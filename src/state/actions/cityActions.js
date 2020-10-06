@@ -88,7 +88,7 @@ export const getCityDetails = city => async (dispatch, getState) => {
   // Open weather api using Lat and Lng points for more accurate search
   const currentWeather = await axios
     .get(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${geoLocation.lat}&lon=${geoLocation.lng}&exclude=minutely,hourly,daily&units=imperial&appid=${process.env.REACT_APP_OPEN_WEATHER_API}`
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${geoLocation?.lat}&lon=${geoLocation?.lng}&exclude=minutely,hourly,daily&units=imperial&appid=${process.env.REACT_APP_OPEN_WEATHER_API}`
     )
     .then(r => r?.data)
     .catch(console.error);

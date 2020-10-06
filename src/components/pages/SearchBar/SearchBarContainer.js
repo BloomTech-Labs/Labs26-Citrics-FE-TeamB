@@ -38,7 +38,7 @@ class SearchBar extends React.Component {
         // add any already selected cities to the Redux store
         selectedCities.forEach(cityId => {
           const city = cityList.find(({ id }) => Number(id) === cityId);
-          this.props.addCityNoDetails(city);
+          city && this.props.addCityNoDetails(city);
         });
       });
   }

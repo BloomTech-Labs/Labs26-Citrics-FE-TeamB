@@ -18,9 +18,10 @@ export default function useLocalStorage(key, initialValue = null) {
     try {
       return JSON.parse(item);
     } catch {
-      console.error(
-        `Existing item found in localStorage under "${key}", but it could not be parsed successfully. Run localStorage.clear() and try again.`
+      console.warn(
+        `Invalid item found in localStorage under "${key}" - it will be replaced with the given initial value.`
       );
+      window.localStorage.setItem(key, JSON.stringify(initialValue));
       return initialValue;
     }
   });

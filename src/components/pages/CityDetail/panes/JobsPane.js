@@ -11,15 +11,20 @@ export default function JobsPane({ jobs }) {
     const data = JSON.parse(jobs.viz).data[0];
     const pieData = [
       {
+        // additional properties for pie chart
         ...data,
+        domain: { x: [1, 0] },
         automargin: true,
         hoverinfo: "label",
         textinfo: "percent",
         insidetextorientation: "radial"
       }
     ];
+    // custom layout for pie chart
     const layout = {
+      title: "Top 10 Industries",
       showlegend: true,
+      legend: { x: -10.4, font: { size: "10px" } },
       paper_bgcolor: "transparent",
       plot_bgcolor: "transparent",
       yaxis: {
@@ -35,6 +40,7 @@ export default function JobsPane({ jobs }) {
         data={pieData}
         layout={layout}
         style={{ width: "100%", height: "100%" }}
+        config={{ responsive: true }}
       />
     );
   };
@@ -47,7 +53,6 @@ export default function JobsPane({ jobs }) {
           <h2>Jobs:</h2>
         </div>
         <div className="job-info-container">
-          <h3>Top 10 Industries</h3>
           <div className="job-charts">{renderPie()}</div>
         </div>
       </div>

@@ -7,7 +7,6 @@ import LoadingSkeleton from "./LoadingSkeleton";
 export default function PopulationPane({ population }) {
   // stlye object for making the graphs responsive
   let style = { width: "100%", height: "100%" };
-  let config = { responsive: true };
   // Functions to generate graphs for age group
   const generateAgeGraph = () => {
     // Creates array for the x axis

@@ -17,6 +17,14 @@ h1 {
   font-size: @h1size;
   font-weight: 700;
   margin: -20px 0 -20px 0;
+
+  @media @tablet {
+    font-size: @tabh1;
+  }
+
+  @media @mobile {
+    font-size: @mobh1;
+  }
 }
 
 h2 {
@@ -24,12 +32,20 @@ h2 {
   font-weight: 300;
   font-style: italic;
   margin-bottom: -10px;
+
+  @media @mobile {
+    font-size: @mobh2;
+  }
 }
 
 .bullet-points {
   font-size: @h3size;
   line-height: 1.5;
   text-align: left;
+
+  @media @tablet {
+    font-size: @tabh3;
+  }
 }
 
 .GSbutton{

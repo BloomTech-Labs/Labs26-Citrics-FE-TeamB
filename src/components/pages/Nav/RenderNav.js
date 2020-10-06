@@ -35,6 +35,7 @@ export default function RenderNav({ toggleDrawer, isOpen }) {
         mask={false}
         width={drawerWidth}
       >
+
         <div className="component-container">
           <SearchBar />
           {/* TODO: remove these and clean up formatting of this element */}

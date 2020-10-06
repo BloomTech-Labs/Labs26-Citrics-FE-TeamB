@@ -53,8 +53,8 @@ export default function WeatherPane({ weather, currentWeather }) {
                       alt="Thermometer icon"
                     />
                     <h6>
-                      Today's weather:{" "}
-                      {Math.round(currentWeather.current.feels_like)}°
+                      Today's weather: {Math.round(currentWeather.current.temp)}
+                      °
                     </h6>
                   </div>
                 </div>

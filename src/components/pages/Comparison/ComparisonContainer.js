@@ -44,6 +44,7 @@ class ComparisonContainer extends React.Component {
 
   // Get the data for each city and set it individually
   retrieveDataForCity = async id => {
+    if (!id) return;
     console.log("Getting data for city number", id);
     // Retrieve the location of this city's data in the array
     const cityEntryLocation = this.state.citiesData.findIndex(

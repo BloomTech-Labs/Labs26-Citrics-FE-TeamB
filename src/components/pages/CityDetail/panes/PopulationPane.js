@@ -11,17 +11,26 @@ export default function PopulationPane({ population }) {
   // Functions to generate graphs for age group
   const generateAgeGraph = () => {
     // Creates array for the x axis
-    const ageGroups = Object.keys(population.data).filter(keys => {
-      return keys.includes("age");
-    });
+    const ageGroups = Object.keys(population.data)
+      .filter(keys => {
+        return keys.includes("age");
+      })
+      .map(ageStr => {
+        return ageStr
+          .replace("age_", "")
+          .replace("_", " ")
+          .toUpperCase();
+      });
+
     // Creates array for the y axis
     const groupPercent = Object.keys(population.data)
       .filter(keys => {
         return keys.includes("age");
       })
       .map(ageGroup => {
-        return population.data[ageGroup];
+        return `${population.data[ageGroup]}%`;
       });
+
     // Uses the function from graphType file to build out the plots
     const { dataPlot, layout } = barGraph({
       name: "",

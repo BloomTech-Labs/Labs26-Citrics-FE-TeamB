@@ -12,7 +12,6 @@ class RenderComparison extends Component {
         name: this.props.citiesData[id].name,
         plotX: JSON.parse(this.props.citiesData[id].unemployRate.viz).data[0].x,
         plotY: JSON.parse(this.props.citiesData[id].unemployRate.viz).data[0].y,
-        graphName: "Unemployment Rate",
         type: "line"
       });
     }
@@ -26,7 +25,6 @@ class RenderComparison extends Component {
         name: this.props.citiesData[id].name,
         plotX: JSON.parse(this.props.citiesData[id].population.viz).data[0].x,
         plotY: JSON.parse(this.props.citiesData[id].population.viz).data[0].y,
-        graphName: "Population Trend",
         type: "bar"
       });
     }
@@ -46,7 +44,6 @@ class RenderComparison extends Component {
           this.props.citiesData[id].rent["3br"],
           this.props.citiesData[id].rent["4br"]
         ],
-        graphName: "Apartment Prices",
         type: "bar",
         orientation: "h"
       });

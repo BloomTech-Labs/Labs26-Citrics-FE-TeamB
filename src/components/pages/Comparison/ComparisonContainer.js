@@ -59,7 +59,7 @@ class ComparisonContainer extends React.Component {
     citiesData[cityEntryLocation] = newlyRetrievedDetails;
     // Update the state store for citiesData, and wait before continuing
     await this.setState({ citiesData });
-    console.log("Loaded data for", newlyRetrievedDetails.name);
+    // console.log("Loaded data for", newlyRetrievedDetails.name);
   };
   // Retrieving selectedCities from this.state instead of as a function argument
   // would result in cityDetails using out-of-date information

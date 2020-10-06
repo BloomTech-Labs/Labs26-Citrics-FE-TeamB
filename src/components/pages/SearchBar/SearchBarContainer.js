@@ -2,7 +2,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { addCity, addCityNoDetails } from "../../../state/actions";
+import { addCityNoDetails } from "../../../state/actions";
 import axios from "axios";
 import RenderSearchBar from "./RenderSearchBar";
 
@@ -60,7 +60,7 @@ class SearchBar extends React.Component {
   onSelect = data => {
     if (this.props.selectedCities.length < 3) {
       const entry = this.state.cityList.find(({ value }) => value === data);
-      this.props.addCity(entry);
+      this.props.addCityNoDetails(entry);
       this.setState({ searchTerm: "" });
     } else {
       alert("You can only add 3 cities");
@@ -88,6 +88,6 @@ const mapPropsToState = ({ cities: { selectedCities } }, props) => ({
   ...props,
   selectedCities
 });
-export default connect(mapPropsToState, { addCity, addCityNoDetails })(
+export default connect(mapPropsToState, { addCityNoDetails })(
   withRouter(SearchBar)
 );

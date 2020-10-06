@@ -80,18 +80,20 @@ class ComparisonContainer extends React.Component {
     });
     // Apply that temporary city data
     await this.setState({ citiesData });
-    // Retrieve the real city data
-    for (const { id } of citiesData) {
-      if (!this.props.cityDetails[id]) {
-        // Retrieve data for each city individually
-        this.retrieveDataForCity(id);
-      }
-    }
+    // Retrieve all the city data
+    // Each city is updated independently, but we need to wait for all to finish
+    // before proceeding
+    await Promise.all(
+      citiesData.map(({ id }) =>
+        // If we don't have this city's data, retrieve it
+        !this.props.cityDetails[id] ? this.retrieveDataForCity(id) : null
+      )
+    );
     // Once all data has been retrieved, update the title
-    // document.title = `Citrics | ${this.state.citiesData.reduce(
-    //   (ac, { name, state }) => `${ac} ${name}, ${state}`,
-    //   ""
-    // )}`;
+    document.title = `Citrics | ${this.state.citiesData.reduce(
+      (ac, { name, state }) => `${ac} ${name}, ${state}`,
+      ""
+    )}`;
   };
 
   render() {

@@ -1,8 +1,9 @@
 import React from "react";
 import Plot from "react-plotly.js";
-import { TeamOutlined } from "@ant-design/icons";
 import { lineGraph, barGraph } from "../../../common/Graphs/graphType";
 import LoadingSkeleton from "./LoadingSkeleton";
+//icon
+import popIcon from "../../../../styles/icons/pop-96.png";
 
 export default function PopulationPane({ population }) {
   // stlye object for making the graphs responsive
@@ -66,7 +67,11 @@ export default function PopulationPane({ population }) {
     <div className="one-render-p">
       <div className="main-detail-content">
         <div className="detail-header">
-          <TeamOutlined className="detail-pane-icon" />
+          <img
+            className="detail-pane-icon"
+            src={popIcon}
+            alt="Population icon, a group of three people"
+          />
           <h2>Population:</h2>
         </div>
         {population ? (

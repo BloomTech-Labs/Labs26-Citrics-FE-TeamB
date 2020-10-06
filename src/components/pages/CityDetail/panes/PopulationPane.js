@@ -33,6 +33,7 @@ export default function PopulationPane({ population }) {
         data={dataPlot}
         layout={{ ...layout, showlegend: false }}
         style={style}
+        config={config}
       />
     );
   };
@@ -49,6 +50,7 @@ export default function PopulationPane({ population }) {
         data={dataPlot}
         layout={{ ...layout, showlegend: false }}
         style={style}
+        config={config}
       />
     );
   };

@@ -6,6 +6,7 @@ import { lineGraph, barGraph } from "../../../common/Graphs/graphType";
 export default function PopulationPane({ population }) {
   // stlye object for making the graphs responsive
   let style = { width: "100%", height: "100%" };
+  let config = { responsive: true };
   // Functions to generate graphs for age group
   const generateAgeGraph = () => {
     // Creates array for the x axis
@@ -32,7 +33,6 @@ export default function PopulationPane({ population }) {
         data={dataPlot}
         layout={{ ...layout, showlegend: false }}
         style={style}
-        config={{ responsive: true }}
       />
     );
   };
@@ -49,7 +49,6 @@ export default function PopulationPane({ population }) {
         data={dataPlot}
         layout={{ ...layout, showlegend: false }}
         style={style}
-        config={{ responsive: true }}
       />
     );
   };

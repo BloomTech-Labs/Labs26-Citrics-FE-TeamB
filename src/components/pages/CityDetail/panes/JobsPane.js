@@ -1,11 +1,11 @@
 import React from "react";
 import { CarOutlined } from "@ant-design/icons";
-
+import { lineGraph } from "../../../common/Graphs/graphType";
 import Plot from "react-plotly.js";
 
-export default function JobsPane({ jobs }) {
-  console.log(jobs, "job industry");
-
+export default function JobsPane({ jobs, unemployment }) {
+  let style = { width: "100%", height: "100%" };
+  let config = { responsive: true };
   // function that parses and renders the given pie chart
   const renderPie = () => {
     const data = JSON.parse(jobs.viz).data[0];
@@ -36,15 +36,25 @@ export default function JobsPane({ jobs }) {
       autosize: true
     };
     return (
+      <Plot data={pieData} layout={layout} style={style} config={config} />
+    );
+  };
+  const generateTrendGraph = () => {
+    const { dataPlot, layout } = lineGraph({
+      name: "",
+      plotX: JSON.parse(unemployment.viz).data[0].x,
+      plotY: JSON.parse(unemployment.viz).data[0].y,
+      graphName: "Unemployment Rate"
+    });
+    return (
       <Plot
-        data={pieData}
-        layout={layout}
-        style={{ width: "100%", height: "100%" }}
-        config={{ responsive: true }}
+        data={dataPlot}
+        layout={{ ...layout, showlegend: false }}
+        style={style}
+        config={config}
       />
     );
   };
-
   return (
     <div className="one-render-p">
       <div className="main-detail-content">
@@ -54,6 +64,7 @@ export default function JobsPane({ jobs }) {
         </div>
         <div className="job-info-container">
           <div className="job-charts">{renderPie()}</div>
+          <div className="job-charts-unemploy">{generateTrendGraph()}</div>
         </div>
       </div>
     </div>

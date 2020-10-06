@@ -22,7 +22,7 @@ export default function PopulationPane({ population }) {
       });
     // Uses the function from graphType file to build out the plots
     const { dataPlot, layout } = barGraph({
-      name: "%",
+      name: "",
       plotX: ageGroups,
       plotY: groupPercent,
       graphName: "Age groups"
@@ -32,6 +32,7 @@ export default function PopulationPane({ population }) {
         data={dataPlot}
         layout={{ ...layout, showlegend: false }}
         style={style}
+        config={{ responsive: true }}
       />
     );
   };
@@ -48,6 +49,7 @@ export default function PopulationPane({ population }) {
         data={dataPlot}
         layout={{ ...layout, showlegend: false }}
         style={style}
+        config={{ responsive: true }}
       />
     );
   };

@@ -2,7 +2,7 @@ import React from "react";
 import { Tabs } from "antd";
 import { HomeOutlined } from "@ant-design/icons";
 export default function HousingPane({ rent }) {
-  console.log(rent);
+  // console.log(rent);
   const { TabPane } = Tabs;
   // This list will be the titles of the tabs
   // it also matches the keys in rent (although they're all lowercase in rent)
@@ -27,9 +27,9 @@ export default function HousingPane({ rent }) {
   return (
     <div className="one-render-p">
       <div className="main-detail-content">
-        <div>
-          <h2>Rental Prices:</h2>
+        <div className="detail-header">
           <HomeOutlined className="detail-pane-icon" />
+          <h2>Rental Prices:</h2>
         </div>
         <div className="housing-pane">
           {generatePriceDisplay(rent.rental_pct_chg)}

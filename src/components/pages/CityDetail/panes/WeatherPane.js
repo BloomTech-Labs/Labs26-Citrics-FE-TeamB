@@ -6,17 +6,18 @@ import winter from "../../../../styles/icons/winter-96.png";
 import feelsLike from "../../../../styles/icons/feelsLike-96.png";
 
 export default function WeatherPane({ weather, currentWeather }) {
-  console.log(weather);
+  console.log(weather, "weather mins and max");
+  console.log(currentWeather, " current");
   return (
     <div className="one-render-p">
       <div className="main-detail-content">
-        <div>
-          <h2>Weather:</h2>
+        <div className="detail-header">
           <img
             className="main-weather-icon"
             src={weatherIcon}
             alt="Weather icon featuring sun, storm cloud, and rain"
           />
+          <h2>Weather:</h2>
         </div>
         <div className="weather-pane-container">
           <div className="first-box">

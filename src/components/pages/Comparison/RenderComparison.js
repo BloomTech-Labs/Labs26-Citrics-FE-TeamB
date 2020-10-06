@@ -90,6 +90,7 @@ class RenderComparison extends Component {
     return {
       headers,
       values: topJobs,
+      graphName: "Top Industries",
       type: "table"
     };
   };
@@ -145,9 +146,6 @@ class RenderComparison extends Component {
                 dataSet3={getUnemployRate()[2]}
               />
             </TabPane>
-            {/* <TabPane className="graph-holder" tab="Job Market" key="4">
-              <Graph dataSet={getJobs()} />
-            </TabPane> */}
           </Tabs>
           <div className="job-table">
             <Graph dataSet={getJobs()} />

@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CarOutlined } from "@ant-design/icons";
 import { lineGraph } from "../../../common/Graphs/graphType";
 import Plot from "react-plotly.js";
 import LoadingSkeleton from "./LoadingSkeleton";
 
 export default function JobsPane({ jobs, unemployment }) {
+  useEffect(() => {
+    console.log(jobs);
+    console.log(unemployment);
+  }, [jobs, unemployment]);
   let style = { width: "100%", height: "100%" };
-  let config = { responsive: true };
   // function that parses and renders the given pie chart
   const renderPie = () => {
     const data = JSON.parse(jobs.viz).data[0];
@@ -36,9 +39,7 @@ export default function JobsPane({ jobs, unemployment }) {
       },
       autosize: true
     };
-    return (
-      <Plot data={pieData} layout={layout} style={style} config={config} />
-    );
+    return <Plot data={pieData} layout={layout} style={style} />;
   };
   const generateTrendGraph = () => {
     const { dataPlot, layout } = lineGraph({
@@ -52,7 +53,6 @@ export default function JobsPane({ jobs, unemployment }) {
         data={dataPlot}
         layout={{ ...layout, showlegend: false }}
         style={style}
-        config={config}
       />
     );
   };

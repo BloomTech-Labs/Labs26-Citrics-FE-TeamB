@@ -28,23 +28,16 @@ export default function Graph({ dataSet, dataSet2, dataSet3 }) {
   }, [dataSet, dataSet2, dataSet3]);
 
   const renderGraph = () => {
-    let config = { responsive: true };
     let style = { width: "100%", height: "100%" };
     if (data.type === "line") {
       const { dataPlot, layout } = lineGraph(data, data2, data3);
-      return (
-        <Plot data={dataPlot} layout={layout} config={config} style={style} />
-      );
+      return <Plot data={dataPlot} layout={layout} style={style} />;
     } else if (dataSet.type === "bar") {
       const { dataPlot, layout } = barGraph(data, data2, data3);
-      return (
-        <Plot data={dataPlot} layout={layout} config={config} style={style} />
-      );
+      return <Plot data={dataPlot} layout={layout} style={style} />;
     } else if (dataSet.type === "table") {
       const { tableData, layout } = table(data);
-      return (
-        <Plot data={tableData} layout={layout} style={style} config={config} />
-      );
+      return <Plot data={tableData} layout={layout} style={style} />;
     }
   };
 

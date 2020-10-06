@@ -1,5 +1,5 @@
-import { Skeleton } from "antd";
 import React from "react";
+import { Skeleton } from "antd";
 import { HousingPane, JobsPane, PopulationPane, WeatherPane } from "./panes";
 export default function RenderCityDetail({ city }) {
   return (

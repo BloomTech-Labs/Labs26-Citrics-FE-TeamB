@@ -69,7 +69,13 @@ const RenderAboutPage = ({ isLoading }) => {
             >
               <GithubOutlined key="github" />
             </a>,
-            <MailOutlined key="email" />,
+            <a
+              href="mailto:bhava.rajan.6@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MailOutlined key="email" />
+            </a>,
             <a
               href="https://www.linkedin.com/in/bhavani-rajan/"
               target="_blank"

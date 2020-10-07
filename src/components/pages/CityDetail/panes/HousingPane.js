@@ -1,7 +1,9 @@
 import React from "react";
 import { Tabs } from "antd";
 import LoadingSkeleton from "./LoadingSkeleton";
-import { HomeOutlined } from "@ant-design/icons";
+//icon
+import rentIcon from "../../../../styles/icons/rent-96.png";
+
 export default function HousingPane({ rent }) {
   const { TabPane } = Tabs;
   // This list will be the titles of the tabs
@@ -28,7 +30,11 @@ export default function HousingPane({ rent }) {
     <div className="one-render-p">
       <div className="main-detail-content">
         <div className="detail-header">
-          <HomeOutlined className="detail-pane-icon" />
+          <img
+            className="detail-pane-icon"
+            src={rentIcon}
+            alt="Green icon of a house with a dollar sign inside"
+          />
           <h2>Rental Prices:</h2>
         </div>
 

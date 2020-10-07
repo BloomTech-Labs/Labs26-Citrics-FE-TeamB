@@ -1,8 +1,9 @@
 import React from "react";
-import { CarOutlined } from "@ant-design/icons";
 import { lineGraph } from "../../../common/Graphs/graphType";
 import Plot from "react-plotly.js";
 import LoadingSkeleton from "./LoadingSkeleton";
+//icon
+import jobIcon from "../../../../styles/icons/jobs-96.png";
 
 export default function JobsPane({ jobs, unemployment }) {
   let style = { width: "100%", height: "100%" };
@@ -56,7 +57,11 @@ export default function JobsPane({ jobs, unemployment }) {
     <div className="one-render-p">
       <div className="main-detail-content">
         <div className="detail-header">
-          <CarOutlined className="detail-pane-icon" />
+          <img
+            className="detail-pane-icon"
+            src={jobIcon}
+            alt="picture of briefcase to represent the job industry icon"
+          />
           <h2>Jobs:</h2>
         </div>
         {jobs && unemployment ? (

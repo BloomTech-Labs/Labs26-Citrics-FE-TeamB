@@ -1,5 +1,5 @@
 import React from "react";
-import { Slider, Input } from "antd";
+import { Input } from "antd";
 import {
   POP_MIN,
   POP_MAX,
@@ -45,7 +45,6 @@ export default function SearchFilters({
   return (
     <div className="search-bar">
       <h2>Filters:</h2>
-      <br />
       <RenderSearchFilter
         title="Population"
         range
@@ -62,7 +61,6 @@ export default function SearchFilters({
         }
       />
 
-      <br />
       <RenderSearchFilter
         title="Weather"
         min={WEATHER_MIN}
@@ -78,27 +76,8 @@ export default function SearchFilters({
         }
       />
 
-      {/* Rent */}
-      <br />
       <RenderSearchFilter
-        title={
-          <>
-            {"Rent for "}
-            <select
-              id="rooms"
-              name="rooms"
-              onChange={processSearchPrefsEvent}
-              value={searchPrefs.rooms}
-            >
-              <option value="studio">Studio</option>
-              <option value="1br">1BR</option>
-              <option value="2br">2BR</option>
-              <option value="3br">3BR</option>
-              <option value="4br">4BR</option>
-            </select>
-            {" apt:"}
-          </>
-        }
+        title="Rent"
         min={RENT_MIN}
         max={RENT_MAX}
         step={100}
@@ -110,10 +89,21 @@ export default function SearchFilters({
             rent_max
           })
         }
-      />
+      >
+        <select
+          id="rooms"
+          name="rooms"
+          onChange={processSearchPrefsEvent}
+          value={searchPrefs.rooms}
+        >
+          <option value="studio">Studio</option>
+          <option value="1br">1BR</option>
+          <option value="2br">2BR</option>
+          <option value="3br">3BR</option>
+          <option value="4br">4BR</option>
+        </select>
+      </RenderSearchFilter>
 
-      {/* Job industries */}
-      <br />
       <RenderSearchFilter
         title="Job Industries"
         input={

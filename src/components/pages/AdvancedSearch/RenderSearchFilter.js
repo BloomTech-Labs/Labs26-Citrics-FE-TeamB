@@ -1,4 +1,4 @@
-import { Slider } from "antd";
+import { Slider, Popover, Button } from "antd";
 import React from "react";
 
 export default function RenderSearchFilter({
@@ -12,9 +12,11 @@ export default function RenderSearchFilter({
   children,
   input
 }) {
-  return (
-    <label>
-      {title}
+  const RangeDisplay = () => <div></div>;
+
+  const content = (
+    <>
+      {children}
       {input || (
         <Slider
           range
@@ -26,6 +28,13 @@ export default function RenderSearchFilter({
           onChange={onChange}
         />
       )}
-    </label>
+      <RangeDisplay />
+    </>
+  );
+
+  return (
+    <Popover title={title} trigger="click" content={content}>
+      <Button>{title}</Button>
+    </Popover>
   );
 }

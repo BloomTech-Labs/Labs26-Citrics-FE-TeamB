@@ -83,7 +83,7 @@ export default function AdvancedSearchContainer(props) {
       <div className="search-results">
         <h2>Results:</h2>
         {isLoading ? (
-          <Skeleton active />
+          <Skeleton active title={false} paragraph={{ rows: 10 }} />
         ) : (
           searchResults.map(elem => <SearchResult {...elem} key={elem.id} />)
         )}

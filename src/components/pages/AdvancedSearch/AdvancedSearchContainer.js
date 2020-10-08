@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
 import SearchFilters from "./SearchFilters";
@@ -11,6 +11,7 @@ import {
   WEATHER_MIN,
   WEATHER_MAX
 } from "./constants";
+import { Skeleton } from "antd";
 
 const initialSearchPrefs = {
   rooms: "1br",
@@ -27,6 +28,7 @@ const initialResults = [{ id: 1, name: "Chandler", state: "AZ" }];
 
 export default function AdvancedSearchContainer(props) {
   const [searchResults, setSearchResults] = useState(initialResults);
+  const [isLoading, setLoadingState] = useState(false);
 
   // I opted to store searchPrefs in an object to simplify getting/setting values
   // Otherwise we'd need many different useLocalStorage calls
@@ -58,23 +60,28 @@ export default function AdvancedSearchContainer(props) {
 
   // This function will update searchResults whenever the user changes their preferences
   // Currently unimplemented
-  useEffect(() => {
+  const getSearchResults = () => {
+    setLoadingState(true);
     //await axios.something
     setSearchResults(initialResults);
-  }, [searchPrefs]);
+    setLoadingState(false);
+  };
 
   return (
     <div className="advanced-search-container">
       <SearchFilters
         searchPrefs={searchPrefs}
         updateSearchPrefs={updateNamedSearchPrefs}
+        getSearchResults={getSearchResults}
       />
       <br />
       <div className="search-results">
         <h2>Results:</h2>
-        {searchResults.map(elem => (
-          <SearchResult {...elem} key={elem.id} />
-        ))}
+        {isLoading ? (
+          <Skeleton active />
+        ) : (
+          searchResults.map(elem => <SearchResult {...elem} key={elem.id} />)
+        )}
       </div>
     </div>
   );

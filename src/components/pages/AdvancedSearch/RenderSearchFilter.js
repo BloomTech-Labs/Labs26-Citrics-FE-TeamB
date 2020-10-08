@@ -15,12 +15,13 @@ export default function RenderSearchFilter({
 }) {
   // Subcomponent to generate the range display
   // either as an HTML element or an array of strings
-  const RangeDisplay = (html = false) => {
+  const RangeDisplay = props => {
+    const html = props?.html;
     const result = [];
     // Jobs passes a unique non-Slider input to render
     // It also has a unique way of displaying what's selected
     if (input) {
-      return ChoicesDisplay(html);
+      return ChoicesDisplay({ html });
     }
     // First word - minimum value (or nothing)
     if (value[0] > min) {

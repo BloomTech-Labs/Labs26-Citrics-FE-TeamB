@@ -100,6 +100,7 @@ const RenderAboutPage = ({ isLoading }) => {
             About me
           </Button>
           <Modal
+            id="inside-modal"
             title="About me"
             centered
             visible={bhavaniModalVisibility}
@@ -126,10 +127,37 @@ const RenderAboutPage = ({ isLoading }) => {
             <p>Frameworks: ​TensorFlow, Keras, Flask, Fast API</p>
             <p>
               Skills​: Data analysis, Predictive analytics, Linear and
-              multivariate regressions,, K-cluster analysis, Classification,
+              multivariate regressions, K-cluster analysis, Classification,
               Machine learning products, Natural language processing, Neural
               Networks, Github, Amazon EBS, Heroku
             </p>
+            <Divider>Contact</Divider>
+            <div
+              className="inner-buttons"
+              style={{ display: "flex", justifyContent: "space-evenly" }}
+            >
+              <Button
+                href="https://github.com/Bhavani-Rajan"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </Button>
+              <Button
+                href="mailto:bhava.rajan.6@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Email
+              </Button>
+              <Button
+                href="https://www.linkedin.com/in/bhavani-rajan/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </Button>
+            </div>
           </Modal>
         </Card>
 
@@ -196,6 +224,33 @@ const RenderAboutPage = ({ isLoading }) => {
               fulfill my ultimate goal, which is to have a humble contribution
               towards ocean sustainability.
             </p>
+            <Divider>Contact</Divider>
+            <div
+              className="inner-buttons"
+              style={{ display: "flex", justifyContent: "space-evenly" }}
+            >
+              <Button
+                href="https://github.com/Ekram49"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </Button>
+              <Button
+                href="mailto:ekramullahzaki@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Email
+              </Button>
+              <Button
+                href="https://www.linkedin.com/in/ekram-ullah-ahmed/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </Button>
+            </div>
           </Modal>
         </Card>
 
@@ -253,6 +308,26 @@ const RenderAboutPage = ({ isLoading }) => {
               programmer I am today. Physically present in CT, but my heart
               still resides in CO.
             </p>
+            <Divider>Contact</Divider>
+            <div
+              className="inner-buttons"
+              style={{ display: "flex", justifyContent: "space-evenly" }}
+            >
+              <Button
+                href="https://github.com/zack-murray"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </Button>
+              <Button
+                href="https://www.linkedin.com/in/zack-murray/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </Button>
+            </div>
           </Modal>
         </Card>
       </section>
@@ -326,6 +401,33 @@ const RenderAboutPage = ({ isLoading }) => {
               while working with diverse remote teams. Outside of the code, I
               enjoy being out in nature hiking and rock climbing.
             </p>
+            <Divider>Contact</Divider>
+            <div
+              className="inner-buttons"
+              style={{ display: "flex", justifyContent: "space-evenly" }}
+            >
+              <Button
+                href="https://github.com/alanblee"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </Button>
+              <Button
+                href="mailto:alanbenlee12@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Email
+              </Button>
+              <Button
+                href="https://www.linkedin.com/in/alanlee321/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </Button>
+            </div>
           </Modal>
         </Card>
 
@@ -381,6 +483,26 @@ const RenderAboutPage = ({ isLoading }) => {
               School graduate with an MA in Chemistry from Columbia and a BS in
               Biochemistry from UCSD.
             </p>
+            <Divider>Contact</Divider>
+            <div
+              className="inner-buttons"
+              style={{ display: "flex", justifyContent: "space-evenly" }}
+            >
+              <Button
+                href="https://github.com/ddhorstman"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </Button>
+              <Button
+                href="https://www.linkedin.com/in/david-horstman/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </Button>
+            </div>
           </Modal>
         </Card>
 
@@ -452,6 +574,33 @@ const RenderAboutPage = ({ isLoading }) => {
               practices by investing in breaks that typically involve video
               games. The Pomodoro technique will save your life in this career!
             </p>
+            <Divider>Contact</Divider>
+            <div
+              className="inner-buttons"
+              style={{ display: "flex", justifyContent: "space-evenly" }}
+            >
+              <Button
+                href="https://github.com/lyndsiWilliams"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </Button>
+              <Button
+                href="mailto:lyndsikaywilliams@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Email
+              </Button>
+              <Button
+                href="https://www.linkedin.com/in/lyndsiwilliams/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </Button>
+            </div>
           </Modal>
         </Card>
 
@@ -531,6 +680,33 @@ const RenderAboutPage = ({ isLoading }) => {
               enjoy many outdoor activities with family such as dirt-biking,
               Jeeping, and snowboarding”
             </p>
+            <Divider>Contact</Divider>
+            <div
+              className="inner-buttons"
+              style={{ display: "flex", justifyContent: "space-evenly" }}
+            >
+              <Button
+                href="https://github.com/berachele"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </Button>
+              <Button
+                href="mailto:berachele425@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Email
+              </Button>
+              <Button
+                href="https://www.linkedin.com/in/berachele/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </Button>
+            </div>
           </Modal>
         </Card>
       </section>

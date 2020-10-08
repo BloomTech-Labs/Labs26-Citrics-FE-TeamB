@@ -11,17 +11,18 @@ export default function RentalPane({ rent }) {
   const aptTypes = ["Studio", "1BR", "2BR", "3BR", "4BR"];
 
   // Make a color-coded price change display
-  const generatePriceDisplay = change => {
+  const PriceDisplay = ({ change }) => {
     change = Math.round(change * 100);
+    console.log(change);
     let indicator = "";
     if (change < 0) {
       indicator = " down";
       change += "%";
     } else {
-      change = "+" + change + "%";
       if (change > 0) {
         indicator = " up";
       }
+      change = "+" + change + "%";
     }
     return <div className={"rent-percent-change" + indicator}>{change}</div>;
   };
@@ -42,11 +43,11 @@ export default function RentalPane({ rent }) {
           {rent ? (
             <>
               {/* This JSX fragment contains everything shown when not loading */}
-              {generatePriceDisplay(rent.rental_pct_chg)}
+              <PriceDisplay change={rent.rental_pct_chg} />
               <Tabs defaultActiveKey="1">
                 {aptTypes.map((name, idx) => (
                   <TabPane key={idx} tab={name} className="rental-price-tab">
-                    ${rent[name.toLowerCase()]}
+                    ${rent[name.toLowerCase()]}/month
                   </TabPane>
                 ))}
               </Tabs>

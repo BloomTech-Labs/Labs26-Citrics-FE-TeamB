@@ -23,7 +23,12 @@ export default function RentalPane({ rent }) {
       }
       change = "+" + change + "%";
     }
-    return <div className={"rent-percent-change" + indicator}>{change}</div>;
+    return (
+      <p>
+        Trend:
+        <span className={"rent-percent-change" + indicator}>{change}</span>
+      </p>
+    );
   };
 
   return (
@@ -42,7 +47,6 @@ export default function RentalPane({ rent }) {
           {rent ? (
             <>
               {/* This JSX fragment contains everything shown when not loading */}
-              <PriceDisplay change={rent.rental_pct_chg} />
               <Tabs defaultActiveKey="1">
                 {aptTypes.map((name, idx) => (
                   <TabPane key={idx} tab={name} className="rental-price-tab">
@@ -50,6 +54,7 @@ export default function RentalPane({ rent }) {
                   </TabPane>
                 ))}
               </Tabs>
+              <PriceDisplay change={rent.rental_pct_chg} />
             </>
           ) : (
             <LoadingSkeleton />

@@ -4,7 +4,7 @@ import LoadingSkeleton from "./LoadingSkeleton";
 //icon
 import rentIcon from "../../../../styles/icons/rent-96.png";
 
-export default function HousingPane({ rent }) {
+export default function RentalPane({ rent }) {
   const { TabPane } = Tabs;
   // This list will be the titles of the tabs
   // it also matches the keys in rent (although they're all lowercase in rent)

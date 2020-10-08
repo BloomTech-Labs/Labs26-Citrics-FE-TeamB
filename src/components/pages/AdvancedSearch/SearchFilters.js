@@ -45,7 +45,6 @@ export default function SearchFilters({
   return (
     <div className="search-bar">
       <h2>Filters:</h2>
-      {/* Population*/}
       <br />
       <RenderSearchFilter
         title="Population"
@@ -62,18 +61,10 @@ export default function SearchFilters({
           })
         }
       />
-      {/* <div className="advanced-search-range-display">
-          <span>{formatPop(searchPrefs.pop_min)}</span>
-          <span> to </span>
-          <span>{formatPop(searchPrefs.pop_max)}</span>
-        </div> */}
 
-      {/* Weather */}
       <br />
-      <label htmlFor="weather">Weather:</label>
-      <Slider
-        id="weather"
-        range
+      <RenderSearchFilter
+        title="Weather"
         min={WEATHER_MIN}
         max={WEATHER_MAX}
         step={5}
@@ -86,33 +77,28 @@ export default function SearchFilters({
           })
         }
       />
-      <div className="advanced-search-range-display">
-        <span>{formatWeather(searchPrefs.weather_min)}</span>
-        <span> to </span>
-        <span>{formatWeather(searchPrefs.weather_max)}</span>
-      </div>
 
       {/* Rent */}
       <br />
-      <label htmlFor="rent">
-        {"Rent for "}
-        <select
-          id="rooms"
-          name="rooms"
-          onChange={processSearchPrefsEvent}
-          value={searchPrefs.rooms}
-        >
-          <option value="studio">Studio</option>
-          <option value="1br">1BR</option>
-          <option value="2br">2BR</option>
-          <option value="3br">3BR</option>
-          <option value="4br">4BR</option>
-        </select>
-        {" apt:"}
-      </label>
-      <Slider
-        id="rent"
-        range
+      <RenderSearchFilter
+        title={
+          <>
+            {"Rent for "}
+            <select
+              id="rooms"
+              name="rooms"
+              onChange={processSearchPrefsEvent}
+              value={searchPrefs.rooms}
+            >
+              <option value="studio">Studio</option>
+              <option value="1br">1BR</option>
+              <option value="2br">2BR</option>
+              <option value="3br">3BR</option>
+              <option value="4br">4BR</option>
+            </select>
+            {" apt:"}
+          </>
+        }
         min={RENT_MIN}
         max={RENT_MAX}
         step={100}
@@ -125,25 +111,21 @@ export default function SearchFilters({
           })
         }
       />
-      <div className="advanced-search-range-display">
-        <span>{formatMoney(searchPrefs.rent_min)}</span>
-        <span> to </span>
-        <span>{formatMoney(searchPrefs.rent_max)}</span>
-      </div>
 
       {/* Job industries */}
       <br />
-      <Input.Group compact>
-        <label htmlFor="jobs">Job Industries:</label>
-        <br />
-        <Input
-          style={{ width: "50%" }}
-          placeholder="Ex: Tech"
-          name="jobs"
-          onChange={processSearchPrefsEvent}
-          value={searchPrefs.jobs}
-        />
-      </Input.Group>
+      <RenderSearchFilter
+        title="Job Industries"
+        input={
+          <Input
+            style={{ width: "50%" }}
+            placeholder="Ex: Tech"
+            name="jobs"
+            onChange={processSearchPrefsEvent}
+            value={searchPrefs.jobs}
+          />
+        }
+      />
     </div>
   );
 }

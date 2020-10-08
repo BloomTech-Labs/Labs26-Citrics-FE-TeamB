@@ -9,21 +9,23 @@ export default function RenderSearchFilter({
   value,
   tipFormatter,
   onChange,
-  children
+  children,
+  input
 }) {
   return (
     <label>
       {title}
-      {children}
-      <Slider
-        range
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        tipFormatter={tipFormatter}
-        onChange={onChange}
-      />
+      {input || (
+        <Slider
+          range
+          min={min}
+          max={max}
+          step={step}
+          value={value}
+          tipFormatter={tipFormatter}
+          onChange={onChange}
+        />
+      )}
     </label>
   );
 }

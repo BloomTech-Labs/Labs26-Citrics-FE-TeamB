@@ -45,6 +45,9 @@ export default function SearchFilters({
   return (
     <div className="search-bar">
       <h2>Filters:</h2>
+      {/* RenderSearchFilter will render a popover with a Slider and range display inside it for each type of filter. */}
+
+      {/* Population */}
       <RenderSearchFilter
         title="Population"
         range
@@ -60,7 +63,7 @@ export default function SearchFilters({
           })
         }
       />
-
+      {/* Weather */}
       <RenderSearchFilter
         title="Weather"
         popoverTitle="Seasonal Temp Range"
@@ -76,7 +79,7 @@ export default function SearchFilters({
           })
         }
       />
-
+      {/* Rent: this filter passes an additional input to render as a child of RenderSearchFilter */}
       <RenderSearchFilter
         title={`Rent (${searchPrefs.rooms})`}
         popoverTitle="Rent"
@@ -109,6 +112,7 @@ export default function SearchFilters({
         </label>
       </RenderSearchFilter>
 
+      {/* Jobs: this filter passes a unique input to render instead of a Slider */}
       <RenderSearchFilter
         title="Jobs"
         popoverTitle={"Major Job Industries"}

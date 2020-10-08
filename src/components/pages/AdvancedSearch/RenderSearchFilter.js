@@ -13,10 +13,15 @@ export default function RenderSearchFilter({
   children,
   input
 }) {
+  // Subcomponent to generate the range display
+  // either as an HTML element or an array of strings
   const RangeDisplay = (html = false) => {
     const result = [];
-    // Jobs has no tipFormatter - instead we render its unique subcomponent
-    if (!tipFormatter) return ChoicesDisplay(html);
+    // Jobs passes a unique non-Slider input to render
+    // It also has a unique way of displaying what's selected
+    if (input) {
+      return ChoicesDisplay(html);
+    }
     // First word - minimum value (or nothing)
     if (value[0] > min) {
       result.push(tipFormatter(value[0]));
@@ -46,6 +51,8 @@ export default function RenderSearchFilter({
     );
   };
 
+  // The display for Jobs (or any filter that implements its own non-Slider input)
+  // currently unimplemented
   const ChoicesDisplay = (html = false) => {
     return [value];
   };
@@ -79,6 +86,7 @@ export default function RenderSearchFilter({
       trigger="click"
       content={content}
     >
+      {/* No onClick is needed, as the Popover itself handles hiding/showing itself */}
       <Button>{`${title}: ${RangeDisplay()?.join(" ")}`}</Button>
     </Popover>
   );

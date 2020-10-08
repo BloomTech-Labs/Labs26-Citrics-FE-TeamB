@@ -13,7 +13,6 @@ export default function RentalPane({ rent }) {
   // Make a color-coded price change display
   const PriceDisplay = ({ change }) => {
     change = Math.round(change * 100);
-    console.log(change);
     let indicator = "";
     if (change < 0) {
       indicator = " down";

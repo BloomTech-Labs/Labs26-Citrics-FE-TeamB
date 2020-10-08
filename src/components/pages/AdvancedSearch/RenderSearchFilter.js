@@ -14,12 +14,13 @@ export default function RenderSearchFilter({
 }) {
   const RangeDisplay = (html = false) => {
     const result = [];
-    if (!tipFormatter) return null;
-    // First word
+    // Jobs has no tipFormatter - instead we render its unique subcomponent
+    if (!tipFormatter) return ChoicesDisplay(html);
+    // First word - minimum value (or nothing)
     if (value[0] > min) {
       result.push(tipFormatter(value[0]));
     }
-    // Middle word
+    // Middle word changes based on whether it has values to its left, right, both, or neither
     if (value[0] > min && value[1] < max) {
       result.push("to");
     } else if (value[0] > min) {
@@ -27,12 +28,13 @@ export default function RenderSearchFilter({
     } else if (value[1] < max) {
       result.push("up to");
     } else result.push("Any");
-    // Last word
+    // Last word - maximum value (or nothing)
     if (value[1] < max) {
       result.push(tipFormatter(value[1]));
     }
 
     return html ? (
+      // If requested, wrap the results in an HTML element
       <div className="advanced-search-range-display">
         {result.map((val, idx) => (
           <span key={idx}>{val}</span>
@@ -43,9 +45,15 @@ export default function RenderSearchFilter({
     );
   };
 
+  const ChoicesDisplay = (html = false) => {
+    return [value];
+  };
+
   const content = (
     <>
+      {/* Currently Rent passes on additional children to render */}
       {children}
+      {/* Currently Jobs passes on an input to render instead of the Slider */}
       {input || (
         <Slider
           range
@@ -63,8 +71,10 @@ export default function RenderSearchFilter({
 
   return (
     <Popover
+      // This placement ensures the popover doesn't move when the values inside change
       placement="bottomLeft"
-      title={title}
+      // The split below removes (1br) from Rent title
+      title={title.split("(")[0]}
       trigger="click"
       content={content}
     >

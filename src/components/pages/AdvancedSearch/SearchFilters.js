@@ -106,9 +106,9 @@ export default function SearchFilters({
 
       <RenderSearchFilter
         title="Job Industries"
+        value={searchPrefs.jobs}
         input={
           <Input
-            style={{ width: "50%" }}
             placeholder="Ex: Tech"
             name="jobs"
             onChange={processSearchPrefsEvent}

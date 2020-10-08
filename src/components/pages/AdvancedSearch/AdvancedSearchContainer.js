@@ -63,8 +63,10 @@ export default function AdvancedSearchContainer(props) {
   const getSearchResults = () => {
     setLoadingState(true);
     //await axios.something
-    setSearchResults(initialResults);
-    setLoadingState(false);
+    setTimeout(() => {
+      setSearchResults(initialResults);
+      setLoadingState(false);
+    }, 1000);
   };
 
   return (

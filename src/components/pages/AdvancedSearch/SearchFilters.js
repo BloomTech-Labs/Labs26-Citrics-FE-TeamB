@@ -8,7 +8,14 @@ import {
   WEATHER_MIN,
   WEATHER_MAX
 } from "./constants";
-export default function SearchFilters({ searchPrefs, updateSearchPrefs }) {
+
+import RenderSearchFilter from "./RenderSearchFilter";
+
+export default function SearchFilters({
+  searchPrefs,
+  updateSearchPrefs,
+  getSearchResults
+}) {
   // This function expects an event triggered by an element with 'name' and 'value' attributes
   // that match a key-value pair in the searchPrefs object
   const processSearchPrefsEvent = ({ target: { name, value } }) =>
@@ -37,32 +44,29 @@ export default function SearchFilters({ searchPrefs, updateSearchPrefs }) {
 
   return (
     <div className="search-bar">
-      <div className="site-input-group-wrapper">
-        {/* Population*/}
-        <br />
-        <label>
-          Population:
-          <Slider
-            range
-            min={POP_MIN}
-            max={POP_MAX}
-            step={10000}
-            value={[searchPrefs.pop_min, searchPrefs.pop_max]}
-            tipFormatter={formatPop}
-            onChange={([pop_min, pop_max]) =>
-              updateSearchPrefs({
-                pop_min,
-                pop_max
-              })
-            }
-          />
-        </label>
-        <div className="advanced-search-range-display">
+      <h2>Filters:</h2>
+      {/* Population*/}
+      <br />
+      <RenderSearchFilter
+        title="Population"
+        range
+        min={POP_MIN}
+        max={POP_MAX}
+        step={10000}
+        value={[searchPrefs.pop_min, searchPrefs.pop_max]}
+        tipFormatter={formatPop}
+        onChange={([pop_min, pop_max]) =>
+          updateSearchPrefs({
+            pop_min,
+            pop_max
+          })
+        }
+      />
+      {/* <div className="advanced-search-range-display">
           <span>{formatPop(searchPrefs.pop_min)}</span>
           <span> to </span>
           <span>{formatPop(searchPrefs.pop_max)}</span>
-        </div>
-      </div>
+        </div> */}
 
       {/* Weather */}
       <br />

@@ -77,7 +77,7 @@ export default function SearchFilters({
       />
 
       <RenderSearchFilter
-        title="Rent"
+        title={`Rent (${searchPrefs.rooms})`}
         min={RENT_MIN}
         max={RENT_MAX}
         step={100}

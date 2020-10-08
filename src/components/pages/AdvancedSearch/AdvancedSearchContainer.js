@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
 import SearchFilters from "./SearchFilters";
@@ -58,8 +58,8 @@ export default function AdvancedSearchContainer(props) {
   const updateNamedSearchPrefs = changes =>
     setSearchPrefs({ ...searchPrefs, ...changes });
 
-  // This function will update searchResults whenever the user changes their preferences
-  // Currently unimplemented
+  // This function will update searchResults whenever requested
+  // Currently is uses a 1-second delay to simulate waiting for an API call
   const getSearchResults = () => {
     setLoadingState(true);
     //await axios.something
@@ -68,6 +68,9 @@ export default function AdvancedSearchContainer(props) {
       setLoadingState(false);
     }, 1000);
   };
+
+  // Retrieve searchResults automatically on initial component load
+  useEffect(getSearchResults, []);
 
   return (
     <div className="advanced-search-container">

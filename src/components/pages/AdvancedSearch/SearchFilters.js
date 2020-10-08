@@ -92,18 +92,21 @@ export default function SearchFilters({
           })
         }
       >
-        <select
-          id="rooms"
-          name="rooms"
-          onChange={processSearchPrefsEvent}
-          value={searchPrefs.rooms}
-        >
-          <option value="studio">Studio</option>
-          <option value="1br">1BR</option>
-          <option value="2br">2BR</option>
-          <option value="3br">3BR</option>
-          <option value="4br">4BR</option>
-        </select>
+        <label>
+          {"Rooms: "}
+          <select
+            id="rooms"
+            name="rooms"
+            onChange={processSearchPrefsEvent}
+            value={searchPrefs.rooms}
+          >
+            <option value="studio">Studio</option>
+            <option value="1br">1BR</option>
+            <option value="2br">2BR</option>
+            <option value="3br">3BR</option>
+            <option value="4br">4BR</option>
+          </select>
+        </label>
       </RenderSearchFilter>
 
       <RenderSearchFilter

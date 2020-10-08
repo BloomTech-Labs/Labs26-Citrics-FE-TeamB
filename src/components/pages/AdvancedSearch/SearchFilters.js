@@ -63,6 +63,7 @@ export default function SearchFilters({
 
       <RenderSearchFilter
         title="Weather"
+        popoverTitle="Seasonal Temp Range"
         min={WEATHER_MIN}
         max={WEATHER_MAX}
         step={5}
@@ -78,6 +79,7 @@ export default function SearchFilters({
 
       <RenderSearchFilter
         title={`Rent (${searchPrefs.rooms})`}
+        popoverTitle="Rent"
         min={RENT_MIN}
         max={RENT_MAX}
         step={100}
@@ -105,7 +107,8 @@ export default function SearchFilters({
       </RenderSearchFilter>
 
       <RenderSearchFilter
-        title="Job Industries"
+        title="Jobs"
+        popoverTitle={"Major Job Industries"}
         value={searchPrefs.jobs}
         input={
           <Input

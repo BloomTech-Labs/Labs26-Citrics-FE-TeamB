@@ -3,6 +3,7 @@ import React from "react";
 
 export default function RenderSearchFilter({
   title,
+  popoverTitle,
   min,
   max,
   step,
@@ -73,8 +74,8 @@ export default function RenderSearchFilter({
     <Popover
       // This placement ensures the popover doesn't move when the values inside change
       placement="bottomLeft"
-      // The split below removes (1br) from Rent title
-      title={title.split("(")[0]}
+      // Some components provide a separate title for the popover
+      title={popoverTitle ?? title}
       trigger="click"
       content={content}
     >

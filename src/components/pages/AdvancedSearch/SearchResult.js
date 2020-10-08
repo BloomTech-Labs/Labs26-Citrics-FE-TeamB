@@ -9,7 +9,7 @@ function SearchResult({ id, name, state, addCity }) {
   const addCityToComparison = () => addCity({ id, name, state });
   return (
     <div className="search-result">
-      {`${name}, ${state}`}
+      {`${name}, ${state}`}&nbsp;&nbsp;
       <Button onClick={addCityToComparison}>Add to Comparison</Button>
     </div>
   );

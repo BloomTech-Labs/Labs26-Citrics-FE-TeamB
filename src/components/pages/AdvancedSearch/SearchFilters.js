@@ -40,7 +40,7 @@ export default function SearchFilters({ searchPrefs, updateSearchPrefs }) {
       <div className="site-input-group-wrapper">
         {/* Population*/}
         <br />
-        <label>
+        <label className="filter-title">
           Population:
           <Slider
             range
@@ -66,7 +66,9 @@ export default function SearchFilters({ searchPrefs, updateSearchPrefs }) {
 
       {/* Weather */}
       <br />
-      <label htmlFor="weather">Weather:</label>
+      <label htmlFor="weather" className="filter-title">
+        Weather:
+      </label>
       <Slider
         id="weather"
         range
@@ -90,7 +92,7 @@ export default function SearchFilters({ searchPrefs, updateSearchPrefs }) {
 
       {/* Rent */}
       <br />
-      <label htmlFor="rent">
+      <label htmlFor="rent" className="filter-title">
         {"Rent for "}
         <select
           id="rooms"
@@ -104,7 +106,6 @@ export default function SearchFilters({ searchPrefs, updateSearchPrefs }) {
           <option value="3br">3BR</option>
           <option value="4br">4BR</option>
         </select>
-        {" apt:"}
       </label>
       <Slider
         id="rent"
@@ -130,7 +131,9 @@ export default function SearchFilters({ searchPrefs, updateSearchPrefs }) {
       {/* Job industries */}
       <br />
       <Input.Group compact>
-        <label htmlFor="jobs">Job Industries:</label>
+        <label htmlFor="jobs" className="filter-title">
+          Job Industries:
+        </label>
         <br />
         <Input
           style={{ width: "50%" }}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "antd";
+import { Button, Input } from "antd";
 import {
   POP_MIN,
   POP_MAX,
@@ -116,6 +116,10 @@ export default function SearchFilters({
           />
         }
       />
+      <br />
+      <Button type="primary" onClick={getSearchResults}>
+        Apply
+      </Button>
     </div>
   );
 }

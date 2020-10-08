@@ -34,22 +34,12 @@ export default function RenderSearchFilter({
 
     return html ? (
       <div className="advanced-search-range-display">
-        {result.map(val => (
-          <span>{val}</span>
+        {result.map((val, idx) => (
+          <span key={idx}>{val}</span>
         ))}
       </div>
     ) : (
       result
-    );
-  };
-
-  const buttonContent = () => {
-    const text = RangeDisplay()?.join(" ");
-    console.log(text);
-    return (
-      <>
-        {title}: {text}
-      </>
     );
   };
 
@@ -78,7 +68,7 @@ export default function RenderSearchFilter({
       trigger="click"
       content={content}
     >
-      <Button>{buttonContent()}</Button>
+      <Button>{`${title}: ${RangeDisplay()?.join(" ")}`}</Button>
     </Popover>
   );
 }

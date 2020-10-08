@@ -33,6 +33,9 @@ const RenderAboutPage = ({ toggleDrawer }) => {
 
   return (
     <div className="about-container">
+      <Button className="home-btn" href="/">
+        Home
+      </Button>
       {/* ----- Introduction ----- */}
       <section className="about-introduction">
         <h1>The Citrics Team</h1>

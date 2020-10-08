@@ -1,9 +1,8 @@
 // Library imports
-import React, { useState } from "react";
-// Placeholder loading component
-// import LoadingComponent from '../../common/LoadingComponent';
-// About page
-// import AboutPageContainer from "./AboutPageContainer";
+import React, { useState, useEffect } from "react";
+// Redux
+import { connect } from "react-redux";
+import { toggleDrawer } from "../../../state/actions";
 // Styling
 import { Card, Avatar, Modal, Button, Divider } from "antd";
 import {
@@ -17,7 +16,7 @@ import webDev from "../../../styles/icons/webDev.png";
 
 const { Meta } = Card;
 
-const RenderAboutPage = ({ isLoading }) => {
+const RenderAboutPage = ({ toggleDrawer }) => {
   // Modal state
   const [bhavaniModalVisibility, setBhavaniModalVisibility] = useState(false);
   const [ekramModalVisibility, setEkramModalVisibility] = useState(false);
@@ -27,16 +26,13 @@ const RenderAboutPage = ({ isLoading }) => {
   const [lyndsiModalVisibility, setLyndsiModalVisibility] = useState(false);
   const [racheleModalVisibility, setRacheleModalVisibility] = useState(false);
 
+  // This closes the drawer when the user is on the page
+  useEffect(() => {
+    toggleDrawer();
+  }, [toggleDrawer]);
+
   return (
     <div className="about-container">
-      {/*  Use this as loading component if needed
-      {isLoading ? (
-        <LoadingComponent message={"Retrieving About Page..."} />
-      ) : (
-        <AboutPageContainer />
-      )}
-      */}
-
       {/* ----- Introduction ----- */}
       <section className="about-introduction">
         <h1>The Citrics Team</h1>
@@ -714,4 +710,4 @@ const RenderAboutPage = ({ isLoading }) => {
   );
 };
 
-export default RenderAboutPage;
+export default connect(null, { toggleDrawer })(RenderAboutPage);

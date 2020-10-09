@@ -23,7 +23,7 @@ export default function JobsPane({ jobs, unemployment }) {
     ];
     // custom layout for pie chart
     const layout = {
-      title: "Top 10 Industries",
+      title: "Top Industries",
       showlegend: true,
       legend: { x: -10.4, font: { size: "10px" } },
       paper_bgcolor: "transparent",

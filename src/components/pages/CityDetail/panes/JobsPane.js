@@ -60,7 +60,7 @@ export default function JobsPane({ jobs, unemployment }) {
           <img
             className="detail-pane-icon"
             src={jobIcon}
-            alt="picture of briefcase to represent the job industry icon"
+            alt="briefcase to represent the job industry icon"
           />
           <h2>Jobs:</h2>
         </div>

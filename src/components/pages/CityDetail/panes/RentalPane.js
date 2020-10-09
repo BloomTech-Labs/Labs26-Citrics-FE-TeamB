@@ -4,26 +4,31 @@ import LoadingSkeleton from "./LoadingSkeleton";
 //icon
 import rentIcon from "../../../../styles/icons/rent-96.png";
 
-export default function HousingPane({ rent }) {
+export default function RentalPane({ rent }) {
   const { TabPane } = Tabs;
   // This list will be the titles of the tabs
   // it also matches the keys in rent (although they're all lowercase in rent)
   const aptTypes = ["Studio", "1BR", "2BR", "3BR", "4BR"];
 
   // Make a color-coded price change display
-  const generatePriceDisplay = change => {
+  const PriceDisplay = ({ change }) => {
     change = Math.round(change * 100);
     let indicator = "";
     if (change < 0) {
       indicator = " down";
       change += "%";
     } else {
-      change = "+" + change + "%";
       if (change > 0) {
         indicator = " up";
       }
+      change = "+" + change + "%";
     }
-    return <div className={"rent-percent-change" + indicator}>{change}</div>;
+    return (
+      <p>
+        Trend:
+        <span className={"rent-percent-change" + indicator}>{change}</span>
+      </p>
+    );
   };
 
   return (
@@ -42,14 +47,14 @@ export default function HousingPane({ rent }) {
           {rent ? (
             <>
               {/* This JSX fragment contains everything shown when not loading */}
-              {generatePriceDisplay(rent.rental_pct_chg)}
               <Tabs defaultActiveKey="1">
                 {aptTypes.map((name, idx) => (
                   <TabPane key={idx} tab={name} className="rental-price-tab">
-                    ${rent[name.toLowerCase()]}
+                    ${rent[name.toLowerCase()]}/month
                   </TabPane>
                 ))}
               </Tabs>
+              <PriceDisplay change={rent.rental_pct_chg} />
             </>
           ) : (
             <LoadingSkeleton />

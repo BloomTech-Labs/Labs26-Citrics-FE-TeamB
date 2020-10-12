@@ -1,9 +1,8 @@
 // Library imports
-import React, { useState } from "react";
-// Placeholder loading component
-// import LoadingComponent from '../../common/LoadingComponent';
-// About page
-// import AboutPageContainer from "./AboutPageContainer";
+import React, { useState, useEffect } from "react";
+// Redux
+import { connect } from "react-redux";
+import { toggleDrawer } from "../../../state/actions";
 // Styling
 import { Card, Avatar, Modal, Button, Divider } from "antd";
 import {
@@ -17,7 +16,7 @@ import webDev from "../../../styles/icons/webDev.png";
 
 const { Meta } = Card;
 
-const RenderAboutPage = ({ isLoading }) => {
+const RenderAboutPage = ({ toggleDrawer }) => {
   // Modal state
   const [bhavaniModalVisibility, setBhavaniModalVisibility] = useState(false);
   const [ekramModalVisibility, setEkramModalVisibility] = useState(false);
@@ -27,28 +26,44 @@ const RenderAboutPage = ({ isLoading }) => {
   const [lyndsiModalVisibility, setLyndsiModalVisibility] = useState(false);
   const [racheleModalVisibility, setRacheleModalVisibility] = useState(false);
 
+  // This closes the drawer when the user is on the page
+  useEffect(() => {
+    toggleDrawer();
+  }, [toggleDrawer]);
+
   return (
     <div className="about-container">
-      {/*  Use this as loading component if needed
-      {isLoading ? (
-        <LoadingComponent message={"Retrieving About Page..."} />
-      ) : (
-        <AboutPageContainer />
-      )}
-      */}
-
+      <Button className="home-btn" href="/">
+        Home
+      </Button>
       {/* ----- Introduction ----- */}
       <section className="about-introduction">
         <h1>The Citrics Team</h1>
         <h3>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida
-          tincidunt euismod. Mauris lacus mi, vulputate eget sem vitae,
-          imperdiet consectetur urna. In ante sapien, mattis eu nisi ut,
-          malesuada fringilla massa. Ut pulvinar, quam quis interdum convallis,
-          sem dolor ullamcorper lacus, vel tristique felis nunc in risus. Duis
-          ex dolor, commodo vitae metus ac, egestas tincidunt turpis. Morbi leo
-          quam, ornare molestie pellentesque interdum, euismod ut magna. Aliquam
-          tincidunt orci vulputate interdum varius.
+          We are a cross-functional team of 7 data scientists and web developers
+          from Lambda School. Check out the links below to learn more about our
+          tracks:
+        </h3>
+        <div className="intro-btns">
+          <Button
+            href="https://lambdaschool.com/courses/data-science"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Data Science
+          </Button>
+          <Button
+            href="https://lambdaschool.com/courses/full-stack-web-development"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Full Stack Web Development
+          </Button>
+        </div>
+        <h3>
+          We collaborated with our stakeholder through our project lead to
+          produce his product vision of Citrics in a span of 8 weeks. Check out
+          our cards below to learn more about the team!
         </h3>
       </section>
 
@@ -59,7 +74,16 @@ const RenderAboutPage = ({ isLoading }) => {
         <Card
           style={{ width: 250 }}
           cover={
-            <img alt="Bhavani Rajan" src="https://i.imgur.com/9TcokzL.png" />
+            <img
+              alt="Bhavani Rajan"
+              src="https://i.imgur.com/9TcokzL.png"
+              onMouseOver={e =>
+                (e.currentTarget.src = "https://i.imgur.com/fA047dl.png")
+              }
+              onMouseOut={e => {
+                e.currentTarget.src = "https://i.imgur.com/9TcokzL.png";
+              }}
+            />
           }
           actions={[
             <a
@@ -69,7 +93,13 @@ const RenderAboutPage = ({ isLoading }) => {
             >
               <GithubOutlined key="github" />
             </a>,
-            <MailOutlined key="email" />,
+            <a
+              href="mailto:bhava.rajan.6@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MailOutlined key="email" />
+            </a>,
             <a
               href="https://www.linkedin.com/in/bhavani-rajan/"
               target="_blank"
@@ -94,6 +124,7 @@ const RenderAboutPage = ({ isLoading }) => {
             About me
           </Button>
           <Modal
+            id="inside-modal"
             title="About me"
             centered
             visible={bhavaniModalVisibility}
@@ -110,8 +141,7 @@ const RenderAboutPage = ({ isLoading }) => {
               Analysis, Recommendation Systems, and Data Engineering. I'm
               excited to take on a new challenge in the Data Science universe.
             </p>
-            <Divider />
-            <p>Technical Skills</p>
+            <Divider>Technical Skills</Divider>
             <p>
               Programming Expertise: ​Python (NumPy, Pandas,
               Scikit-learn,Matplotlib, Seaborn), R, Java, SQL, PostgreSQL,
@@ -120,10 +150,43 @@ const RenderAboutPage = ({ isLoading }) => {
             <p>Frameworks: ​TensorFlow, Keras, Flask, Fast API</p>
             <p>
               Skills​: Data analysis, Predictive analytics, Linear and
-              multivariate regressions,, K-cluster analysis, Classification,
+              multivariate regressions, K-cluster analysis, Classification,
               Machine learning products, Natural language processing, Neural
               Networks, Github, Amazon EBS, Heroku
             </p>
+            <Divider>Hobbies</Divider>
+            <p>Painting and gardening</p>
+            <img
+              alt="Bhavani's paintings"
+              src="https://i.imgur.com/C9JQEKZ.png"
+            />
+            <Divider>Contact</Divider>
+            <div
+              className="inner-buttons"
+              style={{ display: "flex", justifyContent: "space-evenly" }}
+            >
+              <Button
+                href="https://github.com/Bhavani-Rajan"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </Button>
+              <Button
+                href="mailto:bhava.rajan.6@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Email
+              </Button>
+              <Button
+                href="https://www.linkedin.com/in/bhavani-rajan/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </Button>
+            </div>
           </Modal>
         </Card>
 
@@ -133,7 +196,16 @@ const RenderAboutPage = ({ isLoading }) => {
         <Card
           style={{ width: 250 }}
           cover={
-            <img alt="Ekram Ahmed" src="https://i.imgur.com/vBnpIEC.png" />
+            <img
+              alt="Ekram Ahmed"
+              src="https://i.imgur.com/vBnpIEC.png"
+              onMouseOver={e =>
+                (e.currentTarget.src = "https://i.imgur.com/4haF4Tz.png")
+              }
+              onMouseOut={e => {
+                e.currentTarget.src = "https://i.imgur.com/vBnpIEC.png";
+              }}
+            />
           }
           actions={[
             <a
@@ -190,6 +262,33 @@ const RenderAboutPage = ({ isLoading }) => {
               fulfill my ultimate goal, which is to have a humble contribution
               towards ocean sustainability.
             </p>
+            <Divider>Contact</Divider>
+            <div
+              className="inner-buttons"
+              style={{ display: "flex", justifyContent: "space-evenly" }}
+            >
+              <Button
+                href="https://github.com/Ekram49"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </Button>
+              <Button
+                href="mailto:ekramullahzaki@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Email
+              </Button>
+              <Button
+                href="https://www.linkedin.com/in/ekram-ullah-ahmed/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </Button>
+            </div>
           </Modal>
         </Card>
 
@@ -197,7 +296,16 @@ const RenderAboutPage = ({ isLoading }) => {
         <Card
           style={{ width: 250 }}
           cover={
-            <img alt="Zack Murray" src="https://i.imgur.com/jaELQtg.png" />
+            <img
+              alt="Zack Murray"
+              src="https://i.imgur.com/jaELQtg.png"
+              onMouseOver={e =>
+                (e.currentTarget.src = "https://i.imgur.com/TgKYmKI.png")
+              }
+              onMouseOut={e => {
+                e.currentTarget.src = "https://i.imgur.com/jaELQtg.png";
+              }}
+            />
           }
           actions={[
             <a
@@ -207,7 +315,13 @@ const RenderAboutPage = ({ isLoading }) => {
             >
               <GithubOutlined key="github" />
             </a>,
-            <MailOutlined key="email" />,
+            <a
+              href="mailto:zachery.murray@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MailOutlined key="email" />
+            </a>,
             <a
               href="https://www.linkedin.com/in/zack-murray/"
               target="_blank"
@@ -247,6 +361,33 @@ const RenderAboutPage = ({ isLoading }) => {
               programmer I am today. Physically present in CT, but my heart
               still resides in CO.
             </p>
+            <Divider>Contact</Divider>
+            <div
+              className="inner-buttons"
+              style={{ display: "flex", justifyContent: "space-evenly" }}
+            >
+              <Button
+                href="https://github.com/zack-murray"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </Button>
+              <Button
+                href="mailto:zachery.murray@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Email
+              </Button>
+              <Button
+                href="https://www.linkedin.com/in/zack-murray/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </Button>
+            </div>
           </Modal>
         </Card>
       </section>
@@ -320,6 +461,33 @@ const RenderAboutPage = ({ isLoading }) => {
               while working with diverse remote teams. Outside of the code, I
               enjoy being out in nature hiking and rock climbing.
             </p>
+            <Divider>Contact</Divider>
+            <div
+              className="inner-buttons"
+              style={{ display: "flex", justifyContent: "space-evenly" }}
+            >
+              <Button
+                href="https://github.com/alanblee"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </Button>
+              <Button
+                href="mailto:alanbenlee12@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Email
+              </Button>
+              <Button
+                href="https://www.linkedin.com/in/alanlee321/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </Button>
+            </div>
           </Modal>
         </Card>
 
@@ -327,7 +495,16 @@ const RenderAboutPage = ({ isLoading }) => {
         <Card
           style={{ width: 250 }}
           cover={
-            <img alt="David Horstman" src="https://i.imgur.com/jF51x65.png" />
+            <img
+              alt="David Horstman"
+              src="https://i.imgur.com/jF51x65.png"
+              onMouseOver={e =>
+                (e.currentTarget.src = "https://i.imgur.com/1QHV5FV.png")
+              }
+              onMouseOut={e => {
+                e.currentTarget.src = "https://i.imgur.com/jF51x65.png";
+              }}
+            />
           }
           actions={[
             <a
@@ -337,7 +514,13 @@ const RenderAboutPage = ({ isLoading }) => {
             >
               <GithubOutlined key="github" />
             </a>,
-            <MailOutlined key="email" />,
+            <a
+              href="mailto:horstmandd@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MailOutlined key="email" />
+            </a>,
             <a
               href="https://www.linkedin.com/in/david-horstman/"
               target="_blank"
@@ -375,6 +558,41 @@ const RenderAboutPage = ({ isLoading }) => {
               School graduate with an MA in Chemistry from Columbia and a BS in
               Biochemistry from UCSD.
             </p>
+            <Divider>Jack of many trades, master of some</Divider>
+            <p>
+              Currently Full Stack Web Developer, previously High School
+              engineering teacher and Biophysical Chemist. Avid tinkerer,
+              singer, dancer, and hiker. I love pushing myself to learn new
+              languages and take on difficult challenges; if I'm not outside my
+              comfort zone, I'm not having fun.
+            </p>
+            <Divider>Contact</Divider>
+            <div
+              className="inner-buttons"
+              style={{ display: "flex", justifyContent: "space-evenly" }}
+            >
+              <Button
+                href="https://github.com/ddhorstman"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </Button>
+              <Button
+                href="mailto:horstmandd@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Email
+              </Button>
+              <Button
+                href="https://www.linkedin.com/in/david-horstman/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </Button>
+            </div>
           </Modal>
         </Card>
 
@@ -446,6 +664,41 @@ const RenderAboutPage = ({ isLoading }) => {
               practices by investing in breaks that typically involve video
               games. The Pomodoro technique will save your life in this career!
             </p>
+            <Divider>Teamwork makes the dream work</Divider>
+            <p>
+              I am an eager worker and a team player! Good communication is one
+              of the most important aspects to an efficient, productive team. I
+              have seen amazing things produced from teams that took the extra
+              effort to meet and plan properly - these tactics are vital to a
+              proper working environment!
+            </p>
+            <Divider>Contact</Divider>
+            <div
+              className="inner-buttons"
+              style={{ display: "flex", justifyContent: "space-evenly" }}
+            >
+              <Button
+                href="https://github.com/lyndsiWilliams"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </Button>
+              <Button
+                href="mailto:lyndsikaywilliams@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Email
+              </Button>
+              <Button
+                href="https://www.linkedin.com/in/lyndsiwilliams/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </Button>
+            </div>
           </Modal>
         </Card>
 
@@ -519,12 +772,39 @@ const RenderAboutPage = ({ isLoading }) => {
               successful company derives from a team of positive, caring, and
               constructive employees.
             </p>
-            <Divider />
+            <Divider>Fun fact</Divider>
             <p>
-              Fun fact about Rachele: “Not a daredevil, but love adventure! I
-              enjoy many outdoor activities with family such as dirt-biking,
-              Jeeping, and snowboarding”
+              “Not a daredevil, but love adventure! I enjoy many outdoor
+              activities with family such as dirt-biking, Jeeping, and
+              snowboarding”
             </p>
+            <Divider>Contact</Divider>
+            <div
+              className="inner-buttons"
+              style={{ display: "flex", justifyContent: "space-evenly" }}
+            >
+              <Button
+                href="https://github.com/berachele"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </Button>
+              <Button
+                href="mailto:berachele425@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Email
+              </Button>
+              <Button
+                href="https://www.linkedin.com/in/berachele/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LinkedIn
+              </Button>
+            </div>
           </Modal>
         </Card>
       </section>
@@ -532,4 +812,4 @@ const RenderAboutPage = ({ isLoading }) => {
   );
 };
 
-export default RenderAboutPage;
+export default connect(null, { toggleDrawer })(RenderAboutPage);

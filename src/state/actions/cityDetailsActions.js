@@ -58,7 +58,7 @@ const retrieveNameState = async ({ id, name, state }) => {
 
 // Retrieve metrics from our backend and update Redux accordingly
 const updateMetrics = async ({ id }, dispatch) => {
-  const [unemployRate, rent, population, weather, jobs] = await Promise.all([
+  const [unemployRate, rent, population, weather] = await Promise.all([
     axios
       .get(`https://b-ds.citrics.dev/unemployment/${id}`)
       .then(r => r?.data)
@@ -74,22 +74,28 @@ const updateMetrics = async ({ id }, dispatch) => {
     axios
       .get(`https://b-ds.citrics.dev/weather/${id}`)
       .then(r => r?.data?.data)
-      .catch(console.error),
-    axios
-      .get(`https://b-ds.citrics.dev/jobs/${id}`)
-      .then(r => r?.data)
       .catch(console.error)
   ]);
+  // Request job data after getting other metrics to improve performance
+  updateJobs({ id }, dispatch);
 
+  // Update redux with all metrics except jobsF
   const details = {
     weather,
     rent,
     unemployRate,
-    population,
-    jobs
+    population
   };
-
   dispatch(updateCityDetails(id, details));
+};
+
+// Retrieve job data separately, as it's slow
+const updateJobs = ({ id }, dispatch) => {
+  axios
+    .get(`https://b-ds.citrics.dev/jobs/${id}`)
+    .then(r => r?.data)
+    .then(jobs => dispatch(updateCityDetails(id, { jobs })))
+    .catch(console.error);
 };
 
 // Get Image and Weather from external APIs and update Redux accordingly

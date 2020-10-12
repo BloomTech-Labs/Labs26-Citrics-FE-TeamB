@@ -94,18 +94,12 @@ export default class ComparisonGraphs extends React.Component {
     const { getCityPop, getUnemployRate, getRentals, getJobs } = this;
     const { TabPane } = Tabs;
 
-    // To determine if we're done loading, check every city for each relevant property
-    const finishedLoadingPop = Object.values(this.props.citiesData).reduce(
-      (ac, { population }) => population && ac,
+    // To determine if we're done loading, check every city for a "weather" prop
+    const finishedLoading = Object.values(this.props.citiesData).reduce(
+      (ac, { weather }) => weather && ac,
       true
     );
-    const finishedLoadingRent = Object.values(this.props.citiesData).reduce(
-      (ac, { rent }) => rent && ac,
-      true
-    );
-    const finishedLoadingUnemployment = Object.values(
-      this.props.citiesData
-    ).reduce((ac, { unemployRate }) => unemployRate && ac, true);
+    // Some cities are missing job data, hence a separate check for jobs having been loaded
     const finishedLoadingJobs = Object.values(this.props.citiesData).reduce(
       (ac, { jobs }) => jobs && ac,
       true
@@ -124,7 +118,7 @@ export default class ComparisonGraphs extends React.Component {
           }}
         >
           <TabPane className="graph-holder" tab="Population Trend" key="1">
-            {finishedLoadingPop ? (
+            {finishedLoading ? (
               <Graph
                 dataSet={getCityPop()[0]}
                 dataSet2={getCityPop()[1]}
@@ -135,7 +129,7 @@ export default class ComparisonGraphs extends React.Component {
             )}
           </TabPane>
           <TabPane className="graph-holder" tab="Apartment Prices" key="2">
-            {finishedLoadingRent ? (
+            {finishedLoading ? (
               <Graph
                 dataSet={getRentals()[0]}
                 dataSet2={getRentals()[1]}
@@ -146,7 +140,7 @@ export default class ComparisonGraphs extends React.Component {
             )}
           </TabPane>
           <TabPane className="graph-holder" tab="Unemployment Rate" key="3">
-            {finishedLoadingUnemployment ? (
+            {finishedLoading ? (
               <Graph
                 dataSet={getUnemployRate()[0]}
                 dataSet2={getUnemployRate()[1]}

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ADD_CITY_DETAILS, UPDATE_CITY_DETAILS } from "../contexts";
-// Action creator to update details for an existing city
+
+// Action creator to create a new cityDetails entry
 const addCityDetails = (id, details) => ({
   type: ADD_CITY_DETAILS,
   payload: { id, details }
@@ -12,6 +13,34 @@ const updateCityDetails = (id, details) => ({
   payload: { id, details }
 });
 
+/** Retrieve the relevant details for a city of given id and update Redux accordingly.
+ * @param {Object} city The city (must contain an id key)
+ */
+export const getCityDetails = city => async (dispatch, getState) => {
+  let { id } = city;
+
+  // Do nothing if we already have the details on this city
+  const { cityDetails } = getState().cities;
+  if (cityDetails[id]) return;
+
+  // Create a blank entry for this city to prevent double data fetching
+  await dispatch(addCityDetails(id, { id }));
+
+  // Get name and state (if needed) and update the city entry
+  let { name, state } = await retrieveNameState(city);
+  // We should update name and state in Redux ASAP to improve the loading experience
+  dispatch(updateCityDetails(id, { name, state }));
+
+  // Get image and weather from external APIs
+  // This function will call dispatch as each datum is retrieved
+  updateImageAndWeather({ id, name, state }, dispatch);
+
+  // Get metrics from our own DS API
+  // This function will call dispatch once the data is retrieved
+  updateMetrics({ id }, dispatch);
+};
+
+// Initial API request to get name and state if not known
 const retrieveNameState = async ({ id, name, state }) => {
   // Do nothing if we already have the name and state
   if (name && state) return { name, state };
@@ -26,6 +55,8 @@ const retrieveNameState = async ({ id, name, state }) => {
   name = rent?.city ?? "Not found";
   return { name, state };
 };
+
+// Retrieve metrics from our backend and update Redux accordingly
 const updateMetrics = async ({ id }, dispatch) => {
   const [unemployRate, rent, population, weather, jobs] = await Promise.all([
     axios
@@ -60,6 +91,8 @@ const updateMetrics = async ({ id }, dispatch) => {
 
   dispatch(updateCityDetails(id, details));
 };
+
+// Get Image and Weather from external APIs and update Redux accordingly
 const updateImageAndWeather = async ({ id, name, state }, dispatch) => {
   //Placeholder image to use as a fallback
   let fallbackImage = "https://i.imgur.com/YXdssOR.jpeg";
@@ -102,23 +135,4 @@ const updateImageAndWeather = async ({ id, name, state }, dispatch) => {
       })
       .catch(console.error);
   }
-};
-
-export const getCityDetails = city => async (dispatch, getState) => {
-  let { id } = city;
-
-  // Do nothing if we already have the details on this city
-  const { cityDetails } = getState().cities;
-  if (cityDetails[id]) return;
-
-  // Create a blank entry for this city to prevent double data fetching
-  await dispatch(addCityDetails(id, { id }));
-
-  // Get name and state (if needed) and update the city entry
-  let { name, state } = await retrieveNameState(city);
-  dispatch(updateCityDetails(id, { name, state }));
-
-  updateImageAndWeather({ id, name, state }, dispatch);
-
-  updateMetrics({ id }, dispatch);
 };

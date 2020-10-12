@@ -1,5 +1,5 @@
 import React from "react";
-import ComparisonCard from "./comparisonCard";
+import ComparisonCard from "./ComparisonCard";
 import ComparisonGraphs from "./ComparisonGraphs";
 
 export default function RenderComparison({ citiesData }) {

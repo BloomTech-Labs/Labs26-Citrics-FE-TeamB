@@ -36,6 +36,8 @@ export const getCityDetails = city => async (dispatch, getState) => {
     console.log("Already fetching data on city", id);
     return;
   }
+  // Create a blank entry for this city to prevent double data fetching
+  dispatch({ type: ADD_CITY_DETAILS, payload: { id, details: { id } } });
 
   //Placeholder image to use as a fallback
   let image = "https://i.imgur.com/YXdssOR.jpeg";
@@ -50,10 +52,7 @@ export const getCityDetails = city => async (dispatch, getState) => {
   state = state ?? rent?.state ?? "CA";
   name = name ?? rent?.city ?? "Not found";
   console.log("Retrieved initial data for", name, state);
-  await dispatch({
-    type: ADD_CITY_DETAILS,
-    payload: { id, details: { name, state } }
-  });
+  await dispatch(updateCityDetails(id, { name, state }));
 
   // awaiting the unemployment data
   const unemployRate = await axios
@@ -123,8 +122,5 @@ export const getCityDetails = city => async (dispatch, getState) => {
     jobs
   };
 
-  dispatch({
-    type: UPDATE_CITY_DETAILS,
-    payload: { id, details }
-  });
+  dispatch(updateCityDetails(id, details));
 };

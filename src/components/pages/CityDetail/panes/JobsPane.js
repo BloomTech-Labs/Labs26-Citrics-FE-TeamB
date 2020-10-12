@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { lineGraph } from "../../../common/Graphs/graphType";
 import Plot from "react-plotly.js";
 import LoadingSkeleton from "./LoadingSkeleton";
@@ -7,6 +7,26 @@ import jobIcon from "../../../../styles/icons/jobs-96.png";
 
 export default function JobsPane({ jobs, unemployment }) {
   let style = { width: "100%", height: "100%" };
+  const [width, setWidth] = useState(window.innerWidth);
+  const [pieStyle, setPieStyle] = useState({ width: "100%", height: "100%" });
+
+  useEffect(() => {
+    // timeoutId for debounce mechanism
+    let timeoutId = null;
+    function handleResize() {
+      // prevent execution of previous setTimeout
+      clearTimeout(timeoutId);
+      // change width from the state object after 500 milliseconds
+      timeoutId = setTimeout(() => setWidth(window.innerWidth), 500);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [width]);
+
+  useEffect(() => {
+    console.log(width);
+  }, [width]);
+
   // function that parses and renders the given pie chart
   const renderPie = () => {
     const data = JSON.parse(jobs.viz).data[0];
@@ -14,7 +34,7 @@ export default function JobsPane({ jobs, unemployment }) {
       {
         // additional properties for pie chart
         ...data,
-        domain: { x: [1, 0] },
+        domain: width < 1000 ? { x: [-10, 0] } : { x: [1, 0] },
         automargin: true,
         hoverinfo: "label",
         textinfo: "percent",
@@ -22,9 +42,10 @@ export default function JobsPane({ jobs, unemployment }) {
       }
     ];
     // custom layout for pie chart
+
     const layout = {
       title: "Top Industries",
-      showlegend: true,
+      showlegend: width < 800 ? false : true,
       legend: { x: -10.4, font: { size: "10px" } },
       paper_bgcolor: "transparent",
       plot_bgcolor: "transparent",

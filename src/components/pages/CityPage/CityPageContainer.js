@@ -9,27 +9,17 @@ class CityPage extends React.Component {
 
   fetchDataIfNeeded = async () => {
     const { id } = this.props.match.params;
+    this.setState({ city: { id } });
     // If we don't have cached data on this city, retrieve it
     if (!this.props.cityDetails[id]) {
       // We need to wait for getCityDetails to finish before proceeding
       await this.props.getCityDetails({ id });
     }
-    this.setState({ city: this.props.cityDetails[id] });
+    // this.setState({ city: this.props.cityDetails[id] });
     document.title = `Citrics | ${this.props.cityDetails[id].name}, ${this.props.cityDetails[id].state}`;
   };
 
-  // Get name/state info from selectedCites, if applicable
-  retrieveFromSelectedCities = () => {
-    const { id } = this.props.match.params;
-    // If we have data on this city stored in selectedCities, use it
-    const city = this.props.selectedCities.find(
-      ({ id: cityId }) => Number(id) === Number(cityId)
-    ) ?? { id }; // If not, city object should just contain an "id" while we load
-    // Clear out old city data while we load new data
-    this.setState({ city });
-  };
   componentDidMount() {
-    this.retrieveFromSelectedCities();
     // Retrieve data if needed
     this.fetchDataIfNeeded();
   }
@@ -38,7 +28,6 @@ class CityPage extends React.Component {
     // If component remained mounted but user changed the cityId
     // Update the city info to match the new city
     if (prevProps.match.params.id !== id) {
-      this.retrieveFromSelectedCities();
       this.fetchDataIfNeeded();
     }
     // Update name/state info if selectedCities is updated
@@ -47,11 +36,12 @@ class CityPage extends React.Component {
       !this.state.city.name &&
       prevProps.selectedCities !== this.props.selectedCities
     ) {
-      this.retrieveFromSelectedCities();
     }
   }
   render() {
-    return <RenderCityPage city={this.state.city} />;
+    return (
+      <RenderCityPage city={this.props.cityDetails[this.state.city.id] ?? {}} />
+    );
   }
 }
 const mapPropsToState = (

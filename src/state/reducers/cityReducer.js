@@ -1,4 +1,9 @@
-import { ADD_CITY, REMOVE_CITY, ADD_CITY_DETAILS } from "../contexts";
+import {
+  ADD_CITY,
+  REMOVE_CITY,
+  ADD_CITY_DETAILS,
+  UPDATE_CITY_DETAILS
+} from "../contexts";
 
 const initialState = {
   selectedCities: [],
@@ -38,6 +43,17 @@ export default function cityReducer(state = initialState, { type, payload }) {
         cityDetails: {
           ...state.cityDetails,
           [payload.id]: payload.details
+        }
+      };
+    case UPDATE_CITY_DETAILS:
+      return {
+        ...state,
+        cityDetails: {
+          ...state.cityDetails,
+          [payload.id]: {
+            ...state.cityDetails[payload.id],
+            ...payload.details
+          }
         }
       };
     default:

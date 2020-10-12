@@ -12,7 +12,7 @@ export default function RenderComparison({ citiesData }) {
             // where a card will be created before any data is present
             // and will persist as an empty loading card after data has been loaded
             city.name && (
-              <ComparisonCard citiesData={city} key={city.name + city.state} />
+              <ComparisonCard city={city} key={city.name + city.state} />
             )
           );
         })}

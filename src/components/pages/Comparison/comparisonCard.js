@@ -5,7 +5,6 @@ import { Divider, Skeleton } from "antd";
 import weather from "../../../styles/icons/weather-48.png";
 import population from "../../../styles/icons/pop-48.png";
 import pricing from "../../../styles/icons/pricing-48.png";
-import { connect } from "react-redux";
 
 function LoadingSkeleton() {
   return (
@@ -15,36 +14,28 @@ function LoadingSkeleton() {
   );
 }
 
-class ComparisonCard extends Component {
+export default class ComparisonCard extends Component {
   state = {
-    visible: false,
-    city: {}
+    visible: false
   };
-  onSelectCity = cityData => {
-    this.setState({ city: cityData, visible: true });
-  };
-  onToggleModal = () => {
+  toggleModal = () => {
     this.setState({ visible: !this.state.visible });
   };
   render() {
-    let { citiesData, selectedCities } = this.props;
-    const dataFromSelectedCities = selectedCities.find(
-      ({ id }) => Number(id) === Number(citiesData.id)
-    );
-    citiesData = { ...dataFromSelectedCities, ...citiesData };
-    const { onToggleModal, onSelectCity } = this;
-    const { visible, city } = this.state;
+    const { city } = this.props;
+    const { visible } = this.state;
+    const { toggleModal } = this;
     return (
       <div className="card">
         <div className="comparison-card" data-testid="city-cards">
-          {citiesData.image ? (
+          {city.image ? (
             <div
               className="custom-image"
-              style={{ backgroundImage: `url(${citiesData.image})` }}
+              style={{ backgroundImage: `url(${city.image})` }}
             >
               <img
-                alt={`Thumbnail for ${citiesData.name}, ${citiesData.state}`}
-                src={citiesData.image}
+                alt={`Thumbnail for ${city.name}, ${city.state}`}
+                src={city.image}
               />
             </div>
           ) : (
@@ -52,9 +43,9 @@ class ComparisonCard extends Component {
           )}
           <div className="basic-card-info">
             <div className="card-metrics">
-              {citiesData.name ? (
+              {city.name ? (
                 <h3 className="city-name">
-                  {citiesData.name}, {citiesData.state}
+                  {city.name}, {city.state}
                 </h3>
               ) : (
                 <Skeleton.Input
@@ -74,10 +65,8 @@ class ComparisonCard extends Component {
                   <p>
                     <b>Population:</b>
                   </p>
-                  {citiesData.population ? (
-                    <p>
-                      {citiesData.population.data.total_pop.toLocaleString()}
-                    </p>
+                  {city.population ? (
+                    <p>{city.population.data.total_pop.toLocaleString()}</p>
                   ) : (
                     <LoadingSkeleton />
                   )}
@@ -93,8 +82,8 @@ class ComparisonCard extends Component {
                   <p>
                     <b>Rental Prices:</b>
                   </p>
-                  {citiesData.rent ? (
-                    <p>{`${"$" + citiesData.rent["1br"]}/month (1BR)`}</p>
+                  {city.rent ? (
+                    <p>{`${"$" + city.rent["1br"]}/month (1BR)`}</p>
                   ) : (
                     <LoadingSkeleton />
                   )}
@@ -110,10 +99,8 @@ class ComparisonCard extends Component {
                   <p>
                     <b>Current Weather:</b>
                   </p>
-                  {citiesData.currentWeather ? (
-                    <p>{`${Math.round(
-                      citiesData.currentWeather.current.temp
-                    )}°F`}</p>
+                  {city.currentWeather ? (
+                    <p>{`${Math.round(city.currentWeather.current.temp)}°F`}</p>
                   ) : (
                     <LoadingSkeleton />
                   )}
@@ -125,7 +112,7 @@ class ComparisonCard extends Component {
                 className="more-info-btn"
                 data-testid="more-info-btn"
                 type="primary"
-                onClick={() => onSelectCity(citiesData)}
+                onClick={toggleModal}
               >
                 More Info
               </button>
@@ -134,15 +121,10 @@ class ComparisonCard extends Component {
         </div>
         <ModalComponent
           visible={visible}
-          setVisible={onToggleModal}
-          city={city}
+          setVisible={toggleModal}
+          city={this.props.city}
         />
       </div>
     );
   }
 }
-const mapPropsToState = ({ cities: { selectedCities } }, props) => ({
-  selectedCities,
-  ...props
-});
-export default connect(mapPropsToState, {})(ComparisonCard);

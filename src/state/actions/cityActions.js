@@ -45,34 +45,28 @@ const retrieveNameState = async ({ id, name, state }) => {
   return { name, state };
 };
 const updateMetrics = async ({ id }, dispatch) => {
-  // awaiting the unemployment data
-  const unemployRate = await axios
-    .get(`https://b-ds.citrics.dev/unemployment/${id}`)
-    .then(r => r?.data)
-    .catch(console.error);
-
-  // awaiting the rent data
-  const rent = await axios
-    .get(`https://b-ds.citrics.dev/rental/${id}`)
-    .then(r => r?.data?.data)
-    .catch(console.error);
-
-  // awaiting the population data
-  const population = await axios
-    .get(`https://b-ds.citrics.dev/population/${id}`)
-    .then(r => r?.data)
-    .catch(console.error);
-  // awaiting weather data
-  const weather = await axios
-    .get(`https://b-ds.citrics.dev/weather/${id}`)
-    .then(r => r?.data?.data)
-    .catch(console.error);
-
-  // awaiting job data
-  const jobs = await axios
-    .get(`https://b-ds.citrics.dev/jobs/${id}`)
-    .then(r => r?.data)
-    .catch(console.error);
+  const [unemployRate, rent, population, weather, jobs] = await Promise.all([
+    axios
+      .get(`https://b-ds.citrics.dev/unemployment/${id}`)
+      .then(r => r?.data)
+      .catch(console.error),
+    axios
+      .get(`https://b-ds.citrics.dev/rental/${id}`)
+      .then(r => r?.data?.data)
+      .catch(console.error),
+    axios
+      .get(`https://b-ds.citrics.dev/population/${id}`)
+      .then(r => r?.data)
+      .catch(console.error),
+    axios
+      .get(`https://b-ds.citrics.dev/weather/${id}`)
+      .then(r => r?.data?.data)
+      .catch(console.error),
+    axios
+      .get(`https://b-ds.citrics.dev/jobs/${id}`)
+      .then(r => r?.data)
+      .catch(console.error)
+  ]);
 
   const details = {
     weather,

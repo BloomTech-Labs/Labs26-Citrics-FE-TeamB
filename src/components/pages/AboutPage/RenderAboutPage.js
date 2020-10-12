@@ -58,7 +58,16 @@ const RenderAboutPage = ({ toggleDrawer }) => {
         <Card
           style={{ width: 250 }}
           cover={
-            <img alt="Bhavani Rajan" src="https://i.imgur.com/9TcokzL.png" />
+            <img
+              alt="Bhavani Rajan"
+              src="https://i.imgur.com/9TcokzL.png"
+              onMouseOver={e =>
+                (e.currentTarget.src = "https://i.imgur.com/fA047dl.png")
+              }
+              onMouseOut={e => {
+                e.currentTarget.src = "https://i.imgur.com/9TcokzL.png";
+              }}
+            />
           }
           actions={[
             <a
@@ -116,8 +125,7 @@ const RenderAboutPage = ({ toggleDrawer }) => {
               Analysis, Recommendation Systems, and Data Engineering. I'm
               excited to take on a new challenge in the Data Science universe.
             </p>
-            <Divider />
-            <p>Technical Skills</p>
+            <Divider>Technical Skills</Divider>
             <p>
               Programming Expertise: ​Python (NumPy, Pandas,
               Scikit-learn,Matplotlib, Seaborn), R, Java, SQL, PostgreSQL,
@@ -130,6 +138,12 @@ const RenderAboutPage = ({ toggleDrawer }) => {
               Machine learning products, Natural language processing, Neural
               Networks, Github, Amazon EBS, Heroku
             </p>
+            <Divider>Hobbies</Divider>
+            <p>Painting and gardening</p>
+            <img
+              alt="Bhavani's paintings"
+              src="https://i.imgur.com/C9JQEKZ.png"
+            />
             <Divider>Contact</Divider>
             <div
               className="inner-buttons"
@@ -166,7 +180,16 @@ const RenderAboutPage = ({ toggleDrawer }) => {
         <Card
           style={{ width: 250 }}
           cover={
-            <img alt="Ekram Ahmed" src="https://i.imgur.com/vBnpIEC.png" />
+            <img
+              alt="Ekram Ahmed"
+              src="https://i.imgur.com/vBnpIEC.png"
+              onMouseOver={e =>
+                (e.currentTarget.src = "https://i.imgur.com/4haF4Tz.png")
+              }
+              onMouseOut={e => {
+                e.currentTarget.src = "https://i.imgur.com/vBnpIEC.png";
+              }}
+            />
           }
           actions={[
             <a
@@ -267,7 +290,13 @@ const RenderAboutPage = ({ toggleDrawer }) => {
             >
               <GithubOutlined key="github" />
             </a>,
-            <MailOutlined key="email" />,
+            <a
+              href="mailto:zachery.murray@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MailOutlined key="email" />
+            </a>,
             <a
               href="https://www.linkedin.com/in/zack-murray/"
               target="_blank"
@@ -318,6 +347,13 @@ const RenderAboutPage = ({ toggleDrawer }) => {
                 rel="noopener noreferrer"
               >
                 GitHub
+              </Button>
+              <Button
+                href="mailto:zachery.murray@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Email
               </Button>
               <Button
                 href="https://www.linkedin.com/in/zack-murray/"
@@ -434,7 +470,16 @@ const RenderAboutPage = ({ toggleDrawer }) => {
         <Card
           style={{ width: 250 }}
           cover={
-            <img alt="David Horstman" src="https://i.imgur.com/jF51x65.png" />
+            <img
+              alt="David Horstman"
+              src="https://i.imgur.com/jF51x65.png"
+              onMouseOver={e =>
+                (e.currentTarget.src = "https://i.imgur.com/1QHV5FV.png")
+              }
+              onMouseOut={e => {
+                e.currentTarget.src = "https://i.imgur.com/jF51x65.png";
+              }}
+            />
           }
           actions={[
             <a
@@ -444,7 +489,13 @@ const RenderAboutPage = ({ toggleDrawer }) => {
             >
               <GithubOutlined key="github" />
             </a>,
-            <MailOutlined key="email" />,
+            <a
+              href="mailto:horstmandd@gmail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <MailOutlined key="email" />
+            </a>,
             <a
               href="https://www.linkedin.com/in/david-horstman/"
               target="_blank"
@@ -482,6 +533,14 @@ const RenderAboutPage = ({ toggleDrawer }) => {
               School graduate with an MA in Chemistry from Columbia and a BS in
               Biochemistry from UCSD.
             </p>
+            <Divider>Jack of many trades, master of some</Divider>
+            <p>
+              Currently Full Stack Web Developer, previously High School
+              engineering teacher and Biophysical Chemist. Avid tinkerer,
+              singer, dancer, and hiker. I love pushing myself to learn new
+              languages and take on difficult challenges; if I'm not outside my
+              comfort zone, I'm not having fun.
+            </p>
             <Divider>Contact</Divider>
             <div
               className="inner-buttons"
@@ -493,6 +552,13 @@ const RenderAboutPage = ({ toggleDrawer }) => {
                 rel="noopener noreferrer"
               >
                 GitHub
+              </Button>
+              <Button
+                href="mailto:horstmandd@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Email
               </Button>
               <Button
                 href="https://www.linkedin.com/in/david-horstman/"
@@ -572,6 +638,14 @@ const RenderAboutPage = ({ toggleDrawer }) => {
               getting lost in my latest project. I ensure sustainable working
               practices by investing in breaks that typically involve video
               games. The Pomodoro technique will save your life in this career!
+            </p>
+            <Divider>Teamwork makes the dream work</Divider>
+            <p>
+              I am an eager worker and a team player! Good communication is one
+              of the most important aspects to an efficient, productive team. I
+              have seen amazing things produced from teams that took the extra
+              effort to meet and plan properly - these tactics are vital to a
+              proper working environment!
             </p>
             <Divider>Contact</Divider>
             <div
@@ -673,11 +747,11 @@ const RenderAboutPage = ({ toggleDrawer }) => {
               successful company derives from a team of positive, caring, and
               constructive employees.
             </p>
-            <Divider />
+            <Divider>Fun fact</Divider>
             <p>
-              Fun fact about Rachele: “Not a daredevil, but love adventure! I
-              enjoy many outdoor activities with family such as dirt-biking,
-              Jeeping, and snowboarding”
+              “Not a daredevil, but love adventure! I enjoy many outdoor
+              activities with family such as dirt-biking, Jeeping, and
+              snowboarding”
             </p>
             <Divider>Contact</Divider>
             <div

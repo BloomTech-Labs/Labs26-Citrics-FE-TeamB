@@ -27,35 +27,51 @@ const updateCityDetails = (id, details) => ({
   payload: { id, details }
 });
 
+const retrieveNameState = async ({ id, name, state }) => {
+  // Do nothing if we already have the name and state
+  if (name && state) return { name, state };
+  // Get name/state info from the rent endpoint if needed
+  const rent = await axios
+    .get(`https://b-ds.citrics.dev/rental/${id}`)
+    .then(r => r?.data?.data)
+    .catch(console.error);
+
+  // Return name and state from rent data, or fallback if the API call failed
+  state = rent?.state ?? "CA";
+  name = rent?.city ?? "Not found";
+  return { name, state };
+};
+const retrieveMetrics = id => {};
+const retrieveImage = ({ name, state }) => {};
+const retrieveCurrentWeather = ({ lat, lon }) => {};
+
 export const getCityDetails = city => async (dispatch, getState) => {
-  let { id, name, state } = city;
+  let { id } = city;
 
   // Do nothing if we already have the details on this city
   const { cityDetails } = getState().cities;
   if (cityDetails[id]) return;
 
   // Create a blank entry for this city to prevent double data fetching
-  dispatch({ type: ADD_CITY_DETAILS, payload: { id, details: { id } } });
+  await dispatch({ type: ADD_CITY_DETAILS, payload: { id, details: { id } } });
 
   //Placeholder image to use as a fallback
   let image = "https://i.imgur.com/YXdssOR.jpeg";
 
-  // Get rent first since it also echoes city name and state
-  const rent = await axios
-    .get(`https://b-ds.citrics.dev/rental/${id}`)
-    .then(r => r?.data?.data)
-    .catch(console.error);
-
-  // Update city name and state if they weren't successfully passed in thru arguments
-  state = state ?? rent?.state ?? "CA";
-  name = name ?? rent?.city ?? "Not found";
-  console.log("Retrieved initial data for", name, state);
-  await dispatch(updateCityDetails(id, { name, state }));
+  // Get name and state (if needed) and update the city entry
+  let { name, state } = await retrieveNameState(city);
+  dispatch(updateCityDetails(id, { name, state }));
 
   // awaiting the unemployment data
   const unemployRate = await axios
     .get(`https://b-ds.citrics.dev/unemployment/${id}`)
     .then(r => r?.data)
+    .catch(console.error);
+
+  // awaiting the rent data
+  const rent = await axios
+    .get(`https://b-ds.citrics.dev/rental/${id}`)
+    .then(r => r?.data?.data)
     .catch(console.error);
 
   // awaiting the population data

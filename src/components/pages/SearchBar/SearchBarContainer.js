@@ -60,7 +60,7 @@ class SearchBar extends React.Component {
   onSelect = data => {
     if (this.props.selectedCities.length < 3) {
       const entry = this.state.cityList.find(({ value }) => value === data);
-      this.props.addCityNoDetails(entry);
+      this.props.addCity(entry);
       this.setState({ searchTerm: "" });
     } else {
       alert("You can only add 3 cities");

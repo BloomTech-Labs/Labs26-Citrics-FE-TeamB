@@ -47,19 +47,19 @@ class ComparisonContainer extends React.Component {
     if (!id) return;
     console.log("Getting data for city number", id);
     // Retrieve the location of this city's data in the array
-    const cityEntryLocation = this.state.citiesData.findIndex(
-      ({ id: cityId }) => Number(id) === Number(cityId)
-    );
-    // Ask Redux to get city details and wait for it to finish
+    // const cityEntryLocation = this.state.citiesData.findIndex(
+    //   ({ id: cityId }) => Number(id) === Number(cityId)
+    // );
+    // // Ask Redux to get city details and wait for it to finish
     await this.props.getCityDetails({ id });
-    const newlyRetrievedDetails = this.props.cityDetails[id];
-    // Create a new copy of citiesData
-    let citiesData = [...this.state.citiesData];
-    // Replace the dummy entry for this city with the correct data
-    citiesData[cityEntryLocation] = newlyRetrievedDetails;
-    // Update the state store for citiesData, and wait before continuing
-    await this.setState({ citiesData });
-    // console.log("Loaded data for", newlyRetrievedDetails.name);
+    // const newlyRetrievedDetails = this.props.cityDetails[id];
+    // // Create a new copy of citiesData
+    // let citiesData = [...this.state.citiesData];
+    // // Replace the dummy entry for this city with the correct data
+    // citiesData[cityEntryLocation] = newlyRetrievedDetails;
+    // // Update the state store for citiesData, and wait before continuing
+    // await this.setState({ citiesData });
+    // // console.log("Loaded data for", newlyRetrievedDetails.name);
   };
   // Retrieving selectedCities from this.state instead of as a function argument
   // would result in cityDetails using out-of-date information
@@ -80,7 +80,7 @@ class ComparisonContainer extends React.Component {
       );
     });
     // Apply that temporary city data
-    await this.setState({ citiesData });
+    this.setState({ citiesData });
     // Retrieve all the city data
     // Each city is updated independently, but we need to wait for all to finish
     // before proceeding
@@ -102,7 +102,11 @@ class ComparisonContainer extends React.Component {
       <Redirect to="/" />
     ) : (
       <div className="comparison-container">
-        <RenderComparison citiesData={this.state.citiesData} />
+        <RenderComparison
+          citiesData={this.state.selectedCities.map(
+            ({ id }) => this.props.cityDetails[id] ?? {}
+          )}
+        />
       </div>
     );
   }

@@ -6,6 +6,9 @@ import {
 } from "../contexts";
 import axios from "axios";
 
+// All requests are routed thru this proxy to circumvent CORS issues
+const proxyURL = "https://cors-anywhere-citrics.herokuapp.com/";
+
 export const addCity = city => async dispatch => {
   dispatch({
     type: ADD_CITY,
@@ -42,8 +45,46 @@ const retrieveNameState = async ({ id, name, state }) => {
   return { name, state };
 };
 const retrieveMetrics = id => {};
-const retrieveImage = ({ name, state }) => {};
-const retrieveCurrentWeather = ({ lat, lon }) => {};
+const updateImageAndWeather = async ({ id, name, state }, dispatch) => {
+  //Placeholder image to use as a fallback
+  let fallbackImage = "https://i.imgur.com/YXdssOR.jpeg";
+
+  // Initial places lookup request gives the photo ref and lat/lon for the given city
+  const placesLookupURL = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${name} ${state}&key=${process.env.REACT_APP_PLACES_API_KEY}&inputtype=textquery&fields=name,photos,geometry`;
+  const initialQuery = await axios
+    //must use proxy here to avoid CORS error
+    .get(proxyURL + placesLookupURL)
+    .catch(console.error);
+  const photoRef =
+    initialQuery?.data?.candidates?.[0]?.photos?.[0]?.photo_reference;
+
+  //  Lat and Lng to use for open weather api
+  const geoLocation = initialQuery?.data?.candidates?.[0]?.geometry?.location;
+
+  // If we succeeded in getting a photo ref, get the image
+  // if it failed, image will instead be the placeholder above
+  if (photoRef) {
+    const imageLookupURL = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&key=${process.env.REACT_APP_PLACES_API_KEY}&maxwidth=700&maxheight=700`;
+    fetch(proxyURL + imageLookupURL)
+      .then(r => r?.blob())
+      .then(r => (r ? URL.createObjectURL(r) : fallbackImage))
+      .then(image => dispatch(updateCityDetails(id, { image })))
+      .catch(console.error);
+  }
+
+  // Open weather api using Lat and Lng points for more accurate search
+  if (geoLocation) {
+    axios
+      .get(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${geoLocation.lat}&lon=${geoLocation.lng}&exclude=minutely,hourly,daily&units=imperial&appid=${process.env.REACT_APP_OPEN_WEATHER_API}`
+      )
+      .then(r => r?.data)
+      .then(currentWeather => {
+        dispatch(updateCityDetails(id, { currentWeather }));
+      })
+      .catch(console.error);
+  }
+};
 
 export const getCityDetails = city => async (dispatch, getState) => {
   let { id } = city;
@@ -55,12 +96,11 @@ export const getCityDetails = city => async (dispatch, getState) => {
   // Create a blank entry for this city to prevent double data fetching
   await dispatch({ type: ADD_CITY_DETAILS, payload: { id, details: { id } } });
 
-  //Placeholder image to use as a fallback
-  let image = "https://i.imgur.com/YXdssOR.jpeg";
-
   // Get name and state (if needed) and update the city entry
   let { name, state } = await retrieveNameState(city);
   dispatch(updateCityDetails(id, { name, state }));
+
+  updateImageAndWeather({ id, name, state }, dispatch);
 
   // awaiting the unemployment data
   const unemployRate = await axios
@@ -91,50 +131,17 @@ export const getCityDetails = city => async (dispatch, getState) => {
     .then(r => r?.data)
     .catch(console.error);
 
-  // All requests are routed thru this proxy to circumvent CORS issues
-  const proxyURL = "https://cors-anywhere-citrics.herokuapp.com/";
+  // const details = {
+  //   currentWeather,
+  //   weather,
+  //   rent,
+  //   unemployRate,
+  //   population,
+  //   name,
+  //   state,
+  //   image,
+  //   jobs
+  // };
 
-  // Initial places lookup request gives up a photo ref for the given city
-  const placesLookupURL = `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${name} ${state}&key=${process.env.REACT_APP_PLACES_API_KEY}&inputtype=textquery&fields=name,photos,geometry`;
-  const initialQuery = await axios
-    .get(proxyURL + placesLookupURL)
-    .catch(console.error);
-  const photoRef =
-    initialQuery?.data?.candidates?.[0]?.photos?.[0]?.photo_reference;
-
-  //  Lat and Lng to use for open weather api
-  const geoLocation = initialQuery?.data?.candidates?.[0]?.geometry?.location;
-
-  // If we succeeded in getting a photo ref, get the image
-  // if it failed, image will instead be the placeholder above
-  if (photoRef) {
-    const imageLookupURL = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&key=${process.env.REACT_APP_PLACES_API_KEY}&maxwidth=700&maxheight=700`;
-    const imageURLQuery = await fetch(proxyURL + imageLookupURL)
-      .then(r => r.blob())
-      .catch(console.error);
-
-    image = URL.createObjectURL(imageURLQuery);
-  }
-
-  // Open weather api using Lat and Lng points for more accurate search
-  const currentWeather = await axios
-    .get(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${geoLocation?.lat}&lon=${geoLocation?.lng}&exclude=minutely,hourly,daily&units=imperial&appid=${process.env.REACT_APP_OPEN_WEATHER_API}`
-    )
-    .then(r => r?.data)
-    .catch(console.error);
-
-  const details = {
-    currentWeather,
-    weather,
-    rent,
-    unemployRate,
-    population,
-    name,
-    state,
-    image,
-    jobs
-  };
-
-  dispatch(updateCityDetails(id, details));
+  // dispatch(updateCityDetails(id, details));
 };

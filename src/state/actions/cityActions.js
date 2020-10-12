@@ -1,4 +1,9 @@
-import { ADD_CITY, REMOVE_CITY, ADD_CITY_DETAILS } from "../contexts";
+import {
+  ADD_CITY,
+  REMOVE_CITY,
+  ADD_CITY_DETAILS,
+  UPDATE_CITY_DETAILS
+} from "../contexts";
 import axios from "axios";
 
 export const addCity = city => async dispatch => {
@@ -17,12 +22,20 @@ export const removeCity = cityId => ({
   payload: { cityId }
 });
 
+const updateCityDetails = (id, details) => ({
+  type: UPDATE_CITY_DETAILS,
+  payload: { id, details }
+});
+
 export const getCityDetails = city => async (dispatch, getState) => {
   let { id, name, state } = city;
 
   // Do nothing if we already have the details on this city
   const { cityDetails } = getState().cities;
-  if (cityDetails[id]) return;
+  if (cityDetails[id]) {
+    console.log("Already fetching data on city", id);
+    return;
+  }
 
   //Placeholder image to use as a fallback
   let image = "https://i.imgur.com/YXdssOR.jpeg";
@@ -36,6 +49,11 @@ export const getCityDetails = city => async (dispatch, getState) => {
   // Update city name and state if they weren't successfully passed in thru arguments
   state = state ?? rent?.state ?? "CA";
   name = name ?? rent?.city ?? "Not found";
+  console.log("Retrieved initial data for", name, state);
+  await dispatch({
+    type: ADD_CITY_DETAILS,
+    payload: { id, details: { name, state } }
+  });
 
   // awaiting the unemployment data
   const unemployRate = await axios
@@ -106,7 +124,7 @@ export const getCityDetails = city => async (dispatch, getState) => {
   };
 
   dispatch({
-    type: ADD_CITY_DETAILS,
+    type: UPDATE_CITY_DETAILS,
     payload: { id, details }
   });
 };

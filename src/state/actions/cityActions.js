@@ -44,7 +44,46 @@ const retrieveNameState = async ({ id, name, state }) => {
   name = rent?.city ?? "Not found";
   return { name, state };
 };
-const retrieveMetrics = id => {};
+const updateMetrics = async ({ id }, dispatch) => {
+  // awaiting the unemployment data
+  const unemployRate = await axios
+    .get(`https://b-ds.citrics.dev/unemployment/${id}`)
+    .then(r => r?.data)
+    .catch(console.error);
+
+  // awaiting the rent data
+  const rent = await axios
+    .get(`https://b-ds.citrics.dev/rental/${id}`)
+    .then(r => r?.data?.data)
+    .catch(console.error);
+
+  // awaiting the population data
+  const population = await axios
+    .get(`https://b-ds.citrics.dev/population/${id}`)
+    .then(r => r?.data)
+    .catch(console.error);
+  // awaiting weather data
+  const weather = await axios
+    .get(`https://b-ds.citrics.dev/weather/${id}`)
+    .then(r => r?.data?.data)
+    .catch(console.error);
+
+  // awaiting job data
+  const jobs = await axios
+    .get(`https://b-ds.citrics.dev/jobs/${id}`)
+    .then(r => r?.data)
+    .catch(console.error);
+
+  const details = {
+    weather,
+    rent,
+    unemployRate,
+    population,
+    jobs
+  };
+
+  dispatch(updateCityDetails(id, details));
+};
 const updateImageAndWeather = async ({ id, name, state }, dispatch) => {
   //Placeholder image to use as a fallback
   let fallbackImage = "https://i.imgur.com/YXdssOR.jpeg";
@@ -102,46 +141,5 @@ export const getCityDetails = city => async (dispatch, getState) => {
 
   updateImageAndWeather({ id, name, state }, dispatch);
 
-  // awaiting the unemployment data
-  const unemployRate = await axios
-    .get(`https://b-ds.citrics.dev/unemployment/${id}`)
-    .then(r => r?.data)
-    .catch(console.error);
-
-  // awaiting the rent data
-  const rent = await axios
-    .get(`https://b-ds.citrics.dev/rental/${id}`)
-    .then(r => r?.data?.data)
-    .catch(console.error);
-
-  // awaiting the population data
-  const population = await axios
-    .get(`https://b-ds.citrics.dev/population/${id}`)
-    .then(r => r?.data)
-    .catch(console.error);
-  // awaiting weather data
-  const weather = await axios
-    .get(`https://b-ds.citrics.dev/weather/${id}`)
-    .then(r => r?.data?.data)
-    .catch(console.error);
-
-  // awaiting job data
-  const jobs = await axios
-    .get(`https://b-ds.citrics.dev/jobs/${id}`)
-    .then(r => r?.data)
-    .catch(console.error);
-
-  // const details = {
-  //   currentWeather,
-  //   weather,
-  //   rent,
-  //   unemployRate,
-  //   population,
-  //   name,
-  //   state,
-  //   image,
-  //   jobs
-  // };
-
-  // dispatch(updateCityDetails(id, details));
+  updateMetrics({ id }, dispatch);
 };

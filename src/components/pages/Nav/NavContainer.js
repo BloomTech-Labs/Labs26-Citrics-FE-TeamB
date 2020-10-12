@@ -8,8 +8,13 @@ function NavContainer({ isOpen, toggleDrawer }) {
   const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
+    // timeoutId for debounce mechanism
+    let timeoutId = null;
     function handleResize() {
-      setWidth(window.innerWidth);
+      // prevent execution of previous setTimeout
+      clearTimeout(timeoutId);
+      // change width from the state object after 500 milliseconds
+      timeoutId = setTimeout(() => setWidth(window.innerWidth), 500);
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -17,7 +22,7 @@ function NavContainer({ isOpen, toggleDrawer }) {
 
   useEffect(() => {
     width < 1000 && toggleDrawer();
-  }, [width, toggleDrawer]);
+  }, [width]);
 
   return <RenderNav isOpen={isOpen} toggleDrawer={toggleDrawer} />;
 }

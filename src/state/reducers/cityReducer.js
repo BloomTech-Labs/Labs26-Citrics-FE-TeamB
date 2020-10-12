@@ -38,7 +38,6 @@ export default function cityReducer(state = initialState, { type, payload }) {
         )
       };
     case ADD_CITY_DETAILS:
-      console.log("Adding city", payload.details);
       return {
         ...state,
         cityDetails: {
@@ -47,7 +46,6 @@ export default function cityReducer(state = initialState, { type, payload }) {
         }
       };
     case UPDATE_CITY_DETAILS:
-      console.log("Updating city", payload.details.name);
       return {
         ...state,
         cityDetails: {

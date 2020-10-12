@@ -32,10 +32,8 @@ export const getCityDetails = city => async (dispatch, getState) => {
 
   // Do nothing if we already have the details on this city
   const { cityDetails } = getState().cities;
-  if (cityDetails[id]) {
-    console.log("Already fetching data on city", id);
-    return;
-  }
+  if (cityDetails[id]) return;
+
   // Create a blank entry for this city to prevent double data fetching
   dispatch({ type: ADD_CITY_DETAILS, payload: { id, details: { id } } });
 

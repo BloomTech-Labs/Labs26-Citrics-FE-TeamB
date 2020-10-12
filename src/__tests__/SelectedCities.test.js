@@ -35,7 +35,7 @@ describe("<NavContainer />", () => {
         </Provider>
       );
       // The message should say "No city selected"
-      await findByText(/no city selected/i);
+      await findByText(/please select a city/i);
       // The ant button is the parent element of the span with "Details" in it
       // It should be disabled
       const button = await findByText(/details/i);

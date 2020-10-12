@@ -113,10 +113,15 @@ class RenderComparison extends Component {
         <div className="card-container">
           {citiesData.map(city => {
             return (
-              <ComparisonCard
-                citiesData={city}
-                key={city.id ?? city.name + city.state}
-              />
+              // This check for city.name prevents a bug
+              // where a card will be created before any data is present
+              // and will persist as an empty loading card after data has been loaded
+              city.name && (
+                <ComparisonCard
+                  citiesData={city}
+                  key={city.name + city.state}
+                />
+              )
             );
           })}
         </div>

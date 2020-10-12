@@ -40,14 +40,30 @@ const RenderAboutPage = ({ toggleDrawer }) => {
       <section className="about-introduction">
         <h1>The Citrics Team</h1>
         <h3>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec gravida
-          tincidunt euismod. Mauris lacus mi, vulputate eget sem vitae,
-          imperdiet consectetur urna. In ante sapien, mattis eu nisi ut,
-          malesuada fringilla massa. Ut pulvinar, quam quis interdum convallis,
-          sem dolor ullamcorper lacus, vel tristique felis nunc in risus. Duis
-          ex dolor, commodo vitae metus ac, egestas tincidunt turpis. Morbi leo
-          quam, ornare molestie pellentesque interdum, euismod ut magna. Aliquam
-          tincidunt orci vulputate interdum varius.
+          We are a cross-functional team of 7 data scientists and web developers
+          from Lambda School. Check out the links below to learn more about our
+          tracks:
+        </h3>
+        <div className="intro-btns">
+          <Button
+            href="https://lambdaschool.com/courses/data-science"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Data Science
+          </Button>
+          <Button
+            href="https://lambdaschool.com/courses/full-stack-web-development"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Full Stack Web Development
+          </Button>
+        </div>
+        <h3>
+          We collaborated with our stakeholder through our project lead to
+          produce his product vision of Citrics in a span of 8 weeks. Check out
+          our cards below to learn more about the team!
         </h3>
       </section>
 
@@ -280,7 +296,16 @@ const RenderAboutPage = ({ toggleDrawer }) => {
         <Card
           style={{ width: 250 }}
           cover={
-            <img alt="Zack Murray" src="https://i.imgur.com/jaELQtg.png" />
+            <img
+              alt="Zack Murray"
+              src="https://i.imgur.com/jaELQtg.png"
+              onMouseOver={e =>
+                (e.currentTarget.src = "https://i.imgur.com/TgKYmKI.png")
+              }
+              onMouseOut={e => {
+                e.currentTarget.src = "https://i.imgur.com/jaELQtg.png";
+              }}
+            />
           }
           actions={[
             <a

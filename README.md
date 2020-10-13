@@ -2,7 +2,7 @@
 
 A city metrics collation app to help find the perfect city for you!
 
-You can find the deployed project at [Citrics Team B](https://b.citrics.dev).
+You can find the deployed project at [Citrics Team B](https://citrics.netlify.app/).
 
 ### Key Features
 

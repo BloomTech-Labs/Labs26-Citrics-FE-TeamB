@@ -65,33 +65,34 @@ const retrieveNameState = async ({ id, name, state }) => {
 
 // Retrieve metrics from our backend and update Redux accordingly
 const updateMetrics = async ({ id }, dispatch) => {
-  const [unemployRate, rent, population, weather] = await Promise.all([
-    axios
-      .get(`https://b-ds.citrics.dev/unemployment/${id}`)
-      .then(r => r?.data)
-      .catch(console.error),
-    axios
-      .get(`https://b-ds.citrics.dev/rental/${id}`)
-      .then(r => r?.data?.data)
-      .catch(console.error),
-    axios
-      .get(`https://b-ds.citrics.dev/population/${id}`)
-      .then(r => r?.data)
-      .catch(console.error),
-    axios
-      .get(`https://b-ds.citrics.dev/weather/${id}`)
-      .then(r => r?.data?.data)
-      .catch(console.error)
-  ]);
+  const { data, viz_pop, viz_unemp } = await axios
+    .get(`https://b-ds.citrics.dev/combined_metrics_current/${id}`)
+    .then(r => r?.data);
+  // console.log(data);
   // Request job data after getting other metrics to improve performance
   updateJobs({ id }, dispatch);
 
-  // Update redux with all metrics except jobs
+
+  // The data is given as a single flat object
+  // For simplicity, each key will hold a reference to that same object
+
+ 
+
   const details = {
-    weather,
-    rent,
-    unemployRate,
-    population
+    weather: data,
+    rent: {
+      // The name of the keys on the backend were changed
+      // Converting data to original keys here to avoid refactoring lots of code elsewhere
+      studio: data.fmr_0,
+      "1br": data.fmr_1,
+      "2br": data.fmr_2,
+      "3br": data.fmr_3,
+      "4br": data.fmr_4,
+      rental_pct_chg: data.fmr_pct_chg,
+      rental_dollar_chg: data.fmr_dollar_chg
+    },
+    unemployRate: { data, viz: viz_unemp },
+    population: { data, viz: viz_pop }
   };
   dispatch(updateCityDetails(id, details));
 };

@@ -44,21 +44,28 @@ export const getCityDetails = city => async (dispatch, getState) => {
 const retrieveNameState = async ({ id, name, state }) => {
   // Do nothing if we already have the name and state
   if (name && state) return { name, state };
-  // Get name/state info from the rent endpoint if needed
-  const rent = await axios
-    .get(`https://b-ds.citrics.dev/rental/${id}`)
-    .then(r => r?.data?.data)
-    .catch(console.error);
-
+  // Get name/state info from the city list endpoint if needed
+  await axios
+    .get("https://b-ds.citrics.dev/cities")
+    .then(r => r.data.cities)
+    .then(cityList => {
+      const city = cityList.find(
+        ({ id: cityId }) => Number(id) === Number(cityId)
+      );
+      if (city) {
+        name = city.name;
+        state = city.state;
+      }
+    });
   // Return name and state from rent data, or fallback if the API call failed
-  state = rent?.state ?? "CA";
-  name = rent?.city ?? "Not found";
+  state = state ?? "CA";
+  name = name ?? "Not found";
   return { name, state };
 };
 
 // Retrieve metrics from our backend and update Redux accordingly
 const updateMetrics = async ({ id }, dispatch) => {
-  const [unemployRate, rent, population, weather, jobs] = await Promise.all([
+  const [unemployRate, rent, population, weather] = await Promise.all([
     axios
       .get(`https://b-ds.citrics.dev/unemployment/${id}`)
       .then(r => r?.data)
@@ -74,22 +81,28 @@ const updateMetrics = async ({ id }, dispatch) => {
     axios
       .get(`https://b-ds.citrics.dev/weather/${id}`)
       .then(r => r?.data?.data)
-      .catch(console.error),
-    axios
-      .get(`https://b-ds.citrics.dev/jobs/${id}`)
-      .then(r => r?.data)
       .catch(console.error)
   ]);
+  // Request job data after getting other metrics to improve performance
+  updateJobs({ id }, dispatch);
 
+  // Update redux with all metrics except jobsF
   const details = {
     weather,
     rent,
     unemployRate,
-    population,
-    jobs
+    population
   };
-
   dispatch(updateCityDetails(id, details));
+};
+
+// Retrieve job data separately, as it's slow
+const updateJobs = ({ id }, dispatch) => {
+  axios
+    .get(`https://b-ds.citrics.dev/jobs/${id}`)
+    .then(r => r?.data)
+    .then(jobs => dispatch(updateCityDetails(id, { jobs })))
+    .catch(console.error);
 };
 
 // Get Image and Weather from external APIs and update Redux accordingly

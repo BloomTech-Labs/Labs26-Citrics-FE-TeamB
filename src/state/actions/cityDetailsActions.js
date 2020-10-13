@@ -68,7 +68,7 @@ const updateMetrics = async ({ id }, dispatch) => {
   const { data, viz_pop, viz_unemp } = await axios
     .get(`https://b-ds.citrics.dev/combined_metrics_current/${id}`)
     .then(r => r?.data);
-  console.log(data);
+  // console.log(data);
   // Request job data after getting other metrics to improve performance
   updateJobs({ id }, dispatch);
 

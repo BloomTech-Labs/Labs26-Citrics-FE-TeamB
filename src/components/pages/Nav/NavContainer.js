@@ -1,28 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { toggleDrawer } from "../../../state/actions";
+import { openDrawer, closeDrawer, toggleDrawer } from "../../../state/actions";
 
 import RenderNav from "./RenderNav";
 
-function NavContainer({ isOpen, toggleDrawer }) {
-  const [width, setWidth] = useState(window.innerWidth);
-
+function NavContainer({ isOpen, openDrawer, closeDrawer, toggleDrawer }) {
   useEffect(() => {
-    // timeoutId for debounce mechanism
-    let timeoutId = null;
+    let width = window.innerWidth;
+    // On load, if width is less than 1000, close drawer
+    if (width < 1000) closeDrawer();
+
+    // Event handler for window resizing
     function handleResize() {
-      // prevent execution of previous setTimeout
-      clearTimeout(timeoutId);
-      // change width from the state object after 500 milliseconds
-      timeoutId = setTimeout(() => setWidth(window.innerWidth), 500);
+      // Open if we went from mobile view to desktop view
+      if (width < 1000 && window.innerWidth > 1000) {
+        openDrawer();
+        // Close if we went from desktop view to mobile view
+      } else if (width > 1000 && window.innerWidth < 1000) {
+        closeDrawer();
+      }
+      width = window.innerWidth;
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [width]);
-
-  useEffect(() => {
-    width < 1000 && toggleDrawer();
-  }, [width]);
+  }, [openDrawer, closeDrawer]);
 
   return <RenderNav isOpen={isOpen} toggleDrawer={toggleDrawer} />;
 }
@@ -30,4 +31,8 @@ const mapPropsToState = ({ drawer: { isOpen } }, props) => ({
   isOpen,
   ...props
 });
-export default connect(mapPropsToState, { toggleDrawer })(NavContainer);
+export default connect(mapPropsToState, {
+  openDrawer,
+  closeDrawer,
+  toggleDrawer
+})(NavContainer);

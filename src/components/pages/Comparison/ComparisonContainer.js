@@ -59,7 +59,7 @@ class ComparisonContainer extends React.Component {
       )
     );
     // Once all data has been retrieved, update the title
-    document.title = `Citrics | ${this.state.citiesData.reduce(
+    document.title = `Citrics | ${this.props.selectedCities.reduce(
       (ac, { name, state }) => `${ac} ${name}, ${state}`,
       ""
     )}`;

@@ -72,10 +72,13 @@ const updateMetrics = async ({ id }, dispatch) => {
   // Request job data after getting other metrics to improve performance
   updateJobs({ id }, dispatch);
 
-  // Update redux with all metrics except jobs
+  // The data is given as a single flat object
+  // For simplicity, each key will hold a reference to that same object
   const details = {
     weather: data,
     rent: {
+      // The name of the keys on the backend were changed
+      // Converting data to original keys here to avoid refactoring lots of code elsewhere
       studio: data.fmr_0,
       "1br": data.fmr_1,
       "2br": data.fmr_2,
@@ -84,7 +87,7 @@ const updateMetrics = async ({ id }, dispatch) => {
       rental_pct_chg: data.fmr_pct_chg,
       rental_dollar_chg: data.fmr_dollar_chg
     },
-    unemployRate: { viz: viz_unemp },
+    unemployRate: { data, viz: viz_unemp },
     population: { data, viz: viz_pop }
   };
   dispatch(updateCityDetails(id, details));

@@ -51,7 +51,7 @@ class SearchBar extends React.Component {
       item.value.toLowerCase().includes(searchTerm.toLowerCase())
     );
     this.setState({
-      options: !this.state.searchTerm ? [] : searchResults.slice(0, 5)
+      options: !searchTerm ? [] : searchResults.slice(0, 5)
     });
   };
 

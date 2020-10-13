@@ -72,22 +72,9 @@ const updateMetrics = async ({ id }, dispatch) => {
   // Request job data after getting other metrics to improve performance
   updateJobs({ id }, dispatch);
 
-  // The data is given as a single flat object
-  // For simplicity, each key will hold a reference to that same object
-
   const details = {
     weather: data.weather,
-    rent: {
-      // The name of the keys on the backend were changed
-      // Converting data to original keys here to avoid refactoring lots of code elsewhere
-      studio: data.rental.studio,
-      "1br": data.rental["1br"],
-      "2br": data.rental["2br"],
-      "3br": data.rental["3br"],
-      "4br": data.rental["4br"],
-      rental_pct_chg: data.rental.rental_pct_chg,
-      rental_dollar_chg: data.rental.rental_dollar_chg
-    },
+    rent: data.rental,
     unemployRate: { data: data.unemployment, viz: viz.unemployment },
     population: { data: data.population, viz: viz.population }
   };

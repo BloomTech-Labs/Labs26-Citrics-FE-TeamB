@@ -65,34 +65,18 @@ const retrieveNameState = async ({ id, name, state }) => {
 
 // Retrieve metrics from our backend and update Redux accordingly
 const updateMetrics = async ({ id }, dispatch) => {
-  const { data, viz_pop, viz_unemp } = await axios
-    .get(`https://b-ds.citrics.dev/combined_metrics_current/${id}`)
+  const { data, viz } = await axios
+    .get(`https://b-ds.citrics.dev/city_metrics/${id}`)
     .then(r => r?.data);
   // console.log(data);
   // Request job data after getting other metrics to improve performance
   updateJobs({ id }, dispatch);
 
-
-  // The data is given as a single flat object
-  // For simplicity, each key will hold a reference to that same object
-
- 
-
   const details = {
-    weather: data,
-    rent: {
-      // The name of the keys on the backend were changed
-      // Converting data to original keys here to avoid refactoring lots of code elsewhere
-      studio: data.fmr_0,
-      "1br": data.fmr_1,
-      "2br": data.fmr_2,
-      "3br": data.fmr_3,
-      "4br": data.fmr_4,
-      rental_pct_chg: data.fmr_pct_chg,
-      rental_dollar_chg: data.fmr_dollar_chg
-    },
-    unemployRate: { data, viz: viz_unemp },
-    population: { data, viz: viz_pop }
+    weather: data.weather,
+    rent: data.rental,
+    unemployRate: { data: data.unemployment, viz: viz.unemployment },
+    population: { data: data.population, viz: viz.population }
   };
   dispatch(updateCityDetails(id, details));
 };

@@ -1,23 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { toggleDrawer } from "../../../state/actions";
 
 import RenderNav from "./RenderNav";
 
 function NavContainer({ isOpen, toggleDrawer }) {
-  const [width, setWidth] = useState(window.innerWidth);
-
   useEffect(() => {
+    let width = window.innerWidth;
+    // On load, if width is less than 1000, close drawer
+    if (width < 1000) toggleDrawer();
+
+    // Event handler for window resizing
     function handleResize() {
-      setWidth(window.innerWidth);
+      // If we crossed the 100px threshold
+      if ((width < 1000) ^ (window.innerWidth < 1000)) {
+        toggleDrawer();
+        width = window.innerWidth;
+      }
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [width]);
-
-  useEffect(() => {
-    width < 1000 && toggleDrawer();
-  }, [width, toggleDrawer]);
+  }, [toggleDrawer]);
 
   return <RenderNav isOpen={isOpen} toggleDrawer={toggleDrawer} />;
 }

@@ -15,7 +15,7 @@ class CityPage extends React.Component {
       // We need to wait for getCityDetails to finish before proceeding
       await this.props.getCityDetails({ id });
     }
-    // this.setState({ city: this.props.cityDetails[id] });
+    // Update title once data has been loaded
     document.title = `Citrics | ${this.props.cityDetails[id].name}, ${this.props.cityDetails[id].state}`;
   };
 
@@ -30,13 +30,6 @@ class CityPage extends React.Component {
     if (prevProps.match.params.id !== id) {
       this.fetchDataIfNeeded();
     }
-    // Update name/state info if selectedCities is updated
-    // but the page wasn't reloaded
-    else if (
-      !this.state.city.name &&
-      prevProps.selectedCities !== this.props.selectedCities
-    ) {
-    }
   }
   render() {
     return (
@@ -44,8 +37,8 @@ class CityPage extends React.Component {
     );
   }
 }
-const mapPropsToState = (
-  { cities: { selectedCities, cityDetails } },
-  props
-) => ({ selectedCities, cityDetails, ...props });
+const mapPropsToState = ({ cities: { cityDetails } }, props) => ({
+  cityDetails,
+  ...props
+});
 export default connect(mapPropsToState, { getCityDetails })(CityPage);

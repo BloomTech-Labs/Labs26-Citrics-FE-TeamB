@@ -72,8 +72,12 @@ const updateMetrics = async ({ id }, dispatch) => {
   // Request job data after getting other metrics to improve performance
   updateJobs({ id }, dispatch);
 
+
   // The data is given as a single flat object
   // For simplicity, each key will hold a reference to that same object
+
+ 
+
   const details = {
     weather: data,
     rent: {
@@ -115,15 +119,12 @@ const updateImageAndWeather = async ({ id, name, state }, dispatch) => {
   const initialQuery = await axios
     //must use proxy here to avoid CORS error
     .get(proxyURL + placesLookupURL)
+    .then(r => r?.data?.candidates?.[0])
     .catch(console.error);
-  const photoRef =
-    initialQuery?.data?.candidates?.[0]?.photos?.[0]?.photo_reference;
-
-  //  Lat and Lng to use for open weather api
-  const geoLocation = initialQuery?.data?.candidates?.[0]?.geometry?.location;
 
   // If we succeeded in getting a photo ref, get the image
   // if it failed, image will instead be the placeholder above
+  const photoRef = initialQuery?.photos?.[0]?.photo_reference;
   if (photoRef) {
     const imageLookupURL = `https://maps.googleapis.com/maps/api/place/photo?photoreference=${photoRef}&key=${process.env.REACT_APP_PLACES_API_KEY}&maxwidth=700&maxheight=700`;
     fetch(proxyURL + imageLookupURL)
@@ -134,6 +135,7 @@ const updateImageAndWeather = async ({ id, name, state }, dispatch) => {
   }
 
   // Open weather api using Lat and Lng points for more accurate search
+  const geoLocation = initialQuery?.geometry?.location;
   if (geoLocation) {
     axios
       .get(

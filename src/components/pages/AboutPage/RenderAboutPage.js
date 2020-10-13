@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 // Redux
 import { connect } from "react-redux";
-import { toggleDrawer } from "../../../state/actions";
+import { closeDrawer } from "../../../state/actions";
 // Styling
 import { Card, Avatar, Modal, Button, Divider } from "antd";
 import {
@@ -16,7 +16,7 @@ import webDev from "../../../styles/icons/webDev.png";
 
 const { Meta } = Card;
 
-const RenderAboutPage = ({ toggleDrawer }) => {
+const RenderAboutPage = ({ closeDrawer }) => {
   // Modal state
   const [bhavaniModalVisibility, setBhavaniModalVisibility] = useState(false);
   const [ekramModalVisibility, setEkramModalVisibility] = useState(false);
@@ -28,8 +28,8 @@ const RenderAboutPage = ({ toggleDrawer }) => {
 
   // This closes the drawer when the user is on the page
   useEffect(() => {
-    toggleDrawer();
-  }, [toggleDrawer]);
+    closeDrawer();
+  }, [closeDrawer]);
 
   return (
     <div className="about-container">
@@ -812,4 +812,4 @@ const RenderAboutPage = ({ toggleDrawer }) => {
   );
 };
 
-export default connect(null, { toggleDrawer })(RenderAboutPage);
+export default connect(null, { closeDrawer })(RenderAboutPage);

@@ -10,7 +10,6 @@ export default function RenderSelectedCities({
 }) {
   return (
     <div className="selected-cities">
-      {/* TODO: Replace this with Ant Design components */}
       <h4 className="select-city-title">Selected Cities</h4>
       {selectedCities.length === 0 ? (
         <div>Please select a city</div>

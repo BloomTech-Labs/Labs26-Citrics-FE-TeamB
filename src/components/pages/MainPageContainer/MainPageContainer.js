@@ -6,6 +6,7 @@ export const baseMargin = 0;
 
 function MainPageContainer({ children, isOpen }) {
   let width = useWidth();
+
   const marginLeft =
     isOpen && width > 1000
       ? `${drawerWidth + baseMargin}px`

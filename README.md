@@ -2,20 +2,20 @@
 
 A city metrics collation app to help find the perfect city for you!
 
-You can find the deployed project at [Citrics Team B](https://citrics.netlify.app/).
+You can find the deployed project at [Citrics](https://citrics.netlify.app/).
 
 ### Key Features
 
 - View useful metrics, including weather patterns, housing prices, job market, demographics, and more!
 - Currently features information on the `100` largest US cities, with more to come
 - Select up to three cities to compare side-by-side
-- Dig into detailed historical information, trends (*future predictions coming soon*)
+- Dig into detailed historical information, trends, and future predictions
 
 #### Front end deployed to `AWS Amplify`
 
 #### [Backend](https://b-ds.citrics.dev) built using FastAPI:
 - Our Data Science team collated a variety of metrics and created predictive models
-- See [their repo](https://github.com/Lambda-School-Labs/Labs26-Citrics-DS-TeamB) for more information
+- See [their repo](https://github.com/labs26-citrics/Labs26-Citrics-DS-TeamB) for more information
 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v16.13.1-blue.svg)
@@ -38,13 +38,18 @@ You can find the deployed project at [Citrics Team B](https://citrics.netlify.ap
 
 We used the [Google Places API](https://developers.google.com/places/web-service/photos) to dynamically retrieve the most appropriate cover images for each city in our database.
 
+## Open Weather API
+
+We used the [Open Weather API](https://openweathermap.org/api/one-call-api) to retrieve and display the current weather for each city in our database.
+
 ## Backend APIs
-See [Backend Documentation](https://github.com/Lambda-School-Labs/Labs26-Citrics-DS-TeamB) for more information on the APIs used by our Data Science team.
+See [Backend Documentation](https://github.com/labs26-citrics/Labs26-Citrics-DS-TeamB) for more information on the APIs used by our Data Science team.
 
 # Installation Instructions
 Run the following in your shell of choice:
 
     git clone https://github.com/Lambda-School-Labs/Labs26-Citrics-FE-TeamB
+    cd Labs26-Citrics-FE-TeamB
     npm i
     npm start
 You will then see the App running in your browser at [http://localhost:3000/](http://localhost:3000/)

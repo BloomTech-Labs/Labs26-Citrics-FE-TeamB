@@ -1,26 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { lineGraph } from "../../../common/Graphs/graphType";
 import Plot from "react-plotly.js";
 import LoadingSkeleton from "./LoadingSkeleton";
+import useWidth from "../../../../hooks/useWidth";
 //icon
 import jobIcon from "../../../../styles/icons/jobs-96.png";
 
 export default function JobsPane({ jobs, unemployment }) {
   let style = { width: "100%", height: "100%" };
-  const [width, setWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    // timeoutId for debounce mechanism
-    let timeoutId = null;
-    function handleResize() {
-      // prevent execution of previous setTimeout
-      clearTimeout(timeoutId);
-      // change width from the state object after 500 milliseconds
-      timeoutId = setTimeout(() => setWidth(window.innerWidth), 500);
-    }
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [width]);
+  let width = useWidth();
 
   // function that parses and renders the given pie chart
   const renderPie = () => {
@@ -37,7 +25,6 @@ export default function JobsPane({ jobs, unemployment }) {
       }
     ];
     // custom layout for pie chart
-
     const layout = {
       title: "Top Industries",
       showlegend: width < 850 ? false : true,

@@ -11,7 +11,7 @@ import { SelectedCities } from "../SelectedCities/";
 // This defines the width of the drawer *and* how far to translate the floating button
 import drawerWidth from "./drawerWidth";
 
-export default function RenderNav({ toggleDrawer, isOpen, width }) {
+export default function RenderNav({ toggleDrawer, isOpen, closed }) {
   const buttonTransform = isOpen ? `translate(${drawerWidth}px,0px)` : "";
 
   return (
@@ -31,7 +31,7 @@ export default function RenderNav({ toggleDrawer, isOpen, width }) {
         closable={false}
         onClose={toggleDrawer}
         visible={isOpen}
-        mask={width < 800 ? true : false}
+        mask={closed ?? false}
         width={drawerWidth}
       >
         <div className="component-container">

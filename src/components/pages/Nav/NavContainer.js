@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { openDrawer, closeDrawer, toggleDrawer } from "../../../state/actions";
 
 import RenderNav from "./RenderNav";
 
 function NavContainer({ isOpen, openDrawer, closeDrawer, toggleDrawer }) {
+  const [isClosed, setClosed] = useState();
   useEffect(() => {
     let width = window.innerWidth;
     // On load, if width is less than 1000, close drawer
@@ -14,9 +15,11 @@ function NavContainer({ isOpen, openDrawer, closeDrawer, toggleDrawer }) {
     function handleResize() {
       // Open if we went from mobile view to desktop view
       if (width < 1000 && window.innerWidth > 1000) {
+        setClosed(false);
         openDrawer();
         // Close if we went from desktop view to mobile view
       } else if (width > 1000 && window.innerWidth < 1000) {
+        setClosed(true);
         closeDrawer();
       }
       width = window.innerWidth;
@@ -25,7 +28,9 @@ function NavContainer({ isOpen, openDrawer, closeDrawer, toggleDrawer }) {
     return () => window.removeEventListener("resize", handleResize);
   }, [openDrawer, closeDrawer]);
 
-  return <RenderNav isOpen={isOpen} toggleDrawer={toggleDrawer} />;
+  return (
+    <RenderNav isOpen={isOpen} toggleDrawer={toggleDrawer} closed={isClosed} />
+  );
 }
 const mapPropsToState = ({ drawer: { isOpen } }, props) => ({
   isOpen,

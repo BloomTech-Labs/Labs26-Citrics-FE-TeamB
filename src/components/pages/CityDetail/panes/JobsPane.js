@@ -8,7 +8,6 @@ import jobIcon from "../../../../styles/icons/jobs-96.png";
 export default function JobsPane({ jobs, unemployment }) {
   let style = { width: "100%", height: "100%" };
   const [width, setWidth] = useState(window.innerWidth);
-  const [pieStyle, setPieStyle] = useState({ width: "100%", height: "100%" });
 
   useEffect(() => {
     // timeoutId for debounce mechanism
@@ -23,10 +22,6 @@ export default function JobsPane({ jobs, unemployment }) {
     return () => window.removeEventListener("resize", handleResize);
   }, [width]);
 
-  useEffect(() => {
-    console.log(width);
-  }, [width]);
-
   // function that parses and renders the given pie chart
   const renderPie = () => {
     const data = JSON.parse(jobs.viz).data[0];
@@ -34,10 +29,10 @@ export default function JobsPane({ jobs, unemployment }) {
       {
         // additional properties for pie chart
         ...data,
-        domain: width < 1000 ? { x: [-10, 0] } : { x: [1, 0] },
+        domain: { x: [1, 0] },
         automargin: true,
         hoverinfo: "label",
-        textinfo: "percent",
+        textinfo: width < 850 ? "label+percent" : "percent",
         insidetextorientation: "radial"
       }
     ];
@@ -45,7 +40,7 @@ export default function JobsPane({ jobs, unemployment }) {
 
     const layout = {
       title: "Top Industries",
-      showlegend: width < 800 ? false : true,
+      showlegend: width < 850 ? false : true,
       legend: { x: -10.4, font: { size: "10px" } },
       paper_bgcolor: "transparent",
       plot_bgcolor: "transparent",

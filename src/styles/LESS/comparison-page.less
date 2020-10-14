@@ -1,10 +1,18 @@
 .comparison-container {
   background-color: @bgColor;
-  // display: flex;
+  display: flex;
   align-items: center;
   flex-direction: column;
   width: 100%;
   padding: 0 2%;
+  @media @tablet {
+    align-items: center;
+    justify-content: center;
+  }
+  @media @mobile {
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .card-container {
@@ -15,6 +23,12 @@
   @media @tablet {
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+  }
+  @media @mobile {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   .card {
     margin: 0 5%;

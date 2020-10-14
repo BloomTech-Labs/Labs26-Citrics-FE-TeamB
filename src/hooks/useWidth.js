@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 
+const getWidth = () =>
+  window.innerWidth ||
+  document.documentElement.clientWidth ||
+  document.body.clientWidth;
 export default function useWidth() {
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(getWidth());
 
   useEffect(() => {
     // timeoutId for debounce mechanism

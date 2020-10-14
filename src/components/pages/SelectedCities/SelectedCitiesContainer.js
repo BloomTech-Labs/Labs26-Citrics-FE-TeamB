@@ -4,8 +4,14 @@ import { connect } from "react-redux";
 import { removeCity } from "../../../state/actions";
 import { useHistory } from "react-router-dom";
 import RenderSelectedCities from "./RenderSelectedCities";
+import { closeDrawer } from "../../../state/actions/drawerActions";
 
-function SelectedCitiesContainer({ selectedCities, removeCity, cityDetails }) {
+function SelectedCitiesContainer({
+  selectedCities,
+  removeCity,
+  cityDetails,
+  closeDrawer
+}) {
   let history = useHistory();
 
   // The action handler is attached to the parent div
@@ -16,11 +22,14 @@ function SelectedCitiesContainer({ selectedCities, removeCity, cityDetails }) {
     cityId && removeCity(cityId);
   };
 
-  const openDetailPage = () => {
+  const openDetailPage = width => {
+    if (width < 1000) {
+      closeDrawer();
+    }
     history.push(`/city-detail-page/${selectedCities[0].id}`);
   };
 
-  const openComparisonPage = () => {
+  const openComparisonPage = width => {
     // Helper function to encode selectedCities into a query string
     const queryString = cities => {
       // Initialize the string
@@ -34,7 +43,9 @@ function SelectedCitiesContainer({ selectedCities, removeCity, cityDetails }) {
       str += `c${i}=${cities[i].id}`;
       return str;
     };
-
+    if (width < 1000) {
+      closeDrawer();
+    }
     history.push(`/comparison-page${queryString(selectedCities)}`);
   };
 
@@ -55,6 +66,6 @@ const mapPropsToState = (
   selectedCities,
   cityDetails
 });
-export default connect(mapPropsToState, { removeCity })(
+export default connect(mapPropsToState, { removeCity, closeDrawer })(
   SelectedCitiesContainer
 );

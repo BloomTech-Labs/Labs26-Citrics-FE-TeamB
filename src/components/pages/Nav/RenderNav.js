@@ -1,5 +1,6 @@
 // Library imports
 import React from "react";
+import { Link } from "react-router-dom";
 import { Drawer, Button } from "antd";
 import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
 
@@ -46,9 +47,11 @@ export default function RenderNav({ toggleDrawer, isOpen, closed }) {
         </div>
         <div className="footer-container">
           <div className="footer">
-            <Button href="/about" type="primary" className="about-btn">
-              Meet the Team
-            </Button>
+            <Link to="/about">
+              <Button type="primary" className="about-btn">
+                Meet the Team
+              </Button>
+            </Link>
           </div>
         </div>
       </Drawer>

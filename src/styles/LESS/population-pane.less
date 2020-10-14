@@ -2,6 +2,9 @@
   display: flex;
   width: 100%;
   justify-content: flex-start;
+  @media @l-tablet {
+    flex-direction: column;
+  }
   @media @tablet {
     flex-direction: column;
   }
@@ -11,6 +14,9 @@
   .population-graph {
     display: flex;
     width: 50%;
+    @media @l-tablet {
+      width: 100%;
+    }
     @media @tablet {
       width: 100%;
     }

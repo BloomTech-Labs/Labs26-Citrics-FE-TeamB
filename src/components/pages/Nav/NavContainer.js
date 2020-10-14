@@ -5,7 +5,9 @@ import { openDrawer, closeDrawer, toggleDrawer } from "../../../state/actions";
 import RenderNav from "./RenderNav";
 
 function NavContainer({ isOpen, openDrawer, closeDrawer, toggleDrawer }) {
-  const [isClosed, setClosed] = useState();
+  const [isClosed, setClosed] = useState(
+    window.innerWidth < 1000 ? true : false
+  );
   useEffect(() => {
     let width = window.innerWidth;
     // On load, if width is less than 1000, close drawer

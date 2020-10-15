@@ -60,7 +60,9 @@ export default function AdvancedSearchContainer(props) {
 
   // This function will update searchResults whenever requested
   const getSearchResults = () => {
+    // Display loading skeleton while we wait for results
     setLoadingState(true);
+
     console.log(createQueryString(convertLocalPrefsToBackendPrefs()));
     //await axios.something
     setTimeout(() => {
@@ -68,7 +70,11 @@ export default function AdvancedSearchContainer(props) {
       setLoadingState(false);
     }, 1000);
 
-    // Helper function to encode search parameters into a query string
+    /**
+     * Create a query string based on key-value pairs on a given object
+     *
+     * @param {object} data An object with the data to be encoded
+     */
     function createQueryString(data) {
       const keys = Object.keys(data);
       // Initialize the string
@@ -82,7 +88,9 @@ export default function AdvancedSearchContainer(props) {
       str += `${keys[i]}=${data[keys[i]]}`;
       return str;
     }
-    // Helper function to remove max values and convert preferences to match the backend
+    /**
+     * Convert the existing local searchPrefs keys and values into the form of data the backend API is expecting.
+     */
     function convertLocalPrefsToBackendPrefs() {
       const defaultValues = { ...initialSearchPrefs };
       const currentValues = { ...searchPrefs };

@@ -31,10 +31,10 @@ export default function SearchFilters({
     }
   };
   const formatMoney = price =>
-    price >= RENT_MAX ? ">$5,000" : `$ ${price.toLocaleString()}`;
+    price >= RENT_MAX ? ">$4,500" : `$ ${price.toLocaleString()}`;
   const formatWeather = temp => {
     if (temp >= WEATHER_MAX) {
-      return ">100°F";
+      return ">95°F";
     } else if (temp <= WEATHER_MIN) {
       return "<20°F";
     } else {

@@ -12,6 +12,33 @@
   font-weight: 700;
 }
 
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  padding-top: 1%;
+}
+
+.visible-when-hovers {
+  visibility: hidden;
+}
+
+.adding-container {
+  :hover {
+    visibility: visible;
+  }
+}
+
+.add-to-compare-btn {
+  color: @red;
+
+  :hover {
+    color: @blue;
+  }
+}
+
+
+
 //color of the bar--trying to figure out the hover (blue turns back to pinkish color when hovers)
 // .ant-slider-handle {
 //   border: 2px solid @blue;

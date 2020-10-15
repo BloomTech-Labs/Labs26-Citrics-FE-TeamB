@@ -45,6 +45,9 @@ export const mockCityDetails = [
       summer_humidity_mean: 77,
       summer_maxtempF_mean: 91,
       winter_mintempF_mean: 47
+    },
+    currentWeather: {
+      current: { temp: 10 }
     }
   }
 ];

@@ -14,7 +14,8 @@ function SearchResult({ id, name, state, addCity }) {
         src={addIcon}
         alt="circle with plus sign in middle icon"
         onClick={addCityToComparison}
-        onMouseOver={addIconHover}
+        onMouseOver={e => (e.currentTarget.src = addIconHover)}
+        onMouseOut={e => (e.currentTarget.src = addIcon)}
         className="add-to-compare-btn"
       />
     </div>

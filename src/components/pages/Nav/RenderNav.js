@@ -1,7 +1,6 @@
 // Library imports
 import React from "react";
 import { Drawer, Button } from "antd";
-import { Link } from "react-router-dom";
 import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
 
 //Subcomponents
@@ -35,7 +34,6 @@ export default function RenderNav({ toggleDrawer, isOpen }) {
         mask={false}
         width={drawerWidth}
       >
-
         <div className="component-container">
           <SearchBar />
           {/* TODO: remove these and clean up formatting of this element */}
@@ -48,7 +46,9 @@ export default function RenderNav({ toggleDrawer, isOpen }) {
         </div>
         <div className="footer-container">
           <div className="footer">
-            <Link to="/about">Meet the Team</Link>
+            <Button href="/about" type="primary" className="about-btn">
+              Meet the Team
+            </Button>
           </div>
         </div>
       </Drawer>

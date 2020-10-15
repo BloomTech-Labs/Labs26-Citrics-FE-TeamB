@@ -1,6 +1,11 @@
 .about-container {
   .background-image("/compare_screen_full.jpg");
-  // background-color: #fafafa;
+
+  .home-btn {
+    display: flex;
+    width: fit-content;
+    margin-left: auto;
+  }
 
   .about-introduction {
     text-align: center;
@@ -8,18 +13,32 @@
     padding: 2% 3% 1% 2%;
     background-color: @white;
     opacity: .85;
+
+    .intro-btns {
+      display: flex;
+      justify-content: space-evenly;
+      margin-bottom: 1%;
+    }
   }
 
   .about-tpl-ds {
     display: flex;
     justify-content: space-evenly;
     padding-top: 2%;
+
+    .modal-button {
+      margin-top: 7%;
+    }
   }
 
   .about-web {
     display: flex;
     justify-content: space-evenly;
     padding: 2% 0;
+
+    .modal-button {
+      margin-top: 7%;
+    }
   }
 
   .ant-card {

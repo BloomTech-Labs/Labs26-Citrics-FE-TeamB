@@ -2,7 +2,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { addCityNoDetails } from "../../../state/actions";
+import { addCity } from "../../../state/actions";
 import axios from "axios";
 import RenderSearchBar from "./RenderSearchBar";
 
@@ -38,7 +38,7 @@ class SearchBar extends React.Component {
         // add any already selected cities to the Redux store
         selectedCities.forEach(cityId => {
           const city = cityList.find(({ id }) => Number(id) === cityId);
-          city && this.props.addCityNoDetails(city);
+          city && this.props.addCity(city);
         });
       });
   }
@@ -51,7 +51,7 @@ class SearchBar extends React.Component {
       item.value.toLowerCase().includes(searchTerm.toLowerCase())
     );
     this.setState({
-      options: !this.state.searchTerm ? [] : searchResults.slice(0, 5)
+      options: !searchTerm ? [] : searchResults.slice(0, 5)
     });
   };
 
@@ -60,7 +60,7 @@ class SearchBar extends React.Component {
   onSelect = data => {
     if (this.props.selectedCities.length < 3) {
       const entry = this.state.cityList.find(({ value }) => value === data);
-      this.props.addCityNoDetails(entry);
+      this.props.addCity(entry);
       this.setState({ searchTerm: "" });
     } else {
       alert("You can only add 3 cities");
@@ -88,6 +88,4 @@ const mapPropsToState = ({ cities: { selectedCities } }, props) => ({
   ...props,
   selectedCities
 });
-export default connect(mapPropsToState, { addCityNoDetails })(
-  withRouter(SearchBar)
-);
+export default connect(mapPropsToState, { addCity })(withRouter(SearchBar));

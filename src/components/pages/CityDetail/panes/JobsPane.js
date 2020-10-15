@@ -23,7 +23,7 @@ export default function JobsPane({ jobs, unemployment }) {
     ];
     // custom layout for pie chart
     const layout = {
-      title: "Top 10 Industries",
+      title: "Top Industries",
       showlegend: true,
       legend: { x: -10.4, font: { size: "10px" } },
       paper_bgcolor: "transparent",
@@ -60,7 +60,7 @@ export default function JobsPane({ jobs, unemployment }) {
           <img
             className="detail-pane-icon"
             src={jobIcon}
-            alt="picture of briefcase to represent the job industry icon"
+            alt="briefcase to represent the job industry icon"
           />
           <h2>Jobs:</h2>
         </div>

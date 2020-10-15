@@ -1,47 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Plot from "react-plotly.js";
 import LoadingComponent from "../../common/LoadingComponent";
 
 import { lineGraph, barGraph, table } from "./graphType";
 
 export default function Graph({ dataSet, dataSet2, dataSet3 }) {
-  const [data, setData] = useState(null);
-  const [data2, setData2] = useState(null);
-  const [data3, setData3] = useState(null);
-
-  useEffect(() => {
-    if (dataSet) {
-      setData(dataSet);
-    } else {
-      setData(null);
-    }
-    if (dataSet2) {
-      setData2(dataSet2);
-    } else {
-      setData2(null);
-    }
-    if (dataSet3) {
-      setData3(dataSet3);
-    } else {
-      setData3(null);
-    }
-  }, [dataSet, dataSet2, dataSet3]);
-
   const renderGraph = () => {
     let style = { width: "100%", height: "100%" };
-    if (data.type === "line") {
-      const { dataPlot, layout } = lineGraph(data, data2, data3);
+    if (dataSet.type === "line") {
+      const { dataPlot, layout } = lineGraph(dataSet, dataSet2, dataSet3);
       return <Plot data={dataPlot} layout={layout} style={style} />;
     } else if (dataSet.type === "bar") {
-      const { dataPlot, layout } = barGraph(data, data2, data3);
+      const { dataPlot, layout } = barGraph(dataSet, dataSet2, dataSet3);
       return <Plot data={dataPlot} layout={layout} style={style} />;
     } else if (dataSet.type === "table") {
-      const { tableData, layout } = table(data);
+      const { tableData, layout } = table(dataSet);
       return <Plot data={tableData} layout={layout} style={style} />;
     }
   };
 
-  return data ? (
+  return dataSet ? (
     renderGraph()
   ) : (
     <LoadingComponent message={"Retrieving Graph Data... "} />

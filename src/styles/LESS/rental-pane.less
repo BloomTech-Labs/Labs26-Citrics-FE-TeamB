@@ -4,10 +4,17 @@
 }
 .housing-pane {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
 
   .rent-percent-change {
     margin: 0px 15px;
+    &.up {
+      color: @red;
+    }
+    &.down {
+      color: @blue;
+    }
   }
 
   .ant-tabs-top > .ant-tabs-nav {

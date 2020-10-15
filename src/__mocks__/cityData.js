@@ -1,3 +1,4 @@
+// Mock data for <RenderCityDetails /> and <RenderComparison /> tests
 export const mockCityDetails = [
   {
     image: "https://i.imgur.com/YXdssOR.jpeg",

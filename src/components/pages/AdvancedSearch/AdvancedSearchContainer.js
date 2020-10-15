@@ -61,8 +61,15 @@ export default function AdvancedSearchContainer(props) {
   // This function will update searchResults whenever requested
   const getSearchResults = () => {
     setLoadingState(true);
+    console.log(createQueryString(convertLocalPrefsToBackendPrefs()));
+    //await axios.something
+    setTimeout(() => {
+      setSearchResults(initialResults);
+      setLoadingState(false);
+    }, 1000);
+
     // Helper function to encode search parameters into a query string
-    const createQueryString = data => {
+    function createQueryString(data) {
       const keys = Object.keys(data);
       // Initialize the string
       let str = "?";
@@ -74,9 +81,9 @@ export default function AdvancedSearchContainer(props) {
       // Add the last key-value pair to the string string without the trailing '&'
       str += `${keys[i]}=${data[keys[i]]}`;
       return str;
-    };
-
-    const convertLocalPrefsToBackendPrefs = () => {
+    }
+    // Helper function to remove max values and convert preferences to match the backend
+    function convertLocalPrefsToBackendPrefs() {
       const defaultValues = { ...initialSearchPrefs };
       const currentValues = { ...searchPrefs };
 
@@ -89,7 +96,7 @@ export default function AdvancedSearchContainer(props) {
       // but we always want to retain the value of rooms
       defaultValues.rooms = "";
 
-      // The max values of the sliders aren't actually the max values possible
+      // The max values of the search pref sliders aren't actually the max values possible
       // (e.g. POP_MAX is 2.1M but four cities have larger populations than that)
       // so this step is needed to avoid unintentionally excluding cities with outlier values
       // in any metric.
@@ -101,13 +108,7 @@ export default function AdvancedSearchContainer(props) {
         }
       }
       return currentValues;
-    };
-    console.log(createQueryString(convertLocalPrefsToBackendPrefs()));
-    //await axios.something
-    setTimeout(() => {
-      setSearchResults(initialResults);
-      setLoadingState(false);
-    }, 1000);
+    }
   };
 
   // Retrieve searchResults automatically on initial component load

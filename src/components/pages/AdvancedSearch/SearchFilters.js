@@ -41,85 +41,87 @@ export default function SearchFilters({
   return (
     <div className="search-bar">
       <h2>Filters:</h2>
-      {/* RenderSearchFilter will render a popover with a Slider and range display inside it for each type of filter. */}
-      {/* Population */}
-      <RenderSearchFilter
-        title="Population"
-        range
-        min={POP_MIN}
-        max={POP_MAX}
-        step={10000}
-        value={[searchPrefs.pop_min, searchPrefs.pop_max]}
-        tipFormatter={formatPop}
-        onChange={([pop_min, pop_max]) =>
-          updateSearchPrefs({
-            pop_min,
-            pop_max
-          })
-        }
-      />
-      {/* Weather */}
-      <RenderSearchFilter
-        title="Weather"
-        popoverTitle="Seasonal Temp Range"
-        min={WEATHER_MIN}
-        max={WEATHER_MAX}
-        step={5}
-        value={[searchPrefs.weather_min, searchPrefs.weather_max]}
-        tipFormatter={formatWeather}
-        onChange={([weather_min, weather_max]) =>
-          updateSearchPrefs({
-            weather_min,
-            weather_max
-          })
-        }
-      />
-      {/* Rent: this filter passes an additional input to render as a child of RenderSearchFilter */}
-      <RenderSearchFilter
-        title={`Rent (${searchPrefs.rooms})`}
-        popoverTitle="Rent"
-        min={RENT_MIN}
-        max={RENT_MAX}
-        step={100}
-        value={[searchPrefs.rent_min, searchPrefs.rent_max]}
-        tipFormatter={formatMoney}
-        onChange={([rent_min, rent_max]) =>
-          updateSearchPrefs({
-            rent_min,
-            rent_max
-          })
-        }
-      >
-        <label>
-          {"Rooms: "}
-          <select
-            id="rooms"
-            name="rooms"
-            onChange={processSearchPrefsEvent}
-            value={searchPrefs.rooms}
-          >
-            <option value="studio">Studio</option>
-            <option value="1br">1BR</option>
-            <option value="2br">2BR</option>
-            <option value="3br">3BR</option>
-            <option value="4br">4BR</option>
-          </select>
-        </label>
-      </RenderSearchFilter>
-      {/* Jobs: this filter passes a unique input to render instead of a Slider */}
-      <RenderSearchFilter
-        title="Jobs"
-        popoverTitle={"Major Job Industries"}
-        value={searchPrefs.jobs}
-        input={
-          <Input
-            placeholder="Ex: Tech"
-            name="jobs"
-            onChange={processSearchPrefsEvent}
-            value={searchPrefs.jobs}
-          />
-        }
-      />
+      <div className="filter-container">
+        {/* RenderSearchFilter will render a popover with a Slider and range display inside it for each type of filter. */}
+        {/* Population */}
+        <RenderSearchFilter
+          title="Population"
+          range
+          min={POP_MIN}
+          max={POP_MAX}
+          step={10000}
+          value={[searchPrefs.pop_min, searchPrefs.pop_max]}
+          tipFormatter={formatPop}
+          onChange={([pop_min, pop_max]) =>
+            updateSearchPrefs({
+              pop_min,
+              pop_max
+            })
+          }
+        />
+        {/* Weather */}
+        <RenderSearchFilter
+          title="Weather"
+          popoverTitle="Seasonal Temp Range"
+          min={WEATHER_MIN}
+          max={WEATHER_MAX}
+          step={5}
+          value={[searchPrefs.weather_min, searchPrefs.weather_max]}
+          tipFormatter={formatWeather}
+          onChange={([weather_min, weather_max]) =>
+            updateSearchPrefs({
+              weather_min,
+              weather_max
+            })
+          }
+        />
+        {/* Rent: this filter passes an additional input to render as a child of RenderSearchFilter */}
+        <RenderSearchFilter
+          title={`Rent (${searchPrefs.rooms})`}
+          popoverTitle="Rent"
+          min={RENT_MIN}
+          max={RENT_MAX}
+          step={100}
+          value={[searchPrefs.rent_min, searchPrefs.rent_max]}
+          tipFormatter={formatMoney}
+          onChange={([rent_min, rent_max]) =>
+            updateSearchPrefs({
+              rent_min,
+              rent_max
+            })
+          }
+        >
+          <label>
+            {"Rooms: "}
+            <select
+              id="rooms"
+              name="rooms"
+              onChange={processSearchPrefsEvent}
+              value={searchPrefs.rooms}
+            >
+              <option value="studio">Studio</option>
+              <option value="1br">1BR</option>
+              <option value="2br">2BR</option>
+              <option value="3br">3BR</option>
+              <option value="4br">4BR</option>
+            </select>
+          </label>
+        </RenderSearchFilter>
+        {/* Jobs: this filter passes a unique input to render instead of a Slider */}
+        <RenderSearchFilter
+          title="Jobs"
+          popoverTitle={"Major Job Industries"}
+          value={searchPrefs.jobs}
+          input={
+            <Input
+              placeholder="Ex: Tech"
+              name="jobs"
+              onChange={processSearchPrefsEvent}
+              value={searchPrefs.jobs}
+            />
+          }
+        />
+      </div>
       <br />
       <Button type="primary" onClick={getSearchResults}>
         Apply

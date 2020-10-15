@@ -28,7 +28,7 @@ const initialResults = [{ id: 1, name: "Chandler", state: "AZ" }];
 
 export default function AdvancedSearchContainer(props) {
   const [searchResults, setSearchResults] = useState(initialResults);
-  const [isLoading, setLoadingState] = useState(false);
+  const [isLoading, setLoadingState] = useState(true);
 
   // I opted to store searchPrefs in an object to simplify getting/setting values
   // Otherwise we'd need many different useLocalStorage calls
@@ -59,9 +59,23 @@ export default function AdvancedSearchContainer(props) {
     setSearchPrefs({ ...searchPrefs, ...changes });
 
   // This function will update searchResults whenever requested
-  // Currently is uses a 1-second delay to simulate waiting for an API call
   const getSearchResults = () => {
     setLoadingState(true);
+    // Helper function to encode search parameters into a query string
+    const createQueryString = data => {
+      const keys = Object.keys(data);
+      // Initialize the string
+      let str = "?";
+      let i;
+      // Add every city but the last one to the string followed by an '&'
+      for (i = 0; i < keys.length - 1; i++) {
+        str += `${keys[i]}=${data[keys[i]]}&`;
+      }
+      // Add the last city to the string without the trailing '&'
+      str += `${keys[i]}=${data[keys[i]]}`;
+      return str;
+    };
+    console.log(createQueryString(searchPrefs));
     //await axios.something
     setTimeout(() => {
       setSearchResults(initialResults);

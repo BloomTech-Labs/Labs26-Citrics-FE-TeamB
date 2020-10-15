@@ -1,5 +1,6 @@
 // Library imports
 import React from "react";
+import { Link } from "react-router-dom";
 import { Drawer, Button } from "antd";
 import { DoubleLeftOutlined, DoubleRightOutlined } from "@ant-design/icons";
 
@@ -11,7 +12,7 @@ import { SelectedCities } from "../SelectedCities/";
 // This defines the width of the drawer *and* how far to translate the floating button
 import drawerWidth from "./drawerWidth";
 
-export default function RenderNav({ toggleDrawer, isOpen }) {
+export default function RenderNav({ toggleDrawer, isOpen, closed }) {
   const buttonTransform = isOpen ? `translate(${drawerWidth}px,0px)` : "";
 
   return (
@@ -31,7 +32,7 @@ export default function RenderNav({ toggleDrawer, isOpen }) {
         closable={false}
         onClose={toggleDrawer}
         visible={isOpen}
-        mask={false}
+        mask={closed ?? false}
         width={drawerWidth}
       >
         <div className="component-container">
@@ -46,9 +47,11 @@ export default function RenderNav({ toggleDrawer, isOpen }) {
         </div>
         <div className="footer-container">
           <div className="footer">
-            <Button href="/about" type="primary" className="about-btn">
-              Meet the Team
-            </Button>
+            <Link to="/about">
+              <Button type="primary" className="about-btn">
+                Meet the Team
+              </Button>
+            </Link>
           </div>
         </div>
       </Drawer>

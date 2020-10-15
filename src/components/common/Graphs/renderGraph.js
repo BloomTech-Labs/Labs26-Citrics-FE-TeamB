@@ -15,7 +15,14 @@ export default function Graph({ dataSet, dataSet2, dataSet3 }) {
       return <Plot data={dataPlot} layout={layout} style={style} />;
     } else if (dataSet.type === "table") {
       const { tableData, layout } = table(dataSet);
-      return <Plot data={tableData} layout={layout} style={style} />;
+      return (
+        <Plot
+          data={tableData}
+          layout={layout}
+          style={style}
+          config={{ responsive: true }}
+        />
+      );
     }
   };
 

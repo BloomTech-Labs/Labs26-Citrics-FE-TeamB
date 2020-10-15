@@ -2,11 +2,14 @@ import React from "react";
 import { lineGraph } from "../../../common/Graphs/graphType";
 import Plot from "react-plotly.js";
 import LoadingSkeleton from "./LoadingSkeleton";
+import useWidth from "../../../../hooks/useWidth";
 //icon
 import jobIcon from "../../../../styles/icons/jobs-96.png";
 
 export default function JobsPane({ jobs, unemployment }) {
   let style = { width: "100%", height: "100%" };
+  let width = useWidth();
+
   // function that parses and renders the given pie chart
   const renderPie = () => {
     const data = JSON.parse(jobs.viz).data[0];
@@ -23,9 +26,18 @@ export default function JobsPane({ jobs, unemployment }) {
     ];
     // custom layout for pie chart
     const layout = {
-      title: "Top Industries",
+      title: width < 750 ? "" : "Top Industries",
       showlegend: true,
-      legend: { x: -10.4, font: { size: "10px" } },
+      legend:
+        width < 750
+          ? {
+              orientation: "h",
+              y: 1.0,
+              yanchor: "bottom",
+              x: 0.5,
+              xanchor: "center"
+            }
+          : { x: -10.4, font: { size: "10px" } },
       paper_bgcolor: "transparent",
       plot_bgcolor: "transparent",
       yaxis: {

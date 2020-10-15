@@ -1,10 +1,13 @@
 .comparison-container {
   background-color: @bgColor;
-  // display: flex;
-  align-items: center;
+  display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
   padding: 0 2%;
+  @media @tablet {
+    justify-content: center;
+  }
 }
 
 .card-container {
@@ -13,8 +16,14 @@
   margin: 4% 0;
   width: 100%;
 
+  @media @tablet {
+    width: 70%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
   @media @mobile {
-    flex-wrap: wrap;
+    width: 100%;
   }
 
   .card {
@@ -24,7 +33,8 @@
     border-radius: 10px;
 
     @media @tablet {
-      width: 27%;
+      width: 60%;
+      margin: 3% 0;
     }
 
     @media @mobile {
@@ -37,7 +47,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height:100%;
+      height: 100%;
       align-items: center;
 
       .custom-image {
@@ -65,11 +75,17 @@
   text-align: center;
 
   h3 {
-    font-size: 2.5rem;
+    font-size: 2.1rem;
     margin-bottom: 1%;
 
+    @media @l-tablet {
+      font-size: 1.85rem;
+    }
     @media @tablet {
-      font-size: @tabh3;
+      font-size: 1.75rem;
+    }
+    @media @mobile {
+      font-size: 1.5rem;
     }
   }
 

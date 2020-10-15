@@ -4,10 +4,17 @@
   justify-content: flex-start;
   align-items: flex-start;
   width: 100%;
+  overflow: hidden;
   .job-charts {
     width: 100%;
   }
   .job-charts-unemploy {
     width: 70%;
+    @media @mobile {
+      width: 100%;
+    }
+    @media @tablet {
+      width: 100%;
+    }
   }
 }

@@ -1,13 +1,14 @@
 import React from "react";
 import { CloseCircleFilled } from "@ant-design/icons";
 import { Button } from "antd";
-
+import useWidth from "../../../hooks/useWidth";
 export default function RenderSelectedCities({
   selectedCities,
   removeFromSelectedCities,
   openComparisonPage,
   openDetailPage
 }) {
+  let width = useWidth();
   return (
     <div className="selected-cities">
       <h4 className="select-city-title">Selected Cities</h4>
@@ -29,7 +30,7 @@ export default function RenderSelectedCities({
           <Button
             className="search-btn"
             type="primary"
-            onClick={openComparisonPage}
+            onClick={() => openComparisonPage(width)}
           >
             Compare
           </Button>
@@ -38,7 +39,7 @@ export default function RenderSelectedCities({
             className="search-btn"
             type="primary"
             disabled={selectedCities.length === 0}
-            onClick={openDetailPage}
+            onClick={() => openDetailPage(width)}
           >
             Details
           </Button>

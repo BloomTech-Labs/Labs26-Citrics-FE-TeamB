@@ -24,8 +24,9 @@ const mockCityDetails = [
       })
     },
     unemployRate: {
-      x: [1, 2, 3, 4, 5],
-      y: [753, 928, 1235, 5918, 30192]
+      viz: JSON.stringify({
+        data: [{ x: [3, 5, 6, 8, 9] }, { y: [10, 2, 5, 21] }]
+      })
     },
     rent: { studio: 3412 },
     weather: {
@@ -47,8 +48,9 @@ const mockCityDetails = [
       })
     },
     unemployRate: {
-      x: [1, 2, 3, 4, 5],
-      y: [753, 928, 1235, 5918, 30192]
+      viz: JSON.stringify({
+        data: [{ x: [3, 5, 6, 8, 9] }, { y: [10, 2, 5, 21] }]
+      })
     },
     rent: { studio: 3412 },
     weather: {
@@ -70,8 +72,6 @@ it("Renders the loading component", () => {
   const loading = getAllByTestId("loadingComp");
   expect(loading[0]).toBeInTheDocument();
 });
-
-// Tests Below are not passing at the moment. Finding a solution for conditional rendering tests
 
 it("renders the city cards to the page", async () => {
   const { findAllByTestId } = render(

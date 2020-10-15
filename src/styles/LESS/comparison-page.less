@@ -15,6 +15,7 @@
   justify-content: space-evenly;
   margin: 4% 0;
   width: 100%;
+
   @media @tablet {
     width: 70%;
     flex-direction: column;
@@ -24,6 +25,7 @@
   @media @mobile {
     width: 100%;
   }
+
   .card {
     margin: 0 5%;
     width: 25%;
@@ -34,6 +36,12 @@
       width: 60%;
       margin: 3% 0;
     }
+
+    @media @mobile {
+      width: 35%;
+      margin: 1% 5%;
+    }
+
     .comparison-card {
       width: 100%;
       display: flex;
@@ -65,9 +73,11 @@
   width: 100%;
   padding-top: 5%;
   text-align: center;
+
   h3 {
     font-size: 2.1rem;
     margin-bottom: 1%;
+
     @media @l-tablet {
       font-size: 1.85rem;
     }
@@ -78,9 +88,11 @@
       font-size: 1.5rem;
     }
   }
+
   .divider {
     margin: 0 0 2% 0;
   }
+
   .card-metrics {
     display: flex;
     flex-direction: column;
@@ -92,6 +104,7 @@
       height: 40px;
       margin-right: 5%;
     }
+
     .metrics-parent {
       display: flex;
       padding: 1% 0 1% 5%;
@@ -107,6 +120,7 @@
   }
   .btn-container {
     width: 100%;
+
     .more-info-btn {
       .button(95px, 32px, 1.4rem, @buttonBG-compare);
       border: 1px solid @buttonBG-compare;
@@ -128,6 +142,7 @@
   align-items: center;
   width: 100%;
 }
+
 .metrics-container.graphs {
   width: 100%;
 }

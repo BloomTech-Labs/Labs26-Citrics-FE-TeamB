@@ -20,15 +20,24 @@ export default function JobsPane({ jobs, unemployment }) {
         domain: { x: [1, 0] },
         automargin: true,
         hoverinfo: "label",
-        textinfo: width < 850 ? "label+percent" : "percent",
+        textinfo: "percent",
         insidetextorientation: "radial"
       }
     ];
     // custom layout for pie chart
     const layout = {
-      title: "Top Industries",
-      showlegend: width < 850 ? false : true,
-      legend: { x: -10.4, font: { size: "10px" } },
+      title: width < 750 ? "" : "Top Industries",
+      showlegend: true,
+      legend:
+        width < 750
+          ? {
+              orientation: "h",
+              y: 1.0,
+              yanchor: "bottom",
+              x: 0.5,
+              xanchor: "center"
+            }
+          : { x: -10.4, font: { size: "10px" } },
       paper_bgcolor: "transparent",
       plot_bgcolor: "transparent",
       yaxis: {

@@ -2,7 +2,7 @@ import React from "react";
 import { Button } from "antd";
 
 import { connect } from "react-redux";
-import { addCityNoDetails } from "../../../state/actions";
+import { addCity } from "../../../state/actions";
 
 function SearchResult({ id, name, state, addCity }) {
   const addCityToComparison = () => addCity({ id, name, state });
@@ -13,4 +13,4 @@ function SearchResult({ id, name, state, addCity }) {
     </div>
   );
 }
-export default connect(null, { addCity: addCityNoDetails })(SearchResult);
+export default connect(null, { addCity })(SearchResult);

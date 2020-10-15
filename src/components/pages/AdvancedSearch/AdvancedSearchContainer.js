@@ -67,15 +67,42 @@ export default function AdvancedSearchContainer(props) {
       // Initialize the string
       let str = "?";
       let i;
-      // Add every city but the last one to the string followed by an '&'
+      // Add every key-value pair in data (except the last) to the string followed '&'
       for (i = 0; i < keys.length - 1; i++) {
         str += `${keys[i]}=${data[keys[i]]}&`;
       }
-      // Add the last city to the string without the trailing '&'
+      // Add the last key-value pair to the string string without the trailing '&'
       str += `${keys[i]}=${data[keys[i]]}`;
       return str;
     };
-    console.log(createQueryString(searchPrefs));
+
+    const convertLocalPrefsToBackendPrefs = () => {
+      const defaultValues = { ...initialSearchPrefs };
+      const currentValues = { ...searchPrefs };
+
+      // Remove jobs key, as filtering by jobs is not implemented on the backend
+      delete defaultValues.jobs;
+      delete currentValues.jobs;
+
+      // Remove the default value of rooms
+      // We'll be removing values that are equal to default in the next step
+      // but we always want to retain the value of rooms
+      defaultValues.rooms = "";
+
+      // The max values of the sliders aren't actually the max values possible
+      // (e.g. POP_MAX is 2.1M but four cities have larger populations than that)
+      // so this step is needed to avoid unintentionally excluding cities with outlier values
+      // in any metric.
+      for (const pref in currentValues) {
+        // If any preference was left at the default value, instead clear it to "None"
+        // as this is what the backend expects.
+        if (currentValues[pref] === defaultValues[pref]) {
+          currentValues[pref] = "None";
+        }
+      }
+      return currentValues;
+    };
+    console.log(createQueryString(convertLocalPrefsToBackendPrefs()));
     //await axios.something
     setTimeout(() => {
       setSearchResults(initialResults);

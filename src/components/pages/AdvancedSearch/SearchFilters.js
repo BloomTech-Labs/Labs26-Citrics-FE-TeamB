@@ -8,9 +8,7 @@ import {
   WEATHER_MIN,
   WEATHER_MAX
 } from "./constants";
-
 import RenderSearchFilter from "./RenderSearchFilter";
-
 export default function SearchFilters({
   searchPrefs,
   updateSearchPrefs,
@@ -20,7 +18,6 @@ export default function SearchFilters({
   // that match a key-value pair in the searchPrefs object
   const processSearchPrefsEvent = ({ target: { name, value } }) =>
     updateSearchPrefs({ [name]: value });
-
   const formatPop = pop => {
     if (pop >= POP_MAX) {
       return ">2 million";
@@ -41,13 +38,11 @@ export default function SearchFilters({
       return `${temp}°F`;
     }
   };
-
   return (
     <div className="search-bar">
       <h2>Filters:</h2>
       <div className="filter-container">
         {/* RenderSearchFilter will render a popover with a Slider and range display inside it for each type of filter. */}
-
         {/* Population */}
         <RenderSearchFilter
           title="Population"

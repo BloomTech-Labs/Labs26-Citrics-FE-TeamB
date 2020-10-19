@@ -294,6 +294,7 @@ const RenderAboutPage = ({ closeDrawer }) => {
 
         {/* Zack */}
         <Card
+          className="Zack"
           style={{ width: 250 }}
           cover={
             <img
@@ -598,6 +599,7 @@ const RenderAboutPage = ({ closeDrawer }) => {
 
         {/* Lyndsi */}
         <Card
+          className="Lyndsi"
           hoverable
           style={{ width: 250 }}
           cover={
@@ -704,6 +706,7 @@ const RenderAboutPage = ({ closeDrawer }) => {
 
         {/* Rachele */}
         <Card
+          className="Rachele"
           style={{ width: 250 }}
           cover={
             <img

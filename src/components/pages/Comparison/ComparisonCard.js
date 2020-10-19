@@ -121,7 +121,7 @@ export default class ComparisonCard extends Component {
         </div>
         <ModalComponent
           visible={visible}
-          setVisible={toggleModal}
+          toggleModal={toggleModal}
           city={this.props.city}
         />
       </div>

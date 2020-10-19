@@ -3,6 +3,7 @@ import React from "react";
 import {
   POP_MIN,
   POP_MAX,
+  RENT_MIN,
   RENT_MAX,
   WEATHER_MIN,
   WEATHER_MAX
@@ -44,6 +45,7 @@ export default function SearchFilters({
         {/* RenderSearchFilter will render a popover with a Slider and range display inside it for each type of filter. */}
         {/* Population */}
         <RenderSearchFilter
+          range
           title="Population"
           min={POP_MIN}
           max={POP_MAX}
@@ -60,6 +62,7 @@ export default function SearchFilters({
         />
         {/* Weather */}
         <RenderSearchFilter
+          range
           title="Weather"
           popoverTitle="Seasonal Temp Range"
           min={WEATHER_MIN}
@@ -79,7 +82,7 @@ export default function SearchFilters({
         <RenderSearchFilter
           title={`Rent (${searchPrefs.rooms})`}
           popoverTitle="Rent"
-          // min={RENT_MIN}
+          min={RENT_MIN}
           max={RENT_MAX}
           step={100}
           value={searchPrefs.rent_max}

@@ -3,6 +3,7 @@ import React from "react";
 
 export default function RenderSearchFilter(props) {
   const {
+    range,
     title,
     popoverTitle,
     min,
@@ -25,8 +26,8 @@ export default function RenderSearchFilter(props) {
       {/* Currently Jobs passes on an input to render instead of the Slider */}
       {input || (
         <Slider
-          range={min && max}
-          min={min ?? 100}
+          range={range}
+          min={min}
           max={max}
           step={step}
           value={value}
@@ -56,11 +57,10 @@ export default function RenderSearchFilter(props) {
 
 // The Range Display used within this component
 function RangeDisplay(props) {
-  let { value, min, max, tipFormatter, input } = props;
-  // Use a minimum of zero if no minimum is given
-  // The Rent filter uses this logic
-  if (!min) {
-    min = 0;
+  let { value, min, max, tipFormatter, input, range } = props;
+  // If we aren't showing a range, set up a minimum of zero
+  // This logic is currently used by Rent only
+  if (!range) {
     value = [0, value];
   }
 

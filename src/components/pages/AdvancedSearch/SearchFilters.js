@@ -99,7 +99,10 @@ export default function SearchFilters({
             <select
               id="rooms"
               name="rooms"
-              onChange={processSearchPrefsEvent}
+              onChange={e => {
+                processSearchPrefsEvent(e);
+                getSearchResults();
+              }}
               value={searchPrefs.rooms}
             >
               <option value="studio">Studio</option>

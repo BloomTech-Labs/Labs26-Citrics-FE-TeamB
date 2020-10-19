@@ -67,11 +67,8 @@ export default function AdvancedSearchContainer(props) {
     setLoadingState(true);
 
     const queryString = createQueryString(convertLocalPrefsToBackendPrefs());
-    const url =
-      "https://b-ds.citrics.dev/cities{rooms,pop_min,pop_max,rent_min,rent_max,weather_min,weather_max}" +
-      queryString;
     axios
-      .get(url)
+      .get("https://b-ds.citrics.dev/cities" + queryString)
       .then(r => r?.data?.cities)
       .then(setSearchResults)
       .then(() => {

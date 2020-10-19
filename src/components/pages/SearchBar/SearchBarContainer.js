@@ -23,9 +23,7 @@ class SearchBar extends React.Component {
     }
     // Retrieve city list from the backend
     axios
-      .get(
-        "https://b-ds.citrics.dev/cities{rooms,pop_min,pop_max,rent_min,rent_max,weather_min,weather_max}"
-      )
+      .get("https://b-ds.citrics.dev/cities")
       .then(r => r.data.cities)
       .then(queryResult =>
         queryResult.map(item => ({

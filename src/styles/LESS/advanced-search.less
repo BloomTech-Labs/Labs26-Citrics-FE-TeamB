@@ -12,15 +12,18 @@
   font-weight: 700;
 }
 
-.search-result, span {
+.search-result,
+span {
   font-size: 1.75rem;
 }
 
 .filter-container {
-  display: flex;
-  justify-content: space-between;
-  width: 70%;
-  padding-top: 1%;
+  & > * {
+    margin: 0.5% 1%;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
 }
 
 .add-to-compare-btn {

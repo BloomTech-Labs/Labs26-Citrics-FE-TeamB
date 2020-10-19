@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import addIcon from "../../../styles/icons/add-48.png";
 import addIconHover from "../../../styles/icons/add-hover-48.png";
 import { connect } from "react-redux";
-import { addCity } from "../../../state/actions";
+import { addCity, getCityDetails } from "../../../state/actions";
+import CityDetail from "../Comparison/Modal";
+import { Button } from "antd";
 
-function SearchResult({ id, name, state, addCity }) {
+function SearchResult({ id, name, state, addCity, cityDetails }) {
   const addCityToComparison = () => addCity({ id, name, state });
-
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    if (visible && !cityDetails[id]) getCityDetails(id);
+  }, [id, visible, cityDetails]);
   return (
     <div className="search-result">
       {`${name}, ${state}`}&nbsp;&nbsp;
@@ -18,7 +23,17 @@ function SearchResult({ id, name, state, addCity }) {
         onMouseOut={e => (e.currentTarget.src = addIcon)}
         className="add-to-compare-btn"
       />
+      <Button onClick={() => setVisible(true)}>Details</Button>
+      <CityDetail
+        city={cityDetails[id]}
+        visible={visible}
+        setVisible={setVisible}
+      />
     </div>
   );
 }
-export default connect(null, { addCity })(SearchResult);
+const mapProps = ({ cities: { cityDetails } }, props) => ({
+  ...props,
+  cityDetails
+});
+export default connect(mapProps, { addCity, getCityDetails })(SearchResult);

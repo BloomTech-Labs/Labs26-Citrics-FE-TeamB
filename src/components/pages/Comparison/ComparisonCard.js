@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ModalComponent from "./Modal";
+import ModalComponent from "../../common/Modal";
 import { Divider, Skeleton } from "antd";
 //icons
 import weather from "../../../styles/icons/weather-48.png";
@@ -121,7 +121,7 @@ export default class ComparisonCard extends Component {
         </div>
         <ModalComponent
           visible={visible}
-          setVisible={toggleModal}
+          toggleModal={toggleModal}
           city={this.props.city}
         />
       </div>

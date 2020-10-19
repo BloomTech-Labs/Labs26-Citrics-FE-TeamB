@@ -75,7 +75,6 @@ export default function AdvancedSearchContainer(props) {
         setPageNumber(0);
         setLoadingState(false);
       });
-
     /**
      * Create a query string based on key-value pairs on a given object
      *
@@ -148,11 +147,15 @@ export default function AdvancedSearchContainer(props) {
               .map(elem => (
                 <SearchResult {...elem} key={elem.id} />
               ))}
-            <PageNavigation
-              totalResults={searchResults.length}
-              pageNumber={pageNumber}
-              setPageNumber={setPageNumber}
-            />
+            {searchResults.length === 0 ? (
+              <h3>No Results</h3>
+            ) : (
+              <PageNavigation
+                totalResults={searchResults.length}
+                pageNumber={pageNumber}
+                setPageNumber={setPageNumber}
+              />
+            )}
           </>
         )}
       </div>

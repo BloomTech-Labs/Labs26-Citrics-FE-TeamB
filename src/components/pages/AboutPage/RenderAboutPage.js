@@ -13,6 +13,7 @@ import {
 import projectLead from "../../../styles/icons/projectLead.jpg";
 import dataScience from "../../../styles/icons/dataScience.png";
 import webDev from "../../../styles/icons/webDev.png";
+import { Link } from "react-router-dom";
 
 const { Meta } = Card;
 
@@ -33,8 +34,8 @@ const RenderAboutPage = ({ closeDrawer }) => {
 
   return (
     <div className="about-container">
-      <Button className="home-btn" href="/">
-        Home
+      <Button className="home-btn">
+        <Link to="/">Home</Link>
       </Button>
       {/* ----- Introduction ----- */}
       <section className="about-introduction">

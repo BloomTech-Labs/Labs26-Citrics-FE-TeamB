@@ -18,7 +18,6 @@ const updateCityDetails = (id, details) => ({
  */
 export const getCityDetails = city => async (dispatch, getState) => {
   let { id } = city;
-
   // Do nothing if we already have the details on this city
   const { cityDetails } = getState().cities;
   if (cityDetails[id]) return;

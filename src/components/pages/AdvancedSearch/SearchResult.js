@@ -1,24 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import addIcon from "../../../styles/icons/add-48.png";
 import addIconHover from "../../../styles/icons/add-hover-48.png";
 import { connect } from "react-redux";
-import { addCity } from "../../../state/actions";
+import { addCity, getCityDetails } from "../../../state/actions";
+import CityDetail from "../../common/Modal";
+import { Button } from "antd";
 
-function SearchResult({ id, name, state, addCity }) {
+function SearchResult(props) {
+  const { id, name, state, addCity, cityDetails, getCityDetails } = props;
   const addCityToComparison = () => addCity({ id, name, state });
+  // Modal visibility
+  const [visible, setVisible] = useState(false);
 
+  // Retrieve details if we open a modal and don't have those details
+  useEffect(() => {
+    if (visible && !cityDetails[id]) {
+      getCityDetails({ id, name, state });
+    }
+  });
   return (
-    <div className="search-result">
-      {`${name}, ${state}`}&nbsp;&nbsp;
-      <img
-        src={addIcon}
-        alt="circle with plus sign in middle icon"
-        onClick={addCityToComparison}
-        onMouseOver={e => (e.currentTarget.src = addIconHover)}
-        onMouseOut={e => (e.currentTarget.src = addIcon)}
-        className="add-to-compare-btn"
+    <>
+      <div className="search-result">
+        {`${name}, ${state}`}&nbsp;&nbsp;
+        <img
+          src={addIcon}
+          alt="circle with plus sign in middle icon"
+          onClick={addCityToComparison}
+          onMouseOver={e => (e.currentTarget.src = addIconHover)}
+          onMouseOut={e => (e.currentTarget.src = addIcon)}
+          className="add-to-compare-btn"
+        />
+        <Button onClick={() => setVisible(true)}>Details</Button>
+      </div>
+      {/* Modal to show city details */}
+      <CityDetail
+        city={cityDetails[id] ?? { id, name, state }}
+        visible={visible}
+        toggleModal={() => setVisible(!visible)}
       />
-    </div>
+    </>
   );
 }
-export default connect(null, { addCity })(SearchResult);
+const mapProps = ({ cities: { cityDetails } }, props) => ({
+  ...props,
+  cityDetails
+});
+export default connect(mapProps, { addCity, getCityDetails })(SearchResult);

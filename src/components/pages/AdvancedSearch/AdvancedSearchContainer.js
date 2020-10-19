@@ -75,7 +75,6 @@ export default function AdvancedSearchContainer(props) {
         setPageNumber(0);
         setLoadingState(false);
       });
-
     /**
      * Create a query string based on key-value pairs on a given object
      *

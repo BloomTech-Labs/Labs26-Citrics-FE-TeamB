@@ -112,7 +112,7 @@ export default function SearchFilters({
         </label>
       </RenderSearchFilter>
 
-      {/* Jobs: this filter passes a unique input to render instead of a Slider */}
+      {/* Jobs: currently unimplemented
       <RenderSearchFilter
         title="Jobs"
         popoverTitle={"Major Job Industries"}
@@ -126,6 +126,7 @@ export default function SearchFilters({
           />
         }
       />
+       */}
       <br />
       <Button type="primary" onClick={getSearchResults}>
         Apply

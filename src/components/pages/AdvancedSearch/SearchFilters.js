@@ -3,7 +3,6 @@ import React from "react";
 import {
   POP_MIN,
   POP_MAX,
-  RENT_MIN,
   RENT_MAX,
   WEATHER_MIN,
   WEATHER_MAX
@@ -46,7 +45,6 @@ export default function SearchFilters({
         {/* Population */}
         <RenderSearchFilter
           title="Population"
-          range
           min={POP_MIN}
           max={POP_MAX}
           step={10000}
@@ -81,17 +79,17 @@ export default function SearchFilters({
         <RenderSearchFilter
           title={`Rent (${searchPrefs.rooms})`}
           popoverTitle="Rent"
-          min={RENT_MIN}
+          // min={RENT_MIN}
           max={RENT_MAX}
           step={100}
-          value={[searchPrefs.rent_min, searchPrefs.rent_max]}
+          value={searchPrefs.rent_max}
           tipFormatter={formatMoney}
-          onChange={([rent_min, rent_max]) =>
+          onChange={rent_max => {
+            console.log(rent_max);
             updateSearchPrefs({
-              rent_min,
               rent_max
-            })
-          }
+            });
+          }}
           onAfterChange={getSearchResults}
         >
           <label>

@@ -17,6 +17,15 @@ export default function RenderSearchFilter({
   // Subcomponent to generate the range display
   // either as an HTML element or an array of strings
   const RangeDisplay = props => {
+    // Use a minimum of zero if no minimum is given
+    // Rent uses this logic
+    let tempValue;
+    if (!min) {
+      min = 0;
+      tempValue = value;
+      value = [0, value];
+    }
+
     const html = props?.html;
     const result = [];
     // Jobs passes a unique non-Slider input to render
@@ -41,6 +50,12 @@ export default function RenderSearchFilter({
       result.push(tipFormatter(value[1]));
     }
 
+    // If we modified the minimum and value, revert them now
+    // otherwise this function will return different results when called a second time
+    if (tempValue) {
+      value = tempValue;
+      min = undefined;
+    }
     return html ? (
       // If requested, wrap the results in an HTML element
       <div className="advanced-search-range-display">
@@ -66,8 +81,8 @@ export default function RenderSearchFilter({
       {/* Currently Jobs passes on an input to render instead of the Slider */}
       {input || (
         <Slider
-          range
-          min={min}
+          range={min && max}
+          min={min ?? 100}
           max={max}
           step={step}
           value={value}

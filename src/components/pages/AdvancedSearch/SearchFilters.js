@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Input } from "antd";
+// import { Input } from "antd";
 import {
   POP_MIN,
   POP_MAX,
@@ -116,6 +116,7 @@ export default function SearchFilters({
       </RenderSearchFilter>
 
       {/* Jobs: currently unimplemented
+      // uncomment the import of Input from antd to use
       <RenderSearchFilter
         title="Jobs"
         popoverTitle={"Major Job Industries"}

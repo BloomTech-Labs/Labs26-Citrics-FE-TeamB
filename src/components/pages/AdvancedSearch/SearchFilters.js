@@ -87,12 +87,11 @@ export default function SearchFilters({
           step={100}
           value={searchPrefs.rent_max}
           tipFormatter={formatMoney}
-          onChange={rent_max => {
-            console.log(rent_max);
+          onChange={rent_max =>
             updateSearchPrefs({
               rent_max
-            });
-          }}
+            })
+          }
           onAfterChange={getSearchResults}
         >
           <label>

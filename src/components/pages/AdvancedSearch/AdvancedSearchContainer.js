@@ -146,6 +146,7 @@ export default function AdvancedSearchContainer(props) {
         ) : (
           <>
             {searchResults
+              // Divide search results into pages of 10 results
               .slice(pageNumber * 10, (pageNumber + 1) * 10)
               .map(elem => (
                 <SearchResult {...elem} key={elem.id} />

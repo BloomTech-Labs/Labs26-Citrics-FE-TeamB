@@ -62,6 +62,7 @@ export default function SearchFilters({
             pop_max
           })
         }
+        onAfterChange={getSearchResults}
       />
       {/* Weather */}
       <RenderSearchFilter
@@ -78,6 +79,7 @@ export default function SearchFilters({
             weather_max
           })
         }
+        onAfterChange={getSearchResults}
       />
       {/* Rent: this filter passes an additional input to render as a child of RenderSearchFilter */}
       <RenderSearchFilter
@@ -94,6 +96,7 @@ export default function SearchFilters({
             rent_max
           })
         }
+        onAfterChange={getSearchResults}
       >
         <label>
           {"Rooms: "}
@@ -127,10 +130,6 @@ export default function SearchFilters({
         }
       />
        */}
-      <br />
-      <Button type="primary" onClick={getSearchResults}>
-        Apply
-      </Button>
     </div>
   );
 }

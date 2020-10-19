@@ -4,6 +4,7 @@ import useLocalStorage from "../../../hooks/useLocalStorage";
 
 import SearchFilters from "./SearchFilters";
 import SearchResult from "./SearchResult";
+import PageNavigation from "./PageNavigation";
 import {
   POP_MIN,
   POP_MAX,
@@ -29,6 +30,7 @@ const initialResults = [{ id: 1, name: "Chandler", state: "AZ" }];
 
 export default function AdvancedSearchContainer(props) {
   const [searchResults, setSearchResults] = useState(initialResults);
+  const [pageNumber, setPageNumber] = useState(0);
   const [isLoading, setLoadingState] = useState(true);
 
   // I opted to store searchPrefs in an object to simplify getting/setting values
@@ -72,7 +74,10 @@ export default function AdvancedSearchContainer(props) {
       .get(url)
       .then(r => r?.data?.cities)
       .then(setSearchResults)
-      .then(() => setLoadingState(false));
+      .then(() => {
+        setPageNumber(0);
+        setLoadingState(false);
+      });
 
     /**
      * Create a query string based on key-value pairs on a given object
@@ -139,7 +144,15 @@ export default function AdvancedSearchContainer(props) {
         {isLoading ? (
           <Skeleton active title={false} paragraph={{ rows: 10 }} />
         ) : (
-          searchResults.map(elem => <SearchResult {...elem} key={elem.id} />)
+          <>
+            {searchResults.map(elem => (
+              <SearchResult {...elem} key={elem.id} />
+            ))}
+            <PageNavigation
+              pageNumber={pageNumber}
+              setPageNumber={setPageNumber}
+            />
+          </>
         )}
       </div>
     </div>

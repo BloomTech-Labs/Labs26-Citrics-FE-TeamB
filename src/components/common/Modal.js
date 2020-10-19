@@ -2,8 +2,7 @@ import React from "react";
 import { Button, Modal } from "antd";
 import { CityDetailPage } from "../pages/CityDetail";
 
-const ModalComponent = ({ visible, toggleModal, city }) => {
-  city = city ?? {};
+const ModalComponent = ({ visible, toggleModal, city = {} }) => {
   return (
     <Modal
       centered

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
 import SearchFilters from "./SearchFilters";
@@ -63,12 +64,15 @@ export default function AdvancedSearchContainer(props) {
     // Display loading skeleton while we wait for results
     setLoadingState(true);
 
-    console.log(createQueryString(convertLocalPrefsToBackendPrefs()));
-    //await axios.something
-    setTimeout(() => {
-      setSearchResults(initialResults);
-      setLoadingState(false);
-    }, 1000);
+    const queryString = createQueryString(convertLocalPrefsToBackendPrefs());
+    const url =
+      "https://b-ds.citrics.dev/cities{rooms,pop_min,pop_max,rent_min,rent_max,weather_min,weather_max}" +
+      queryString;
+    axios
+      .get(url)
+      .then(r => r?.data?.cities)
+      .then(setSearchResults)
+      .then(() => setLoadingState(false));
 
     /**
      * Create a query string based on key-value pairs on a given object
@@ -112,7 +116,7 @@ export default function AdvancedSearchContainer(props) {
         // If any preference was left at the default value, instead clear it to "None"
         // as this is what the backend expects.
         if (currentValues[pref] === defaultValues[pref]) {
-          currentValues[pref] = "None";
+          delete currentValues[pref];
         }
       }
       return currentValues;

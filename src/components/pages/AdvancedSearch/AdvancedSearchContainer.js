@@ -145,10 +145,13 @@ export default function AdvancedSearchContainer(props) {
           <Skeleton active title={false} paragraph={{ rows: 10 }} />
         ) : (
           <>
-            {searchResults.slice(pageNumber, pageNumber + 10).map(elem => (
-              <SearchResult {...elem} key={elem.id} />
-            ))}
+            {searchResults
+              .slice(pageNumber * 10, (pageNumber + 1) * 10)
+              .map(elem => (
+                <SearchResult {...elem} key={elem.id} />
+              ))}
             <PageNavigation
+              totalResults={searchResults.length}
               pageNumber={pageNumber}
               setPageNumber={setPageNumber}
             />

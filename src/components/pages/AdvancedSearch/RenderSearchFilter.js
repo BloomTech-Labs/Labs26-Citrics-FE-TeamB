@@ -16,8 +16,6 @@ export default function RenderSearchFilter(props) {
     input,
     onAfterChange
   } = props;
-  // Subcomponent to generate the range display
-  // either as an HTML element or an array of strings
 
   const content = (
     <>
@@ -55,7 +53,8 @@ export default function RenderSearchFilter(props) {
   );
 }
 
-// The Range Display used within this component
+// Subcomponent to generate the range display
+// either as an HTML element or an array of strings
 function RangeDisplay(props) {
   let { value, min, max, tipFormatter, input, range } = props;
   // If we aren't showing a range, set up a minimum of zero

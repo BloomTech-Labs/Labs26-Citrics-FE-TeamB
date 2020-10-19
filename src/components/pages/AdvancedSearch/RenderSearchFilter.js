@@ -69,7 +69,7 @@ function RangeDisplay(props) {
   // Jobs passes a unique non-Slider input to render
   // It also has a unique way of displaying what's selected
   if (input) {
-    return ChoicesDisplay({ html, value });
+    return ChoicesDisplay();
   }
   // First word - minimum value (or nothing)
   if (value[0] > min) {

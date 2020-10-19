@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { render, fireEvent, waitFor, cleanup } from "@testing-library/react";
 
+import { mockCityDetails } from "../__mocks__/cityData";
 import RenderComparison from "../components/pages/Comparison/RenderComparison";
 
 afterEach(() => {
@@ -9,55 +10,6 @@ afterEach(() => {
   jest.restoreAllMocks();
   jest.clearAllMocks();
 });
-
-const mockCityDetails = [
-  {
-    image: "https://i.imgur.com/YXdssOR.jpeg",
-    name: "Baton Rouge",
-    state: "LA",
-    population: {
-      data: {
-        total_pop: 221606
-      },
-      viz: JSON.stringify({
-        data: [{ x: [3, 5, 6, 8, 9] }, { y: [10, 2, 5, 21] }]
-      })
-    },
-    unemployRate: {
-      x: [1, 2, 3, 4, 5],
-      y: [753, 928, 1235, 5918, 30192]
-    },
-    rent: { studio: 3412 },
-    weather: {
-      summer_humidity_mean: 77,
-      summer_maxtempF_mean: 91,
-      winter_mintempF_mean: 47
-    }
-  },
-  {
-    image: "https://i.imgur.com/YXdssOR.jpeg",
-    name: "Sacramento",
-    state: "CA",
-    population: {
-      data: {
-        total_pop: 22160216
-      },
-      viz: JSON.stringify({
-        data: [{ x: [3, 5, 6, 8, 9] }, { y: [10, 2, 5, 21] }]
-      })
-    },
-    unemployRate: {
-      x: [1, 2, 3, 4, 5],
-      y: [753, 928, 1235, 5918, 30192]
-    },
-    rent: { studio: 3412 },
-    weather: {
-      summer_humidity_mean: 77,
-      summer_maxtempF_mean: 91,
-      winter_mintempF_mean: 47
-    }
-  }
-];
 
 // Renders the comparison page
 it("Renders the comparison without errors", () => {
@@ -70,8 +22,6 @@ it("Renders the loading component", () => {
   const loading = getAllByTestId("loadingComp");
   expect(loading[0]).toBeInTheDocument();
 });
-
-// Tests Below are not passing at the moment. Finding a solution for conditional rendering tests
 
 it("renders the city cards to the page", async () => {
   const { findAllByTestId } = render(

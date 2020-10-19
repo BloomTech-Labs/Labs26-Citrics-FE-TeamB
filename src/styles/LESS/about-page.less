@@ -26,6 +26,10 @@
     justify-content: space-evenly;
     padding-top: 2%;
 
+    @media @l-tablet, @tablet {
+      flex-wrap: wrap;
+    }
+
     .modal-button {
       margin-top: 7%;
     }
@@ -36,6 +40,10 @@
     justify-content: space-evenly;
     padding: 2% 0;
 
+    @media @l-tablet, @tablet {
+      flex-wrap: wrap;
+    }
+
     .modal-button {
       margin-top: 7%;
     }
@@ -43,5 +51,20 @@
 
   .ant-card {
     box-shadow: 3px 4px 22px -4px rgba(0, 0, 0, 0.46);
+
+    @media @mobile {
+      margin: 2% 0;
+    }
+  }
+  
+  .Lyndsi, .Zack {
+    @media screen and (max-width: 749px) {
+      margin: 2% 0;
+    }
+  }
+  .Rachele {
+    @media @l-tablet, @tablet {
+      margin: 2% 0;
+    }
   }
 }

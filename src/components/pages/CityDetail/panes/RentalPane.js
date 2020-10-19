@@ -4,7 +4,7 @@ import LoadingSkeleton from "./LoadingSkeleton";
 //icon
 import rentIcon from "../../../../styles/icons/rent-96.png";
 
-export default function RentalPane({ rent }) {
+export default function RentalPane({ rent, predictions }) {
   const { TabPane } = Tabs;
   // This list will be the titles of the tabs
   // it also matches the keys in rent (although they're all lowercase in rent)
@@ -30,6 +30,9 @@ export default function RentalPane({ rent }) {
       </p>
     );
   };
+  const renderPrediction = roomType => {
+    console.log(JSON.parse(predictions[roomType.toLowerCase()]).data);
+  };
 
   return (
     <div className="one-render-p">
@@ -51,6 +54,7 @@ export default function RentalPane({ rent }) {
                 {aptTypes.map((name, idx) => (
                   <TabPane key={idx} tab={name} className="rental-price-tab">
                     ${rent[name.toLowerCase()]}/month
+                    {predictions ? renderPrediction(name) : null}
                   </TabPane>
                 ))}
               </Tabs>

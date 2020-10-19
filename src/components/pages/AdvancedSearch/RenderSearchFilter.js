@@ -11,7 +11,8 @@ export default function RenderSearchFilter({
   tipFormatter,
   onChange,
   children,
-  input
+  input,
+  onAfterChange
 }) {
   // Subcomponent to generate the range display
   // either as an HTML element or an array of strings
@@ -72,6 +73,7 @@ export default function RenderSearchFilter({
           value={value}
           tipFormatter={tipFormatter}
           onChange={onChange}
+          onAfterChange={onAfterChange}
         />
       )}
       <RangeDisplay html={true} />

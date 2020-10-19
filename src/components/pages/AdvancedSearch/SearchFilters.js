@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Input } from "antd";
+// import { Input } from "antd";
 import {
   POP_MIN,
   POP_MAX,
@@ -28,10 +28,10 @@ export default function SearchFilters({
     }
   };
   const formatMoney = price =>
-    price >= RENT_MAX ? ">$5,000" : `$ ${price.toLocaleString()}`;
+    price >= RENT_MAX ? ">$4,500" : `$ ${price.toLocaleString()}`;
   const formatWeather = temp => {
     if (temp >= WEATHER_MAX) {
-      return ">100°F";
+      return ">95°F";
     } else if (temp <= WEATHER_MIN) {
       return "<20°F";
     } else {
@@ -58,6 +58,7 @@ export default function SearchFilters({
               pop_max
             })
           }
+          onAfterChange={getSearchResults}
         />
         {/* Weather */}
         <RenderSearchFilter
@@ -74,6 +75,7 @@ export default function SearchFilters({
               weather_max
             })
           }
+          onAfterChange={getSearchResults}
         />
         {/* Rent: this filter passes an additional input to render as a child of RenderSearchFilter */}
         <RenderSearchFilter
@@ -90,6 +92,7 @@ export default function SearchFilters({
               rent_max
             })
           }
+          onAfterChange={getSearchResults}
         >
           <label>
             {"Rooms: "}
@@ -107,25 +110,24 @@ export default function SearchFilters({
             </select>
           </label>
         </RenderSearchFilter>
-        {/* Jobs: this filter passes a unique input to render instead of a Slider */}
-        <RenderSearchFilter
-          title="Jobs"
-          popoverTitle={"Major Job Industries"}
-          value={searchPrefs.jobs}
-          input={
-            <Input
-              placeholder="Ex: Tech"
-              name="jobs"
-              onChange={processSearchPrefsEvent}
-              value={searchPrefs.jobs}
-            />
-          }
-        />
+
+        {/* Jobs: currently unimplemented
+      // uncomment the import of Input from antd to use
+      <RenderSearchFilter
+        title="Jobs"
+        popoverTitle={"Major Job Industries"}
+        value={searchPrefs.jobs}
+        input={
+          <Input
+            placeholder="Ex: Tech"
+            name="jobs"
+            onChange={processSearchPrefsEvent}
+            value={searchPrefs.jobs}
+          />
+        }
+      />
+       */}
       </div>
-      <br />
-      <Button type="primary" onClick={getSearchResults}>
-        Apply
-      </Button>
     </div>
   );
 }

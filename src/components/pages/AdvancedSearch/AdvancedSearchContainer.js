@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 
 import SearchFilters from "./SearchFilters";
 import SearchResult from "./SearchResult";
+import PageNavigation from "./PageNavigation";
 import {
   POP_MIN,
   POP_MAX,
@@ -28,7 +30,8 @@ const initialResults = [{ id: 1, name: "Chandler", state: "AZ" }];
 
 export default function AdvancedSearchContainer(props) {
   const [searchResults, setSearchResults] = useState(initialResults);
-  const [isLoading, setLoadingState] = useState(false);
+  const [pageNumber, setPageNumber] = useState(0);
+  const [isLoading, setLoadingState] = useState(true);
 
   // I opted to store searchPrefs in an object to simplify getting/setting values
   // Otherwise we'd need many different useLocalStorage calls
@@ -59,14 +62,67 @@ export default function AdvancedSearchContainer(props) {
     setSearchPrefs({ ...searchPrefs, ...changes });
 
   // This function will update searchResults whenever requested
-  // Currently is uses a 1-second delay to simulate waiting for an API call
   const getSearchResults = () => {
+    // Display loading skeleton while we wait for results
     setLoadingState(true);
-    //await axios.something
-    setTimeout(() => {
-      setSearchResults(initialResults);
-      setLoadingState(false);
-    }, 1000);
+
+    const queryString = createQueryString(convertLocalPrefsToBackendPrefs());
+    axios
+      .get("https://b-ds.citrics.dev/cities" + queryString)
+      .then(r => r?.data?.cities)
+      .then(setSearchResults)
+      .then(() => {
+        setPageNumber(0);
+        setLoadingState(false);
+      });
+
+    /**
+     * Create a query string based on key-value pairs on a given object
+     *
+     * @param {object} data An object with the data to be encoded
+     */
+    function createQueryString(data) {
+      const keys = Object.keys(data);
+      // Initialize the string
+      let str = "?";
+      let i;
+      // Add every key-value pair in data (except the last) to the string followed '&'
+      for (i = 0; i < keys.length - 1; i++) {
+        str += `${keys[i]}=${data[keys[i]]}&`;
+      }
+      // Add the last key-value pair to the string string without the trailing '&'
+      str += `${keys[i]}=${data[keys[i]]}`;
+      return str;
+    }
+    /**
+     * Convert the existing local searchPrefs keys and values into the form of data the backend API is expecting.
+     */
+    function convertLocalPrefsToBackendPrefs() {
+      const defaultValues = { ...initialSearchPrefs };
+      const currentValues = { ...searchPrefs };
+
+      // Remove jobs key, as filtering by jobs is not implemented on the backend
+      delete defaultValues.jobs;
+      delete currentValues.jobs;
+
+      // Remove the default value of rooms
+      // We'll be removing values that are equal to default in the next step
+      // but we always want to retain the value of rooms
+      defaultValues.rooms = "";
+
+      // The max values of the search pref sliders aren't actually the max values possible
+      // (e.g. POP_MAX is 2.1M but four cities have larger populations than that)
+      // so this step is needed to avoid unintentionally excluding cities with outlier values
+      // in any metric.
+      for (const pref in currentValues) {
+        // If any preference was left at the default value, instead clear it to "None"
+        // as this is what the backend expects.
+        if (currentValues[pref] === defaultValues[pref]) {
+          delete currentValues[pref];
+        }
+      }
+      return currentValues;
+    }
   };
 
   // Retrieve searchResults automatically on initial component load
@@ -85,7 +141,19 @@ export default function AdvancedSearchContainer(props) {
         {isLoading ? (
           <Skeleton active title={false} paragraph={{ rows: 10 }} />
         ) : (
-          searchResults.map(elem => <SearchResult {...elem} key={elem.id} />)
+          <>
+            {searchResults
+              // Divide search results into pages of 10 results
+              .slice(pageNumber * 10, (pageNumber + 1) * 10)
+              .map(elem => (
+                <SearchResult {...elem} key={elem.id} />
+              ))}
+            <PageNavigation
+              totalResults={searchResults.length}
+              pageNumber={pageNumber}
+              setPageNumber={setPageNumber}
+            />
+          </>
         )}
       </div>
     </div>

@@ -3,14 +3,17 @@ import addIcon from "../../../styles/icons/add-48.png";
 import addIconHover from "../../../styles/icons/add-hover-48.png";
 import { connect } from "react-redux";
 import { addCity, getCityDetails } from "../../../state/actions";
-import CityDetail from "../Comparison/Modal";
+import CityDetail from "../../common/Modal";
 import { Button } from "antd";
 
 function SearchResult({ id, name, state, addCity, cityDetails }) {
   const addCityToComparison = () => addCity({ id, name, state });
   const [visible, setVisible] = useState(false);
   useEffect(() => {
-    if (visible && !cityDetails[id]) getCityDetails(id);
+    if (visible && !cityDetails[id]) {
+      console.log("Retrieving data for city", id);
+      getCityDetails(id);
+    }
   }, [id, visible, cityDetails]);
   return (
     <div className="search-result">
@@ -27,7 +30,7 @@ function SearchResult({ id, name, state, addCity, cityDetails }) {
       <CityDetail
         city={cityDetails[id]}
         visible={visible}
-        setVisible={setVisible}
+        toggleModal={() => setVisible(!visible)}
       />
     </div>
   );

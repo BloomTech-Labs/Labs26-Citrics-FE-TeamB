@@ -97,7 +97,11 @@ const updateRentalPredictions = ({ id }, dispatch) => {
   axios
     .get(`https://b-ds.citrics.dev/rental_viz/${id}`)
     .then(r => r?.data)
-    .then(predictions => dispatch(updateCityDetails(id, { predictions })))
+    .then(rentalPrediction =>
+      dispatch(
+        updateCityDetails(id, { rentalPrediction: rentalPrediction.viz })
+      )
+    )
     .catch(console.error);
 };
 

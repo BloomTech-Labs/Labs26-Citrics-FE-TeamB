@@ -6,15 +6,21 @@ import { addCity, getCityDetails } from "../../../state/actions";
 import CityDetail from "../../common/Modal";
 import { Button } from "antd";
 
-function SearchResult({ id, name, state, addCity, cityDetails }) {
+function SearchResult({
+  id,
+  name,
+  state,
+  addCity,
+  cityDetails,
+  getCityDetails
+}) {
   const addCityToComparison = () => addCity({ id, name, state });
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     if (visible && !cityDetails[id]) {
-      console.log("Retrieving data for city", id);
-      getCityDetails(id);
+      getCityDetails({ id, name, state });
     }
-  }, [id, visible, cityDetails]);
+  }, [id, name, state, visible, cityDetails, getCityDetails]);
   return (
     <div className="search-result">
       {`${name}, ${state}`}&nbsp;&nbsp;
@@ -28,7 +34,7 @@ function SearchResult({ id, name, state, addCity, cityDetails }) {
       />
       <Button onClick={() => setVisible(true)}>Details</Button>
       <CityDetail
-        city={cityDetails[id]}
+        city={cityDetails[id] ?? { id, name, state }}
         visible={visible}
         toggleModal={() => setVisible(!visible)}
       />

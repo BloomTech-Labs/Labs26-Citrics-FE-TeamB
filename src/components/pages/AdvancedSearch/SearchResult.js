@@ -17,7 +17,7 @@ function SearchResult(props) {
     if (visible && !cityDetails[id]) {
       getCityDetails({ id, name, state });
     }
-  }, [id, name, state, visible, cityDetails, getCityDetails]);
+  });
   return (
     <>
       <div className="search-result">

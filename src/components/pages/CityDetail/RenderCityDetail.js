@@ -3,7 +3,7 @@ import { Skeleton } from "antd";
 import { RentalPane, JobsPane, PopulationPane, WeatherPane } from "./panes";
 export default function RenderCityDetail({ city }) {
   return (
-    <div className="city-detail-card">
+    <div className="city-detail-card" data-testid="city-detail-card">
       {city?.image ? (
         <div
           className="custom-image-details"

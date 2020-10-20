@@ -36,7 +36,8 @@ export default function PopulationPane({ population }) {
       name: "",
       plotX: ageGroups,
       plotY: groupPercent,
-      graphName: "Age groups"
+      graphName: "Age groups",
+      xLabel: "Year"
     });
     return (
       <Plot

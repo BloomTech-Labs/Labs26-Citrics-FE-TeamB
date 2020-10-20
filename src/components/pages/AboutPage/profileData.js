@@ -106,38 +106,65 @@ export const zackData = {
 };
 
 export const alanData = {
-  name: "",
-  role: "",
-  image: "",
-  altImage: "",
-  github: "",
-  email: "",
-  linkedin: "",
+  name: "Alan Lee",
+  role: "Web Developer",
+  image: "https://i.imgur.com/ueHbN2x.png",
+  altImage: "https://i.imgur.com/ccPPRUD.png",
+  github: "https://github.com/alanblee",
+  email: "mailto:alanbenlee12@gmail.com",
+  linkedin: "https://www.linkedin.com/in/alanlee321/",
   details: [
     {
-      body: <p></p>
+      body: (
+        <p>
+          Motivated developer with experience creating custom websites. Strong
+          collaboration skills required to deliver projects on time while
+          working with diverse remote teams. Outside of the code, I enjoy being
+          out in nature hiking and rock climbing.
+        </p>
+      )
     }
   ]
 };
 
 export const davidData = {
-  name: "",
-  role: "",
-  image: "",
-  altImage: "",
-  github: "",
-  email: "",
-  linkedin: "",
+  name: "David Horstman",
+  role: "Web Developer",
+  image: "https://i.imgur.com/jF51x65.png",
+  altImage: "https://i.imgur.com/1QHV5FV.png",
+  github: "https://github.com/ddhorstman",
+  email: "mailto:horstmandd@gmail.com",
+  linkedin: "https://www.linkedin.com/in/david-horstman/",
   details: [
     {
-      body: <p></p>
+      body: (
+        <p>
+          Software Engineer with strong programming skills and broad experience,
+          currently specialized in Web Development. Background in computer
+          science education and research science. Recent Lambda School graduate
+          with an MA in Chemistry from Columbia and a BS in Biochemistry from
+          UCSD.
+        </p>
+      )
+    },
+    {
+      header: "Jack of many trades, master of some",
+      body: (
+        <p>
+          Currently Full Stack Web Developer, previously High School engineering
+          teacher and Biophysical Chemist. Avid tinkerer, singer, dancer, and
+          hiker. I love pushing myself to learn new languages and take on
+          difficult challenges; if I'm not outside my comfort zone, I'm not
+          having fun.
+        </p>
+      )
     }
   ]
 };
 
 export const lyndsiData = {
   name: "",
-  role: "",
+  role: "Web Developer",
   image: "",
   altImage: "",
   github: "",
@@ -152,7 +179,7 @@ export const lyndsiData = {
 
 export const racheleData = {
   name: "",
-  role: "",
+  role: "Web Developer",
   image: "",
   altImage: "",
   github: "",

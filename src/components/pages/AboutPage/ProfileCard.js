@@ -31,6 +31,7 @@ export default function ProfileCard({
   const [cardImage, setCardImage] = useState(image);
   return (
     <Card
+      className={name.split(" ")[0]}
       style={{ width: 250 }}
       cover={
         <img

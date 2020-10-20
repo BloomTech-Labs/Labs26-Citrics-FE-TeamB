@@ -55,3 +55,28 @@ export const bhavaniData = {
     }
   ]
 };
+
+export const ekramData = {
+  name: "Ekram Ahmed",
+  role: "Team Project Lead",
+  image: "https://i.imgur.com/vBnpIEC.png",
+  altImage: "https://i.imgur.com/4haF4Tz.png",
+  github: "https://github.com/Ekram49",
+  email: "mailto:ekramullahzaki@gmail.com",
+  linkedin: "https://www.linkedin.com/in/ekram-ullah-ahmed/",
+  details: [
+    {
+      body: (
+        <p>
+          With a background in Maritime science and Marine engineering, and
+          being blessed of having the opportunity of working onboard ocean-going
+          vessel, I and eager to utilize my knowledge and experience towards my
+          new career of Data Science. I want to learn new technical skills in
+          data science, enhance my knowledge in ocean & marine science and keep
+          educating myself in order to fulfill my ultimate goal, which is to
+          have a humble contribution towards ocean sustainability.
+        </p>
+      )
+    }
+  ]
+};

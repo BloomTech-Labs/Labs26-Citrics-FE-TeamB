@@ -12,7 +12,7 @@ import dataScience from "../../../styles/icons/dataScience.png";
 import webDev from "../../../styles/icons/webDev.png";
 
 import ProfileCard from "./ProfileCard";
-import { bhavaniData } from "./profileData";
+import { bhavaniData, ekramData } from "./profileData";
 
 const { Meta } = Card;
 
@@ -69,104 +69,7 @@ const RenderAboutPage = ({ returnToHome }) => {
         {/* Data Science - Ekram, Zack */}
 
         {/* Ekram */}
-        <Card
-          style={{ width: 250 }}
-          cover={
-            <img
-              alt="Ekram Ahmed"
-              src="https://i.imgur.com/vBnpIEC.png"
-              onMouseOver={e =>
-                (e.currentTarget.src = "https://i.imgur.com/4haF4Tz.png")
-              }
-              onMouseOut={e => {
-                e.currentTarget.src = "https://i.imgur.com/vBnpIEC.png";
-              }}
-            />
-          }
-          actions={[
-            <a
-              href="https://github.com/Ekram49"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <GithubOutlined key="github" />
-            </a>,
-            <a
-              href="mailto:ekramullahzaki@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MailOutlined key="email" />
-            </a>,
-            <a
-              href="https://www.linkedin.com/in/ekram-ullah-ahmed/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LinkedinOutlined key="linkedin" />
-            </a>
-          ]}
-        >
-          <Meta
-            avatar={<Avatar src={dataScience} />}
-            title="Ekram Ahmed"
-            description="Data Scientist"
-          />
-
-          {/* Modal functionality */}
-          <Button
-            className="modal-button"
-            type="primary"
-            onClick={() => setEkramModalVisibility(true)}
-          >
-            About me
-          </Button>
-          <Modal
-            title="About me"
-            centered
-            visible={ekramModalVisibility}
-            onOk={() => setEkramModalVisibility(false)}
-            onCancel={() => setEkramModalVisibility(false)}
-          >
-            <p>
-              With a background in Maritime science and Marine engineering, and
-              being blessed of having the opportunity of working onboard
-              ocean-going vessel, I and eager to utilize my knowledge and
-              experience towards my new career of Data Science. I want to learn
-              new technical skills in data science, enhance my knowledge in
-              ocean & marine science and keep educating myself in order to
-              fulfill my ultimate goal, which is to have a humble contribution
-              towards ocean sustainability.
-            </p>
-            <Divider>Contact</Divider>
-            <div
-              className="inner-buttons"
-              style={{ display: "flex", justifyContent: "space-evenly" }}
-            >
-              <Button
-                href="https://github.com/Ekram49"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </Button>
-              <Button
-                href="mailto:ekramullahzaki@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Email
-              </Button>
-              <Button
-                href="https://www.linkedin.com/in/ekram-ullah-ahmed/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LinkedIn
-              </Button>
-            </div>
-          </Modal>
-        </Card>
+        <ProfileCard {...ekramData} />
 
         {/* Zack */}
         <Card

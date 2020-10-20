@@ -1,12 +1,24 @@
-.rental-price-tab {
-  color: @success-color;
-  font-size: @h3size;
-}
 .housing-pane {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 100%;
 
+  .metrics-container.rental {
+    width: 100%;
+
+    .rental-price-tab {
+      color: @success-color;
+      font-size: @h3size;
+      width: 100%;
+
+      .rental-data-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+    }
+  }
   .rent-percent-change {
     margin: 0px 15px;
     &.up {

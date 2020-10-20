@@ -104,3 +104,63 @@ export const zackData = {
     }
   ]
 };
+
+export const alanData = {
+  name: "",
+  role: "",
+  image: "",
+  altImage: "",
+  github: "",
+  email: "",
+  linkedin: "",
+  details: [
+    {
+      body: <p></p>
+    }
+  ]
+};
+
+export const davidData = {
+  name: "",
+  role: "",
+  image: "",
+  altImage: "",
+  github: "",
+  email: "",
+  linkedin: "",
+  details: [
+    {
+      body: <p></p>
+    }
+  ]
+};
+
+export const lyndsiData = {
+  name: "",
+  role: "",
+  image: "",
+  altImage: "",
+  github: "",
+  email: "",
+  linkedin: "",
+  details: [
+    {
+      body: <p></p>
+    }
+  ]
+};
+
+export const racheleData = {
+  name: "",
+  role: "",
+  image: "",
+  altImage: "",
+  github: "",
+  email: "",
+  linkedin: "",
+  details: [
+    {
+      body: <p></p>
+    }
+  ]
+};

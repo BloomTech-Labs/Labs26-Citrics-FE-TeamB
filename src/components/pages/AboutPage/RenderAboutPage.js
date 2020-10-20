@@ -12,7 +12,15 @@ import dataScience from "../../../styles/icons/dataScience.png";
 import webDev from "../../../styles/icons/webDev.png";
 
 import ProfileCard from "./ProfileCard";
-import { bhavaniData, ekramData, zackData } from "./profileData";
+import {
+  bhavaniData,
+  ekramData,
+  zackData,
+  alanData,
+  davidData,
+  lyndsiData,
+  racheleData
+} from "./profileData";
 
 const { Meta } = Card;
 

@@ -26,7 +26,7 @@ export default function PageNavigation({
         <LeftOutlined />
       </Button>
       {/* Page number starts at 0, but we want our display to start at 1 */}
-      {`Page ${pageNumber + 1} of ${lastPage + 1}`}
+      {`  Page ${pageNumber + 1} of ${lastPage + 1}  `}
       <Button disabled={pageNumber === lastPage} onClick={goToNextPage}>
         <RightOutlined />
       </Button>

@@ -39,6 +39,8 @@ export default function RentalPane({ rent, predictions }) {
       plotX: JSON.parse(predictions[roomType.toLowerCase()]).data[1].x,
       plotY: JSON.parse(predictions[roomType.toLowerCase()]).data[1].y,
       type: "line",
+      xLabel: "Year",
+      yLabel: "Price $",
       graphName: `${roomType} price predictions`
     });
 

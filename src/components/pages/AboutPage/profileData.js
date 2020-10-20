@@ -163,31 +163,70 @@ export const davidData = {
 };
 
 export const lyndsiData = {
-  name: "",
+  name: "Lyndsi Kay Williams",
   role: "Web Developer",
-  image: "",
-  altImage: "",
-  github: "",
-  email: "",
-  linkedin: "",
+  image: "https://i.imgur.com/KpOZXeg.png",
+  altImage: "https://i.imgur.com/Dd61zD4.png",
+  github: "https://github.com/lyndsiWilliams",
+  email: "mailto:lyndsikaywilliams@gmail.com",
+  linkedin: "https://www.linkedin.com/in/lyndsiwilliams/",
   details: [
     {
-      body: <p></p>
+      body: (
+        <p>
+          I am a full-stack web developer with a strong love for Front End. My
+          passion for programming shows in my late-night adventures getting lost
+          in my latest project. I ensure sustainable working practices by
+          investing in breaks that typically involve video games. The Pomodoro
+          technique will save your life in this career!
+        </p>
+      )
+    },
+    {
+      header: "Teamwork makes the dream work",
+      body: (
+        <p>
+          I am an eager worker and a team player! Good communication is one of
+          the most important aspects to an efficient, productive team. I have
+          seen amazing things produced from teams that took the extra effort to
+          meet and plan properly - these tactics are vital to a proper working
+          environment!
+        </p>
+      )
     }
   ]
 };
 
 export const racheleData = {
-  name: "",
+  name: "Rachele Edwards",
   role: "Web Developer",
-  image: "",
-  altImage: "",
-  github: "",
-  email: "",
-  linkedin: "",
+  image: "https://i.imgur.com/UR0sA0t.png",
+  altImage: "https://i.imgur.com/lXJcpk0.png",
+  github: "https://github.com/berachele",
+  email: "mailto:berachele425@gmail.com",
+  linkedin: "https://www.linkedin.com/in/berachele/",
   details: [
     {
-      body: <p></p>
+      body: (
+        <p>
+          Hello, I’m Rachele! I love building functional apps and being able to
+          create something that starts with an idea. Backend is my strong suit,
+          but I love design and amping out my frontend skills. My dream job
+          would be to work with a company that values hard work and has a hunger
+          to improve our product and stretches our employees to be the best we
+          can be. I truly believe that a successful company derives from a team
+          of positive, caring, and constructive employees.
+        </p>
+      )
+    },
+    {
+      header: "Fun fact",
+      body: (
+        <p>
+          “Not a daredevil, but love adventure! I enjoy many outdoor activities
+          with family such as dirt-biking, Jeeping, and snowboarding”
+        </p>
+      )
     }
   ]
 };

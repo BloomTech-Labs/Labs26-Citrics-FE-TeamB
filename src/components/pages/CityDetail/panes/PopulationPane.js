@@ -5,7 +5,7 @@ import LoadingSkeleton from "./LoadingSkeleton";
 //icon
 import popIcon from "../../../../styles/icons/pop-96.png";
 
-export default function PopulationPane({ population }) {
+export default function PopulationPane({ population, prediction }) {
   // stlye object for making the graphs responsive
   let style = { width: "100%", height: "100%" };
   // Functions to generate graphs for age group
@@ -49,13 +49,32 @@ export default function PopulationPane({ population }) {
   };
   // Function to create the trand graph
   const generateTrendGraph = () => {
+    console.log(JSON.parse(prediction.pop_density));
     const { dataPlot, layout } = lineGraph({
       name: "",
-      plotX: JSON.parse(population.viz).data[0].x,
-      plotY: JSON.parse(population.viz).data[0].y,
-      graphName: "Population Trend",
+      plotX: JSON.parse(prediction.total_pop).data[1].x,
+      plotY: JSON.parse(prediction.total_pop).data[1].y,
+      graphName: "Population Trend Predictions",
       xLabel: "Year",
       yLabel: "Population Count"
+    });
+    return (
+      <Plot
+        data={dataPlot}
+        layout={{ ...layout, showlegend: false }}
+        style={style}
+      />
+    );
+  };
+  const generateDensityGraph = () => {
+    console.log(JSON.parse(prediction.pop_density));
+    const { dataPlot, layout } = lineGraph({
+      name: "",
+      plotX: JSON.parse(prediction.pop_density).data[1].x,
+      plotY: JSON.parse(prediction.pop_density).data[1].y,
+      graphName: "Population Density Predictions",
+      xLabel: "Year",
+      yLabel: "Density %"
     });
     return (
       <Plot
@@ -76,15 +95,12 @@ export default function PopulationPane({ population }) {
           />
           <h2>Population:</h2>
         </div>
-        {population ? (
+        {population && prediction ? (
           <div>
-            <p>
-              Current total population:{" "}
-              <span>{population.data.total_pop.toLocaleString()}</span>
-            </p>
             <div className="population-graph-container">
-              <div className="population-graph">{generateAgeGraph()}</div>
               <div className="population-graph">{generateTrendGraph()}</div>
+              <div className="population-graph">{generateAgeGraph()}</div>
+              <div className="population-graph">{generateDensityGraph()}</div>
             </div>
           </div>
         ) : (

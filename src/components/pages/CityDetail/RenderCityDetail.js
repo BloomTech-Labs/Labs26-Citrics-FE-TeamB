@@ -25,13 +25,16 @@ export default function RenderCityDetail({ city }) {
           <Skeleton active title={{ width: "30%" }} paragraph={false} />
         )}
       </h3>
-
-      <WeatherPane
-        weather={city.weather}
-        currentWeather={city.currentWeather}
-      />
-      <div className="rental-pane-container">
-        <RentalPane rent={city.rent} predictions={city.rentalPrediction} />
+      <div className="pane-container">
+        <div>
+          <WeatherPane
+            weather={city.weather}
+            currentWeather={city.currentWeather}
+          />
+        </div>
+        <div className="rental-pane-container">
+          <RentalPane rent={city.rent} predictions={city.rentalPrediction} />
+        </div>
       </div>
 
       <JobsPane jobs={city.jobs} unemployment={city.unemployRate} />

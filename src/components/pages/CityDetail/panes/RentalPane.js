@@ -73,8 +73,8 @@ export default function RentalPane({ rent, predictions }) {
                 {aptTypes.map((name, idx) => (
                   <TabPane key={idx} tab={name} className="rental-price-tab">
                     <div className="rental-data-container">
-                      ${rent[name.toLowerCase()]}/month
-                      {renderPrediction(name)}
+                      <div>${rent[name.toLowerCase()]}/month</div>
+                      <div>{renderPrediction(name)}</div>
                     </div>
                   </TabPane>
                 ))}

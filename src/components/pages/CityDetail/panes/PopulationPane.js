@@ -74,7 +74,7 @@ export default function PopulationPane({ population, prediction }) {
       plotY: JSON.parse(prediction.pop_density).data[1].y,
       graphName: "Population Density Predictions",
       xLabel: "Year",
-      yLabel: "Density %"
+      yLabel: "Density"
     });
     return (
       <Plot

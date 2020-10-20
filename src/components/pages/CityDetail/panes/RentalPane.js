@@ -68,7 +68,6 @@ export default function RentalPane({ rent, predictions }) {
         <div className="housing-pane">
           {predictions && rent ? (
             <>
-              <PriceDisplay change={rent.rental_pct_chg} />
               {/* This JSX fragment contains everything shown when not loading */}
               <Tabs defaultActiveKey="1" className="metrics-container rental">
                 {aptTypes.map((name, idx) => (

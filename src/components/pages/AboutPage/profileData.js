@@ -1,5 +1,6 @@
 export const bhavaniData = {
   name: "Bhavani Rajan",
+  role: "Team Project Lead",
   image: "https://i.imgur.com/9TcokzL.png",
   altImage: "https://i.imgur.com/fA047dl.png",
   github: "https://github.com/Bhavani-Rajan",

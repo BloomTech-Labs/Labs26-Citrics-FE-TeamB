@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-import projectLead from "../../../styles/icons/projectLead.jpg";
-
 import { Card, Avatar, Modal, Button, Divider } from "antd";
 import {
   GithubOutlined,
@@ -9,10 +7,19 @@ import {
   LinkedinOutlined
 } from "@ant-design/icons";
 
+import projectLead from "../../../styles/icons/projectLead.jpg";
+import dataScience from "../../../styles/icons/dataScience.png";
+import webDev from "../../../styles/icons/webDev.png";
+const avatars = {
+  "Team Project Lead": projectLead,
+  "Data Scientist": dataScience,
+  "Web Developer": webDev
+};
 const { Meta } = Card;
 
 export default function ProfileCard({
   name,
+  role,
   image,
   altImage,
   github,
@@ -45,9 +52,9 @@ export default function ProfileCard({
       ]}
     >
       <Meta
-        avatar={<Avatar src={projectLead} />}
+        avatar={<Avatar src={avatars[role]} />}
         title={name}
-        description="Team Project Lead"
+        description={role}
       />
 
       {/* Modal functionality */}
@@ -65,6 +72,15 @@ export default function ProfileCard({
         visible={isVisible}
         onOk={() => setVisibility(false)}
         onCancel={() => setVisibility(false)}
+        footer={[
+          <Button
+            type="primary"
+            key="close"
+            onClick={() => setVisibility(false)}
+          >
+            Close
+          </Button>
+        ]}
       >
         <p>
           Data Scientist with a background is as a Java Programmer with 3 years
@@ -97,25 +113,13 @@ export default function ProfileCard({
           className="inner-buttons"
           style={{ display: "flex", justifyContent: "space-evenly" }}
         >
-          <Button
-            href="https://github.com/Bhavani-Rajan"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <Button href={github} target="_blank" rel="noopener noreferrer">
             GitHub
           </Button>
-          <Button
-            href="mailto:bhava.rajan.6@gmail.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <Button href={email} target="_blank" rel="noopener noreferrer">
             Email
           </Button>
-          <Button
-            href="https://www.linkedin.com/in/bhavani-rajan/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <Button href={linkedin} target="_blank" rel="noopener noreferrer">
             LinkedIn
           </Button>
         </div>

@@ -1,8 +1,5 @@
 // Library imports
-import React, { useState, useEffect } from "react";
-// Redux
-import { connect } from "react-redux";
-import { closeDrawer } from "../../../state/actions";
+import React, { useState } from "react";
 // Styling
 import { Card, Avatar, Modal, Button, Divider } from "antd";
 import {
@@ -13,11 +10,10 @@ import {
 import projectLead from "../../../styles/icons/projectLead.jpg";
 import dataScience from "../../../styles/icons/dataScience.png";
 import webDev from "../../../styles/icons/webDev.png";
-import { Link } from "react-router-dom";
 
 const { Meta } = Card;
 
-const RenderAboutPage = ({ closeDrawer }) => {
+const RenderAboutPage = ({ returnToHome }) => {
   // Modal state
   const [bhavaniModalVisibility, setBhavaniModalVisibility] = useState(false);
   const [ekramModalVisibility, setEkramModalVisibility] = useState(false);
@@ -27,15 +23,10 @@ const RenderAboutPage = ({ closeDrawer }) => {
   const [lyndsiModalVisibility, setLyndsiModalVisibility] = useState(false);
   const [racheleModalVisibility, setRacheleModalVisibility] = useState(false);
 
-  // This closes the drawer when the user is on the page
-  useEffect(() => {
-    closeDrawer();
-  }, [closeDrawer]);
-
   return (
     <div className="about-container">
-      <Button className="home-btn">
-        <Link to="/">Home</Link>
+      <Button className="home-btn" onClick={returnToHome}>
+        Home
       </Button>
       {/* ----- Introduction ----- */}
       <section className="about-introduction">
@@ -816,4 +807,4 @@ const RenderAboutPage = ({ closeDrawer }) => {
   );
 };
 
-export default connect(null, { closeDrawer })(RenderAboutPage);
+export default RenderAboutPage;

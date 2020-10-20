@@ -1,10 +1,26 @@
 // React
 import React from "react";
-// Component functionality
+import { connect } from "react-redux";
+import { closeDrawer, openDrawer } from "../../../state/actions";
+
 import RenderAboutPage from "./RenderAboutPage";
 
-const AboutPageContainer = () => {
-  return <RenderAboutPage />;
-};
+class AboutPageContainer extends React.Component {
+  componentDidMount() {
+    // When page loads, close drawer for better visibility
+    this.props.closeDrawer();
+  }
 
-export default AboutPageContainer;
+  returnToHome = () => {
+    // If not on mobile, re-open drawer
+    if (window.innerWidth > 1000) this.props.openDrawer();
+    // Go to the homepage
+    this.props.history.push("/");
+  };
+
+  render() {
+    return <RenderAboutPage returnToHome={this.returnToHome} />;
+  }
+}
+
+export default connect(null, { closeDrawer, openDrawer })(AboutPageContainer);

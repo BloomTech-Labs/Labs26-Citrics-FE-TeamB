@@ -2,20 +2,26 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 100%;
+  max-width: 63%;
+
+  @media @l-tablet {
+    max-width: 83%;
+  }
+  @media @tablet {
+    max-width: 100%;
+  }
 
   .metrics-container.rental {
     width: 100%;
-
     .rental-price-tab {
       color: @success-color;
       font-size: @h3size;
       width: 100%;
 
       .rental-data-container {
-        display: flex;
-        flex-direction: column;
         width: 100%;
+        @media @l-tablet {
+        }
       }
     }
   }

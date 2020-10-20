@@ -29,3 +29,17 @@ span {
 .add-to-compare-btn {
   width: 25px;
 }
+
+.cities-container {
+  display: flex;
+  width: 25%;
+  justify-content: space-between;
+  margin: 2% 0;
+  .city-name {
+    cursor: pointer;
+    transition: 0.5s all;
+    &:hover {
+      color: @primary-color;
+    }
+  }
+}

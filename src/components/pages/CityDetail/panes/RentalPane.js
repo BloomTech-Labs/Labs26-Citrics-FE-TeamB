@@ -13,25 +13,25 @@ export default function RentalPane({ rent, predictions }) {
   const aptTypes = ["Studio", "1BR", "2BR", "3BR", "4BR"];
 
   // Make a color-coded price change display
-  const PriceDisplay = ({ change }) => {
-    change = Math.round(change * 100);
-    let indicator = "";
-    if (change < 0) {
-      indicator = " down";
-      change += "%";
-    } else {
-      if (change > 0) {
-        indicator = " up";
-      }
-      change = "+" + change + "%";
-    }
-    return (
-      <p>
-        Trend:
-        <span className={"rent-percent-change" + indicator}>{change}</span>
-      </p>
-    );
-  };
+  // const PriceDisplay = ({ change }) => {
+  //   change = Math.round(change * 100);
+  //   let indicator = "";
+  //   if (change < 0) {
+  //     indicator = " down";
+  //     change += "%";
+  //   } else {
+  //     if (change > 0) {
+  //       indicator = " up";
+  //     }
+  //     change = "+" + change + "%";
+  //   }
+  // return (
+  //   <p>
+  //     Trend:
+  //     <span className={"rent-percent-change" + indicator}>{change}</span>
+  //   </p>
+  // );
+  // };
   // Takes the roomtype from tab pan loop and generates a graph for each room
   const renderPrediction = roomType => {
     const { dataPlot, layout } = lineGraph({
@@ -41,7 +41,7 @@ export default function RentalPane({ rent, predictions }) {
       type: "line",
       xLabel: "Year",
       yLabel: "Price",
-      graphName: `${roomType} price predictions`
+      graphName: `${roomType} Price Predictions`
     });
 
     return (
@@ -73,8 +73,8 @@ export default function RentalPane({ rent, predictions }) {
                 {aptTypes.map((name, idx) => (
                   <TabPane key={idx} tab={name} className="rental-price-tab">
                     <div className="rental-data-container">
-                      ${rent[name.toLowerCase()]}/month
-                      {renderPrediction(name)}
+                      <div>${rent[name.toLowerCase()]}/month</div>
+                      <div>{renderPrediction(name)}</div>
                     </div>
                   </TabPane>
                 ))}

@@ -70,8 +70,9 @@ const updateMetrics = async ({ id }, dispatch) => {
 
   // Request job data after getting other metrics to improve performance
   updateJobs({ id }, dispatch);
-  // Updates city details with rental predictions - calling it separately incase of performance slow down
+  // Updates city details with rental and population predictions - calling it separately incase of performance slow down
   updateRentalPredictions({ id }, dispatch);
+  updatePopulationPredictions({ id }, dispatch);
 
   const details = {
     weather: data.weather,
@@ -94,12 +95,21 @@ const updateJobs = ({ id }, dispatch) => {
 // Retrieves rental prediction data
 const updateRentalPredictions = ({ id }, dispatch) => {
   axios
-    .get(`https://b-ds.citrics.dev/rental_viz/${id}`)
+    .get(`https://b-ds.citrics.dev/predict_rental/${id}`)
     .then(r => r?.data)
     .then(rentalPrediction =>
       dispatch(
         updateCityDetails(id, { rentalPrediction: rentalPrediction.viz })
       )
+    )
+    .catch(console.error);
+};
+const updatePopulationPredictions = ({ id }, dispatch) => {
+  axios
+    .get(`https://b-ds.citrics.dev/predict_pop/${id}`)
+    .then(r => r?.data)
+    .then(popPrediction =>
+      dispatch(updateCityDetails(id, { popPrediction: popPrediction.viz }))
     )
     .catch(console.error);
 };

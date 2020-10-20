@@ -38,7 +38,10 @@ export default function RenderCityDetail({ city }) {
       </div>
 
       <JobsPane jobs={city.jobs} unemployment={city.unemployRate} />
-      <PopulationPane population={city.population} />
+      <PopulationPane
+        population={city.population}
+        prediction={city.popPrediction}
+      />
     </div>
   );
 }

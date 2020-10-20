@@ -7,7 +7,7 @@ import RenderAboutPage from "./RenderAboutPage";
 
 class AboutPageContainer extends React.Component {
   componentDidMount() {
-    // When page loads, close drawer for better visibility
+    // When the page loads, close drawer for better visibility
     this.props.closeDrawer();
   }
 

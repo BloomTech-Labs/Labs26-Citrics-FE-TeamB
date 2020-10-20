@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+// UI components
 import { Card, Avatar, Modal, Button, Divider } from "antd";
 import {
   GithubOutlined,
@@ -7,6 +8,7 @@ import {
   LinkedinOutlined
 } from "@ant-design/icons";
 
+// Avatar icons and mapping to roles
 import projectLead from "../../../styles/icons/projectLead.jpg";
 import dataScience from "../../../styles/icons/dataScience.png";
 import webDev from "../../../styles/icons/webDev.png";
@@ -31,16 +33,20 @@ export default function ProfileCard({
   const [cardImage, setCardImage] = useState(image);
   return (
     <Card
+      //Give each card a class based on the first name of the person
+      // used in about-page.less
       className={name.split(" ")[0]}
       style={{ width: 250 }}
       cover={
         <img
           alt={name}
           src={cardImage}
+          // Swap to an alt image on mouseOver
           onMouseOver={() => setCardImage(altImage ?? image)}
           onMouseOut={() => setCardImage(image)}
         />
       }
+      // Contact buttons
       actions={[
         <a href={github} target="_blank" rel="noopener noreferrer">
           <GithubOutlined key="github" />
@@ -53,6 +59,7 @@ export default function ProfileCard({
         </a>
       ]}
     >
+      {/* Avatar with icon, name, and role */}
       <Meta
         avatar={<Avatar src={avatars[role]} />}
         title={name}
@@ -84,12 +91,15 @@ export default function ProfileCard({
           </Button>
         ]}
       >
+        {/* Details section */}
+        {/* Details are stored as an array of objects with a required JSX body and optional header string */}
         {details.map(({ header, body }) => (
           <>
             {header && <Divider>{header}</Divider>}
             {body}
           </>
         ))}
+        {/* Contact links */}
         <Divider>Contact</Divider>
         <div
           className="inner-buttons"

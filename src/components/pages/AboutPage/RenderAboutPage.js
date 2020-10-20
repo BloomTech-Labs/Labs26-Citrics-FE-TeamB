@@ -12,7 +12,7 @@ import dataScience from "../../../styles/icons/dataScience.png";
 import webDev from "../../../styles/icons/webDev.png";
 
 import ProfileCard from "./ProfileCard";
-import { bhavaniData, ekramData } from "./profileData";
+import { bhavaniData, ekramData, zackData } from "./profileData";
 
 const { Meta } = Card;
 
@@ -72,104 +72,7 @@ const RenderAboutPage = ({ returnToHome }) => {
         <ProfileCard {...ekramData} />
 
         {/* Zack */}
-        <Card
-          className="Zack"
-          style={{ width: 250 }}
-          cover={
-            <img
-              alt="Zack Murray"
-              src="https://i.imgur.com/jaELQtg.png"
-              onMouseOver={e =>
-                (e.currentTarget.src = "https://i.imgur.com/TgKYmKI.png")
-              }
-              onMouseOut={e => {
-                e.currentTarget.src = "https://i.imgur.com/jaELQtg.png";
-              }}
-            />
-          }
-          actions={[
-            <a
-              href="https://github.com/zack-murray"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <GithubOutlined key="github" />
-            </a>,
-            <a
-              href="mailto:zachery.murray@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <MailOutlined key="email" />
-            </a>,
-            <a
-              href="https://www.linkedin.com/in/zack-murray/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LinkedinOutlined key="linkedin" />
-            </a>
-          ]}
-        >
-          <Meta
-            avatar={<Avatar src={dataScience} />}
-            title="Zack Murray"
-            description="Data Scientist"
-          />
-
-          {/* Modal functionality */}
-          <Button
-            className="modal-button"
-            type="primary"
-            onClick={() => setZackModalVisibility(true)}
-          >
-            About me
-          </Button>
-          <Modal
-            title="About me"
-            centered
-            visible={zackModalVisibility}
-            onOk={() => setZackModalVisibility(false)}
-            onCancel={() => setZackModalVisibility(false)}
-          >
-            <p>
-              Data scientist with a passion for solving problems and exploring
-              algorithms. Friendship ended with SQL, now machine learning is my
-              best friend. Just kidding, I still love you SQL. Have a background
-              in business management and customer service, both are very
-              important to me and have been instrumental in molding the
-              programmer I am today. Physically present in CT, but my heart
-              still resides in CO.
-            </p>
-            <Divider>Contact</Divider>
-            <div
-              className="inner-buttons"
-              style={{ display: "flex", justifyContent: "space-evenly" }}
-            >
-              <Button
-                href="https://github.com/zack-murray"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </Button>
-              <Button
-                href="mailto:zachery.murray@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Email
-              </Button>
-              <Button
-                href="https://www.linkedin.com/in/zack-murray/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                LinkedIn
-              </Button>
-            </div>
-          </Modal>
-        </Card>
+        <ProfileCard {...zackData} />
       </section>
 
       {/* Web - Alan, David, Lyndsi, Rachele */}

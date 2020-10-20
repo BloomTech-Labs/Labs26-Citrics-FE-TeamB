@@ -58,7 +58,7 @@ export const bhavaniData = {
 
 export const ekramData = {
   name: "Ekram Ahmed",
-  role: "Team Project Lead",
+  role: "Data Scientist",
   image: "https://i.imgur.com/vBnpIEC.png",
   altImage: "https://i.imgur.com/4haF4Tz.png",
   github: "https://github.com/Ekram49",
@@ -75,6 +75,30 @@ export const ekramData = {
           data science, enhance my knowledge in ocean & marine science and keep
           educating myself in order to fulfill my ultimate goal, which is to
           have a humble contribution towards ocean sustainability.
+        </p>
+      )
+    }
+  ]
+};
+
+export const zackData = {
+  name: "Zack Murray",
+  role: "Data Scientist",
+  image: "https://i.imgur.com/jaELQtg.png",
+  altImage: "https://i.imgur.com/TgKYmKI.png",
+  github: "https://github.com/zack-murray",
+  email: "mailto:zachery.murray@gmail.com",
+  linkedin: "https://www.linkedin.com/in/zack-murray/",
+  details: [
+    {
+      body: (
+        <p>
+          Data scientist with a passion for solving problems and exploring
+          algorithms. Friendship ended with SQL, now machine learning is my best
+          friend. Just kidding, I still love you SQL. Have a background in
+          business management and customer service, both are very important to
+          me and have been instrumental in molding the programmer I am today.
+          Physically present in CT, but my heart still resides in CO.
         </p>
       )
     }

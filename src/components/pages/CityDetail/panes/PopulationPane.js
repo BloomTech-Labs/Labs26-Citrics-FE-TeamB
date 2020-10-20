@@ -66,6 +66,7 @@ export default function PopulationPane({ population, prediction }) {
       />
     );
   };
+
   // Creates the density prediction graph - pretty much the same as the trend graph. Will refactor when theres time
   const generateDensityGraph = () => {
     const { dataPlot, layout } = lineGraph({

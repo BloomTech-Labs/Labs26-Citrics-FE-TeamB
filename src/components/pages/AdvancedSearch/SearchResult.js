@@ -4,7 +4,6 @@ import addIconHover from "../../../styles/icons/add-hover-48.png";
 import { connect } from "react-redux";
 import { addCity, getCityDetails } from "../../../state/actions";
 import CityDetail from "../../common/Modal";
-import { Button } from "antd";
 
 function SearchResult(props) {
   const { id, name, state, addCity, cityDetails, getCityDetails } = props;
@@ -21,16 +20,19 @@ function SearchResult(props) {
   return (
     <>
       <div className="search-result">
-        {`${name}, ${state}`}&nbsp;&nbsp;
-        <img
-          src={addIcon}
-          alt="circle with plus sign in middle icon"
-          onClick={addCityToComparison}
-          onMouseOver={e => (e.currentTarget.src = addIconHover)}
-          onMouseOut={e => (e.currentTarget.src = addIcon)}
-          className="add-to-compare-btn"
-        />
-        <Button onClick={() => setVisible(true)}>Details</Button>
+        <div className="cities-container">
+          <div onClick={() => setVisible(true)} className="city-name">
+            {`${name}, ${state}`}&nbsp;&nbsp;
+          </div>
+          <img
+            src={addIcon}
+            alt="circle with plus sign in middle icon"
+            onClick={addCityToComparison}
+            onMouseOver={e => (e.currentTarget.src = addIconHover)}
+            onMouseOut={e => (e.currentTarget.src = addIcon)}
+            className="add-to-compare-btn"
+          />
+        </div>
       </div>
       {/* Modal to show city details */}
       <CityDetail

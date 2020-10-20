@@ -45,8 +45,8 @@ export default function SearchFilters({
         {/* RenderSearchFilter will render a popover with a Slider and range display inside it for each type of filter. */}
         {/* Population */}
         <RenderSearchFilter
-          title="Population"
           range
+          title="Population"
           min={POP_MIN}
           max={POP_MAX}
           step={10000}
@@ -62,6 +62,7 @@ export default function SearchFilters({
         />
         {/* Weather */}
         <RenderSearchFilter
+          range
           title="Weather"
           popoverTitle="Seasonal Temp Range"
           min={WEATHER_MIN}
@@ -84,11 +85,10 @@ export default function SearchFilters({
           min={RENT_MIN}
           max={RENT_MAX}
           step={100}
-          value={[searchPrefs.rent_min, searchPrefs.rent_max]}
+          value={searchPrefs.rent_max}
           tipFormatter={formatMoney}
-          onChange={([rent_min, rent_max]) =>
+          onChange={rent_max =>
             updateSearchPrefs({
-              rent_min,
               rent_max
             })
           }
@@ -99,7 +99,10 @@ export default function SearchFilters({
             <select
               id="rooms"
               name="rooms"
-              onChange={processSearchPrefsEvent}
+              onChange={e => {
+                processSearchPrefsEvent(e);
+                getSearchResults();
+              }}
               value={searchPrefs.rooms}
             >
               <option value="studio">Studio</option>

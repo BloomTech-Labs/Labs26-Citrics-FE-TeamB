@@ -94,7 +94,7 @@ const updateJobs = ({ id }, dispatch) => {
 // Retrieves rental prediction data
 const updateRentalPredictions = ({ id }, dispatch) => {
   axios
-    .get(`https://b-ds.citrics.dev/rental_viz/${id}`)
+    .get(`https://b-ds.citrics.dev/predict_rental/${id}`)
     .then(r => r?.data)
     .then(rentalPrediction =>
       dispatch(

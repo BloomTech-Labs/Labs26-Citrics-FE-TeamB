@@ -32,15 +32,23 @@ export default function RentalPane({ rent, predictions }) {
       </p>
     );
   };
+  // Takes the roomtype from tab pan loop and generates a graph for each room
   const renderPrediction = roomType => {
     const { dataPlot, layout } = lineGraph({
       name: "",
       plotX: JSON.parse(predictions[roomType.toLowerCase()]).data[1].x,
       plotY: JSON.parse(predictions[roomType.toLowerCase()]).data[1].y,
       type: "line",
-      graphName: `${roomType} prediction trend`
+      graphName: `${roomType} price predictions`
     });
-    return <Plot data={dataPlot} layout={{ ...layout, showlegend: false }} />;
+
+    return (
+      <Plot
+        data={dataPlot}
+        layout={{ ...layout, showlegend: false }}
+        style={{ width: "100%", height: "100%" }}
+      />
+    );
   };
 
   return (
@@ -56,18 +64,20 @@ export default function RentalPane({ rent, predictions }) {
         </div>
 
         <div className="housing-pane">
-          {rent ? (
+          {predictions && rent ? (
             <>
+              <PriceDisplay change={rent.rental_pct_chg} />
               {/* This JSX fragment contains everything shown when not loading */}
-              <Tabs defaultActiveKey="1">
+              <Tabs defaultActiveKey="1" className="metrics-container rental">
                 {aptTypes.map((name, idx) => (
                   <TabPane key={idx} tab={name} className="rental-price-tab">
-                    ${rent[name.toLowerCase()]}/month
-                    {predictions ? renderPrediction(name) : null}
+                    <div className="rental-data-container">
+                      ${rent[name.toLowerCase()]}/month
+                      {renderPrediction(name)}
+                    </div>
                   </TabPane>
                 ))}
               </Tabs>
-              <PriceDisplay change={rent.rental_pct_chg} />
             </>
           ) : (
             <LoadingSkeleton />

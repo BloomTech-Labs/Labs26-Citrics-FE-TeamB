@@ -11,50 +11,42 @@ import {
 
 const { Meta } = Card;
 
-export default function ProfileCard(props) {
+export default function ProfileCard({
+  name,
+  image,
+  altImage,
+  github,
+  email,
+  linkedin
+}) {
   const [isVisible, setVisibility] = useState(false);
+  const [cardImage, setCardImage] = useState(image);
   return (
     <Card
       style={{ width: 250 }}
       cover={
         <img
-          alt="Bhavani Rajan"
-          src="https://i.imgur.com/9TcokzL.png"
-          onMouseOver={e =>
-            (e.currentTarget.src = "https://i.imgur.com/fA047dl.png")
-          }
-          onMouseOut={e => {
-            e.currentTarget.src = "https://i.imgur.com/9TcokzL.png";
-          }}
+          alt={name}
+          src={cardImage}
+          onMouseOver={() => setCardImage(altImage ?? image)}
+          onMouseOut={() => setCardImage(image)}
         />
       }
       actions={[
-        <a
-          href="https://github.com/Bhavani-Rajan"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={github} target="_blank" rel="noopener noreferrer">
           <GithubOutlined key="github" />
         </a>,
-        <a
-          href="mailto:bhava.rajan.6@gmail.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={email} target="_blank" rel="noopener noreferrer">
           <MailOutlined key="email" />
         </a>,
-        <a
-          href="https://www.linkedin.com/in/bhavani-rajan/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href={linkedin} target="_blank" rel="noopener noreferrer">
           <LinkedinOutlined key="linkedin" />
         </a>
       ]}
     >
       <Meta
         avatar={<Avatar src={projectLead} />}
-        title="Bhavani Rajan"
+        title={name}
         description="Team Project Lead"
       />
 

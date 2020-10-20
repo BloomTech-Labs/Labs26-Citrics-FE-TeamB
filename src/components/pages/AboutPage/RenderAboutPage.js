@@ -12,19 +12,18 @@ import dataScience from "../../../styles/icons/dataScience.png";
 import webDev from "../../../styles/icons/webDev.png";
 
 import ProfileCard from "./ProfileCard";
+import { bhavaniData } from "./profileData";
 
 const { Meta } = Card;
 
 const RenderAboutPage = ({ returnToHome }) => {
   // Modal state
-  const [bhavaniModalVisibility, setBhavaniModalVisibility] = useState(false);
   const [ekramModalVisibility, setEkramModalVisibility] = useState(false);
   const [zackModalVisibility, setZackModalVisibility] = useState(false);
   const [alanModalVisibility, setAlanModalVisibility] = useState(false);
   const [davidModalVisibility, setDavidModalVisibility] = useState(false);
   const [lyndsiModalVisibility, setLyndsiModalVisibility] = useState(false);
   const [racheleModalVisibility, setRacheleModalVisibility] = useState(false);
-
   return (
     <div className="about-container">
       <Button className="home-btn" onClick={returnToHome}>
@@ -65,7 +64,7 @@ const RenderAboutPage = ({ returnToHome }) => {
 
       <section className="about-tpl-ds">
         {/* TPL - Bhavani */}
-        <ProfileCard />
+        <ProfileCard {...bhavaniData} />
 
         {/* Data Science - Ekram, Zack */}
 

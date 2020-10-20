@@ -37,7 +37,7 @@ export default function PopulationPane({ population }) {
       plotX: ageGroups,
       plotY: groupPercent,
       graphName: "Age groups",
-      xLabel: "Year"
+      yLabel: "Percentage %"
     });
     return (
       <Plot
@@ -53,7 +53,9 @@ export default function PopulationPane({ population }) {
       name: "",
       plotX: JSON.parse(population.viz).data[0].x,
       plotY: JSON.parse(population.viz).data[0].y,
-      graphName: "Population Trend"
+      graphName: "Population Trend",
+      xLabel: "Year",
+      yLabel: "Population Count"
     });
     return (
       <Plot

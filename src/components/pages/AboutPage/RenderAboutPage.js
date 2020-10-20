@@ -1,15 +1,6 @@
 // Library imports
-import React, { useState } from "react";
-// Styling
-import { Card, Avatar, Modal, Button, Divider } from "antd";
-
-import {
-  GithubOutlined,
-  MailOutlined,
-  LinkedinOutlined
-} from "@ant-design/icons";
-import dataScience from "../../../styles/icons/dataScience.png";
-import webDev from "../../../styles/icons/webDev.png";
+import React from "react";
+import { Button } from "antd";
 
 import ProfileCard from "./ProfileCard";
 import {
@@ -22,16 +13,7 @@ import {
   racheleData
 } from "./profileData";
 
-const { Meta } = Card;
-
 const RenderAboutPage = ({ returnToHome }) => {
-  // Modal state
-  const [ekramModalVisibility, setEkramModalVisibility] = useState(false);
-  const [zackModalVisibility, setZackModalVisibility] = useState(false);
-  const [alanModalVisibility, setAlanModalVisibility] = useState(false);
-  const [davidModalVisibility, setDavidModalVisibility] = useState(false);
-  const [lyndsiModalVisibility, setLyndsiModalVisibility] = useState(false);
-  const [racheleModalVisibility, setRacheleModalVisibility] = useState(false);
   return (
     <div className="about-container">
       <Button className="home-btn" onClick={returnToHome}>

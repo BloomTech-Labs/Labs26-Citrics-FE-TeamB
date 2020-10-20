@@ -90,6 +90,7 @@ export default function ProfileCard({
             {body}
           </>
         ))}
+        <Divider>Contact</Divider>
         <div
           className="inner-buttons"
           style={{ display: "flex", justifyContent: "space-evenly" }}

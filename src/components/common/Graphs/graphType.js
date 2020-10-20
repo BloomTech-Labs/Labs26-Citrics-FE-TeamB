@@ -42,7 +42,17 @@ export const lineGraph = (set1, set2, set3) => {
     },
     showlegend: true,
     title: set1.graphName ?? "",
-    autosize: true
+    autosize: true,
+    xaxis: {
+      title: {
+        text: set1.xLabel ?? ""
+      }
+    },
+    yaxis: {
+      title: {
+        text: set1.yLabel ?? ""
+      }
+    }
   };
   return {
     dataPlot,
@@ -106,7 +116,17 @@ export const barGraph = (set1, set2, set3) => {
       color: "#000"
     },
     showlegend: true,
-    barmode: set1.mode ? set1.mode : "group"
+    barmode: set1.mode ? set1.mode : "group",
+    xaxis: {
+      title: {
+        text: set1.xLabel ?? ""
+      }
+    },
+    yaxis: {
+      title: {
+        text: set1.yLabel ?? ""
+      }
+    }
   };
 
   return { dataPlot, layout };

@@ -11,7 +11,9 @@ export default class ComparisonGraphs extends React.Component {
         name: this.props.citiesData[id].name,
         plotX: JSON.parse(this.props.citiesData[id].unemployRate.viz).data[0].x,
         plotY: JSON.parse(this.props.citiesData[id].unemployRate.viz).data[0].y,
-        type: "line"
+        type: "line",
+        xLabel: "Year",
+        yLabel: "Percentage %"
       });
     }
     return unemployRate;
@@ -24,7 +26,9 @@ export default class ComparisonGraphs extends React.Component {
         name: this.props.citiesData[id].name,
         plotX: JSON.parse(this.props.citiesData[id].population.viz).data[0].x,
         plotY: JSON.parse(this.props.citiesData[id].population.viz).data[0].y,
-        type: "bar"
+        type: "bar",
+        xLabel: "Year",
+        yLabel: "Population Count"
       });
     }
     return cityPop;
@@ -44,7 +48,9 @@ export default class ComparisonGraphs extends React.Component {
           this.props.citiesData[id].rent["4br"]
         ],
         type: "bar",
-        orientation: "h"
+        orientation: "h",
+        xLabel: "Price $",
+        yLabel: "Room Type"
       });
     }
     return rentals;

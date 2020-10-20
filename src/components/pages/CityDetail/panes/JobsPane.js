@@ -55,7 +55,9 @@ export default function JobsPane({ jobs, unemployment }) {
       name: "",
       plotX: JSON.parse(unemployment.viz).data[0].x,
       plotY: JSON.parse(unemployment.viz).data[0].y,
-      graphName: "Unemployment Rate"
+      graphName: "Unemployment Rate",
+      xLabel: "Year",
+      yLabel: "Percentage %"
     });
     return (
       <Plot

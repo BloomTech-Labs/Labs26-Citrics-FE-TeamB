@@ -1,10 +1,12 @@
 import React from "react";
 import { Tabs } from "antd";
+import { lineGraph } from "../../../common/Graphs/graphType";
+import Plot from "react-plotly.js";
 import LoadingSkeleton from "./LoadingSkeleton";
 //icon
 import rentIcon from "../../../../styles/icons/rent-96.png";
 
-export default function RentalPane({ rent }) {
+export default function RentalPane({ rent, predictions }) {
   const { TabPane } = Tabs;
   // This list will be the titles of the tabs
   // it also matches the keys in rent (although they're all lowercase in rent)
@@ -30,6 +32,26 @@ export default function RentalPane({ rent }) {
       </p>
     );
   };
+  // Takes the roomtype from tab pan loop and generates a graph for each room
+  const renderPrediction = roomType => {
+    const { dataPlot, layout } = lineGraph({
+      name: "",
+      plotX: JSON.parse(predictions[roomType.toLowerCase()]).data[1].x,
+      plotY: JSON.parse(predictions[roomType.toLowerCase()]).data[1].y,
+      type: "line",
+      xLabel: "Year",
+      yLabel: "Price",
+      graphName: `${roomType} price predictions`
+    });
+
+    return (
+      <Plot
+        data={dataPlot}
+        layout={{ ...layout, showlegend: false }}
+        style={{ width: "100%", height: "100%" }}
+      />
+    );
+  };
 
   return (
     <div className="one-render-p">
@@ -44,17 +66,19 @@ export default function RentalPane({ rent }) {
         </div>
 
         <div className="housing-pane">
-          {rent ? (
+          {predictions && rent ? (
             <>
               {/* This JSX fragment contains everything shown when not loading */}
-              <Tabs defaultActiveKey="1">
+              <Tabs defaultActiveKey="1" className="metrics-container rental">
                 {aptTypes.map((name, idx) => (
                   <TabPane key={idx} tab={name} className="rental-price-tab">
-                    ${rent[name.toLowerCase()]}/month
+                    <div className="rental-data-container">
+                      ${rent[name.toLowerCase()]}/month
+                      {renderPrediction(name)}
+                    </div>
                   </TabPane>
                 ))}
               </Tabs>
-              <PriceDisplay change={rent.rental_pct_chg} />
             </>
           ) : (
             <LoadingSkeleton />

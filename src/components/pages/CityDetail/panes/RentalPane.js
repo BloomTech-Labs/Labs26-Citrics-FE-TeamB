@@ -1,5 +1,7 @@
 import React from "react";
 import { Tabs } from "antd";
+import { lineGraph } from "../../../common/Graphs/graphType";
+import Plot from "react-plotly.js";
 import LoadingSkeleton from "./LoadingSkeleton";
 //icon
 import rentIcon from "../../../../styles/icons/rent-96.png";
@@ -31,7 +33,14 @@ export default function RentalPane({ rent, predictions }) {
     );
   };
   const renderPrediction = roomType => {
-    console.log(JSON.parse(predictions[roomType.toLowerCase()]).data);
+    const { dataPlot, layout } = lineGraph({
+      name: "",
+      plotX: JSON.parse(predictions[roomType.toLowerCase()]).data[1].x,
+      plotY: JSON.parse(predictions[roomType.toLowerCase()]).data[1].y,
+      type: "line",
+      graphName: `${roomType} prediction trend`
+    });
+    return <Plot data={dataPlot} layout={{ ...layout, showlegend: false }} />;
   };
 
   return (

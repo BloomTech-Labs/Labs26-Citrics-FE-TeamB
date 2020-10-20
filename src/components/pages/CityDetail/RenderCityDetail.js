@@ -30,7 +30,10 @@ export default function RenderCityDetail({ city }) {
         weather={city.weather}
         currentWeather={city.currentWeather}
       />
-      <RentalPane rent={city.rent} predictions={city.rentalPrediction} />
+      <div className="rental-pane-container">
+        <RentalPane rent={city.rent} predictions={city.rentalPrediction} />
+      </div>
+
       <JobsPane jobs={city.jobs} unemployment={city.unemployRate} />
       <PopulationPane population={city.population} />
     </div>

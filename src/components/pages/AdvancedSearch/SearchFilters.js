@@ -40,7 +40,6 @@ export default function SearchFilters({
   };
   return (
     <div className="search-bar">
-      <h2>Filters:</h2>
       <div className="filter-container">
         {/* RenderSearchFilter will render a popover with a Slider and range display inside it for each type of filter. */}
         {/* Population */}

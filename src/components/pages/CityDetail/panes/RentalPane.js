@@ -41,7 +41,7 @@ export default function RentalPane({ rent, predictions }) {
       type: "line",
       xLabel: "Year",
       yLabel: "Price",
-      graphName: `${roomType} price predictions`
+      graphName: `${roomType} Price Predictions`
     });
 
     return (

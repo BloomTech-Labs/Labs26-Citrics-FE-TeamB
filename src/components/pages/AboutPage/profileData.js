@@ -1,3 +1,4 @@
+import React from "react";
 export const bhavaniData = {
   name: "Bhavani Rajan",
   role: "Team Project Lead",
@@ -5,5 +6,52 @@ export const bhavaniData = {
   altImage: "https://i.imgur.com/fA047dl.png",
   github: "https://github.com/Bhavani-Rajan",
   email: "mailto:bhava.rajan.6@gmail.com",
-  linkedin: "https://www.linkedin.com/in/bhavani-rajan/"
+  linkedin: "https://www.linkedin.com/in/bhavani-rajan/",
+  details: [
+    {
+      body: (
+        <p>
+          Data Scientist with a background is as a Java Programmer with 3 years
+          of corporate experience. I studied at Lambda School, currently working
+          as a Technical Project Lead at Lambda School to support the learning
+          and professional growth of other Lambda students while deepening my
+          skills in Data Science. My skill set includes Data Analysis, Machine
+          Learning Engineering, Predictive Analysis, Recommendation Systems, and
+          Data Engineering. I'm excited to take on a new challenge in the Data
+          Science universe.
+        </p>
+      )
+    },
+    {
+      header: "Technical Skills",
+      body: (
+        <>
+          <p>
+            Programming Expertise: ​Python (NumPy, Pandas,
+            Scikit-learn,Matplotlib, Seaborn), R, Java, SQL, PostgreSQL,
+            MongoDb, AS/400, DB2/400 and Excel
+          </p>
+          <p>Frameworks: ​TensorFlow, Keras, Flask, Fast API</p>
+          <p>
+            Skills​: Data analysis, Predictive analytics, Linear and
+            multivariate regressions, K-cluster analysis, Classification,
+            Machine learning products, Natural language processing, Neural
+            Networks, Github, Amazon EBS, Heroku
+          </p>
+        </>
+      )
+    },
+    {
+      header: "Hobbies",
+      body: (
+        <>
+          <p>Painting and gardening</p>
+          <img
+            alt="Bhavani's paintings"
+            src="https://i.imgur.com/C9JQEKZ.png"
+          />
+        </>
+      )
+    }
+  ]
 };

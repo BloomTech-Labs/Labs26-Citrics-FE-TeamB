@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Modal } from "antd";
-import { CityDetailPage } from "../pages/CityDetail";
+import CityDetailPane from "./CityDetailContainer";
 
 const ModalComponent = ({ visible, toggleModal, city = {} }) => {
   return (
@@ -17,7 +17,7 @@ const ModalComponent = ({ visible, toggleModal, city = {} }) => {
         </Button>
       ]}
     >
-      <CityDetailPage city={city} />
+      <CityDetailPane city={city} />
     </Modal>
   );
 };

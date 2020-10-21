@@ -1,1 +1,1 @@
-export { default as CityDetailPage } from './CityDetailContainer';
+export { default as CityDetailPane } from "./CityDetailContainer";

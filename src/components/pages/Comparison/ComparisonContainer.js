@@ -32,9 +32,10 @@ class ComparisonContainer extends React.Component {
     }
   }
   parseSelectedCities = props => {
-    // Using the new URLSearchParams class to extract values from the query
+    // Retrieve the contents of the query string from values given by Router
     const queryParams = new URLSearchParams(props.location.search);
-    // Must convert from iterator to array, and convert id from string to number
+    // Must convert from iterator to array and convert id from string to number
+    // This function assumes all query params are city names - hopefully they are
     const selectedCities = Array.from(queryParams.values()).map(id => ({
       id: Number(id)
     }));
@@ -43,11 +44,13 @@ class ComparisonContainer extends React.Component {
 
   // Get the data for each city and set it individually
   retrieveDataForCity = async id => {
+    // Fix a bug where some id's are undefined
     if (!id) return;
     await this.props.getCityDetails({ id });
   };
-  // Retrieving selectedCities from this.state instead of as a function argument
-  // would result in cityDetails using out-of-date information
+
+  // SelectedCities must be passed as an argument to this function
+  // Retrieving it from this.state would result in outdated information being processed
   retrieveCityDataIfNeeded = async selectedCities => {
     // Retrieve all the city data
     // Each city is updated independently, but we need to wait for all to finish

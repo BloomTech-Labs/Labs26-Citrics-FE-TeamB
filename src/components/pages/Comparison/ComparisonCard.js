@@ -6,8 +6,11 @@ import weather from "../../../styles/icons/weather-48.png";
 import population from "../../../styles/icons/pop-48.png";
 import pricing from "../../../styles/icons/pricing-48.png";
 
+// The Loading element used in this component
 function LoadingSkeleton() {
   return (
+    // This wrapper div with minWidth is necessary
+    // to prevent the Skeleton from collapsing to zero width
     <div style={{ minWidth: "150px" }}>
       <Skeleton active title={false} paragraph={{ rows: 1 }} />
     </div>
@@ -28,6 +31,7 @@ export default class ComparisonCard extends Component {
     return (
       <div className="card">
         <div className="comparison-card" data-testid="city-cards">
+          {/* Header Image */}
           {city.image ? (
             <div
               className="custom-image"
@@ -43,6 +47,7 @@ export default class ComparisonCard extends Component {
           )}
           <div className="basic-card-info">
             <div className="card-metrics">
+              {/* Name and State */}
               {city.name ? (
                 <h3 className="city-name">
                   {city.name}, {city.state}
@@ -55,6 +60,7 @@ export default class ComparisonCard extends Component {
                 />
               )}
               <Divider className="divider" />
+              {/* Population info */}
               <div className="metrics-parent">
                 <img
                   className="metrics-icon"
@@ -72,6 +78,7 @@ export default class ComparisonCard extends Component {
                   )}
                 </div>
               </div>
+              {/* Rent info */}
               <div className="metrics-parent">
                 <img
                   className="metrics-icon"
@@ -89,6 +96,7 @@ export default class ComparisonCard extends Component {
                   )}
                 </div>
               </div>
+              {/* Current weather */}
               <div className="metrics-parent">
                 <img
                   className="metrics-icon"
@@ -107,6 +115,7 @@ export default class ComparisonCard extends Component {
                 </div>
               </div>
             </div>
+            {/* Modal and toggle button */}
             <div className="btn-container">
               <button
                 className="more-info-btn"

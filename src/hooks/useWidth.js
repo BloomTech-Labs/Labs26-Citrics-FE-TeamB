@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
 const getWidth = () =>
-  window.innerWidth ||
-  document.documentElement.clientWidth ||
+  window.innerWidth ??
+  document.documentElement.clientWidth ??
   document.body.clientWidth;
 export default function useWidth() {
   const [width, setWidth] = useState(getWidth());
@@ -14,7 +14,7 @@ export default function useWidth() {
       // prevent execution of previous setTimeout
       clearTimeout(timeoutId);
       // change width from the state object after 500 milliseconds
-      timeoutId = setTimeout(() => setWidth(window.innerWidth), 500);
+      timeoutId = setTimeout(() => setWidth(getWidth()), 100);
     }
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);

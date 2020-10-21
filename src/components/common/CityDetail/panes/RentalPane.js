@@ -57,7 +57,7 @@ export default function RentalPane({ rent, predictions }) {
               ))}
             </Tabs>
           ) : (
-            <LoadingSkeleton minWidth="400px" rows={3} />
+            <LoadingSkeleton minWidth="400px" />
           )}
         </div>
       </div>

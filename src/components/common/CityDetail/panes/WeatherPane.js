@@ -62,7 +62,7 @@ export default function WeatherPane({ weather, currentWeather }) {
               )}
             </>
           ) : (
-            <LoadingSkeleton minWidth="400px" rows={3} />
+            <LoadingSkeleton minWidth="400px" />
           )}
         </div>
       </div>

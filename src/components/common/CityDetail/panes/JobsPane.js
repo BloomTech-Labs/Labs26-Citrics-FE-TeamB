@@ -88,7 +88,7 @@ export default function JobsPane({ jobs, unemployment, insideModal }) {
             <div className="job-charts-unemploy">{generateTrendGraph()}</div>
           </div>
         ) : (
-          <LoadingSkeleton minWidth="400px" rows={3} />
+          <LoadingSkeleton minWidth="400px" />
         )}
       </div>
     </div>

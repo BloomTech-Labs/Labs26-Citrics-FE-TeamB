@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import drawerWidth from "../Nav/drawerWidth";
+import { drawerWidth } from "../../common/constants";
 import useWidth from "../../../hooks/useWidth";
 export const baseMargin = 0;
 

@@ -27,7 +27,7 @@ export default function useWidth(callback = null) {
         const w = getWidth();
         setWidth(w);
         callback && callback(w);
-        console.log("Width changed to", w);
+        // console.log("Width changed to", w);
       }, 100);
     }
     window.addEventListener("resize", handleResize);

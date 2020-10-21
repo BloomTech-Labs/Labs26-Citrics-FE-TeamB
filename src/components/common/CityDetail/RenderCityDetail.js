@@ -1,7 +1,7 @@
 import React from "react";
 import { Skeleton } from "antd";
 import { RentalPane, JobsPane, PopulationPane, WeatherPane } from "./panes";
-export default function RenderCityDetail({ city }) {
+export default function RenderCityDetail({ city, insideModal }) {
   return (
     <div className="city-detail-card" data-testid="city-detail-card">
       {city?.image ? (
@@ -37,7 +37,13 @@ export default function RenderCityDetail({ city }) {
         </div>
       </div>
 
-      <JobsPane jobs={city.jobs} unemployment={city.unemployRate} />
+      <JobsPane
+        jobs={city.jobs}
+        unemployment={city.unemployRate}
+        // The JobsPane has a slightly different display
+        // based on whether it's inside a modal or not
+        insideModal={insideModal}
+      />
       <PopulationPane
         population={city.population}
         prediction={city.popPrediction}

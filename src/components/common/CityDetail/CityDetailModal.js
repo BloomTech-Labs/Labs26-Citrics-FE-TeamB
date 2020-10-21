@@ -18,7 +18,7 @@ const CityDetailModal = ({ visible, toggleModal, city = {} }) => {
         </Button>
       ]}
     >
-      <CityDetailPane city={city} />
+      <CityDetailPane city={city} insideModal={true} />
     </Modal>
   );
 };

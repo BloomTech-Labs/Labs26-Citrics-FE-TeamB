@@ -15,6 +15,7 @@ import {
 } from "./constants";
 import { Skeleton } from "antd";
 
+// Set default search prefs based on max values provided by backend and stored in constants.js
 const initialSearchPrefs = {
   rooms: "1br",
   pop_min: POP_MIN,
@@ -25,12 +26,15 @@ const initialSearchPrefs = {
   weather_max: WEATHER_MAX
 };
 
-//TEMPORARY - replace with [] once search endpoint is implemented
-const initialResults = [{ id: 1, name: "Chandler", state: "AZ" }];
+const initialResults = [];
 
 export default function AdvancedSearchContainer(props) {
   const [searchResults, setSearchResults] = useState(initialResults);
+  // Results past 10 are split into pages of 10
+  // pageNumber is an offset starting at zero
+  // It will be multiplied by 10 to get the set of results to show
   const [pageNumber, setPageNumber] = useState(0);
+  // Since we load data on initial page load, we want to start in a loading state
   const [isLoading, setLoadingState] = useState(true);
 
   // I opted to store searchPrefs in an object to simplify getting/setting values
@@ -114,8 +118,7 @@ export default function AdvancedSearchContainer(props) {
       // so this step is needed to avoid unintentionally excluding cities with outlier values
       // in any metric.
       for (const pref in currentValues) {
-        // If any preference was left at the default value, instead clear it to "None"
-        // as this is what the backend expects.
+        // If any preference was left at the default value, delete it
         if (currentValues[pref] === defaultValues[pref]) {
           delete currentValues[pref];
         }
@@ -125,6 +128,8 @@ export default function AdvancedSearchContainer(props) {
   };
 
   // Retrieve searchResults automatically on initial component load
+  // I know there's a warning here, but it's just Hooks being picky
+  // adding SearchPrefs to the dependency array would actually break our code
   useEffect(getSearchResults, []);
 
   return (

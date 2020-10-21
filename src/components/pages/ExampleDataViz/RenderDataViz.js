@@ -1,7 +1,6 @@
-/*eslint no-unused-vars: 0 */
-import React, { useState, useEffect } from 'react';
-import Plot from 'react-plotly.js';
-import { getDSData } from '../../../api';
+import React, { useState, useEffect } from "react";
+import Plot from "react-plotly.js";
+import { getDSData } from "../../../api";
 
 const initialState = {
   data: [],
@@ -9,8 +8,8 @@ const initialState = {
   frames: [],
   config: {
     displaylogo: false,
-    displayModeBar: false,
-  },
+    displayModeBar: false
+  }
 };
 
 function DataViz(props) {

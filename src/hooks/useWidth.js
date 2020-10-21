@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-/** Hook to track current window width with added de-bouncing logic.
+/** Hook to track current window width with added de-bouncing logic and (optionally) fire a callback when width is updated.
  * The width will only be updated after resizing has been stopped for 100ms to avoid rapid changes to its value.
  *
  * @param {function} [callback] (Optional) Function to execute whenever width changes.

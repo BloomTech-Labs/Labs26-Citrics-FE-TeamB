@@ -1,6 +1,6 @@
 import React from "react";
 import Plot from "react-plotly.js";
-import { LoadingSkeleton } from "../../common/";
+import LoadingSkeleton from "../../common/LoadingSkeleton";
 
 import { lineGraph, barGraph, table } from "./graphType";
 

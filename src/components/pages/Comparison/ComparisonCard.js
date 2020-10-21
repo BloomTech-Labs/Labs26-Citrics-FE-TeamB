@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import CityDetailModal from "../../common/CityDetail/CityDetailModal";
+import { CityDetailModal } from "../../common/CityDetail/";
 import { Divider, Skeleton } from "antd";
 //icons
 import weather from "../../../styles/icons/weather-48.png";

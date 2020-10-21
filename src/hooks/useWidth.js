@@ -20,16 +20,18 @@ export default function useWidth(callback = null) {
     // timeoutId for debounce mechanism
     let timeoutId = null;
     function handleResize() {
-      // prevent execution of previous setTimeout
+      // Prevent execution of previously set timeout
       clearTimeout(timeoutId);
-      // change width from the state object after 100 milliseconds
+      // After 100ms, update the width in state and execute the callback (if provided)
       timeoutId = setTimeout(() => {
         const w = getWidth();
         setWidth(w);
         callback && callback(w);
+        console.log("Width changed to", w);
       }, 100);
     }
     window.addEventListener("resize", handleResize);
+    // Remove the event listener when unmounting the component
     return () => window.removeEventListener("resize", handleResize);
   }, [callback]);
   return width;

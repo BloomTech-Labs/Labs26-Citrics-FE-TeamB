@@ -2,31 +2,12 @@ import RenderHomePage from "../components/pages/Home/RenderHomePage";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
 import { render, fireEvent } from "@testing-library/react";
 import configureStore from "redux-mock-store";
 import { toggleDrawer } from "../state/actions";
 
 const mockStore = configureStore([]);
 describe("<RenderHomePage /> test suite", () => {
-  //COMMENTING OUT DUE TO NOT HAVING LOGIN/AUTHENTICATION IN RELEASE 1--KEEPING IF NEEDED IN RELEASE 2
-  // test('it handles a loading state', () => {
-  //   const authService = {
-  //     logout: jest.fn(),
-  //   };
-  //   const { getByText } = render(
-  //     <Router>
-  //       <RenderHomePage userInfo={{ name: 'Sara' }} authService={authService} />
-  //     </Router>
-  //   );
-  //   const button = getByText(/logout/i);
-  //   userEvent.click(button);
-  //   expect(authService.logout).toHaveBeenCalledTimes(1);
-  //   expect(getByText(/hi sara welcome to labs basic spa/i).innerHTML).toBe(
-  //     'Hi Sara Welcome to Labs Basic SPA'
-  //   );
-  // });
-
   // Arrange - Act - Assert pattern
   let store, component;
   beforeEach(() => {

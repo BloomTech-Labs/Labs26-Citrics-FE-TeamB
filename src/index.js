@@ -4,29 +4,17 @@ import {
   BrowserRouter as Router,
   Redirect,
   Route,
-  // useHistory,
   Switch
 } from "react-router-dom";
-
-// import { Security, LoginCallback, SecureRoute } from '@okta/okta-react';
-
+//Styles
 import "antd/dist/antd.less";
 import "./styles/LESS/index.less";
-
+//Pages
 import { NotFoundPage } from "./components/pages/NotFound";
-// import { ExampleListPage } from "./components/pages/ExampleList";
-// import { ProfileListPage } from "./components/pages/ProfileList";
-// import { LoginPage } from "./components/pages/Login";
-
-// import { PageNav } from "./components/pages/PageNav";
 import { NavPage } from "./components/pages/Nav";
 import { HomePage } from "./components/pages/Home";
 import { AdvancedSearchPage } from "./components/pages/AdvancedSearch";
 import { MainPageContainer } from "./components/pages/MainPageContainer";
-// import { ExampleDataViz } from "./components/pages/ExampleDataViz";
-// import { config } from './utils/oktaConfig';
-// import { LoadingComponent } from "./components/common";
-// import NavContainer from './components/pages/Nav/NavContainer';
 import { ComparisonPage } from "./components/pages/Comparison";
 import { CityPage } from "./components/pages/CityPage";
 import { AboutPage } from "./components/pages/AboutPage";
@@ -54,23 +42,13 @@ function App() {
   // };
 
   return (
-    // <Security {...config} onAuthRequired={authHandler}>
     <>
-      {/* <PageNav /> */}
       <Switch>
-        {/* <Route path="/login" component={LoginPage} /> */}
-        {/* <Route path="/implicit/callback" component={LoginCallback} /> */}
-        {/* any of the routes you need secured should be registered as SecureRoutes */}
-        <Route
-          path="/"
-          exact
-          render={params => (
-            <HomePage {...params} /*LoadingComponent={LoadingComponent}*/ />
-          )}
-        />
-        {/* <Route path="/example-list" component={ExampleListPage} /> */}
-        {/* <Route path="/profile-list" component={ProfileListPage} /> */}
-        {/* <Route path="/datavis" component={ExampleDataViz} /> */}
+        {/* The HomePage isn't wrapped inside MainPageContainer, so it won't move with the sidebar. */}
+        <Route path="/" exact render={params => <HomePage {...params} />} />
+
+        {/* These components are wrapped in MainPageContainer */}
+        {/* When the navigation drawer moves, MainPageContainer moves with it on desktop view. */}
         <Route
           path="/comparison-page"
           render={p => (
@@ -111,7 +89,6 @@ function App() {
         <Route component={NotFoundPage} />
       </Switch>
       <NavPage />
-      {/* </Security> */}
     </>
   );
 }

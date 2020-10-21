@@ -9,9 +9,11 @@ export default function RenderSelectedCities({
   openDetailPage
 }) {
   let width = useWidth();
+
   return (
     <div className="selected-cities">
       <h4 className="select-city-title">Selected Cities</h4>
+      {/* check whether or not cities have been selected */}
       {selectedCities.length === 0 ? (
         <div>Please select a city</div>
       ) : (

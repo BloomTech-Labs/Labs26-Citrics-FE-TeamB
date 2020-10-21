@@ -1,5 +1,5 @@
 import React from "react";
-// import { Input } from "antd";
+// import { Input } from "antd"; --commented out because not in use while Jobs isn't implemented (see below)
 import {
   POP_MIN,
   POP_MAX,
@@ -40,7 +40,6 @@ export default function SearchFilters({
   };
   return (
     <div className="search-bar">
-      <h2>Filters:</h2>
       <div className="filter-container">
         {/* RenderSearchFilter will render a popover with a Slider and range display inside it for each type of filter. */}
         {/* Population */}

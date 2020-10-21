@@ -18,6 +18,8 @@ span {
 }
 
 .filter-container {
+  margin-top: 3%;
+  
   & > * {
     margin: 0.5% 1%;
     &:first-child {
@@ -32,9 +34,14 @@ span {
 
 .cities-container {
   display: flex;
-  width: 25%;
+  width: 50%;
   justify-content: space-between;
   margin: 2% 0;
+
+  @media @tablet, @mobile {
+    width: 75%;
+  }
+
   .city-name {
     cursor: pointer;
     transition: 0.5s all;

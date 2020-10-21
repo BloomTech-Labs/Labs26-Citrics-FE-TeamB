@@ -1,10 +1,10 @@
 import React from "react";
-import { CityDetailPage } from "../CityDetail";
+import { CityDetailPane } from "../CityDetail";
 
 export default function RenderCityPage({ city }) {
   return (
     <div className="city-page">
-      <CityDetailPage city={city} />
+      <CityDetailPane city={city} />
     </div>
   );
 }

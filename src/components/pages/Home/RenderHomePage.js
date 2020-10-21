@@ -3,7 +3,7 @@ import React from "react";
 import { Typography, Card, Button } from "antd";
 import { connect } from "react-redux";
 import { toggleDrawer } from "../../../state/actions";
-//Styles
+//icons
 import {
   EnvironmentFilled,
   CloudFilled,

@@ -7,6 +7,8 @@ export const baseMargin = 0;
 function MainPageContainer({ children, isOpen }) {
   let width = useWidth();
 
+  // Move the wrapper div to the right to make space for the navigation drawer
+  // if the drawer is open and our screen width indicates we're on desktop
   const marginLeft =
     isOpen && width > 1000
       ? `${drawerWidth + baseMargin}px`

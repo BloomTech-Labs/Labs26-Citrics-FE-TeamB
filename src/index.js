@@ -44,7 +44,11 @@ function App() {
   return (
     <>
       <Switch>
+        {/* The HomePage isn't wrapped inside MainPageContainer, so it won't move with the sidebar. */}
         <Route path="/" exact render={params => <HomePage {...params} />} />
+
+        {/* These components are wrapped in MainPageContainer */}
+        {/* When the navigation drawer moves, MainPageContainer moves with it on desktop view. */}
         <Route
           path="/comparison-page"
           render={p => (

@@ -2,7 +2,6 @@ import RenderHomePage from "../components/pages/Home/RenderHomePage";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router } from "react-router-dom";
 import { render, fireEvent } from "@testing-library/react";
 import configureStore from "redux-mock-store";
 import { toggleDrawer } from "../state/actions";

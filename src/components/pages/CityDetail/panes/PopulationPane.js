@@ -47,7 +47,7 @@ export default function PopulationPane({ population, prediction }) {
       />
     );
   };
-  // Function to create the trand graph
+  // Function to create the trend graph
   const generateTrendGraph = () => {
     console.log(JSON.parse(prediction.pop_density));
     const { dataPlot, layout } = lineGraph({

@@ -140,6 +140,9 @@ const updateImageAndWeather = async ({ id, name, state }, dispatch) => {
       .then(r => (r ? URL.createObjectURL(r) : fallbackImage))
       .then(image => dispatch(updateCityDetails(id, { image })))
       .catch(console.error);
+  } else {
+    // If the places query failed, use the fallback image
+    dispatch(updateCityDetails(id, { image: fallbackImage }));
   }
 
   // Open weather api using Lat and Lng points for more accurate search

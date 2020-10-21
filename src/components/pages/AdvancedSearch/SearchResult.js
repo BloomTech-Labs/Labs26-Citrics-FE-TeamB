@@ -3,7 +3,7 @@ import addIcon from "../../../styles/icons/add-48.png";
 import addIconHover from "../../../styles/icons/add-hover-48.png";
 import { connect } from "react-redux";
 import { addCity, getCityDetails } from "../../../state/actions";
-import CityDetail from "../CityDetail/CityDetailModal";
+import CityDetail from "../../common/CityDetail/CityDetailModal";
 
 function SearchResult(props) {
   const { id, name, state, addCity, cityDetails, getCityDetails } = props;

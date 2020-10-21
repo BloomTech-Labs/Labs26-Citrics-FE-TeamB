@@ -1,21 +1,11 @@
 import React, { Component } from "react";
-import CityDetailModal from "../CityDetail/CityDetailModal";
+import CityDetailModal from "../../common/CityDetail/CityDetailModal";
 import { Divider, Skeleton } from "antd";
 //icons
 import weather from "../../../styles/icons/weather-48.png";
 import population from "../../../styles/icons/pop-48.png";
 import pricing from "../../../styles/icons/pricing-48.png";
-
-// The Loading element used in this component
-function LoadingSkeleton() {
-  return (
-    // This wrapper div with minWidth is necessary
-    // to prevent the Skeleton from collapsing to zero width
-    <div style={{ minWidth: "150px" }}>
-      <Skeleton active title={false} paragraph={{ rows: 1 }} />
-    </div>
-  );
-}
+import { LoadingSkeleton } from "../../common";
 
 export default class ComparisonCard extends Component {
   state = {
@@ -74,7 +64,7 @@ export default class ComparisonCard extends Component {
                   {city.population ? (
                     <p>{city.population.data.total_pop.toLocaleString()}</p>
                   ) : (
-                    <LoadingSkeleton />
+                    <LoadingSkeleton minWidth="150px" rows={1} />
                   )}
                 </div>
               </div>
@@ -92,7 +82,7 @@ export default class ComparisonCard extends Component {
                   {city.rent ? (
                     <p>{`${"$" + city.rent["1br"]}/month (1BR)`}</p>
                   ) : (
-                    <LoadingSkeleton />
+                    <LoadingSkeleton minWidth="150px" rows={1} />
                   )}
                 </div>
               </div>
@@ -110,7 +100,7 @@ export default class ComparisonCard extends Component {
                   {city.currentWeather ? (
                     <p>{`${Math.round(city.currentWeather.current.temp)}°F`}</p>
                   ) : (
-                    <LoadingSkeleton />
+                    <LoadingSkeleton minWidth="150px" rows={1} />
                   )}
                 </div>
               </div>

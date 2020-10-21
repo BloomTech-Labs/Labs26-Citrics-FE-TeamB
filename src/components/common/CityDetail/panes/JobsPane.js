@@ -1,7 +1,7 @@
 import React from "react";
-import { lineGraph } from "../../../common/Graphs/graphType";
+import { lineGraph } from "../../Graphs/graphType";
 import Plot from "react-plotly.js";
-import LoadingSkeleton from "./LoadingSkeleton";
+import LoadingSkeleton from "../../LoadingSkeleton";
 import useWidth from "../../../../hooks/useWidth";
 //icon
 import jobIcon from "../../../../styles/icons/jobs-96.png";
@@ -84,7 +84,7 @@ export default function JobsPane({ jobs, unemployment }) {
             <div className="job-charts-unemploy">{generateTrendGraph()}</div>
           </div>
         ) : (
-          <LoadingSkeleton />
+          <LoadingSkeleton minWidth="400px" rows={3} />
         )}
       </div>
     </div>

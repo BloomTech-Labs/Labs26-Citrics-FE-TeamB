@@ -1,8 +1,8 @@
 import React from "react";
 import { Tabs } from "antd";
-import { lineGraph } from "../../../common/Graphs/graphType";
+import { lineGraph } from "../../Graphs/graphType";
 import Plot from "react-plotly.js";
-import LoadingSkeleton from "./LoadingSkeleton";
+import LoadingSkeleton from "../../LoadingSkeleton";
 //icon
 import rentIcon from "../../../../styles/icons/rent-96.png";
 
@@ -57,7 +57,7 @@ export default function RentalPane({ rent, predictions }) {
               ))}
             </Tabs>
           ) : (
-            <LoadingSkeleton />
+            <LoadingSkeleton minWidth="400px" rows={3} />
           )}
         </div>
       </div>

@@ -2,6 +2,7 @@ import React from "react";
 import { Skeleton, Space, Tabs } from "antd";
 
 import Graph from "../../common/Graphs/renderGraph";
+import { LoadingSkeleton } from "../../common";
 
 export default class ComparisonGraphs extends React.Component {
   getUnemployRate = () => {
@@ -131,7 +132,7 @@ export default class ComparisonGraphs extends React.Component {
                 dataSet3={getCityPop()[2]}
               />
             ) : (
-              <Skeleton active />
+              <LoadingSkeleton />
             )}
           </TabPane>
           <TabPane className="graph-holder" tab="Apartment Prices" key="2">
@@ -142,7 +143,7 @@ export default class ComparisonGraphs extends React.Component {
                 dataSet3={getRentals()[2]}
               />
             ) : (
-              <Skeleton active />
+              <LoadingSkeleton />
             )}
           </TabPane>
           <TabPane className="graph-holder" tab="Unemployment Rate" key="3">
@@ -153,7 +154,7 @@ export default class ComparisonGraphs extends React.Component {
                 dataSet3={getUnemployRate()[2]}
               />
             ) : (
-              <Skeleton active />
+              <LoadingSkeleton />
             )}
           </TabPane>
         </Tabs>

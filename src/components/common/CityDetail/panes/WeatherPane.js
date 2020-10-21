@@ -5,7 +5,7 @@ import humidity from "../../../../styles/icons/humidity-96.png";
 import summer from "../../../../styles/icons/summer-96.png";
 import winter from "../../../../styles/icons/winter-96.png";
 import feelsLike from "../../../../styles/icons/feelsLike-96.png";
-import LoadingSkeleton from "./LoadingSkeleton";
+import LoadingSkeleton from "../../LoadingSkeleton";
 
 export default function WeatherPane({ weather, currentWeather }) {
   return (
@@ -62,7 +62,7 @@ export default function WeatherPane({ weather, currentWeather }) {
               )}
             </>
           ) : (
-            <LoadingSkeleton />
+            <LoadingSkeleton minWidth="400px" rows={3} />
           )}
         </div>
       </div>

@@ -49,15 +49,32 @@ export default function PopulationPane({ population, prediction }) {
   };
   // Function to create the trand graph
   const generateTrendGraph = () => {
-    console.log(JSON.parse(prediction.pop_density));
-    const { dataPlot, layout } = lineGraph({
-      name: "",
-      plotX: JSON.parse(prediction.total_pop).data[1].x,
-      plotY: JSON.parse(prediction.total_pop).data[1].y,
-      graphName: "Population Trend Predictions",
-      xLabel: "Year",
-      yLabel: "Population Count"
-    });
+    const { dataPlot, layout } = lineGraph(
+      {
+        name: "Current",
+        plotX: JSON.parse(prediction.total_pop).data[0].x,
+        plotY: JSON.parse(prediction.total_pop).data[0].y,
+        graphName: "Population Trend Predictions",
+        xLabel: "Year",
+        yLabel: "Population Count"
+      },
+      {
+        name: "Average Prediction",
+        plotX: JSON.parse(prediction.total_pop).data[1].x,
+        plotY: JSON.parse(prediction.total_pop).data[1].y,
+        color: JSON.parse(prediction.total_pop).data[1].line.color
+      },
+      {
+        name: "Upper/Lower Predictions",
+        plotX: JSON.parse(prediction.total_pop).data[2].x,
+        plotY: JSON.parse(prediction.total_pop).data[2].y,
+        hoverinfo: JSON.parse(prediction.total_pop).data[2].hoverinfo,
+        color: JSON.parse(prediction.total_pop).data[2].line.color,
+        fill: JSON.parse(prediction.total_pop).data[2].fill,
+        fillcolor: JSON.parse(prediction.total_pop).data[2].fillcolor
+      }
+    );
+
     return (
       <Plot
         data={dataPlot}
@@ -67,24 +84,6 @@ export default function PopulationPane({ population, prediction }) {
     );
   };
 
-  // Creates the density prediction graph - pretty much the same as the trend graph. Will refactor when theres time
-  const generateDensityGraph = () => {
-    const { dataPlot, layout } = lineGraph({
-      name: "",
-      plotX: JSON.parse(prediction.pop_density).data[1].x,
-      plotY: JSON.parse(prediction.pop_density).data[1].y,
-      graphName: "Population Density Predictions",
-      xLabel: "Year",
-      yLabel: "People per square mile"
-    });
-    return (
-      <Plot
-        data={dataPlot}
-        layout={{ ...layout, showlegend: false }}
-        style={style}
-      />
-    );
-  };
   return (
     <div className="one-render-p">
       <div className="main-detail-content">
@@ -101,7 +100,6 @@ export default function PopulationPane({ population, prediction }) {
             <div className="population-graph-container">
               <div className="population-graph">{generateTrendGraph()}</div>
               <div className="population-graph">{generateAgeGraph()}</div>
-              <div className="population-graph">{generateDensityGraph()}</div>
             </div>
           </div>
         ) : (

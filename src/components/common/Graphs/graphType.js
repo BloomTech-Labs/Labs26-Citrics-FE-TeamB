@@ -6,7 +6,7 @@ export const lineGraph = (set1, set2, set3) => {
     automargin: true,
     x: set1.plotX,
     y: set1.plotY,
-    line: { color: "rgba(222,45,38,0.8)" },
+    line: { color: set1.color ?? "rgba(222,45,38,0.8)" },
     mode: "lines",
     name: set1.name,
     type: "scatter"
@@ -16,9 +16,10 @@ export const lineGraph = (set1, set2, set3) => {
       automargin: true,
       x: set2.plotX,
       y: set2.plotY,
-      line: { color: "rgb(49,130,189)" },
+      line: { color: set2.color ?? "rgb(49,130,189)" },
       mode: "lines",
-      name: set2 ? set2.name : "Fix me"
+      name: set2.name ?? "",
+      type: "scatter"
     };
   }
   if (set3) {
@@ -26,9 +27,13 @@ export const lineGraph = (set1, set2, set3) => {
       automargin: true,
       x: set3.plotX,
       y: set3.plotY,
-      line: { color: "rgb(204,204,204)" },
+      line: { color: set3.color ?? "rgb(204,204,204)" },
       mode: "lines",
-      name: set3 ? set3.name : "Fix me too"
+      name: set3.name ?? "",
+      type: "scatter",
+      hoverinfo: set3.hoverinfo ?? "",
+      fill: set3.fill ?? "",
+      fillcolor: set3.fillcolor ?? ""
     };
   }
 

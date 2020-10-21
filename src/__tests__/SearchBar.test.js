@@ -1,8 +1,7 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { render, fireEvent, act, waitFor } from "@testing-library/react";
+import { render, act } from "@testing-library/react";
 import configureStore from "redux-mock-store";
-import { addCity } from "../state/actions";
 import { SearchBar } from "../components/pages/SearchBar";
 const mockStore = configureStore([]);
 describe("<SearchBar />", () => {

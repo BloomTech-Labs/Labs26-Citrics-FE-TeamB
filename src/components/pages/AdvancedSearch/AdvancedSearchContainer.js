@@ -13,7 +13,7 @@ import {
   WEATHER_MIN,
   WEATHER_MAX
 } from "./constants";
-import { Skeleton } from "antd";
+import { LoadingSkeleton } from "../../common";
 
 // Set default search prefs based on max values provided by backend and stored in constants.js
 const initialSearchPrefs = {
@@ -143,7 +143,7 @@ export default function AdvancedSearchContainer(props) {
       <div className="search-results">
         <h2>Results:</h2>
         {isLoading ? (
-          <Skeleton active title={false} paragraph={{ rows: 10 }} />
+          <LoadingSkeleton rows={10} />
         ) : (
           <>
             {searchResults

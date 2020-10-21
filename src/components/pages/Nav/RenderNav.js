@@ -10,7 +10,7 @@ import { SelectedCities } from "../SelectedCities/";
 
 //Configuration
 // This defines the width of the drawer *and* how far to translate the floating button
-import drawerWidth from "./drawerWidth";
+import { drawerWidth } from "../../common/constants";
 
 export default function RenderNav({ toggleDrawer, isOpen, isMobile }) {
   const buttonTransform = isOpen ? `translate(${drawerWidth}px,0px)` : "";

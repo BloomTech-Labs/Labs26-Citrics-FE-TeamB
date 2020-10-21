@@ -1,41 +1,43 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import useWidth from "../../../hooks/useWidth";
 import { openDrawer, closeDrawer, toggleDrawer } from "../../../state/actions";
 
+import { mobileCutoff } from "../../common/constants";
 import RenderNav from "./RenderNav";
 
 function NavContainer({ isOpen, openDrawer, closeDrawer, toggleDrawer }) {
-  // Keep track of whether we're showing the mobile or desktop view
-  const [isMobile, setMobileView] = useState(window.innerWidth < 1000);
-  useEffect(() => {
-    // width is used to track the most recent width in handleResize
-    // It's kept alive by this closure
-    let width = window.innerWidth;
-    // On load, if width is less than 1000, close drawer
-    if (width < 1000) closeDrawer();
+  // Keep track of the previous width
+  // to ensure we only change drawer state when passing the mobileCutoff
+  const [prevWidth, setPrevWidth] = useState(window.innerWidth);
 
-    // Event handler for window resizing
-    function handleResize() {
-      // Open if we went from mobile view to desktop view
-      if (width < 1000 && window.innerWidth > 1000) {
-        setMobileView(false);
-        openDrawer();
-        // Close if we went from desktop view to mobile view
-      } else if (width > 1000 && window.innerWidth < 1000) {
-        setMobileView(true);
-        closeDrawer();
-      }
-      width = window.innerWidth;
+  // Retrieve a debounced width value from the useWidth hook
+  // Also, open/close the nav drawer whenever width passes the cutoff
+  // between desktop and mobile views
+  const width = useWidth(width => {
+    // Open if we went from mobile view to desktop view
+    if (prevWidth < mobileCutoff && width > mobileCutoff) {
+      openDrawer();
+      // Close if we went from desktop view to mobile view
+    } else if (prevWidth > mobileCutoff && width < mobileCutoff) {
+      closeDrawer();
     }
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [openDrawer, closeDrawer]);
+    // Update prevWidth
+    setPrevWidth(width);
+  });
+
+  // On component mount, close the drawer if we're on mobile view
+  // This function uses innerWidth directly to avoid bugs:
+  // using width or prevWidth would cause this logic to fire more than just on component mount
+  useEffect(() => {
+    if (window.innerWidth < mobileCutoff) closeDrawer();
+  }, [closeDrawer]);
 
   return (
     <RenderNav
       isOpen={isOpen}
       toggleDrawer={toggleDrawer}
-      isMobile={isMobile}
+      isMobile={width < mobileCutoff}
     />
   );
 }

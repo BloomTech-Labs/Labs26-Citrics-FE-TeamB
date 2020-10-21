@@ -1,6 +1,6 @@
 import React from "react";
 import Plot from "react-plotly.js";
-import LoadingComponent from "../../common/LoadingComponent";
+import LoadingSkeleton from "../../common/LoadingSkeleton";
 
 import { lineGraph, barGraph, table } from "./graphType";
 
@@ -26,9 +26,5 @@ export default function Graph({ dataSet, dataSet2, dataSet3 }) {
     }
   };
 
-  return dataSet ? (
-    renderGraph()
-  ) : (
-    <LoadingComponent message={"Retrieving Graph Data... "} />
-  );
+  return dataSet ? renderGraph() : <LoadingSkeleton />;
 }

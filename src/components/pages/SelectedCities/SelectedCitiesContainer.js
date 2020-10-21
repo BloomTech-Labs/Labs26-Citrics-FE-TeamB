@@ -1,17 +1,12 @@
 // Library imports
 import React from "react";
 import { connect } from "react-redux";
-import { removeCity } from "../../../state/actions";
+import { removeCity, closeDrawer } from "../../../state/actions";
 import { useHistory } from "react-router-dom";
 import RenderSelectedCities from "./RenderSelectedCities";
-import { closeDrawer } from "../../../state/actions/drawerActions";
+import { mobileCutoff } from "../../common/constants";
 
-function SelectedCitiesContainer({
-  selectedCities,
-  removeCity,
-  cityDetails,
-  closeDrawer
-}) {
+function SelectedCitiesContainer({ selectedCities, removeCity, closeDrawer }) {
   let history = useHistory();
 
   // The action handler is attached to the parent div
@@ -23,7 +18,7 @@ function SelectedCitiesContainer({
   };
 
   const openDetailPage = width => {
-    if (width < 1000) {
+    if (width < mobileCutoff) {
       closeDrawer();
     }
     history.push(`/city-detail-page/${selectedCities[0].id}`);
@@ -43,7 +38,7 @@ function SelectedCitiesContainer({
       str += `c${i}=${cities[i].id}`;
       return str;
     };
-    if (width < 1000) {
+    if (width < mobileCutoff) {
       closeDrawer();
     }
     history.push(`/comparison-page${queryString(selectedCities)}`);

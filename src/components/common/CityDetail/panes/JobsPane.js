@@ -1,12 +1,16 @@
 import React from "react";
-import { lineGraph } from "../../../common/Graphs/graphType";
+import { lineGraph } from "../../Graphs/graphType";
 import Plot from "react-plotly.js";
-import LoadingSkeleton from "./LoadingSkeleton";
+import LoadingSkeleton from "../../LoadingSkeleton";
 import useWidth from "../../../../hooks/useWidth";
 //icon
 import jobIcon from "../../../../styles/icons/jobs-96.png";
 
-export default function JobsPane({ jobs, unemployment }) {
+export default function JobsPane({ jobs, unemployment, insideModal }) {
+  // The breakpoint where the pie chart switches
+  // from next the legend to beneath the legend.
+  // If we're inside a modal, the width is narrower, so this cutoff changes
+  const mobileCutoff = insideModal ? 840 : 780;
   let style = { width: "100%", height: "100%" };
   let width = useWidth();
 
@@ -26,10 +30,10 @@ export default function JobsPane({ jobs, unemployment }) {
     ];
     // custom layout for pie chart
     const layout = {
-      title: width < 750 ? "" : "Top Industries",
+      title: width < mobileCutoff ? "" : "Top Industries",
       showlegend: true,
       legend:
-        width < 750
+        width < mobileCutoff
           ? {
               orientation: "h",
               y: 1.0,
@@ -84,7 +88,7 @@ export default function JobsPane({ jobs, unemployment }) {
             <div className="job-charts-unemploy">{generateTrendGraph()}</div>
           </div>
         ) : (
-          <LoadingSkeleton />
+          <LoadingSkeleton minWidth="400px" />
         )}
       </div>
     </div>

@@ -1,12 +1,12 @@
 import React from "react";
 import Plot from "react-plotly.js";
-import { lineGraph, barGraph } from "../../../common/Graphs/graphType";
-import LoadingSkeleton from "./LoadingSkeleton";
+import { lineGraph, barGraph } from "../../Graphs/graphType";
+import LoadingSkeleton from "../../LoadingSkeleton";
 //icon
 import popIcon from "../../../../styles/icons/pop-96.png";
 
 export default function PopulationPane({ population, prediction }) {
-  // stlye object for making the graphs responsive
+  // style object for making the graphs responsive
   let style = { width: "100%", height: "100%" };
   // Functions to generate graphs for age group
   const generateAgeGraph = () => {

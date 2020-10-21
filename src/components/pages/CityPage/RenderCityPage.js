@@ -1,5 +1,5 @@
 import React from "react";
-import { CityDetailPane } from "../CityDetail";
+import { CityDetailPane } from "../../common/CityDetail";
 
 export default function RenderCityPage({ city }) {
   return (

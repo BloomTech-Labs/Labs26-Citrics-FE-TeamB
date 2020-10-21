@@ -2,7 +2,7 @@ import {
   MainPageContainer,
   baseMargin
 } from "../components/pages/MainPageContainer/";
-import drawerWidth from "../components/pages/Nav/drawerWidth";
+import { drawerWidth } from "../components/common/constants";
 import { render } from "@testing-library/react";
 import configureStore from "redux-mock-store";
 import React from "react";

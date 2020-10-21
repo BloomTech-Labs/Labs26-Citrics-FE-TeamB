@@ -26,7 +26,7 @@ function RenderHomePage({ openDrawer }) {
           &nbsp;<Text>Search for a city</Text>
           <br />
           <CloudFilled />
-          &nbsp;<Text>View popular demographics</Text>
+          &nbsp;<Text>View popular metrics</Text>
           <br />
           <ProfileFilled />
           &nbsp;<Text>Compare with other cities</Text>

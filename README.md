@@ -38,9 +38,17 @@ You can find the deployed project at [Citrics](https://citrics.netlify.app/).
 
 We used the [Google Places API](https://developers.google.com/places/web-service/photos) to dynamically retrieve the most appropriate cover images for each city in our database.
 
+To use this API, you must provide a valid API key in the environment variable `REACT_APP_PLACES_API_KEY`, either using a `.env` file or in the configuration of your deployment.
+
+You can find instructions on getting an API key in [this Medium article](https://codeburst.io/adding-city-images-to-your-react-app-14c937df2db2).
+
 ## Open Weather API
 
 We used the [Open Weather API](https://openweathermap.org/api/one-call-api) to retrieve and display the current weather for each city in our database.
+
+To use this API, you must provide a valid API key in the environment variable `REACT_APP_OPEN_WEATHER_API`, either using a `.env` file or in the configuration of your deployment.
+
+You can find instructions on getting an API key in [this article](https://openweathermap.org/appid).
 
 ## Backend APIs
 See [Backend Documentation](https://github.com/labs26-citrics/Labs26-Citrics-DS-TeamB) for more information on the APIs used by our Data Science team.

@@ -3,7 +3,7 @@ import addIcon from "../../../styles/icons/add-48.png";
 import addIconHover from "../../../styles/icons/add-hover-48.png";
 import { connect } from "react-redux";
 import { addCity, getCityDetails } from "../../../state/actions";
-import { CityDetailPane } from "../../common/CityDetail";
+import { CityDetailModal } from "../../common/CityDetail";
 
 function SearchResult(props) {
   const { id, name, state, addCity, cityDetails, getCityDetails } = props;
@@ -35,7 +35,7 @@ function SearchResult(props) {
         </div>
       </div>
       {/* Modal to show city details */}
-      <CityDetailPane
+      <CityDetailModal
         city={cityDetails[id] ?? { id, name, state }}
         visible={visible}
         toggleModal={() => setVisible(!visible)}

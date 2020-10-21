@@ -2,26 +2,27 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { openDrawer, closeDrawer, toggleDrawer } from "../../../state/actions";
 
+import { mobileCutoff } from "../../common/constants";
 import RenderNav from "./RenderNav";
 
 function NavContainer({ isOpen, openDrawer, closeDrawer, toggleDrawer }) {
   // Keep track of whether we're showing the mobile or desktop view
-  const [isMobile, setMobileView] = useState(window.innerWidth < 1000);
+  const [isMobile, setMobileView] = useState(window.innerWidth < mobileCutoff);
   useEffect(() => {
     // width is used to track the most recent width in handleResize
     // It's kept alive by this closure
     let width = window.innerWidth;
-    // On load, if width is less than 1000, close drawer
-    if (width < 1000) closeDrawer();
+    // On load, if width is less than mobileCutoff, close drawer
+    if (width < mobileCutoff) closeDrawer();
 
     // Event handler for window resizing
     function handleResize() {
       // Open if we went from mobile view to desktop view
-      if (width < 1000 && window.innerWidth > 1000) {
+      if (width < mobileCutoff && window.innerWidth > mobileCutoff) {
         setMobileView(false);
         openDrawer();
         // Close if we went from desktop view to mobile view
-      } else if (width > 1000 && window.innerWidth < 1000) {
+      } else if (width > mobileCutoff && window.innerWidth < mobileCutoff) {
         setMobileView(true);
         closeDrawer();
       }

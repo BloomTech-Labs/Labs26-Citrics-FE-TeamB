@@ -2,6 +2,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { closeDrawer, openDrawer } from "../../../state/actions";
+import { mobileCutoff } from "../../common/constants";
 
 import RenderAboutPage from "./RenderAboutPage";
 
@@ -13,7 +14,7 @@ class AboutPageContainer extends React.Component {
 
   returnToHome = () => {
     // If not on mobile, re-open drawer
-    if (window.innerWidth > 1000) this.props.openDrawer();
+    if (window.innerWidth > mobileCutoff) this.props.openDrawer();
     // Go to the homepage
     this.props.history.push("/");
   };

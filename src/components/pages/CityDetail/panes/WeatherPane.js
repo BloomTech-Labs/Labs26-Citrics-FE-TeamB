@@ -1,4 +1,5 @@
 import React from "react";
+//icons
 import weatherIcon from "../../../../styles/icons/weather-96.png";
 import humidity from "../../../../styles/icons/humidity-96.png";
 import summer from "../../../../styles/icons/summer-96.png";

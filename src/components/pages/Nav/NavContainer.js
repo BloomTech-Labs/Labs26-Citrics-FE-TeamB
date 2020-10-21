@@ -5,10 +5,11 @@ import { openDrawer, closeDrawer, toggleDrawer } from "../../../state/actions";
 import RenderNav from "./RenderNav";
 
 function NavContainer({ isOpen, openDrawer, closeDrawer, toggleDrawer }) {
-  const [isClosed, setClosed] = useState(
-    window.innerWidth < 1000 ? true : false
-  );
+  // Keep track of whether we're showing the mobile or desktop view
+  const [isMobile, setMobileView] = useState(window.innerWidth < 1000);
   useEffect(() => {
+    // width is used to track the most recent width in handleResize
+    // It's kept alive by this closure
     let width = window.innerWidth;
     // On load, if width is less than 1000, close drawer
     if (width < 1000) closeDrawer();
@@ -17,11 +18,11 @@ function NavContainer({ isOpen, openDrawer, closeDrawer, toggleDrawer }) {
     function handleResize() {
       // Open if we went from mobile view to desktop view
       if (width < 1000 && window.innerWidth > 1000) {
-        setClosed(false);
+        setMobileView(false);
         openDrawer();
         // Close if we went from desktop view to mobile view
       } else if (width > 1000 && window.innerWidth < 1000) {
-        setClosed(true);
+        setMobileView(true);
         closeDrawer();
       }
       width = window.innerWidth;
@@ -31,7 +32,11 @@ function NavContainer({ isOpen, openDrawer, closeDrawer, toggleDrawer }) {
   }, [openDrawer, closeDrawer]);
 
   return (
-    <RenderNav isOpen={isOpen} toggleDrawer={toggleDrawer} closed={isClosed} />
+    <RenderNav
+      isOpen={isOpen}
+      toggleDrawer={toggleDrawer}
+      isMobile={isMobile}
+    />
   );
 }
 const mapPropsToState = ({ drawer: { isOpen } }, props) => ({

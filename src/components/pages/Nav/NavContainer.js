@@ -11,13 +11,6 @@ function NavContainer({ isOpen, openDrawer, closeDrawer, toggleDrawer }) {
   // to ensure we only change drawer state when passing the mobileCutoff
   const [prevWidth, setPrevWidth] = useState(window.innerWidth);
 
-  // On component mount, close the drawer if we're on mobile view
-  // This function uses innerWidth directly to avoid bugs:
-  // using width or prevWidth would cause this logic to fire more than just on component mount
-  useEffect(() => {
-    if (window.innerWidth < mobileCutoff) closeDrawer();
-  }, [closeDrawer]);
-
   // Retrieve a debounced width value from the useWidth hook
   // Also, open/close the nav drawer whenever width passes the cutoff
   // between desktop and mobile views
@@ -29,8 +22,16 @@ function NavContainer({ isOpen, openDrawer, closeDrawer, toggleDrawer }) {
     } else if (prevWidth > mobileCutoff && width < mobileCutoff) {
       closeDrawer();
     }
+    // Update prevWidth
     setPrevWidth(width);
   });
+
+  // On component mount, close the drawer if we're on mobile view
+  // This function uses innerWidth directly to avoid bugs:
+  // using width or prevWidth would cause this logic to fire more than just on component mount
+  useEffect(() => {
+    if (window.innerWidth < mobileCutoff) closeDrawer();
+  }, [closeDrawer]);
 
   return (
     <RenderNav

@@ -51,12 +51,14 @@ class SearchBar extends React.Component {
       item.value.toLowerCase().includes(searchTerm.toLowerCase())
     );
     this.setState({
+      // If something is entered, show the top 5 results in the AutoComplete
       options: !searchTerm ? [] : searchResults.slice(0, 5)
     });
   };
 
   // When clicking on a city, add it to the selected cities
   // and empty the search term
+  // Limited to 3 cities
   onSelect = data => {
     if (this.props.selectedCities.length < 3) {
       const entry = this.state.cityList.find(({ value }) => value === data);

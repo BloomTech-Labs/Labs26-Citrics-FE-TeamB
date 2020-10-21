@@ -46,19 +46,16 @@ export default function RentalPane({ rent, predictions }) {
 
         <div className="housing-pane">
           {predictions && rent ? (
-            <>
-              {/* This JSX fragment contains everything shown when not loading */}
-              <Tabs defaultActiveKey="1" className="metrics-container rental">
-                {aptTypes.map((name, idx) => (
-                  <TabPane key={idx} tab={name} className="rental-price-tab">
-                    <div className="rental-data-container">
-                      <div>${rent[name.toLowerCase()]}/month</div>
-                      <div>{renderPrediction(name)}</div>
-                    </div>
-                  </TabPane>
-                ))}
-              </Tabs>
-            </>
+            <Tabs defaultActiveKey="1" className="metrics-container rental">
+              {aptTypes.map((name, idx) => (
+                <TabPane key={idx} tab={name} className="rental-price-tab">
+                  <div className="rental-data-container">
+                    <div>${rent[name.toLowerCase()]}/month</div>
+                    <div>{renderPrediction(name)}</div>
+                  </div>
+                </TabPane>
+              ))}
+            </Tabs>
           ) : (
             <LoadingSkeleton />
           )}

@@ -2,7 +2,7 @@
 import React from "react";
 import { Typography, Card, Button } from "antd";
 import { connect } from "react-redux";
-import { toggleDrawer } from "../../../state/actions";
+import { openDrawer } from "../../../state/actions";
 //icons
 import {
   EnvironmentFilled,
@@ -12,12 +12,10 @@ import {
 
 const { Text } = Typography;
 
-function RenderHomePage({ toggleDrawer }) {
-  const openNav = () => {
-    toggleDrawer();
-  };
+function RenderHomePage({ openDrawer }) {
   return (
     <>
+      {/* This div contains the background image */}
       <div className="home-container" role="img" />
       <Card className="title-card">
         <h1>Citrics</h1>
@@ -35,11 +33,15 @@ function RenderHomePage({ toggleDrawer }) {
         </div>
 
         <br />
-        <Button type="primary" className="GSbutton" onClick={openNav}>
+        <Button
+          type="primary"
+          className="GSbutton"
+          onClick={() => openDrawer()}
+        >
           Get Started
         </Button>
       </Card>
     </>
   );
 }
-export default connect(null, { toggleDrawer })(RenderHomePage);
+export default connect(null, { openDrawer })(RenderHomePage);

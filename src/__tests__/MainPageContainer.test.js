@@ -1,18 +1,11 @@
 import {
-  BrowserRouter as Router,
-  Route,
-  // useHistory,
-  Switch
-} from "react-router-dom";
-import {
   MainPageContainer,
   baseMargin
 } from "../components/pages/MainPageContainer/";
 import drawerWidth from "../components/pages/Nav/drawerWidth";
-import { render, fireEvent } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import configureStore from "redux-mock-store";
 import React from "react";
-import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
 const mockStore = configureStore([]);

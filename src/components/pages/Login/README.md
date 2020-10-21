@@ -1,4 +1,5 @@
 ## Login and Authentication w/ Okta.
+### *Note from previous Labs26 Team: We didn't implement a Login component but we can keep this fold for you for easy implementation if you do
 
 - The `LoginContainer.js` file includes a widget that is provided to us by Okta.
 - This widget is the key to `user authentication and management` within your application.

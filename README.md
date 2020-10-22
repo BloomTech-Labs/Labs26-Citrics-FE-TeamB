@@ -65,7 +65,9 @@ You can find instructions on getting an API key in [this article](https://openwe
 See [Backend Documentation](https://github.com/Lambda-School-Labs/Labs26-Citrics-DS-TeamB) for more information on the APIs used by our Data Science team.
 
 ## Other Sources
-
+[<b>User Flowchart</b>](https://whimsical.com/341zvP6EuiJdMGJt3neFJa)<br />
+[<b>Wireframe</b>](https://whimsical.com/T5VcCfKv8TwyKzgjfUnAeE)<br />
+[<b>Engineering Architecture Flowchart</b>](https://whimsical.com/BFjY6RQpD7YD67d7UukiSx)<br />
 <b>Icons:</b> We got out icons from [Icons8](https://icons8.com/). Small icons are 48px, Large is 96px.
 
 # Installation Instructions

@@ -1,4 +1,4 @@
-# Citrics - A city metrics app
+# Citrics - A City Metrics app
 
 A city metrics collation app to help find the perfect city for you!
 
@@ -9,13 +9,24 @@ You can find the deployed project at [Citrics Team B](https://b.citrics.dev).
 - View useful metrics, including weather patterns, housing prices, job market, demographics, and more!
 - Currently features information on the `100` largest US cities, with more to come
 - Select up to three cities to compare side-by-side
-- Dig into detailed historical information, trends (*future predictions coming soon*)
+- Dig into detailed historical information, trends
+- Glance at future predeictions for specific statistics
+- Complete an Advanced Search to filter cities with specific requirements
 
-#### Front end deployed to `AWS Amplify`
 
-#### [Backend](https://b-ds.citrics.dev) built using FastAPI:
-- Our Data Science team collated a variety of metrics and created predictive models
-- See [their repo](https://github.com/Lambda-School-Labs/Labs26-Citrics-DS-TeamB) for more information
+### 🔮 Future Feature Ideas
+
+- Provide a more complete list/suggestions for an unsuccessful search
+- Determine additional types of data can be shown e.g.: Demographics (age, religion, etc), access to activities (hiking trails, bars, restaurants, etc)
+- After looking at a city, I can click on a 'See cities similar to this' feature
+- User can search for a city by Zip code
+- Styling: model the home page to be more useful. Instead of side bar and 'Get Started' button, incorporate the search bar like this [similar app](https://www.areavibes.com/)
+
+### Front end deployed to `AWS Amplify`
+
+### [Backend](https://b-ds.citrics.dev) built using FastAPI:
+
+Our Data Science team collated a variety of metrics and created predictive models. See [their repo](https://github.com/Lambda-School-Labs/Labs26-Citrics-DS-TeamB) for more information
 
 ![MIT](https://img.shields.io/packagist/l/doctrine/orm.svg)
 ![React](https://img.shields.io/badge/react-v16.13.1-blue.svg)
@@ -52,6 +63,12 @@ You can find instructions on getting an API key in [this article](https://openwe
 
 ## Backend APIs
 See [Backend Documentation](https://github.com/Lambda-School-Labs/Labs26-Citrics-DS-TeamB) for more information on the APIs used by our Data Science team.
+
+## Other Sources
+[<b>User Flowchart</b>](https://whimsical.com/341zvP6EuiJdMGJt3neFJa)<br />
+[<b>Wireframe</b>](https://whimsical.com/T5VcCfKv8TwyKzgjfUnAeE)<br />
+[<b>Engineering Architecture Flowchart</b>](https://whimsical.com/BFjY6RQpD7YD67d7UukiSx)<br />
+<b>Icons:</b> We got out icons from [Icons8](https://icons8.com/). Small icons are 48px, Large is 96px.
 
 # Installation Instructions
 Run the following in your shell of choice:

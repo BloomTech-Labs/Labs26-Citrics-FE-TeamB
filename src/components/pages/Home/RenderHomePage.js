@@ -7,7 +7,8 @@ import { openDrawer } from "../../../state/actions";
 import {
   EnvironmentFilled,
   CloudFilled,
-  ProfileFilled
+  ProfileFilled,
+  EyeFilled
 } from "@ant-design/icons";
 
 const { Text } = Typography;
@@ -30,6 +31,9 @@ function RenderHomePage({ openDrawer }) {
           <br />
           <ProfileFilled />
           &nbsp;<Text>Compare with other cities</Text>
+          <br />
+          <EyeFilled />
+          &nbsp;<Text>View future predictions</Text>
         </div>
 
         <br />
